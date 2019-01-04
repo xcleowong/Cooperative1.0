@@ -42,8 +42,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Allowances.cs" />
+    <Compile Include="ApprovalActivity.cs" />
+    <Compile Include="ApprovalConditions.cs" />
+    <Compile Include="ApprovalHistory.cs" />
+    <Compile Include="ApprovalNode.cs" />
+    <Compile Include="ApprovalProcess.cs" />
+    <Compile Include="ApprovalStatus.cs" />
+    <Compile Include="CanteenanagementFee.cs" />
+    <Compile Include="CheckingIn.cs" />
+    <Compile Include="DepartmentMaintenance.cs" />
+    <Compile Include="EntryAndExitRecord.cs" />
+    <Compile Include="EntryDimissionRecord.cs" />
+    <Compile Include="EssentialInformation.cs" />
+    <Compile Include="HolidaySettings.cs" />
+    <Compile Include="OtherExpenses.cs" />
+    <Compile Include="Permission.cs" />
+    <Compile Include="PermissionsAndRoles.cs" />
+    <Compile Include="PersonalInformation.cs" />
+    <Compile Include="PersonnelExpenditure.cs" />
+    <Compile Include="ProcessConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuarterlySubsidyExpenditure.cs" />
+    <Compile Include="Roles.cs" />
+    <Compile Include="RolesAndUsers.cs" />
+    <Compile Include="SpecialSignTheRecord.cs" />
     <Compile Include="Test.cs" />
+    <Compile Include="TrainingExpenses.cs" />
+    <Compile Include="TravelExpense.cs" />
+    <Compile Include="TravelOnVacation.cs" />
+    <Compile Include="UserManagement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

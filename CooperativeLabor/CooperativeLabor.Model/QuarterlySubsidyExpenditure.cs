@@ -5,14 +5,24 @@ using System.Text;
 namespace CooperativeLabor.Model
 {
     ///<summary>
-    ///补助标准配置
+    ///季度补助支出
     ///</summary>
-    public class Allowances
+    public class QuarterlySubsidyExpenditure
     {
         /// <summary>
-        /// 主键
+        /// 主键（自增）
         /// </summary>           
         public int Id { get; set; }
+
+        /// <summary>
+        /// 费用结算人
+        /// </summary>           
+        public string FeeSettler { get; set; }
+
+        /// <summary>
+        /// 员工数量
+        /// </summary>           
+        public int StaffNum { get; set; }
 
         /// <summary>
         /// 平日工作补助
@@ -45,9 +55,14 @@ namespace CooperativeLabor.Model
         public double MealSubsidy { get; set; }
 
         /// <summary>
-        /// 发布时间
+        /// 补助标准
         /// </summary>           
-        public DateTime ReleaseTime { get; set; }
+        public string Allowances { get; set; }
+
+        /// <summary>
+        /// 创建时间
+        /// </summary>           
+        public DateTime CreationTime { get; set; }
 
         /// <summary>
         /// 修改时间
@@ -55,19 +70,14 @@ namespace CooperativeLabor.Model
         public DateTime ModificationTime { get; set; }
 
         /// <summary>
-        /// 历史信息
+        /// 是否提交
         /// </summary>           
-        public string HistoricalInformation { get; set; }
+        public int IsCommit { get; set; }
 
         /// <summary>
-        /// 历史信息次数
+        /// 是否删除
         /// </summary>           
-        public int HistoricalInformationNum { get; set; }
-
-        /// <summary>
-        /// 是否只读
-        /// </summary>           
-        public int IsReadOnly { get; set; }
+        public int IsDelete { get; set; }
 
     }
 }
