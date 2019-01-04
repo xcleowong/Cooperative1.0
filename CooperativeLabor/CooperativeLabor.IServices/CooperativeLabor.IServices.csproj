@@ -41,7 +41,35 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAllowancesServices.cs" />
+    <Compile Include="IApprovalActivityServices.cs" />
+    <Compile Include="IApprovalConditionsServices.cs" />
+    <Compile Include="IApprovalHistoryServices.cs" />
+    <Compile Include="IApprovalNodeServices.cs" />
+    <Compile Include="IApprovalProcessServices.cs" />
+    <Compile Include="IApprovalStatusServices.cs" />
+    <Compile Include="ICanteenanagementFeeServices.cs" />
+    <Compile Include="ICheckingInServices.cs" />
+    <Compile Include="IDepartmentMaintenanceServices.cs" />
+    <Compile Include="IEntryAndExitRecordServices.cs" />
+    <Compile Include="IEntryDimissionRecordServices.cs" />
+    <Compile Include="IEssentialInformationServices.cs" />
+    <Compile Include="IHolidaySettingsServices.cs" />
+    <Compile Include="IOtherExpensesServices.cs" />
+    <Compile Include="IPermissionsAndRolesServices.cs" />
+    <Compile Include="IPermissionServices.cs" />
+    <Compile Include="IPersonalInformationServices.cs" />
+    <Compile Include="IPersonnelExpenditureServices.cs" />
+    <Compile Include="IProcessConfigurationServices.cs" />
+    <Compile Include="IQuarterlySubsidyExpenditureServices.cs" />
+    <Compile Include="IRolesAndUsersServices.cs" />
+    <Compile Include="IRolesServices.cs" />
+    <Compile Include="ISpecialSignTheRecordServices.cs" />
     <Compile Include="ITestServices.cs" />
+    <Compile Include="ITrainingExpensesServices.cs" />
+    <Compile Include="ITravelExpenseServices.cs" />
+    <Compile Include="ITravelOnVacationServices.cs" />
+    <Compile Include="IUserManagementServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -49,8 +49,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AllowancesServices.cs" />
+    <Compile Include="ApprovalActivityServices.cs" />
+    <Compile Include="ApprovalConditionsServices.cs" />
+    <Compile Include="ApprovalHistoryServices.cs" />
+    <Compile Include="ApprovalNodeServices.cs" />
+    <Compile Include="ApprovalProcessServices.cs" />
+    <Compile Include="ApprovalStatusServices.cs" />
+    <Compile Include="CanteenanagementFeeServices.cs" />
+    <Compile Include="CheckingInServices.cs" />
+    <Compile Include="DepartmentMaintenanceServices.cs" />
+    <Compile Include="EntryAndExitRecordServices.cs" />
+    <Compile Include="EntryDimissionRecordServices.cs" />
+    <Compile Include="EssentialInformationServices.cs" />
+    <Compile Include="HolidaySettingsServices.cs" />
+    <Compile Include="OtherExpensesServices.cs" />
+    <Compile Include="PermissionsAndRolesServices.cs" />
+    <Compile Include="PermissionServices.cs" />
+    <Compile Include="PersonalInformationServices.cs" />
+    <Compile Include="PersonnelExpenditureServices.cs" />
+    <Compile Include="ProcessConfigurationServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuarterlySubsidyExpenditureServices.cs" />
+    <Compile Include="RolesAndUsersServices.cs" />
+    <Compile Include="RolesServices.cs" />
+    <Compile Include="SpecialSignTheRecordServices.cs" />
     <Compile Include="TestServices.cs" />
+    <Compile Include="TrainingExpensesServices.cs" />
+    <Compile Include="TravelExpenseServices.cs" />
+    <Compile Include="TravelOnVacationServices.cs" />
+    <Compile Include="UserManagementServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CooperativeLabor.Common\CooperativeLabor.Common.csproj">

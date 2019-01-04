@@ -34,7 +34,7 @@ namespace CooperativeLabor.Model
         /// </summary>           
         public double HolidaysRest { get; set; }
 
-        /// <summary>
+         /// <summary>
         /// 倒休补助
         /// </summary>           
         public double ExchangeSubsidy { get; set; }
