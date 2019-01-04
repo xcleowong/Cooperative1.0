@@ -57,7 +57,7 @@ namespace CooperativeLabor.Model
         /// <summary>
         /// 补助标准Id
         /// </summary>           
-        public string AllowancesId { get; set; }
+        public int AllowancesId { get; set; }
 
         /// <summary>
         /// 创建时间
