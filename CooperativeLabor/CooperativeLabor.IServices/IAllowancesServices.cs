@@ -12,5 +12,31 @@ namespace CooperativeLabor.IServices
     ///</summary>
     public interface IAllowancesServices
     {
+        /// <summary>
+        /// 新增
+        /// </summary>
+        /// <param name="addAllowances"></param>
+        /// <returns></returns>
+        int Add(Allowances addAllowances);
+
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        int Delete(int id);
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="uptAllowances"></param>
+        /// <returns></returns>
+        int Update(Allowances uptAllowances);
+
+        /// <summary>
+        /// 显示
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Allowances> GetAllowances();
     }
 }
