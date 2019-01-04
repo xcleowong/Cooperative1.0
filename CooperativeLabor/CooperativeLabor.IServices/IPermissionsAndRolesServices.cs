@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 namespace CooperativeLabor.IServices
 {
     using CooperativeLabor.Model;
+    ///<summary>
+    ///权限角色关联表
+    ///</summary>
     public interface IPermissionsAndRolesServices
     {
     }

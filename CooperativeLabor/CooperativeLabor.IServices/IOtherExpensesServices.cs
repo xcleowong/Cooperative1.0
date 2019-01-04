@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 namespace CooperativeLabor.IServices
 {
     using CooperativeLabor.Model;
+    ///<summary>
+    ///其他费用
+    ///</summary>
     public interface IOtherExpensesServices
     {
     }

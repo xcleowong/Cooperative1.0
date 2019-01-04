@@ -16,5 +16,6 @@ namespace CooperativeLabor.Services
     ///</summary>
     public class CheckingInServices
     {
+
     }
 }

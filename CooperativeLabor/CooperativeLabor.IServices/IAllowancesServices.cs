@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 namespace CooperativeLabor.IServices
 {
     using CooperativeLabor.Model;
+    ///<summary>
+    ///补助标准配置
+    ///</summary>
     public interface IAllowancesServices
     {
     }
