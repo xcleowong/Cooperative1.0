@@ -55,9 +55,9 @@ namespace CooperativeLabor.Model
         public double MealSubsidy { get; set; }
 
         /// <summary>
-        /// 补助标准
+        /// 补助标准Id
         /// </summary>           
-        public string Allowances { get; set; }
+        public string AllowancesId { get; set; }
 
         /// <summary>
         /// 创建时间
