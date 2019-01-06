@@ -45,6 +45,8 @@ namespace CooperativeLabor.WebApi
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
 
+            container.RegisterType<IEntryAndExitRecordServices, EntryAndExitRecordServices>();
+            container.RegisterType<IEssentialInformationServices, EssentialInformationServices>();
             //µÿ÷∑
             container.RegisterType<ITestServices, TestServices>();
             container.RegisterType<IPersonalInformationServices, PersonalInformationServices>();
