@@ -17,22 +17,22 @@ namespace CooperativeLabor.Model
         /// <summary>
         /// 上班时间（早）
         /// </summary>           
-        public DateTime OfficeHoursam { get; set; }
+        public string OfficeHoursam { get; set; }
 
         /// <summary>
         /// 下班时间（早）
         /// </summary>           
-        public DateTime ClosingTimeam { get; set; }
+        public string ClosingTimeam { get; set; }
 
         /// <summary>
         /// 上班时间（下）
         /// </summary>           
-        public DateTime OfficeHourspm { get; set; }
+        public string OfficeHourspm { get; set; }
 
         /// <summary>
         /// 下班时间（下）
         /// </summary>           
-        public DateTime ClosingTimepm { get; set; }
+        public string ClosingTimepm { get; set; }
 
         /// <summary>
         /// 创建时间

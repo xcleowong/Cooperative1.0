@@ -36,6 +36,45 @@ namespace CooperativeLabor.WebApi.Controllers
             return result;
         }
 
+        [Route("getTest1")]
+        [HttpGet]
+        public IHttpActionResult GetTest1()
+        {
+            var result = this.TestServices.GetTests();
+            return Json<List<Test>>(result);
+        }
+
+        [Route("addTest")]
+        [HttpPost]
+        public int AddTest(Test test)
+        {
+            var result = this.TestServices.Add(test);
+            return result;
+        }
+        
+        [Route("deleteTest")]
+        [HttpPost]
+        public int DeleteTest(int Id)
+        {
+            var result = this.TestServices.Delete(Id);
+            return result;
+        }
+
+        [Route("getTestById")]
+        [HttpGet]
+        public IHttpActionResult GetTestById(int Id)
+        {
+            var result = this.TestServices.GetTestById(Id);
+            return Json<List<Test>>(result);
+        }
+
+        [Route("updateTest")]
+        [HttpPost]
+        public int UpdateTest(Test test)
+        {
+            var result = this.TestServices.Update(test);
+            return result;
+        }
 
         //方法二
         //不需要引用Unity

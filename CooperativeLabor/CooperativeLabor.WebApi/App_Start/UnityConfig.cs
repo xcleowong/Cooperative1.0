@@ -48,6 +48,11 @@ namespace CooperativeLabor.WebApi
             //µØÖ·
             container.RegisterType<ITestServices, TestServices>();
 
+            //¿¼ÇÚÇ©µ½
+            container.RegisterType<ICheckingInServices, CheckingInServices>();
+            //²îÂÃĞİ¼Ù
+            container.RegisterType<ITravelOnVacationServices, TravelOnVacationServices>();
+
         }
     }
 }
