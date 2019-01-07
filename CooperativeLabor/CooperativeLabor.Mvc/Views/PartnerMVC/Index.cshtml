@@ -1,0 +1,174 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Content/VueScripts/vue.js"></script>
+    <script src="~/Content/VueScripts/axios.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <table v-show="EntryAndExitRecordList.length" class="table-condensed" border="1" style="width:100px">
+
+            <tr>
+                <td>ddd</td>
+                <td>合作方名称</td>
+                <td>合作方类别</td>
+                <td>营业执照</td>
+                <td>操作类型</td>
+                <td>入场时间</td>
+                <td>离场时间</td>
+                <td>备注</td>
+                <td>附件名称</td>
+                <td>附件Path</td>
+                <td>创建时间</td>
+                <td>修改时间</td>
+                <td>是否删除</td>
+                <td>操作</td>
+            </tr>
+            <tr v-for="(EntryAndExitRecord,index) in EntryAndExitRecordList">
+                <td><input type="text" v-model="EntryAndExitRecord.Id" /></td>
+                <td><input type="text" v-model="EntryAndExitRecord.PartnerName" /></td>
+                <td><input type="text" v-model="EntryAndExitRecord.PartnerCategory" /></td>
+                <td><input type="text" v-model="EntryAndExitRecord.BusinessLicense" /></td>
+                <td><input type="text" v-model="EntryAndExitRecord.OperationType" /></td>
+                <td><input type="text" v-model="EntryAndExitRecord.ApproachTime" /></td>
+                <td><input type="text" v-model="EntryAndExitRecord.Departuretime" /></td>
+                <td><input type="text" v-model="EntryAndExitRecord.Remark" /></td>
+                <td><input type="text" v-model="EntryAndExitRecord.AttachmentName" /></td>
+                <td><input type="text" v-model="EntryAndExitRecord.AttachmentPath" /></td>
+                <td><input type="text" v-model="EntryAndExitRecord.CreationTime" /></td>
+                <td><input type="text" v-model="EntryAndExitRecord.ModificationTime" /></td>
+                <td><input type="text" v-model="EntryAndExitRecord.IsDelete" /></td>
+                <td>
+                    <div v-if="EntryAndExitRecord.Id!=''">
+                        <a href="#" v-on:click="updateContact(EntryAndExitRecord.Id,EntryAndExitRecord.PartnerName,EntryAndExitRecord.PartnerCategory,EntryAndExitRecord.BusinessLicense,EntryAndExitRecord.OperationType,EntryAndExitRecord.ApproachTime,EntryAndExitRecord.Departuretime,EntryAndExitRecord.Remark,EntryAndExitRecord.AttachmentName,EntryAndExitRecord.AttachmentPath,EntryAndExitRecord.CreationTime,EntryAndExitRecord.ModificationTime,EntryAndExitRecord.IsDelete)">修改</a>
+                        <a href="#" v-on:click="deleteContactById(EntryAndExitRecord.Id)">删除</a>
+                        
+                    </div>
+                    <div v-else>
+                        <a href="#" v-on:click="addContact(EntryAndExitRecord.PartnerName,EntryAndExitRecord.PartnerCategory,EntryAndExitRecord.BusinessLicense,EntryAndExitRecord.OperationType,EntryAndExitRecord.ApproachTime,
+                               EntryAndExitRecord.Departuretime,EntryAndExitRecord.Remark,EntryAndExitRecord.AttachmentName,EntryAndExitRecord.AttachmentPath,EntryAndExitRecord.CreationTime,EntryAndExitRecord.ModificationTime,EntryAndExitRecord.IsDelete)">添加</a>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            EntryAndExitRecordList: []
+        },
+        mounted() {
+            this.getAllEntryAndExitRecords();
+        },
+        methods: {
+            //显示
+            getAllEntryAndExitRecords: function () {
+                axios.get("http://localhost:8099/Partner/GetEntryAndExitRecordsEnt"
+                ).then(
+                    (response) => {
+                        console.log(response);
+                        this.EntryAndExitRecordList = response.data;
+                        //for (var i = 0; i < response.data.length; i++) {
+                        //    this.EntryAndExitRecordList.push(response.data[i]);
+                        //}
+                        // this.EntryAndExitRecordList.push({ Id: "", PartnerName: "222", PartnerCategory: "", BusinessLicense: "", OperationType: "", ApproachTime: "", Departuretime: "", Remark: "", AttachmentName: "", AttachmentPath: "", CreationTime: "", ModificationTime: "", IsDelete: ""});
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
+
+            //删除
+            deleteContactById: function (Id) {
+                axios.post('http://localhost:8099/Partner/DeleteEnt?Id=' + Id).then(
+                    //axios.post('http://localhost:8099/Partner/DeleteEnt', { Id: Id }).then(
+                    (response) => {
+                        this.EntryAndExitRecordList = response.data;
+                        //for (var i = 0; i < response.data.length; i++) {
+                        //    this.contactsList.push(response.data[i]);
+                        //}
+                        //this.contactsList.push({ Id: "", Name: "", PhoneNo: "", EmailAddress: "" });
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
+            //修改
+            //updateContact: function (Id, PartnerName, PartnerCategory, BusinessLicense, OperationType, ApproachTime, Departuretime, Remark, AttachmentName, AttachmentPath, CreationTime, ModificationTime, IsDelete) {
+            //    axios.post('http://localhost:8099/Partner/UpdateEnt?Id=' + Id, { contact: { Id: Id, PartnerName: PartnerName, PartnerCategory: PartnerCategory, BusinessLicense: BusinessLicense, OperationType: OperationType, ApproachTime: ApproachTime, Departuretime: Departuretime, Remark: Remark, AttachmentName: AttachmentName, AttachmentPath: AttachmentPath, CreationTime: CreationTime, ModificationTime: ModificationTime, IsDelete: IsDelete} }).then(
+            //        (response) => {
+            //            if (response.data>0) {
+            //                alert("修改成功!!!");
+            ////this.EntryAndExitRecordList
+            //            }
+            //              //  this.EntryAndExitRecordList = response.data;
+            //                //for (var i = 0; i < response.data.length; i++) {
+            //                //    this.contactsList.push(response.data[i]);
+            //                //}
+            //                //this.contactsList.push({ Id: "", Name: "", PhoneNo: "", EmailAddress: "" });
+            //            },
+            //            (response) => {
+            //                alert(response.status);
+            //            }
+            //        ).catch(function (response) {
+            //            alert(response);
+            //        });
+            //    },
+
+
+            ////修改质检计划信息
+            updateContact: function (Id, PartnerName, PartnerCategory, BusinessLicense, OperationType, ApproachTime, Departuretime, Remark, AttachmentName, AttachmentPath, CreationTime, ModificationTime, IsDelete) {
+                var params = new URLSearchParams();
+                params.append('Id', Id);
+                params.append('PartnerName', PartnerName);
+                params.append('PartnerCategory', PartnerCategory);
+                params.append('BusinessLicense', BusinessLicense);
+                params.append('OperationType', OperationType);
+                params.append('ApproachTime', ApproachTime);
+                params.append('Departuretime', Departuretime);
+                params.append('Remark', Remark);
+                params.append('AttachmentName', AttachmentName);
+                params.append('AttachmentPath', AttachmentPath);
+                params.append('CreationTime', CreationTime);
+                params.append('ModificationTime', ModificationTime);
+                params.append('IsDelete', IsDelete);
+                axios.post('http://localhost:8099/Partner/UpdateEnt?Id=' + Id, params).then(
+                    (response) => {
+                        console.log(response.data);
+                        if (response.data > 0) {
+                            alert("修改成功!!!");
+                            this.getList();
+                        }
+                        //console.info(this.list);
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
+        }
+
+    })
+</script>

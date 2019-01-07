@@ -96,5 +96,6 @@ namespace CooperativeLabor.Services
                 return result.ToList();
             }
         }
+
     }
 }

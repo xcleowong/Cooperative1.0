@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 namespace CooperativeLabor.IServices
 {
     using CooperativeLabor.Model;
+    ///<summary>
+    ///用户管理维护表
+    ///</summary>
     public interface IUserManagementServices
     {
     }

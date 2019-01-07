@@ -44,5 +44,10 @@ namespace CooperativeLabor.Model
         /// </summary>           
         public DateTime ModificationTime { get; set; }
 
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        public int IsStart { get; set; }
+
     }
 }

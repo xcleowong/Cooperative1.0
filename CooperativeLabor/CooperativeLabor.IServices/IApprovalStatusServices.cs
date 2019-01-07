@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 namespace CooperativeLabor.IServices
 {
     using CooperativeLabor.Model;
+    ///<summary>
+    ///审批状态表
+    ///</summary>
     public interface IApprovalStatusServices
     {
     }

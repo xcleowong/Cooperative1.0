@@ -1,0 +1,169 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddAllowancesView</title>
+    <script src="~/Scripts/vue.js"></script>
+    <script src="~/Scripts/axios.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="add">
+        <table class="table table-bordered">
+            <tr>
+                <td>平日工作补助：</td>
+                <td>
+                    <input id="Text1" type="text" v-model="WeekDaysSubsidy" />
+                </td>
+            </tr>
+            <tr>
+                <td>出差补助：</td>
+                <td>
+                    <input id="Text1" type="text" v-model="EvectionSubsidy" />
+                </td>
+            </tr>
+            <tr>
+                <td>公休节假日加班补助：</td>
+                <td>
+                    <input id="Text1" type="text" v-model="HolidaysOverTime" />
+                </td>
+            </tr>
+            <tr>
+                <td>公休节假日休息补助：</td>
+                <td>
+                    <input id="Text1" type="text" v-model="HolidaysRest" />
+                </td>
+            </tr>
+            <tr>
+                <td>倒休补助：</td>
+                <td>
+                    <input id="Text1" type="text" v-model="ExchangeSubsidy" />
+                </td>
+            </tr>
+            <tr>
+                <td>每日餐补：</td>
+                <td>
+                    <input id="Text1" type="text" v-model="MealSubsidy" />
+                </td>
+            </tr>
+            <tr>
+                <td>发布时间：</td>
+                <td>
+                    <input id="Text1" type="text" v-model="ReleaseTime" />
+                </td>
+            </tr>
+            <tr>
+                <td>历史信息：</td>
+                <td>
+                    <select id="Select1" v-model="HistoricalInformation">
+                        <option value="请选择">--请选择--</option>
+                        <option v-for="HI in HistoricalInformationList" v-bind:value="HI">
+                            {{HI}}
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>是否发布：</td>
+                <td>
+                    <input id="Radio1" type="radio" v-model="HistoricalInformationNum" name="HistoricalInformationNum" value="1" checked="checked" />发布
+                    &nbsp;&nbsp;&nbsp;
+                    <input id="Radio1" type="radio" v-model="HistoricalInformationNum" name="HistoricalInformationNum" value="0" />取消
+                </td>
+            </tr>
+            <tr>
+                <td>是否只读：</td>
+                <td>
+                    <input id="Radio1" type="radio" v-model="IsReadOnly" name="IsReadOnly" value="1" checked="checked" />只读
+                    &nbsp;&nbsp;&nbsp;
+                    <input id="Radio1" type="radio" v-model="IsReadOnly" name="IsReadOnly" value="0" />取消
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="AddBtn" type="button" value="添加" v-on:click="AddAllowances(WeekDaysSubsidy, EvectionSubsidy, HolidaysOverTime, HolidaysRest, ExchangeSubsidy, MealSubsidy, ReleaseTime, HistoricalInformation, HistoricalInformationNum, IsReadOnly)" />
+                </td>
+                <td>
+                    <a href="/AllowancesView/GetAllowancesView">显示</a>
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#add",
+        data: {
+            WeekDaysSubsidy: "",
+            EvectionSubsidy: "",
+            HolidaysOverTime: "",
+            HolidaysRest: "",
+            ExchangeSubsidy: "",
+            MealSubsidy: "",
+            ReleaseTime: "",
+            HistoricalInformationList: ['已发布', '未发布'],
+            HistoricalInformation: "请选择",
+            HistoricalInformationNum: 1,
+            IsReadOnly: 1
+        },
+        methods: {
+            AddAllowances: function (WeekDaysSubsidy, EvectionSubsidy, HolidaysOverTime, HolidaysRest, ExchangeSubsidy, MealSubsidy, ReleaseTime, HistoricalInformation, HistoricalInformationNum, IsReadOnly) {
+                var params = new URLSearchParams();
+                //var date = new Date();
+
+                params.append('WeekDaysSubsidy', WeekDaysSubsidy);
+                params.append('EvectionSubsidy', EvectionSubsidy);
+                params.append('HolidaysOverTime', HolidaysOverTime);
+                params.append('HolidaysRest', HolidaysRest);
+                params.append('ExchangeSubsidy', ExchangeSubsidy);
+                params.append('MealSubsidy', MealSubsidy);
+                params.append('ReleaseTime', ReleaseTime);
+                params.append('HistoricalInformation', HistoricalInformation);
+                params.append('HistoricalInformationNum', HistoricalInformationNum);
+                params.append('IsReadOnly', IsReadOnly);
+                axios.post('http://localhost:8099/Allowances/AddAllowances', params).then(
+                    (response) => {
+                        alert(response)
+
+                        alert("添加成功")
+
+
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+
+            },
+
+        },
+        computed: {
+        }
+
+    });
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
