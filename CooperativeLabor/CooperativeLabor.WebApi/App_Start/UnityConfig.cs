@@ -48,6 +48,20 @@ namespace CooperativeLabor.WebApi
             //µÿ÷∑
             container.RegisterType<ITestServices, TestServices>();
 
+
+
+
+
+
+
+
+
+            container.RegisterType<IAllowancesServices, AllowancesServices>();
+            container.RegisterType<IHolidaySettingsServices, HolidaySettingsServices>();
+         
+          
+
+
         }
     }
 }
