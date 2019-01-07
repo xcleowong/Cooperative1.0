@@ -130,5 +130,16 @@ namespace CooperativeLabor.WebApi.Controllers
             int i = this.Update(essentialInformation);
             return i;
         }
+        /// <summary>
+        /// 获取合作方Id，名称
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetEntryByIdName")]
+        [HttpGet]
+        public IEnumerable<EntryAndExitRecord> GetEntryByIdName()
+        {
+            var result = this.entryAndExitRecord.GetEntryByIdName();
+            return result;
+        }
     }
 }

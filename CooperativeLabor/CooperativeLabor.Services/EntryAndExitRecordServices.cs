@@ -120,5 +120,19 @@ namespace CooperativeLabor.Services
                 return i;
             }
         }
+        /// <summary>
+        /// 获取合作方Id，名称
+        /// </summary>
+        /// <returns></returns>
+        public List<EntryAndExitRecord> GetEntryByIdName()
+        {
+            using (MySqlConnection conn = DapperHelper.GetConnString())
+            {
+                string sql = string.Format("select Id,PartnerName from EntryAndExitRecord");
+                var result = conn.Query<EntryAndExitRecord>(sql, null).ToList();
+                return result;
+            }
+        }
+
     }
 }
