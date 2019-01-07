@@ -73,7 +73,7 @@ namespace CooperativeLabor.Services
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
-                string sql = "select Name,UserName,Gender,Birthday,Nation,Employingnit,PartnerName,ProfessionalSkill,MaritalStatus,IDNumber,PartyGroupings,Email,Post,Phone,CardNo,OpeningBank,CreationTime,ModificationTime,IsDelete from personalinformation";
+                string sql = "select Id,Name,UserName,Gender,Birthday,Nation,Employingnit,PartnerName,ProfessionalSkill,MaritalStatus,IDNumber,PartyGroupings,Email,Post,Phone,CardNo,OpeningBank,CreationTime,ModificationTime,IsDelete from personalinformation";
                 IEnumerable<PersonalInformation> list = conn.Query<PersonalInformation>(sql,null);
                 return list.ToList();
             }
@@ -87,7 +87,7 @@ namespace CooperativeLabor.Services
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
-                string sql = "select Name,UserName,Gender,Birthday,Nation,Employingnit,PartnerName,ProfessionalSkill,MaritalStatus,IDNumber,PartyGroupings,Email,Post,Phone,CardNo,OpeningBank,CreationTime,ModificationTime,IsDelete from personalinformation where Id=@Id";
+                string sql = "select Id,Name,UserName,Gender,Birthday,Nation,Employingnit,PartnerName,ProfessionalSkill,MaritalStatus,IDNumber,PartyGroupings,Email,Post,Phone,CardNo,OpeningBank,CreationTime,ModificationTime,IsDelete from personalinformation where Id=@Id";
                 IEnumerable<PersonalInformation> list = conn.Query<PersonalInformation>(sql, new { Id = id });
                 return list.ToList();
             }

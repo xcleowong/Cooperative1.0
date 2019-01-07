@@ -13,30 +13,37 @@ namespace CooperativeLabor.IServices
     public interface IAllowancesServices
     {
         /// <summary>
-        /// 新增
+        /// 新增补助标准
         /// </summary>
         /// <param name="addAllowances"></param>
         /// <returns></returns>
-        int Add(Allowances addAllowances);
+        int AddAllowances(Allowances addAllowances);
 
         /// <summary>
-        /// 删除
+        /// 删除补助标准
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        int Delete(int id);
+        int DeleteAllowances(int id);
 
         /// <summary>
-        /// 修改
+        /// 修改补助标准
         /// </summary>
         /// <param name="uptAllowances"></param>
         /// <returns></returns>
-        int Update(Allowances uptAllowances);
+        int UpdateAllowances(Allowances uptAllowances);
 
         /// <summary>
-        /// 显示
+        /// 显示补助标准
         /// </summary>
         /// <returns></returns>
         IEnumerable<Allowances> GetAllowances();
+
+        /// <summary>
+        /// 根据ID获取补助标准
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        Allowances GetAloneAllowances(int Id);
     }
 }

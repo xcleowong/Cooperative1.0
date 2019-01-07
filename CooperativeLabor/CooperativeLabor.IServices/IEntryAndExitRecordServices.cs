@@ -47,5 +47,11 @@ namespace CooperativeLabor.IServices
         /// <param name="Id"></param>
         /// <returns></returns>
         EntryAndExitRecord GetEntryAndExitRecordById(int Id);
+        /// <summary>
+        /// 获取合作方Id，名称
+        /// </summary>
+        /// <returns></returns>
+        List<EntryAndExitRecord> GetEntryByIdName();
+
     }
 }
