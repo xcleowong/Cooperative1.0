@@ -66,6 +66,11 @@ namespace CooperativeLabor.WebApi
           
 
 
+            //¿¼ÇÚÇ©µ½
+            container.RegisterType<ICheckingInServices, CheckingInServices>();
+            //²îÂÃÐÝ¼Ù
+            container.RegisterType<ITravelOnVacationServices, TravelOnVacationServices>();
+
         }
     }
 }

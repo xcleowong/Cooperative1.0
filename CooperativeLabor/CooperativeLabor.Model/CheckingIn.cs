@@ -23,7 +23,7 @@ namespace CooperativeLabor.Model
         /// 员工名称
         /// </summary>           
         public string StaffName { get; set; }
-
+        
         /// <summary>
         /// 签到时间
         /// </summary>           
@@ -36,8 +36,9 @@ namespace CooperativeLabor.Model
 
         /// <summary>
         /// 签到状态
-        /// </summary>           
-        public int SignInState { get; set; }
+        /// </summary>
+        /// 0迟到、1签到、2早退、3旷工、4请假、5加班
+        public string SignInState { get; set; }
 
     }
 }

@@ -15,6 +15,11 @@ namespace CooperativeLabor.Model
         public int Id { get; set; }
 
         /// <summary>
+        /// 员工ID
+        /// </summary>
+        public int StaffId { get; set; }
+
+        /// <summary>
         /// 姓名
         /// </summary>           
         public string Name { get; set; }
