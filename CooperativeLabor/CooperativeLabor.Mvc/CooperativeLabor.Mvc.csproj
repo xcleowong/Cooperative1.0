@@ -147,18 +147,29 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+
     <Compile Include="Controllers\AllowancesViewController.cs" />
     <Compile Include="Controllers\HolidaySettingsViewController.cs" />
+
+    <Compile Include="Controllers\PartnerMVCController.cs" />
+    <Compile Include="Controllers\PersonalInformationController.cs" />
+
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="bin\CooperativeLabor.Mvc.dll" />
+    <Content Include="bin\CooperativeLabor.Mvc.pdb" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+
     <Content Include="Content\My97DatePicker\demo.htm" />
     <Content Include="Content\My97DatePicker\My97DatePicker\calendar.js" />
     <Content Include="Content\My97DatePicker\My97DatePicker\lang\en.js" />
@@ -183,6 +194,12 @@
     <Content Include="Content\My97DatePicker\My97DatePicker\开发包\skin\whyGreen\bg.jpg" />
     <Content Include="Content\My97DatePicker\My97DatePicker\开发包\skin\whyGreen\datepicker.css" />
     <Content Include="Content\My97DatePicker\My97DatePicker\开发包\skin\whyGreen\img.gif" />
+
+    <Content Include="Content\VueScripts\axios.js" />
+    <Content Include="Content\VueScripts\axios.min.js" />
+    <Content Include="Content\VueScripts\vue-resource.js" />
+    <Content Include="Content\VueScripts\vue.js" />
+
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -196,6 +213,10 @@
     </Content>
     <Content Include="Scripts\axios.min.map" />
     <Content Include="Scripts\axios.map" />
+
+    <Content Include="Content\VueScripts\axios.map" />
+    <Content Include="Content\VueScripts\axios.min.map" />
+
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -226,6 +247,11 @@
     <Content Include="Views\AllowancesView\GetAllowancesView.cshtml" />
     <Content Include="Views\HolidaySettingsView\AddHolidaySettingsView.cshtml" />
     <Content Include="Views\HolidaySettingsView\GetHolidaySettingsView.cshtml" />
+
+    <Content Include="Views\PartnerMVC\Index.cshtml" />
+    <Content Include="Views\PersonalInformation\Add.cshtml" />
+    <Content Include="Views\PersonalInformation\Index.cshtml" />
+
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
