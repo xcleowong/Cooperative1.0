@@ -149,8 +149,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\FilterConfig2.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+
     <Compile Include="App_Start\RouteConfig2.cs" />
     <Compile Include="Controllers\TestController.cs" />
+
     <Compile Include="Controllers\AllowancesViewController.cs" />
     <Compile Include="Controllers\HolidaySettingsViewController.cs" />
     <Compile Include="Controllers\PartnerMVCController.cs" />
@@ -251,6 +253,7 @@
     <Content Include="Views\HolidaySettingsView\AddHolidaySettingsView.cshtml" />
     <Content Include="Views\HolidaySettingsView\GetHolidaySettingsView.cshtml" />
     <Content Include="Views\PartnerMVC\Index.cshtml" />
+    <Content Include="Views\PartnerMVC\AddEnt.cshtml" />
     <Content Include="Views\PersonalInformation\Add.cshtml" />
     <Content Include="Views\PersonalInformation\Index.cshtml" />
   </ItemGroup>

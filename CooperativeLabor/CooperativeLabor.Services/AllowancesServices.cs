@@ -39,7 +39,7 @@ namespace CooperativeLabor.Services
                 parameters.Add("@ModificationTime", addAllowances.ModificationTime, null, null, null);
                 parameters.Add("@HistoricalInformation", addAllowances.HistoricalInformation, null, null, null);
                 parameters.Add("@HistoricalInformationNum", addAllowances.HistoricalInformationNum, null, null, null);
-                parameters.Add("@IsReadOnly ", addAllowances.IsReadOnly, null, null, null);
+                parameters.Add("@IsReadOnly", addAllowances.IsReadOnly, null, null, null);
                 string sql = "INSERT INTO allowances(WeekDaysSubsidy,EvectionSubsidy,HolidaysOverTime,HolidaysRest,ExchangeSubsidy,MealSubsidy,ReleaseTime,ModificationTime,HistoricalInformation,HistoricalInformationNum,IsReadOnly) VALUES(@WeekDaysSubsidy,@EvectionSubsidy,@HolidaysOverTime,@HolidaysRest,@ExchangeSubsidy,@MealSubsidy,@ReleaseTime,@ModificationTime,@HistoricalInformation,@HistoricalInformationNum,@IsReadOnly)";
                 int i = conn.Execute(sql, parameters);
                 return i;

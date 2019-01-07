@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Data;
 namespace CooperativeLabor.Services
 {
     using CooperativeLabor.Common;
@@ -101,6 +101,9 @@ namespace CooperativeLabor.Services
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
                 conn.Open();
+
+               // entryAndExitRecord.ModificationTime =Convert.ToDateTime(DateTime.Now.ToString("yyyy/MM/dd HH:mm"));                
+                entryAndExitRecord.ModificationTime =DateTime.Now;                
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Id", entryAndExitRecord.Id, null, null, null);
                 parameters.Add("@PartnerName", entryAndExitRecord.PartnerName, null, null, null);
@@ -115,10 +118,26 @@ namespace CooperativeLabor.Services
                 parameters.Add("@CreationTime", entryAndExitRecord.CreationTime, null, null, null);
                 parameters.Add("@ModificationTime", entryAndExitRecord.ModificationTime, null, null, null);
                 parameters.Add("@IsDelete", entryAndExitRecord.IsDelete, null, null, null);
-                string sql =string.Format("UPDATE EntryAndExitRecord SET PartnerName=@PartnerName,PartnerCategory=@PartnerCategory,BusinessLicense=@BusinessLicense,OperationType=@OperationType,ApproachTime=@ApproachTime,Departuretime=@Departuretime,Remark=@Remark,AttachmentName=@AttachmentName,AttachmentPath=@AttachmentPath,CreationTime=@CreationTime,ModificationTime=@ModificationTime,IsDelete=@IsDelete WHERE Id = @Id");
+                string sql =string.Format("UPDATE EntryAndExitRecord SET PartnerName=@PartnerName,PartnerCategory=@PartnerCategory,BusinessLicense=@BusinessLicense," +
+                    "OperationType=@OperationType,ApproachTime=@ApproachTime,Departuretime=@Departuretime,Remark=@Remark,AttachmentName=@AttachmentName,AttachmentPath=@AttachmentPath," +
+                    "CreationTime=@CreationTime,ModificationTime=@ModificationTime,IsDelete=@IsDelete WHERE Id = @Id");
                 int i = conn.Execute(sql, parameters);
                 return i;
             }
         }
+        /// <summary>
+        /// 获取合作方Id，名称
+        /// </summary>
+        /// <returns></returns>
+        public List<EntryAndExitRecord> GetEntryByIdName()
+        {
+            using (MySqlConnection conn = DapperHelper.GetConnString())
+            {
+                string sql = string.Format("select Id,PartnerName from EntryAndExitRecord");
+                var result = conn.Query<EntryAndExitRecord>(sql, null).ToList();
+                return result;
+            }
+        }
+
     }
 }

@@ -45,7 +45,13 @@
             </tr>
             <tr>
                 <td>合作方名称：</td>
-                <td><input type="text" v-model="PartnerName" /></td>
+                <td>
+                    <select id="Select2" v-model="ObjType_ID">
+                        <option value="请选择">--请选择--</option>
+                        <option v-for="item in QCPlanObjType" v-bind:value="ObType.ObjType_ID">{{ObType.ObjType_Name}}</option>
+
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>专业技术资格：</td>
@@ -149,13 +155,13 @@
         },
         methods:
         {
-            //获取质检设备表
-            //getFacility: function () {
-            //    axios.get('http://localhost:8103/GetFacilities').then(
+            //获取对象类型表
+            //getQCPlanObjType: function () {
+            //    axios.get('http://localhost:8089/GetQCPlanObjTypes').then(
             //        (response) => {
-            //            this.Facility = [];
+            //            this.QCPlanObjType = [];
             //            for (var i = 0; i < response.data.length; i++) {
-            //                this.Facility.push(response.data[i]);
+            //                this.QCPlanObjType.push(response.data[i]);
             //            }
             //        },
             //        (response) => {
