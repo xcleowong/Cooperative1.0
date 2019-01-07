@@ -95,7 +95,7 @@ namespace CooperativeLabor.Services
                 parameters.Add("@DepartureTime", entry.DepartureTime, null, null, null);
                 parameters.Add("@ModificationTime", entry.ModificationTime, null, null, null);
                 parameters.Add("@IsDelete", entry.IsDelete, null, null, null);
-                parameters.Add("@Id", entry.Id, null, null, null);
+                parameters.Add("@Id", entry.PersonnelId, null, null, null);
 
                 string sql = "update entrydimissionrecord set OperationType=@OperationType,DatesEmployed=@DatesEmployed,DepartureTime=@DepartureTime,ModificationTime=@ModificationTime,IsDelete=@IsDelete where PersonnelId=@Id";
                 int i = conn.Execute(sql, parameters);

@@ -13,5 +13,13 @@ namespace CooperativeLabor.Mvc.Controllers
         {
             return View();
         }
+        public ActionResult Add()
+        {
+            return View();
+        }
+        public ActionResult People()
+        {
+            return View();
+        }
     }
 }
