@@ -1,0 +1,170 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetAllowancesView</title>
+    <script src="~/Scripts/vue.js"></script>
+    <script src="~/Scripts/axios.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <style>
+
+
+
+        .div-td table td {
+            width: 30px;
+            line-height: 15px
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="div-td">
+        <input id="Button1" type="button" value="添加" onclick="location.href='AddAllowancesView'" />
+        <table v-show="list.length" class="table-condensed" border="1">
+            <tr>
+                <th>补助标准配置ID</th>
+                <th>平日工作补助</th>
+                <th>出差补助</th>
+                <th>公休节假日加班补助</th>
+                <th>公休节假日休息补助</th>
+                <th>倒休补助</th>
+                <th>每日餐补</th>
+                <th>发布时间</th>
+                <th>历史信息</th>
+                <th>历史信息是否发布</th>
+                <th>是否只读</th>
+                <th>编辑</th>
+            </tr>
+            <tr v-for="item in list">
+                <td>{{item.Id}}</td>
+                <td><input type="text" v-model="item.WeekDaysSubsidy" /></td>
+                <td><input type="text" v-model="item.EvectionSubsidy" /></td>
+                <td><input type="text" v-model="item.HolidaysOverTime" /></td>
+                <td><input type="text" v-model="item.HolidaysRest" /></td>
+                <td><input type="text" v-model="item.ExchangeSubsidy" /></td>
+                <td><input type="text" v-model="item.MealSubsidy" /></td>
+                <td><input type="text" v-model="item.ReleaseTime" /></td>
+                <td>
+                    <select id="Select1" v-model="item.HistoricalInformation">
+                        <option value="请选择">--请选择--</option>
+                        <option v-for="HI in HistoricalInformationList" v-bind:value="HI">
+                            {{HI}}
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <input id="Radio1" type="radio" v-model="item.HistoricalInformationNum" value="1">发布
+                    &nbsp;&nbsp;&nbsp;
+                    <input id="Radio1" type="radio" v-model="item.HistoricalInformationNum" value="0" />未发布
+                </td>
+                <td>
+                    <input id="Radio1" type="radio" v-model="item.IsReadOnly" name="IsReadOnly" value="1" />是
+                    &nbsp;&nbsp;&nbsp;
+                    <input id="Radio1" type="radio" v-model="item.IsReadOnly" name="IsReadOnly" value="0" />否
+                </td>
+                <td>
+                    <div v-if="item.Id!=''">
+                        <a href="#" v-on:click="DeleteAllowances(item.Id)">删除</a>
+                        &nbsp;&nbsp;&nbsp;
+                        <a href="#" v-on:click="UpdateAllowances(item.Id, item.WeekDaysSubsidy, item.EvectionSubsidy, item.HolidaysOverTime, item.HolidaysRest, item.ExchangeSubsidy, item.MealSubsidy, item.ReleaseTime, item.HistoricalInformation, item.HistoricalInformationNum, item.IsReadOnly)">修改</a>
+                    </div>
+                </td>
+
+            </tr>
+
+        </table>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            HistoricalInformationList: ['已发布', '未发布'],
+            //HistoricalInformation: "请选择",
+            HistoricalInformationNum: "",
+            IsReadOnly: "",
+            list: []
+        },
+        mounted() {
+            this.getList();
+        },
+        methods: {
+
+
+            //获取补助标准标准信息
+            getList: function () {
+                axios.get('http://localhost:8099/Allowances/GetAllowances').then((response) => {
+                    this.list = [];
+                    for (var i = 0; i < response.data.length; i++) {
+                        this.list.push(response.data[i]);
+                    }
+                },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
+            //删除补助标准标准信息
+            DeleteAllowances: function (id) {
+                axios.get('http://localhost:8099/Allowances/DeleteAllowances?Id=' + id).then((respose) => {
+                    if (respose.data > 0) {
+                        alert("删除成功!!!");
+                        this.getList();
+                    }
+                },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
+            //修改补助标准标准信息
+            UpdateAllowances: function (Id, WeekDaysSubsidy, EvectionSubsidy, HolidaysOverTime, HolidaysRest, ExchangeSubsidy, MealSubsidy, ReleaseTime, HistoricalInformation, HistoricalInformationNum, IsReadOnly) {
+                var params = new URLSearchParams();
+                params.append('Id', Id);
+                params.append('WeekDaysSubsidy', WeekDaysSubsidy);
+                params.append('EvectionSubsidy', EvectionSubsidy);
+                params.append('HolidaysOverTime', HolidaysOverTime);
+                params.append('HolidaysRest', HolidaysRest);
+                params.append('ExchangeSubsidy', ExchangeSubsidy);
+                params.append('MealSubsidy', MealSubsidy);
+                params.append('ReleaseTime', ReleaseTime);
+                params.append('HistoricalInformation', HistoricalInformation);
+                params.append('HistoricalInformationNum', HistoricalInformationNum);
+                params.append('IsReadOnly', IsReadOnly);
+                axios.post('http://localhost:8099/Allowances/UpdateAllowances?Id=' + Id, params).then(
+                    (response) => {
+                        console.log(response.data);
+                        if (response.data >0) {
+                            alert("修改成功!!!");
+                            this.getList();
+                        }
+                        //console.info(this.list);
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
+
+        },
+
+    })
+</script>
+
+
+
+

@@ -1,0 +1,129 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddHolidaySettingsView</title>
+    <script src="~/Scripts/vue.js"></script>
+    <script src="~/Scripts/axios.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+</head>
+<body>
+    <div id="add">
+        <table class="table table-bordered">
+            <tr>
+                <td>上班时间(上午)：</td>
+                <td>
+                    <input id="Text1" type="text" v-model="OfficeHoursam" />
+                </td>
+            </tr>
+            <tr>
+                <td>下班时间(上午)：</td>
+                <td>
+                    <input id="Text1" type="text" v-model="ClosingTimeam" />
+                </td>
+            </tr>
+            <tr>
+                <td>上班时间(下午)：</td>
+                <td>
+                    <input id="Text1" type="text" v-model="OfficeHourspm" />
+                </td>
+            </tr>
+            <tr>
+                <td>上班时间(下午)：</td>
+                <td>
+                    <input id="Text1" type="text" v-model="ClosingTimepm" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>发布时间：</td>
+                <td>
+                    <input id="Text1" type="text" v-model="CreationTime" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>是否启用：</td>
+                <td>
+                    <input id="Radio1" type="radio" v-model="IsStart" name="IsStart" value="1" checked="checked" />启用
+                    &nbsp;&nbsp;&nbsp;
+                    <input id="Radio1" type="radio" v-model="IsStart" name="IsStart" value="0" />禁用
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <input id="AddBtn" type="button" value="添加" v-on:click="AddHolidaySettings(OfficeHoursam,ClosingTimeam,OfficeHourspm,ClosingTimepm,CreationTime,IsStart)" />
+                </td>
+                <td>
+                    <a href="/HolidaySettingsView/GetHolidaySettingsView">显示</a>
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#add",
+        data: {
+            OfficeHoursam: "",
+            ClosingTimeam: "",
+            OfficeHourspm: "",
+            ClosingTimepm: "",
+            CreationTime: "",
+            IsStart: 1,
+           
+        },
+        methods: {
+            AddHolidaySettings: function (OfficeHoursam, ClosingTimeam, OfficeHourspm, ClosingTimepm, CreationTime, IsStart) {
+                var params = new URLSearchParams();
+                //var date = new Date();
+
+                params.append('OfficeHoursam', OfficeHoursam);
+                params.append('ClosingTimeam', ClosingTimeam);
+                params.append('OfficeHourspm', OfficeHourspm);
+                params.append('ClosingTimepm', ClosingTimepm);
+                params.append('CreationTime', CreationTime);
+                params.append('IsStart', IsStart);
+              
+                axios.post('http://localhost:8099/HolidaySettings/AddHolidaySettings', params).then(
+                    (response) => {
+                        alert(response)
+
+                        alert("添加成功")
+
+
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+
+            },
+
+        },
+        computed: {
+        }
+
+    });
+
+
+
+
+
+
+
+</script>

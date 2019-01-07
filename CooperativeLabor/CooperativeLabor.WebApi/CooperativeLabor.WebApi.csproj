@@ -243,9 +243,14 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AllowancesController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
+
+    <Compile Include="Controllers\HolidaySettingsController.cs" />
+
     <Compile Include="Controllers\PartnerController.cs" />
     <Compile Include="Controllers\PersonalInformationController.cs" />
+
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
