@@ -1,0 +1,183 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddEnt</title>
+    <script src="~/Content/VueScripts/vue.js"></script>
+    <script src="~/Content/VueScripts/axios.js"></script>
+</head>
+<body>
+    <div id="add">
+        <table>
+            <tr>
+                <td>合作方名称</td>
+                <td><input id="Text1" type="text" v-model="PartnerName" /></td>
+            </tr>
+            <tr>
+                <td>合作方类别</td>
+                <td><input id="Text1" type="text" v-model="PartnerCategory" /></td>
+                @*<td>
+            <select id="Select1" v-model="PartnerCategory">
+                <option value="请选择">--请选择--</option>
+
+            </select>
+        </td>*@
+            </tr>
+            <tr>
+                <td>营业执照</td>
+                <td>
+                    <input id="Text1" type="text" v-model="BusinessLicense" />
+                </td>
+            </tr>
+
+            <tr>
+                <td>操作类型</td>
+                <td><input id="Text1" type="text" v-model="OperationType" /></td>
+                @*<td>
+            <select id="Select2" v-model="OperationType">
+                <option value="请选择">--请选择--</option>
+                <option></option>
+
+            </select>
+        </td>*@
+            </tr>
+            <tr>
+                <td>入场时间</td>
+                <td>
+                    <input id="date" type="date" v-model="ApproachTime" />
+                </td>
+            </tr>
+            <tr>
+                <td>离场时间</td>
+                <td><input id="date" type="date" v-model="Departuretime" /></td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td>
+                    <input id="Text1" type="text" v-model="Remark" />
+                </td>
+            <tr>
+                <td>附件名称</td>
+                <td>
+                    <input id="Text1" type="text" v-model="AttachmentName" />
+                </td>
+            </tr>
+            <tr>
+                <td>附件路径</td>
+                <td>
+                    <input id="Text1" type="text" v-model="AttachmentPath" />
+                </td>
+            </tr>
+            <tr>
+                <td>创建时间</td>
+                <td>
+                    <input id="date" type="date" v-model="CreationTime" />
+                </td>
+            </tr>
+            <tr>
+                <td>修改时间</td>
+                <td>
+                    <input id="date" type="date" v-model="ModificationTime" />
+                </td>
+            </tr>
+            <tr>
+                <td>是否删除</td>
+                <td>
+                    <input id="Radio1" type="radio" v-model="IsDelete" name="IsReadOnly" value="1" />是
+                    <input id="Radio1" type="radio" v-model="IsDelete" name="IsReadOnly" value="0" checked="checked" />否
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="AddBtn" type="button" value="添加" v-on:click="AddEntryAndExitRecord(PartnerName,PartnerCategory,BusinessLicense,OperationType,ApproachTime,Departuretime,Remark,AttachmentName,AttachmentPath,CreationTime,ModificationTime,IsDelete)" />
+                </td>
+                <td>
+                    <a href="/PartnerMVC/Index">显示</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#add",
+        data: {
+            PartnerName: "",
+            PartnerCategory: "",
+            BusinessLicense: "",
+            OperationType: "",
+            ApproachTime: "",
+            Departuretime: "",
+            Remark: "",
+            AttachmentName: "",
+            AttachmentPath: "",
+            CreationTime: "",
+            ModificationTime: "",
+            IsDelete: 1,         
+        },
+        methods: {
+            AddEntryAndExitRecord: function (PartnerName, PartnerCategory, BusinessLicense, OperationType, ApproachTime, Departuretime, Remark, AttachmentName, AttachmentPath, CreationTime, ModificationTime, IsDelete) {
+                var params = new URLSearchParams();
+              
+                params.append('PartnerName', PartnerName);
+                params.append('PartnerCategory', PartnerCategory);
+                params.append('BusinessLicense', BusinessLicense);
+                params.append('OperationType', OperationType);
+                params.append('ApproachTime', ApproachTime);
+                params.append('Departuretime', Departuretime);
+                params.append('Remark', Remark);
+                params.append('AttachmentName', AttachmentName);
+                params.append('AttachmentPath', AttachmentPath);
+                params.append('CreationTime', CreationTime);
+                params.append('ModificationTime', ModificationTime);
+                params.append('IsDelete', IsDelete);
+                axios.post('http://localhost:8099/Partner/AddEnt', params).then(
+                    (response) => {
+                        alert(response)
+
+
+                        alert("添加成功")
+
+
+
+
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+
+
+            },
+
+
+        },
+        computed: {
+        }
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
