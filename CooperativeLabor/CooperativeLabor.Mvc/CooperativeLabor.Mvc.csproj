@@ -148,6 +148,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AllowancesViewController.cs" />
+    <Compile Include="Controllers\EntryDimissionMVCController.cs" />
     <Compile Include="Controllers\HolidaySettingsViewController.cs" />
     <Compile Include="Controllers\PartnerMVCController.cs" />
     <Compile Include="Controllers\PersonalInformationController.cs" />
@@ -238,6 +239,7 @@
     <Content Include="Views\PartnerMVC\AddEnt.cshtml" />
     <Content Include="Views\PersonalInformation\Add.cshtml" />
     <Content Include="Views\PersonalInformation\Index.cshtml" />
+    <Content Include="Views\EntryDimissionMVC\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
