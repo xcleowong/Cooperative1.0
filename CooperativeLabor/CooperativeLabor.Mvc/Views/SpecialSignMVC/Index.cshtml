@@ -1,0 +1,106 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Content/VueScripts/vue.js"></script>
+    <script src="~/Content/VueScripts/axios.js"></script>
+</head>
+<body>
+    <div id="app">
+        姓名：<input type="text" name="Name" />
+        <input type="button" value="搜索" class="btn btn-info" />
+        <input type="button" value="添加" class="btn btn-info" onclick="location.href='/PersonalInformation/Add'" />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td>序号</td>
+                    <td>姓名</td>
+                    <td>部门</td>
+                    <td>出勤日期</td>
+                    <td>出勤类型</td>
+                    <td>签录时间</td>
+                    <td>签退时间</td>
+                    <td>修改签到时间</td>
+                    <td>修改签退时间</td>
+                    <td>特签人</td>
+                    <td>特签时间</td>
+                    <td>特签原由</td>
+                    <td>操作</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in GetSpecialSign">
+                    <td>{{item.Id}}</td>
+                    <td>{{item.Name}}</td>
+                    <td>{{item.Department}}</td>
+                    <td>{{item.AttendanceDate}}</td>
+                    <td>{{item.AttendanceTypes}}</td>
+                    <td>{{item.SignInDate}}</td>
+                    <td>{{item.SignOutDate}}</td>
+                    <td>{{item.AlterSignInDate}}</td>
+                    <td>{{item.AlterSignOutDate}}</td>
+                    <td>{{item.ThoseSign}}</td>
+                    <td>{{item.SignedTime}}</td>
+                    <td>{{item.SpecialSign}}</td>
+                    <td>
+                        <div>
+                            <a href="#" v-on:click="deleteById(GetSpecialSign.Id)">删除</a>
+
+                        </div>
+                        
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            GetSpecialSign:[]
+        },
+        mounted() {
+            this.SpecialSignTheRecord();
+            this.deleteById();
+        },
+        methods: {
+            SpecialSignTheRecord: function () {
+                axios.get("http://localhost:8099/SpecialSignTheRecord/GetSpecialSignTheRecord").then(
+                    (response) => {
+                        this.GetSpecialSign = response.data;
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
+            deleteById: function (id) {
+                axios.post("http://localhost:8099/SpecialSignTheRecord/DeleteSpecialSignTheRecord?id=" + id).then(
+                    (response) => {
+                        this.GetSpecialSign = response.data;
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            }
+        }
+    })
+
+
+</script>

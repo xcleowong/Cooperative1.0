@@ -150,6 +150,7 @@
     <Compile Include="App_Start\FilterConfig2.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\RouteConfig2.cs" />
+    <Compile Include="Controllers\SpecialSignMVCController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\AllowancesViewController.cs" />
     <Compile Include="Controllers\EntryDimissionMVCController.cs" />
@@ -258,6 +259,7 @@
     <Content Include="Views\EntryDimissionMVC\Index.cshtml" />
     <Content Include="Views\EntryDimissionMVC\Add.cshtml" />
     <Content Include="Views\EntryDimissionMVC\People.cshtml" />
+    <Content Include="Views\SpecialSignMVC\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

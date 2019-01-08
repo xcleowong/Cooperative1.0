@@ -14,7 +14,7 @@ namespace CooperativeLabor.Services
     ///<summary>
     ///特别签录
     ///</summary>
-    public class SpecialSignTheRecordServices
+    public class SpecialSignTheRecordServices:ISpecialSignTheRecordServices
     {
         /// <summary>
         /// 添加特别签录
@@ -62,7 +62,7 @@ namespace CooperativeLabor.Services
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
-                string sql = "select Id,StaffId,Name,Department,AttendanceDate,AttendanceTypes,SignInDate,SignOutDate,AlterSignInDate FROM specialsigntherecord";
+                string sql = "select Id,StaffId,Name,Department,AttendanceDate,AttendanceTypes,SignInDate,SignOutDate,AlterSignInDate,AlterSignOutDate,ThoseSign,SignedTime,SpecialSign FROM specialsigntherecord";
                 IEnumerable<SpecialSignTheRecord> list = conn.Query<SpecialSignTheRecord>(sql, null);
                 return list.ToList();
             }

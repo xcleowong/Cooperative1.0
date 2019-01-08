@@ -54,6 +54,7 @@ namespace CooperativeLabor.WebApi
 
 
 
+            container.RegisterType<ISpecialSignTheRecordServices, SpecialSignTheRecordServices>();
 
 
 
