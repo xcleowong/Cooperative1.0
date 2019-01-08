@@ -12,12 +12,15 @@ namespace CooperativeLabor.WebApi.Controllers
     using CooperativeLabor.IServices;
     using CooperativeLabor.Cache;
     using Unity.Attributes;
+    using Dapper;
+
     /// <summary>
     /// 补助标准配置
     /// </summary>
     [RoutePrefix("Allowances")]
     public class AllowancesController : ApiController
     {
+        const int pagesize = 3;
         //方法一
         //需要引用 using Unity.Attributes;
         /// <summary>
