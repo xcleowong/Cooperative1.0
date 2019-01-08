@@ -15,7 +15,56 @@
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <style>
+        .page-bar {
+            margin: 40px;
+        }
 
+        ul, li {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        li {
+            list-style: none
+        }
+
+        .page-bar li:first-child > a {
+            margin-left: 0px
+        }
+
+        .page-bar a {
+            border: 1px solid #ddd;
+            text-decoration: none;
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            margin-left: -1px;
+            line-height: 1.42857143;
+            color: #337ab7;
+            cursor: pointer
+        }
+
+            .page-bar a:hover {
+                background-color: #eee;
+            }
+
+            .page-bar a.banclick {
+                cursor: not-allowed;
+            }
+
+        .page-bar .active a {
+            color: #fff;
+            cursor: default;
+            background-color: #337ab7;
+            border-color: #337ab7;
+        }
+
+        .page-bar i {
+            font-style: normal;
+            color: #d44950;
+            margin: 0px 4px;
+            font-size: 12px;
+        }
 
 
         .div-td table td {
@@ -50,7 +99,7 @@
                 <td><input type="text" v-model="item.HolidaysRest" /></td>
                 <td><input type="text" v-model="item.ExchangeSubsidy" /></td>
                 <td><input type="text" v-model="item.MealSubsidy" /></td>
-                <td><input type="text" v-model="item.ReleaseTime" readonly="readonly"/></td>
+                <td><input type="text" v-model="item.ReleaseTime" readonly="readonly" /></td>
                 <td>
                     <select id="Select1" v-model="item.HistoricalInformation">
                         <option value="请选择">--请选择--</option>
@@ -80,7 +129,20 @@
             </tr>
 
         </table>
+        <div class="page-bar">
+    <ul>
+        <li v-if="cur>1"><a v-on:click="cur--,pageClick()">上一页</a></li>
+        <li v-if="cur==1"><a class="banclick">上一页</a></li>
+        <li v-for="index in indexs" v-bind:class="{ 'active': cur == index}">
+            <a v-on:click="btnClick(index)">{{ index }}</a>
+        </li>
+        <li v-if="cur!=all"><a v-on:click="cur++,pageClick()">下一页</a></li>
+        <li v-if="cur == all"><a class="banclick">下一页</a></li>
+        <li><a>共<i>{{all}}</i>页</a></li>
+    </ul>
+</div>
     </div>
+    
 </body>
 </html>
 <script type="text/javascript">
@@ -91,20 +153,39 @@
             //HistoricalInformation: "请选择",
             HistoricalInformationNum: "",
             IsReadOnly: "",
-            list: []
+            list: [],
+            all: 6, //总页数
+            cur: 1//当前页码
+        },
+        watch: {
+            cur: function (oldValue, newValue) {
+            }
         },
         mounted() {
-            this.getList();
+            this.getList(this.cur);
         },
         methods: {
+            btnClick: function (data) {//页码点击事件
+                if (data != this.cur) {
+                    this.cur = data;
+                    this.getList(data);
 
+
+                }
+            },
+            pageClick: function () {
+                //console.log('现在在' + this.cur + '页');
+                this.getList(this.cur);
+            },
 
             //获取补助标准标准信息
-            getList: function () {
-                axios.get('http://localhost:8099/Allowances/GetAllowances').then((response) => {
+            getList: function (id) {
+                axios.get('http://localhost:8099/Allowances/GetAllowances', { params: { pageIndex: id } }).then((response) => {
                     this.list = [];
-                    for (var i = 0; i < response.data.length; i++) {
-                        this.list.push(response.data[i]);
+                    this.cur = response.data.CurrentPage;
+                    this.all = response.data.TotlePage;
+                    for (var i = 0; i < response.data.Data.length; i++) {
+                        this.list.push(response.data.Data[i]);
                     }
                 },
                     (response) => {
@@ -161,6 +242,36 @@
             },
 
         },
+        //计算属性
+        computed: {
+            indexs: function () {
+                var left = 1;
+                var right = this.all;
+                var ar = [];
+                if (this.all >= 5) {
+                    if (this.cur > 3 && this.cur < this.all - 2) {
+                        left = this.cur - 2
+                        right = this.cur + 2
+                    } else {
+                        if (this.cur <= 3) {
+                            left = 1
+                            right = 5
+                        } else {
+                            right = this.all
+                            left = this.all - 4
+                        }
+                    }
+                }
+                while (left <= right) {
+                    ar.push(left)
+                    left++
+                }
+                return ar
+            }
+
+        }
+
+
 
     })
 </script>

@@ -18,6 +18,7 @@ namespace CooperativeLabor.WebApi.Controllers
     [RoutePrefix("HolidaySettings")]
     public class HolidaySettingsController : ApiController
     {
+        private const int PAGESIZE = 3;
         //方法一
         //需要引用 using Unity.Attributes;
         /// <summary>
@@ -72,10 +73,19 @@ namespace CooperativeLabor.WebApi.Controllers
         /// <returns></returns>
         [Route("GetHolidaySettings")]
         [HttpGet]
-        public List<HolidaySettings> GetHolidaySettings()
+        public PageNumber GetHolidaySettings(int pageIndex)
         {
-            var list = holidaySettings.GetHolidaySettings();
-            return list;
+            if (pageIndex == null)
+            {
+                pageIndex = 1;
+            }
+            List<HolidaySettings> listGH = holidaySettings.GetHolidaySettings().ToList();
+            PageNumber pageNumber = new PageNumber();
+            pageNumber.CurrentPage = pageIndex;
+            pageNumber.TotlePage = (listGH.Count / PAGESIZE) + (listGH.Count % PAGESIZE == 0 ? 0 : 1);
+            pageNumber.Data = listGH.Skip((pageIndex - 1) * PAGESIZE).Take(PAGESIZE);
+            return pageNumber;
+          
         }
 
         /// <summary>
