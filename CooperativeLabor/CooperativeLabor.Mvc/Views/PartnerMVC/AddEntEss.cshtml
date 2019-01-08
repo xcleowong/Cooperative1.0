@@ -1,0 +1,202 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddEnt</title>
+    <script src="~/Content/VueScripts/vue.js"></script>
+    <script src="~/Content/VueScripts/axios.js"></script>
+</head>
+<body>
+    <div id="add">
+        <table>
+
+            <tr>
+                <td>合作方名称</td>
+                <td>
+                    <input id="Text1" type="text" v-model="PartnerName" />
+                </td>
+            </tr>
+            <tr>
+                <td>合作方类别</td>
+                <td><input id="Text1" type="text" v-model="PartnerCategory" /></td>
+            </tr>
+            <tr>
+                <td>营业执照名称</td>
+                <td>
+                    <input id="Text1" type="text" v-model="BusinessLicenseName" />
+                </td>
+            <tr>
+                <td>营业执照URL</td>
+                <td>
+                    <input id="Text1" type="text" v-model="BusinessLicenseURL" />
+                </td>
+            </tr>
+            <tr>
+                <td>是否启用</td>
+                <td>
+                    <input id="Radio1" type="radio" v-model="IsStart" name="IsStart" value="1" />是
+                    <input id="Radio1" type="radio" v-model="IsStart" name="IsStart" value="0" checked="checked" />否
+                    
+                </td>
+            </tr>
+            <tr>
+                <td>备注</td>
+                <td>
+                    <input id="Text1" type="text" v-model="Remark" />
+                </td>
+            </tr>
+            <tr>
+                <td>岗位</td>
+                <td>
+                    <input id="Text1" type="text" v-model="Post" />
+                </td>
+            </tr>
+            <tr>
+                <td>技术等级</td>
+                <td><input id="Text1" type="text"  v-model="TechnicalGrade" /></td>
+            </tr>
+            <tr>
+                <td>月薪</td>
+                <td><input id="Text1" type="text" v-model="MonthlyPay" /></td>
+            </tr>
+            <tr>
+                <td>单位入账卡号</td>
+                <td>
+                    <input id="Text1" type="text" v-model="BankCard" />
+                </td>
+            </tr>
+            <tr>
+                <td>创建时间</td>
+                <td>
+                    <input id="Text1" type="date" v-model="CreationTime" />
+                </td>
+            </tr>
+            <tr>
+                <td>修改时间</td>
+                <td><input id="Text1" type="date" v-model="ModificationTime" /></td>
+
+            </tr>
+            <tr>
+                <td>是否删除</td>
+                <td>
+                    <input id="Radio1" type="radio" v-model="IsDelete" name="IsReadOnly" value="1" />是
+                    <input id="Radio1" type="radio" v-model="IsDelete" name="IsReadOnly" value="0" checked="checked" />否
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="AddBtn" type="button" value="添加" v-on:click="AddEntryAndExitRecord( PartnerName,
+                PartnerCategory,
+                BusinessLicenseName,
+                BusinessLicenseURL,
+                IsStart,
+                Remark,
+                Post,
+                TechnicalGrade,
+                MonthlyPay,
+                BankCard,
+                CreationTime,
+                ModificationTime,
+                IsDelete)" />
+                </td>
+                <td>
+                    <a href="/PartnerMVC/IndexEss">显示</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#add",
+        data: {
+            PartnerName: "",
+            PartnerCategory: "",
+            BusinessLicenseName: "",
+            BusinessLicenseURL: "",
+            IsStart: 1,
+            Remark: "",
+            Post: "",
+            TechnicalGrade: "",
+            MonthlyPay: "",
+            BankCard: "",
+            CreationTime: "",
+            ModificationTime: "",
+            IsDelete: 1,
+        },
+        methods: {
+           
+            AddEntryAndExitRecord: function (
+                PartnerName,
+                PartnerCategory,
+                BusinessLicenseName,
+                BusinessLicenseURL,
+                IsStart,
+                Remark,
+                Post,
+                TechnicalGrade,
+                MonthlyPay,
+                BankCard,
+                CreationTime,
+                ModificationTime,
+                IsDelete,
+            ) {
+                var params = new URLSearchParams();
+
+                params.append('PartnerName', PartnerName);
+                params.append('PartnerCategory', PartnerCategory);
+                params.append('BusinessLicenseName', BusinessLicenseName);
+                params.append('BusinessLicenseURL', BusinessLicenseURL);
+                params.append('IsStart', IsStart);
+                params.append('Remark', Remark);
+                params.append('Post', Post);
+                params.append('TechnicalGrade', TechnicalGrade);
+                params.append('MonthlyPay', MonthlyPay);
+                params.append('BankCard', BankCard);
+                params.append('CreationTime', CreationTime);
+                params.append('ModificationTime', ModificationTime);
+                params.append('IsDelete', IsDelete);
+                axios.post('http://localhost:8099/Partner/AddEss', params).then(
+                    (response) => {
+                        alert(response)
+                        alert("添加成功")
+                },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+
+
+            },
+
+
+        },
+        computed: {
+        }
+
+
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
