@@ -80,5 +80,16 @@ namespace CooperativeLabor.WebApi.Controllers
             int i = entryDimission.UpdateEntryDimissionRecord(entry);
             return i;
         }
+        /// <summary>
+        /// 获取人员基本信息
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetPersonals")]
+        [HttpGet]
+        public List<PersonalInformation> GetPersonals()
+        {
+            var result = entryDimission.GetPersonals();
+            return result;
+        }
     }
 }

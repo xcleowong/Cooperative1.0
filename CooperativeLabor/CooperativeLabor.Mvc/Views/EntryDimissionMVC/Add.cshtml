@@ -49,11 +49,7 @@
             <tr>
                 <td>操作类型：</td>
                 <td>
-                    <select id="Select2" v-model="OperationType">
-                        <option value="请选择">--请选择--</option>
-                        <option value="入职">入职</option>
-                        <option value="离职">离职</option>
-                    </select>
+                    c
                 </td>
             </tr>
             <tr>
@@ -149,10 +145,7 @@
                 axios.post('http://localhost:8099/EntryDimission/AddEntry', params).then(
                     (response) => {
                         alert(response)
-
                         alert("添加成功")
-
-
                     },
                     (response) => {
                         alert(response.status);
