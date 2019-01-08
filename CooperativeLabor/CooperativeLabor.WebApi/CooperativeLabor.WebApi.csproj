@@ -151,6 +151,7 @@
     <Compile Include="Controllers\AllowancesController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\HolidaySettingsController.cs" />
+    <Compile Include="Controllers\JurisdictionController.cs" />
     <Compile Include="Controllers\PartnerController.cs" />
     <Compile Include="Controllers\PersonalInformationController.cs" />
     <Compile Include="Global.asax.cs">

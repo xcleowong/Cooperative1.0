@@ -15,15 +15,16 @@ namespace CooperativeLabor.Model
         public int Id { get; set; }
 
         /// <summary>
-        /// 角色Id
-        /// </summary>           
-        public int RoleId { get; set; }
-
-        /// <summary>
         /// 用户Id
         /// </summary>           
         public int UserId { get; set; }
 
+        /// <summary>
+        /// 角色Id
+        /// </summary>           
+        public int RoleId { get; set; }
+
+       
         /// <summary>
         /// 创建时间
         /// </summary>           
