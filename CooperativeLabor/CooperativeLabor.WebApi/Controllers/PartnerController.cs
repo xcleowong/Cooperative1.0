@@ -127,7 +127,7 @@ namespace CooperativeLabor.WebApi.Controllers
         [HttpPost]
         public int Update(EssentialInformation essentialInformation)
         {
-            int i = this.Update(essentialInformation);
+            int i = this.essentialInformation.Update(essentialInformation);
             return i;
         }
         /// <summary>

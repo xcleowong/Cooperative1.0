@@ -52,9 +52,9 @@ namespace CooperativeLabor.WebApi
             container.RegisterType<IPersonalInformationServices, PersonalInformationServices>();
             container.RegisterType<IEntryDimissionRecordServices, EntryDimissionRecordServices>();
 
-
-
             container.RegisterType<ISpecialSignTheRecordServices, SpecialSignTheRecordServices>();
+            //х╗оч
+            container.RegisterType<IPermissionServices, PermissionServices>();
 
 
 

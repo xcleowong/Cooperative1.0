@@ -16,6 +16,11 @@ namespace CooperativeLabor.Services
     ///</summary>
     public class EssentialInformationServices : IEssentialInformationServices
     {
+        /// <summary>
+        /// 添加
+        /// </summary>
+        /// <param name="essentialInformation"></param>
+        /// <returns></returns>
         public int Add(EssentialInformation essentialInformation)
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
@@ -41,7 +46,11 @@ namespace CooperativeLabor.Services
                 return i;
             }
         }
-
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public int Deletes(int Id)
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
@@ -54,7 +63,11 @@ namespace CooperativeLabor.Services
                 return i;
             }
         }
-
+        /// <summary>
+        /// 显示单个
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public EssentialInformation GetEssentialInformationById(int Id)
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
@@ -68,6 +81,12 @@ namespace CooperativeLabor.Services
             };
         }
 
+
+
+        /// <summary>
+        /// 显示所有
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<EssentialInformation> GetEssentialInformations()
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
@@ -79,12 +98,18 @@ namespace CooperativeLabor.Services
                 return result;
             }
         }
-
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="essentialInformation"></param>
+        /// <returns></returns>
         public int Update(EssentialInformation essentialInformation)
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
                 conn.Open();
+                essentialInformation.CreationTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy/MM/dd HH:mm"));
+                essentialInformation.ModificationTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy/MM/dd HH:mm"));
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Id", essentialInformation.Id, null, null, null);
                 parameters.Add("@PartnerName", essentialInformation.PartnerName, null, null, null);

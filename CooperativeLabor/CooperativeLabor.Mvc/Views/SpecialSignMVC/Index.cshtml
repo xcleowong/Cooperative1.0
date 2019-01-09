@@ -52,10 +52,11 @@
                     <td>{{item.SpecialSign}}</td>
                     <td>
                         <div>
-                            <a href="#" v-on:click="deleteById(GetSpecialSign.Id)">删除</a>
+                            <a href="#" v-on:click="ReturnSpecial(item.Id)">恢复签录</a>
+                            <a href="#" v-on:click="deleteById(item.Id)">删除</a>
 
                         </div>
-                        
+
                     </td>
 
                 </tr>
@@ -68,11 +69,10 @@
     var vm = new Vue({
         el: "#app",
         data: {
-            GetSpecialSign:[]
+            GetSpecialSign: []
         },
         mounted() {
             this.SpecialSignTheRecord();
-            this.deleteById();
         },
         methods: {
             SpecialSignTheRecord: function () {
@@ -87,10 +87,13 @@
                     alert(response);
                 });
             },
-            deleteById: function (id) {
-                axios.post("http://localhost:8099/SpecialSignTheRecord/DeleteSpecialSignTheRecord?id=" + id).then(
+            deleteById: function (Id) {
+                axios.post('http://localhost:8099/SpecialSignTheRecord/DeleteSpecialSignTheRecord?id=' + Id).then(
                     (response) => {
-                        this.GetSpecialSign = response.data;
+                        if (response.data > 0) {
+                            alert("删除成功！");
+                            this.SpecialSignTheRecord();
+                        }
                     },
                     (response) => {
                         alert(response.status);
@@ -98,7 +101,8 @@
                 ).catch(function (response) {
                     alert(response);
                 });
-            }
+            },
+            
         }
     })
 

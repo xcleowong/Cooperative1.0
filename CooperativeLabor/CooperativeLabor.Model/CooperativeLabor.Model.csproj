@@ -56,7 +56,11 @@
     <Compile Include="EssentialInformation.cs" />
     <Compile Include="HolidaySettings.cs" />
     <Compile Include="OtherExpenses.cs" />
+
+    <Compile Include="PageBox.cs" />
+
     <Compile Include="PageNumber.cs" />
+
     <Compile Include="Permission.cs" />
     <Compile Include="PermissionsAndRoles.cs" />
     <Compile Include="PersonalInformation.cs" />

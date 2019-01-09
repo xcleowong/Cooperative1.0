@@ -34,7 +34,11 @@ namespace CooperativeLabor.Services
                 parameters.Add("@SignInDate", special.SignInDate, null, null, null);
                 parameters.Add("@SignOutDate", special.SignOutDate, null, null, null);
                 parameters.Add("@AlterSignInDate", special.AlterSignInDate, null, null, null);
-                string sql = "insert into specialsigntherecord(StaffId,Name,Department,AttendanceDate,AttendanceTypes,SignInDate,SignOutDate,AlterSignInDate) values (@StaffId,@Name,@Department,@AttendanceDate,@AttendanceTypes,@SignInDate,@SignOutDate,@AlterSignInDate)";
+                parameters.Add("@AlterSignOutDate", special.AlterSignOutDate, null, null, null);
+                parameters.Add("@ThoseSign", special.ThoseSign, null, null, null);
+                parameters.Add("@SignedTime", special.SignedTime, null, null, null);
+                parameters.Add("@SpecialSign", special.SpecialSign, null, null, null);
+                string sql = "insert into specialsigntherecord(StaffId,Name,Department,AttendanceDate,AttendanceTypes,SignInDate,SignOutDate,AlterSignInDate,AlterSignOutDate,ThoseSign,SignedTime,SpecialSign) values (@StaffId,@Name,@Department,@AttendanceDate,@AttendanceTypes,@SignInDate,@SignOutDate,@AlterSignInDate,@AlterSignOutDate,@ThoseSign,@SignedTime,@SpecialSign)";
                 int i = conn.Execute(sql, parameters);
                 return i;
             }

@@ -34,11 +34,18 @@ namespace CooperativeLabor.IServices
         int Update(PermissionsAndRoles upt);
 
         /// <summary>
-        /// 删除关联信息
+        /// 根据Id获取关联信息
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        PermissionsAndRoles GetPermissionsAndRolesById(int id);
+        PermissionsAndRoles GetPermissionsAndRolesById(int Id);
+
+        /// <summary>
+        /// 根据Id显示单个关联信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        PermissionsAndRoles DeletePermissionsAndRolesById(int Id);
 
         /// <summary>
         /// 显示关联表数据

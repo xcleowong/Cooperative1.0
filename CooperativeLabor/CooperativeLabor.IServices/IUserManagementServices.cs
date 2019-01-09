@@ -12,5 +12,39 @@ namespace CooperativeLabor.IServices
     ///</summary>
     public interface IUserManagementServices
     {
+        /// <summary>
+        /// 添加人员管理信息
+        /// </summary>
+        /// <param name="userManagement"></param>
+        /// <returns></returns>
+        int AddUserManagement(UserManagement userManagement);
+
+        /// <summary>
+        /// 修改人员管理信息
+        /// </summary>
+        /// <param name=""></param>
+        /// <returns></returns>
+        int UpdateUserManagement(int Id);
+
+        /// <summary>
+        /// 删除人员管理信息
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        int DeleteUserManagement(int Id);
+
+        /// <summary>
+        /// 获取人员管理信息
+        /// </summary>
+        /// <returns></returns>
+        List<UserManagement> GetUserManagements();
+
+        /// <summary>
+        /// 根据ID获取人员管理信息
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        UserManagement GetAloneUserManagement(int Id);
+
     }
 }

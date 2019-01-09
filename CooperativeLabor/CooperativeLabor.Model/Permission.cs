@@ -34,5 +34,10 @@ namespace CooperativeLabor.Model
         /// </summary>           
         public int IsStart { get; set; }
 
+        /// <summary>
+        /// pid
+        /// </summary>
+        public int Pid { get; set; }
+
     }
 }

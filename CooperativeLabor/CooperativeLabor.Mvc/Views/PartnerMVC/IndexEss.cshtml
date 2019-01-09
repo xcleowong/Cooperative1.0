@@ -1,0 +1,206 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>IndexEss</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Content/VueScripts/vue.js"></script>
+    <script src="~/Content/VueScripts/axios.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <table v-show="EssentialInformationList.length" class="table-condensed" border="1" style="width:100px">
+
+            <tr>
+                <td>编号</td>
+                <td>合作方名称</td>
+                <td>合作方类别</td>
+                <td>营业执照名称</td>
+                <td>营业执照URL</td>
+                <td>是否启用</td>
+                <td>备注</td>
+                <td>岗位</td>
+                <td>技术等级</td>
+                <td>月薪</td>
+                <td>单位入账卡号</td>
+                <td>创建时间</td>
+                <td>修改时间</td>
+                <td>是否删除</td>
+                <td>操作</td>
+            </tr>
+            <tr v-for="(EssentialInformation,index) in EssentialInformationList">
+                <td><input type="text" v-model="EssentialInformation.Id" /></td>
+                <td><input type="text" v-model="EssentialInformation.PartnerName" /></td>
+                <td><input type="text" v-model="EssentialInformation.PartnerCategory" /></td>
+                <td><input type="text" v-model="EssentialInformation.BusinessLicenseName" /></td>
+                <td><input type="text" v-model="EssentialInformation.BusinessLicenseURL" /></td>
+                <td><input type="text" v-model="EssentialInformation.IsStart" /></td>
+                <td><input type="text" v-model="EssentialInformation.Remark" /></td>
+                <td><input type="text" v-model="EssentialInformation.Post" /></td>
+                <td><input type="text" v-model="EssentialInformation.TechnicalGrade" /></td>
+                <td><input type="text" v-model="EssentialInformation.MonthlyPay" /></td>
+                <td><input type="text" v-model="EssentialInformation.BankCard" /></td>
+                <td><input type="text" v-model="EssentialInformation.CreationTime" /></td>
+                <td><input type="text" v-model="EssentialInformation.ModificationTime" /></td>
+                <td><input type="text" v-model="EssentialInformation.IsDelete" /></td>
+                <td>
+                    <div v-if="EssentialInformation.Id!=''">
+                        <a href="#" v-on:click="updateContact(EssentialInformation.Id,
+EssentialInformation.PartnerName,
+EssentialInformation.PartnerCategory,
+EssentialInformation.BusinessLicenseName,
+EssentialInformation.BusinessLicenseURL,
+EssentialInformation.IsStart,
+EssentialInformation.Remark,
+EssentialInformation.Post,
+EssentialInformation.TechnicalGrade,
+EssentialInformation.MonthlyPay,
+EssentialInformation.BankCard,
+EssentialInformation.CreationTime,
+EssentialInformation.ModificationTime,
+EssentialInformation.IsDelete,
+)">修改</a>
+                        <a href="#" v-on:click="deleteContactById(EssentialInformation.Id)">删除</a>
+
+                    </div>
+                    <div v-else>
+                        <a href="#" v-on:click="addContact(EssentialInformationList.PartnerName,EssentialInformationList.PartnerCategory,EssentialInformationList.BusinessLicense,EssentialInformationList.OperationType,EssentialInformationList.ApproachTime,
+                               EssentialInformationList.Departuretime,EssentialInformationList.Remark,EssentialInformationList.AttachmentName,EssentialInformationList.AttachmentPath,EssentialInformationList.CreationTime,EssentialInformationList.ModificationTime,EssentialInformationList.IsDelete)">添加</a>
+                    </div>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            EssentialInformationList: []
+        },
+        mounted() {
+            this.getAllEntryAndExitRecords(2);
+        },
+        methods: {
+            //显示
+            getAllEntryAndExitRecords: function () {
+                axios.get("http://localhost:8099/Partner/GetEssentialInformationsEss"
+                ).then(
+                    (response) => {
+                        console.log(response);
+                        this.EssentialInformationList = response.data;
+                        //for (var i = 0; i < response.data.length; i++) {
+                        //    this.EssentialInformationList.push(response.data[i]);
+                        //}
+                        // this.EssentialInformationList.push({ Id: "", PartnerName: "222", PartnerCategory: "", BusinessLicense: "", OperationType: "", ApproachTime: "", Departuretime: "", Remark: "", AttachmentName: "", AttachmentPath: "", CreationTime: "", ModificationTime: "", IsDelete: ""});
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
+
+            //删除
+            deleteContactById: function (Id) {
+                axios.get('http://localhost:8099/Partner/DeleteEss?Id=' + Id).then(
+                    //axios.post('http://localhost:8099/Partner/DeleteEss', { Id: Id }).then(
+                    (response) => {
+                        this.EssentialInformationList = response.data;
+                        //for (var i = 0; i < response.data.length; i++) {
+                        //    this.contactsList.push(response.data[i]);
+                        //}
+                        //this.contactsList.push({ Id: "", Name: "", PhoneNo: "", EmailAddress: "" });
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
+            //修改
+            //updateContact: function (Id, PartnerName, PartnerCategory, BusinessLicense, OperationType, ApproachTime, Departuretime, Remark, AttachmentName, AttachmentPath, CreationTime, ModificationTime, IsDelete) {
+            //    axios.post('http://localhost:8099/Partner/UpdateEss?Id=' + Id, { contact: { Id: Id, PartnerName: PartnerName, PartnerCategory: PartnerCategory, BusinessLicense: BusinessLicense, OperationType: OperationType, ApproachTime: ApproachTime, Departuretime: Departuretime, Remark: Remark, AttachmentName: AttachmentName, AttachmentPath: AttachmentPath, CreationTime: CreationTime, ModificationTime: ModificationTime, IsDelete: IsDelete} }).then(
+            //        (response) => {
+            //            if (response.data>0) {
+            //                alert("修改成功!!!");
+            ////this.EssentialInformationList
+            //            }
+            //              //  this.EssentialInformationList = response.data;
+            //                //for (var i = 0; i < response.data.length; i++) {
+            //                //    this.contactsList.push(response.data[i]);
+            //                //}
+            //                //this.contactsList.push({ Id: "", Name: "", PhoneNo: "", EmailAddress: "" });
+            //            },
+            //            (response) => {
+            //                alert(response.status);
+            //            }
+            //        ).catch(function (response) {
+            //            alert(response);
+            //        });
+            //    },
+
+
+            ////修改质检计划信息
+            updateContact: function (
+                Id,
+                PartnerName,
+                PartnerCategory,
+                BusinessLicenseName,
+                BusinessLicenseURL,
+                IsStart,
+                Remark,
+                Post,
+                TechnicalGrade,
+                MonthlyPay,
+                BankCard,
+                CreationTime,
+                ModificationTime,
+                IsDelete)
+             {
+                var params = new URLSearchParams();
+                params.append('Id', Id);
+                params.append('PartnerName', PartnerName);
+                params.append('PartnerCategory', PartnerCategory);
+                params.append('BusinessLicenseName', BusinessLicenseName);
+                params.append('BusinessLicenseURL', BusinessLicenseURL);
+                params.append('IsStart', IsStart);
+                params.append('Remark', Remark);
+                params.append('Post', Post);               
+                params.append('TechnicalGrade', TechnicalGrade);
+                params.append('MonthlyPay', MonthlyPay);
+                params.append('BankCard', BankCard);
+                params.append('CreationTime', CreationTime);
+                params.append('ModificationTime', ModificationTime);
+                params.append('IsDelete', IsDelete);
+                axios.post('http://localhost:8099/Partner/UpdateEss?Id=' + Id, params).then(
+                    (response) => {
+                        console.log(response.data);
+                        if (response.data > 0) {
+                            alert("修改成功!!!");
+                            this.EssentialInformationList;
+                        }
+                        //console.info(this.list);
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
+        }
+
+    })
+</script>
