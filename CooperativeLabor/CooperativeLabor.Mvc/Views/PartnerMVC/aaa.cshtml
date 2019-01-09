@@ -1,0 +1,143 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<HEAD>
+    <TITLE> ZTREE DEMO </TITLE>
+    @*<link href="~/demo.css" rel="stylesheet" />*@
+
+    <script src="~/Scripts/ztree/jquery-1.4.4.min.js"></script>
+
+    <script src="~/Scripts/ztree/jquery.ztree.all.js"></script>
+    <script src="~/Scripts/ztree/jquery.ztree.all.min.js"></script>
+    <script src="~/Scripts/ztree/jquery.ztree.core.js"></script>
+    <script src="~/Scripts/ztree/jquery.ztree.core.min.js"></script>
+    <script src="~/Scripts/ztree/jquery.ztree.excheck.js"></script>
+    <script src="~/Scripts/ztree/jquery.ztree.excheck.min.js"></script>
+    <script src="~/Scripts/ztree/jquery.ztree.exedit.js"></script>
+    <script src="~/Scripts/ztree/jquery.ztree.exedit.min.js"></script>
+    <script src="~/Scripts/ztree/jquery.ztree.exhide.js"></script>
+    <script src="~/Scripts/ztree/jquery.ztree.exhide.min.js"></script>
+    <link href="~/Scripts/ztreeCSS/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+
+
+    <link href="~/Scripts/ztreeCSS/metroStyle/metroStyle.css" rel="stylesheet" />
+    @*<link href="~/Scripts/ztreeCSS/demo.css" rel="stylesheet" />*@
+
+
+
+    <SCRIPT LANGUAGE="JavaScript">
+        var zTreeObj;
+        var setting = {};        // zTree 的参数配置，后面详解
+        function zTreeOnClick(event, treeId, treeNode) {
+            alert(treeNode);
+            console.log(treeNode);
+            // alert(treeNode.tId + ", " + treeNode.name);
+        };
+        //var setting = {
+        //    data: {
+        //        simpleData: {
+        //            enable: true,
+        //            idKey: "id",
+        //            pIdKey: "pId",
+        //            rootPId: 0
+        //        }
+        //},
+        //    callback: {
+        //        onClick: zTreeOnClick
+        //    }
+        //};
+
+        var zTreeObj;
+        var setting = {};        // zTree 的参数配置，后面详解
+        var zNodes = [           // zTree 的数据属性，此处使用标准json格式
+            {
+                name: "东旭控股集团", open: true, children:
+                    [
+                        {
+                            name: "东旭光电", open: true, children:
+                                [{
+                                    name: "东旭建设集团", open: true, children:
+                                        [{
+                                            name: "财务管理部", open: true, children:
+                                                [{ name: "财务管理部总经理" }]
+                                        }, { name: "投资拓展部" }, { name: "产品定制部" }, { name: "销售管理部" }, { name: "成本管理部" }, { name: "人力行政部" }, { name: "设计管理部" }]
+                                },
+                                { name: "光电显示材料" }, { name: "高端装备制造" }, { name: "石墨烯产业化" }, { name: "新能源汽车" }, { name: "装备贸易" }]
+                        }, { name: "东旭蓝天" }, { name: "嘉麟杰" }, { name: "产业发展集团" }, { name: "东旭资本" }, { name: "职能部门" }
+                    ]
+            }
+        ]
+
+        $(document).ready(function () {
+            zTreeObj = $.fn.zTree.init($("#treeDemo"), setting, zNodes); //初始化zTree，三个参数一次分别是容器(zTree 的容器 className 别忘了设置为 "ztree")、参数配置、数据源
+        });
+    </SCRIPT>
+    <style>
+        .ztree * {
+            font-size: 10pt;
+            font-family: "Microsoft Yahei",Verdana,Simsun,"Segoe UI Web Light","Segoe UI Light","Segoe UI Web Regular","Segoe UI","Segoe UI Symbol","Helvetica Neue",Arial
+        }
+
+        .ztree li {
+            line-height: 20px;
+        }
+
+            .ztree li a {
+                width: 200px;
+                height: 30px;
+                padding-top: 0px;
+            }
+
+                .ztree li a:hover {
+                    text-decoration: none;
+                    background-color: #E7E7E7;
+                }
+
+                .ztree li a span.button.switch {
+                    visibility: hidden
+                }
+
+                .ztree li a.curSelectedNode {
+                    background-color: #D4D4D4;
+                    border: 0;
+                    height: 30px;
+                }
+    </style>
+</HEAD>
+<BODY>
+    <div id="app">
+        <ul id="treeDemo" class="ztree" style="height:500px;border:1px solid #ffffff;float:left; background-color:#ffffff"></ul>
+        @*<table style="float:left;margin-left:300px;margin-top:150px;margin-right:60px;border-collapse:separate; border-spacing:0px 50px;" ;>
+                <tr>
+                    <td>
+                        组织名称:
+                    </td>
+                    <td>
+                        <input id="Text1" type="text" name="name" />
+                    </td>
+                    <td>
+                        组织层级:
+                    </td>
+                    <td>
+                        <select id="Select1" name="pId">
+                            <option>东旭总部集团</option>
+
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>组织状态</td>
+                    <td>
+                        <input id="Radio1" type="radio" name="IsOrNo" checked="checked">启用
+                        <input type="radio" name="IsOrNo" />禁用
+                    </td>
+                </tr>
+
+            </table>*@
+    </div>
+</BODY>
+</html>

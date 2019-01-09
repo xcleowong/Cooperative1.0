@@ -12,12 +12,15 @@ namespace CooperativeLabor.WebApi.Controllers
     using CooperativeLabor.IServices;
     using CooperativeLabor.Cache;
     using Unity.Attributes;
+    using Dapper;
+
     /// <summary>
     /// 补助标准配置
     /// </summary>
     [RoutePrefix("Allowances")]
     public class AllowancesController : ApiController
     {
+        private const int PAGESIZE = 3;
         //方法一
         //需要引用 using Unity.Attributes;
         /// <summary>
@@ -58,10 +61,18 @@ namespace CooperativeLabor.WebApi.Controllers
         /// <returns></returns>
         [Route("GetAllowances")]
         [HttpGet]
-        public IEnumerable<Allowances> GetAllowances()
+        public PageNumber GetAllowances(int pageIndex)
         {
-            var list = allowancesServices.GetAllowances();
-            return list;
+            if(pageIndex==null)
+            {
+                pageIndex = 1;
+            }
+            List<Allowances> listGA = allowancesServices.GetAllowances().ToList();
+            PageNumber pageNumber = new PageNumber();
+            pageNumber.CurrentPage = pageIndex;
+            pageNumber.TotlePage = (listGA.Count / PAGESIZE) + (listGA.Count % PAGESIZE == 0 ? 0 : 1);
+            pageNumber.Data = listGA.Skip((pageIndex-1)*PAGESIZE).Take(PAGESIZE);
+            return pageNumber;
         }
 
         /// <summary>

@@ -23,6 +23,10 @@ namespace CooperativeLabor.Model
         /// 创建时间
         /// </summary>           
         public DateTime CreateTime { get; set; }
+        /// <summary>
+        ///   权限ID
+        /// </summary>
+        public string Role_PeremissionIds { get; set; }
 
         /// <summary>
         /// 是否启用

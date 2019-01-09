@@ -52,8 +52,8 @@ namespace CooperativeLabor.WebApi
             container.RegisterType<IPersonalInformationServices, PersonalInformationServices>();
             container.RegisterType<IEntryDimissionRecordServices, EntryDimissionRecordServices>();
 
-
-
+            //х╗оч
+            container.RegisterType<IPermissionServices, PermissionServices>();
 
 
 

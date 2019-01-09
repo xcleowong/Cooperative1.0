@@ -90,17 +90,32 @@ namespace CooperativeLabor.Services
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
                 DynamicParameters parameters = new DynamicParameters();
-                parameters.Add("@OperationType",entry.OperationType , null, null, null);
-                parameters.Add("@DatesEmployed",entry.DatesEmployed , null, null, null);
+                parameters.Add("@OperationType", entry.OperationType, null, null, null);
+                parameters.Add("@DatesEmployed", entry.DatesEmployed, null, null, null);
                 parameters.Add("@DepartureTime", entry.DepartureTime, null, null, null);
                 parameters.Add("@ModificationTime", entry.ModificationTime, null, null, null);
                 parameters.Add("@IsDelete", entry.IsDelete, null, null, null);
-                parameters.Add("@Id", entry.Id, null, null, null);
+                parameters.Add("@Id", entry.PersonnelId, null, null, null);
 
                 string sql = "update entrydimissionrecord set OperationType=@OperationType,DatesEmployed=@DatesEmployed,DepartureTime=@DepartureTime,ModificationTime=@ModificationTime,IsDelete=@IsDelete where PersonnelId=@Id";
                 int i = conn.Execute(sql, parameters);
                 return i;
             }
         }
+
+        /// <summary>
+        /// 获取人员基本信息
+        /// </summary>
+        /// <returns></returns>
+        public List<PersonalInformation> GetPersonals()
+        {
+            using (MySqlConnection conn = DapperHelper.GetConnString())
+            {
+                string sql = "select Id,`Name`,Gender,IDNumber,Employingnit,PartnerName from personalinformation";
+                IEnumerable<PersonalInformation> list = conn.Query<PersonalInformation>(sql, null);
+                return list.ToList();
+            }
+        }
+
     }
 }
