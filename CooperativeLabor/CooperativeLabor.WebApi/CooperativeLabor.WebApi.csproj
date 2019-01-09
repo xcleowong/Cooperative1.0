@@ -148,12 +148,12 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AllowancesController.cs" />
     <Compile Include="Controllers\CheckingInWebApiController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\EntryDimissionController.cs" />
     <Compile Include="Controllers\SpecialSignTheRecordController.cs" />
     <Compile Include="Controllers\TravelOnVacationWebApiController.cs" />
-    <Compile Include="Controllers\AllowancesController.cs" />
     <Compile Include="Controllers\HolidaySettingsController.cs" />
     <Compile Include="Controllers\JurisdictionController.cs" />
     <Compile Include="Controllers\PartnerController.cs" />
