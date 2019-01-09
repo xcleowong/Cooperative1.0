@@ -48,6 +48,10 @@ namespace CooperativeLabor.Mvc.Controllers
             return View();
         }
 
+        public ActionResult bbb()
+        {
+            return View();
+        }
         #region 添加权限信息
         public ActionResult AddPermission()
         {
