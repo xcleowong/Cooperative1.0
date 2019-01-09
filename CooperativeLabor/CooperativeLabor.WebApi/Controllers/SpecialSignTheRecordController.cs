@@ -9,6 +9,7 @@ namespace CooperativeLabor.WebApi.Controllers
 {
     using IServices;
     using Model;
+    [RoutePrefix("SpecialSignTheRecord")]
     public class SpecialSignTheRecordController : ApiController
     {
         ISpecialSignTheRecordServices specialSign = null;
@@ -20,6 +21,8 @@ namespace CooperativeLabor.WebApi.Controllers
         /// 获取特别签录
         /// </summary>
         /// <returns></returns>
+        [Route("GetSpecialSignTheRecord")]
+        [HttpGet]
         public List<SpecialSignTheRecord> GetSpecialSignTheRecord()
         {
             var result = specialSign.GetSpecialSignTheRecord();
@@ -31,6 +34,8 @@ namespace CooperativeLabor.WebApi.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [Route("DeleteSpecialSignTheRecord")]
+        [HttpPost]
         public int DeleteSpecialSignTheRecord(int id)
         {
             int i = specialSign.DeleteSpecialSignTheRecord(id);
@@ -43,6 +48,8 @@ namespace CooperativeLabor.WebApi.Controllers
         /// </summary>
         /// <param name="entry"></param>
         /// <returns></returns>
+        [Route("AddSpecialSignTheRecord")]
+        [HttpPost]
         public int AddSpecialSignTheRecord(SpecialSignTheRecord special)
         {
             int i = specialSign.AddSpecialSignTheRecord(special);
@@ -54,6 +61,8 @@ namespace CooperativeLabor.WebApi.Controllers
         /// </summary>
         /// <param name="entry"></param>
         /// <returns></returns>
+        [Route("UpdateSpecialSignTheRecord")]
+        [HttpPost]
         public int UpdateSpecialSignTheRecord(SpecialSignTheRecord special)
         {
             int i = specialSign.UpdateSpecialSignTheRecord(special);

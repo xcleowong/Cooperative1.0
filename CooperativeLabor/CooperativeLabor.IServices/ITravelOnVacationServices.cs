@@ -18,10 +18,16 @@ namespace CooperativeLabor.IServices
         /// 获取差旅休假信息
         /// </summary>
         /// <param name="StaffId">员工ID</param>
-        /// <param name="Name">员工姓名</param>
         /// <returns></returns>
-        List<TravelOnVacation> GetTravelOnVacations(int StaffId, string Name);
-        
+        List<TravelOnVacation> GetTravelOnVacations(int StaffId);
+
+        /// <summary>
+        /// 根据ID获取单个差旅休假信息
+        /// </summary>
+        /// <param name="ID">ID</param>
+        /// <returns></returns>
+        List<TravelOnVacation> GetTravelOnVacationById(int Id);
+
         /// <summary>
         /// 添加差旅休假信息
         /// </summary>
@@ -36,7 +42,7 @@ namespace CooperativeLabor.IServices
         /// <param name="StaffId">员工ID</param>
         /// <param name="Name">员工姓名</param>
         /// <returns></returns>
-        int UpdateTravelOnVacation(int State, int StaffId, string Name);
+        int UpdateTravelOnVacation(int State, int Id);
 
 
     }

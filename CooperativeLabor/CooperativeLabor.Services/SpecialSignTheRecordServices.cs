@@ -14,7 +14,7 @@ namespace CooperativeLabor.Services
     ///<summary>
     ///特别签录
     ///</summary>
-    public class SpecialSignTheRecordServices
+    public class SpecialSignTheRecordServices:ISpecialSignTheRecordServices
     {
         /// <summary>
         /// 添加特别签录
@@ -34,7 +34,11 @@ namespace CooperativeLabor.Services
                 parameters.Add("@SignInDate", special.SignInDate, null, null, null);
                 parameters.Add("@SignOutDate", special.SignOutDate, null, null, null);
                 parameters.Add("@AlterSignInDate", special.AlterSignInDate, null, null, null);
-                string sql = "insert into specialsigntherecord(StaffId,Name,Department,AttendanceDate,AttendanceTypes,SignInDate,SignOutDate,AlterSignInDate) values (@StaffId,@Name,@Department,@AttendanceDate,@AttendanceTypes,@SignInDate,@SignOutDate,@AlterSignInDate)";
+                parameters.Add("@AlterSignOutDate", special.AlterSignOutDate, null, null, null);
+                parameters.Add("@ThoseSign", special.ThoseSign, null, null, null);
+                parameters.Add("@SignedTime", special.SignedTime, null, null, null);
+                parameters.Add("@SpecialSign", special.SpecialSign, null, null, null);
+                string sql = "insert into specialsigntherecord(StaffId,Name,Department,AttendanceDate,AttendanceTypes,SignInDate,SignOutDate,AlterSignInDate,AlterSignOutDate,ThoseSign,SignedTime,SpecialSign) values (@StaffId,@Name,@Department,@AttendanceDate,@AttendanceTypes,@SignInDate,@SignOutDate,@AlterSignInDate,@AlterSignOutDate,@ThoseSign,@SignedTime,@SpecialSign)";
                 int i = conn.Execute(sql, parameters);
                 return i;
             }
@@ -62,7 +66,7 @@ namespace CooperativeLabor.Services
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
-                string sql = "select Id,StaffId,Name,Department,AttendanceDate,AttendanceTypes,SignInDate,SignOutDate,AlterSignInDate FROM specialsigntherecord";
+                string sql = "select Id,StaffId,Name,Department,AttendanceDate,AttendanceTypes,SignInDate,SignOutDate,AlterSignInDate,AlterSignOutDate,ThoseSign,SignedTime,SpecialSign FROM specialsigntherecord";
                 IEnumerable<SpecialSignTheRecord> list = conn.Query<SpecialSignTheRecord>(sql, null);
                 return list.ToList();
             }

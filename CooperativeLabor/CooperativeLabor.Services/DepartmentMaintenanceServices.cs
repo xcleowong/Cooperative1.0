@@ -14,7 +14,11 @@ namespace CooperativeLabor.Services
     ///<summary>
     ///单位科室维护表
     ///</summary>
-    public class DepartmentMaintenanceServices
+    public class DepartmentMaintenanceServices:IDepartmentMaintenanceServices
     {
+
+
+
+
     }
 }

@@ -74,7 +74,6 @@
     <Compile Include="RolesAndUsersServices.cs" />
     <Compile Include="RolesServices.cs" />
     <Compile Include="SpecialSignTheRecordServices.cs" />
-    <Compile Include="TestServices.cs" />
     <Compile Include="TrainingExpensesServices.cs" />
     <Compile Include="TravelExpenseServices.cs" />
     <Compile Include="TravelOnVacationServices.cs" />

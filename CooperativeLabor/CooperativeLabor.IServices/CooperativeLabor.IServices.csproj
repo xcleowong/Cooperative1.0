@@ -65,7 +65,6 @@
     <Compile Include="IRolesAndUsersServices.cs" />
     <Compile Include="IRolesServices.cs" />
     <Compile Include="ISpecialSignTheRecordServices.cs" />
-    <Compile Include="ITestServices.cs" />
     <Compile Include="ITrainingExpensesServices.cs" />
     <Compile Include="ITravelExpenseServices.cs" />
     <Compile Include="ITravelOnVacationServices.cs" />

@@ -1,0 +1,144 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Add</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <script src="~/Scripts/vue.js"></script>
+    <script src="~/Scripts/axios.js"></script>
+</head>
+<body>
+    <div id="add"> 
+        <input type="hidden" v-model="StaffId"/>
+        <table class="table table-hover">
+            <tr>
+                <td>姓名：</td>
+                <td>
+                    <select id="Select1" v-model="Name">
+                        <option value="请选择">--请选择--</option>
+                        <option value=""></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>部门：</td>
+                <td><input type="text" v-model="Department" readonly /></td>
+            </tr>
+            <tr>
+                <td>出勤类型：</td>
+                <td>
+                    <select id="Select1" v-model="AttendanceTypes">
+                        <option value="出勤签录">出勤签录</option>
+                        <option value="加班签录">加班签录</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>签录时间：</td>
+                <td><input type="text" v-model="SignInDate" readonly /></td>
+            </tr>
+            <tr>
+                <td>签退时间：</td>
+                <td><input type="text" v-model="SignOutDate" readonly /></td>
+            </tr>
+            <tr>
+                <td>修改签到时间：</td>
+                <td><input type="date" v-model="AlterSignInDate" /></td>
+            </tr>
+            <tr>
+                <td>修改签退时间：</td>
+                <td><input type="date" v-model="AlterSignOutDate" /></td>
+            </tr>
+            <tr>
+                <td>特签人：</td>
+                <td><input type="text" v-model="ThoseSign" /></td>
+            </tr>
+            <tr>
+                <td>特签时间：</td>
+                <td><input type="text" v-model="SignedTime" /></td>
+            </tr>
+            <tr>
+                <td>特签原由：</td>
+                <td><input type="text" v-model="SpecialSign" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="AddBtn" type="button" value="添加" v-on:click="AddSpecial(StaffId,Name,Department,AttendanceDate,AttendanceTypes,SignInDate,SignOutDate,AlterSignInDate,AlterSignOutDate,ThoseSign,SignedTime,SpecialSign)" />
+                </td>
+                <td><input type="button" value="取消" /></td>
+            </tr>
+            
+        </table>
+
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#add",
+        data: {
+            StaffId: 1,
+            Name: "",
+            Department: "",
+            AttendanceDate: "",
+            AttendanceTypes: "",
+            SignInDate: "",
+            SignOutDate: "",
+            AlterSignInDate: "",
+            AlterSignOutDate: "",
+            ThoseSign: "",
+            SignedTime: "",
+            SpecialSign: ""
+        },
+
+        methods: {
+            AddSpecial: function (StaffId, Name, Department, AttendanceDate, AttendanceTypes, SignInDate, SignOutDate, AlterSignInDate, AlterSignOutDate, ThoseSign, SignedTime, SpecialSign) {
+                var params = new URLSearchParams();
+                params.append('StaffId', StaffId);
+                params.append('Name', Name);
+                params.append('Department', Department);
+                params.append('AttendanceDate', AttendanceDate);
+                params.append('AttendanceTypes', AttendanceTypes);
+                params.append('SignInDate', SignInDate);
+                params.append('SignOutDate', SignOutDate);
+                params.append('AlterSignInDate', AlterSignInDate);
+                params.append('AlterSignOutDate', AlterSignOutDate);
+                params.append('ThoseSign', ThoseSign);
+                params.append('SignedTime', SignedTime);
+                params.append('SpecialSign', SpecialSign);
+
+                axios.post('http://localhost:8099/SpecialSignTheRecord/AddSpecialSignTheRecord', params).then(
+                    (response) => {
+                        alert(response)
+                        alert("添加成功")
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+
+            },
+        },
+        computed: {
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+
+

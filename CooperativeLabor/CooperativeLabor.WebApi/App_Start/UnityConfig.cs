@@ -47,25 +47,20 @@ namespace CooperativeLabor.WebApi
 
             container.RegisterType<IEntryAndExitRecordServices, EntryAndExitRecordServices>();
             container.RegisterType<IEssentialInformationServices, EssentialInformationServices>();
+
             //地址
-            container.RegisterType<ITestServices, TestServices>();
             container.RegisterType<IPersonalInformationServices, PersonalInformationServices>();
             container.RegisterType<IEntryDimissionRecordServices, EntryDimissionRecordServices>();
 
+            container.RegisterType<ISpecialSignTheRecordServices, SpecialSignTheRecordServices>();
             //权限
             container.RegisterType<IPermissionServices, PermissionServices>();
             //角色
             container.RegisterType<IRolesServices, RolesServices>();
 
-
-
-
-
             container.RegisterType<IAllowancesServices, AllowancesServices>();
             container.RegisterType<IHolidaySettingsServices, HolidaySettingsServices>();
          
-          
-
 
             //考勤签到
             container.RegisterType<ICheckingInServices, CheckingInServices>();
