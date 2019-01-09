@@ -152,6 +152,7 @@
     <Compile Include="App_Start\FilterConfig2.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\RouteConfig2.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SpecialSignMVCController.cs" />
     <Compile Include="Controllers\CheckingInController.cs" />
     <Compile Include="Controllers\AllowancesViewController.cs" />
@@ -845,6 +846,12 @@
     <Content Include="Scripts\Plugins\moment\moment.min.js" />
     <Content Include="Scripts\Plugins\TypeAhead\typeahead.bundle.js" />
     <Content Include="Scripts\vue-resource.js" />
+    <None Include="Views\PartnerMVC\IndexEss1.cshtml" />
+    <None Include="Views\PartnerMVC\IndexEnt.cshtml" />
+    <None Include="Views\PartnerMVC\AdminList.cshtml" />
+    <None Include="Views\PartnerMVC\RoleList.cshtml" />
+    <None Include="Views\PartnerMVC\PermissionType.cshtml" />
+    <None Include="Views\PartnerMVC\PermissionList.cshtml" />
     <!--<Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />-->
     <Content Include="VueScripts\axios.js" />
@@ -952,12 +959,9 @@
     <Content Include="Views\EntryDimissionMVC\Index.cshtml" />
     <Content Include="Views\EntryDimissionMVC\Add.cshtml" />
     <Content Include="Views\EntryDimissionMVC\People.cshtml" />
-
     <Content Include="Views\SpecialSignMVC\Index.cshtml" />
-
     <Content Include="Views\PartnerMVC\IndexEss.cshtml" />
     <Content Include="Views\PartnerMVC\AddEntEss.cshtml" />
-    <Content Include="Views\PartnerMVC\aaa.cshtml" />
     <Content Include="Scripts\ztreeCSS\awesomeStyle\awesome.less" />
     <Content Include="Scripts\ztreeCSS\awesomeStyle\fa.less" />
     <Content Include="Scripts\ztree\ztreeCSS\awesomeStyle\awesome.less" />
@@ -972,7 +976,6 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\PartnerMVC\bbb.cshtml" />
     <Content Include="Scripts\Plugins\jsRender\jsrender.min.js.map" />
     <Content Include="Scripts\Plugins\ckeditor_basic\skins\moono\readme.md" />
     <Content Include="Scripts\Plugins\ckeditor_basic\README.md" />
@@ -992,6 +995,8 @@
     <Content Include="Views\PartnerMVC\AddRoles.cshtml" />
     <Content Include="Views\PartnerMVC\GetRoles.cshtml" />
     <Content Include="Views\PartnerMVC\UpdateRoles.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

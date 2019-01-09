@@ -27,6 +27,23 @@ namespace CooperativeLabor.Mvc.Controllers
         }
 
         /// <summary>
+        /// 入离厂信息页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult IndexEnt()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 基本信息页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult IndexEss1()
+        {
+            return View();
+        }
+        /// <summary>
         /// 显示基本信息
         /// </summary>
         /// <returns></returns>
@@ -109,5 +126,38 @@ namespace CooperativeLabor.Mvc.Controllers
 
     
         #endregion
+
+        /// <summary>
+        /// 管理员列表
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AdminList()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 角色管理
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult RoleList()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 权限分类
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult PermissionType()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 权限管理
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult PermissionList()
+        {
+            return View();
+        }
     }
 }
