@@ -47,8 +47,8 @@ namespace CooperativeLabor.WebApi
 
             container.RegisterType<IEntryAndExitRecordServices, EntryAndExitRecordServices>();
             container.RegisterType<IEssentialInformationServices, EssentialInformationServices>();
+
             //µØÖ·
-            container.RegisterType<ITestServices, TestServices>();
             container.RegisterType<IPersonalInformationServices, PersonalInformationServices>();
             container.RegisterType<IEntryDimissionRecordServices, EntryDimissionRecordServices>();
 
@@ -57,15 +57,9 @@ namespace CooperativeLabor.WebApi
             container.RegisterType<IPermissionServices, PermissionServices>();
 
 
-
-
-
-
             container.RegisterType<IAllowancesServices, AllowancesServices>();
             container.RegisterType<IHolidaySettingsServices, HolidaySettingsServices>();
          
-          
-
 
             //¿¼ÇÚÇ©µ½
             container.RegisterType<ICheckingInServices, CheckingInServices>();

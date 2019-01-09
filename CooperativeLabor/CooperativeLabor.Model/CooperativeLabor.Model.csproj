@@ -56,11 +56,8 @@
     <Compile Include="EssentialInformation.cs" />
     <Compile Include="HolidaySettings.cs" />
     <Compile Include="OtherExpenses.cs" />
-
     <Compile Include="PageBox.cs" />
-
     <Compile Include="PageNumber.cs" />
-
     <Compile Include="Permission.cs" />
     <Compile Include="PermissionsAndRoles.cs" />
     <Compile Include="PersonalInformation.cs" />
@@ -71,7 +68,6 @@
     <Compile Include="Roles.cs" />
     <Compile Include="RolesAndUsers.cs" />
     <Compile Include="SpecialSignTheRecord.cs" />
-    <Compile Include="Test.cs" />
     <Compile Include="TrainingExpenses.cs" />
     <Compile Include="TravelExpense.cs" />
     <Compile Include="TravelOnVacation.cs" />

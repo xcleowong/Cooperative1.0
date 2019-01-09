@@ -93,7 +93,7 @@ namespace CooperativeLabor.WebApi.Controllers
         public int UpdateTravelOnVacation( int Id,int State)
         {
             var result = 0;
-            var state = ItravelOnVacationServices.GetTravelOnVacations(Id)[0].State;
+            var state = ItravelOnVacationServices.GetTravelOnVacationById(Id)[0].State;
             //现提交状态
             if (state == 1)//撤回
             {

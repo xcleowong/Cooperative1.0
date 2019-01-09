@@ -26,7 +26,7 @@ namespace CooperativeLabor.Services
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
-                string sql = @"insert into TravelOnVacation(StaffId,Name,ApplicationType,ApplicationReason,StartTime,StartTime,ComputingTime,ApplicationDate,State) values(@StaffId,@Name,@ApplicationType,@ApplicationReason,@StartTime,@StartTime,@ComputingTime,@ApplicationDate,@State)";
+                string sql = @"insert into TravelOnVacation(StaffId,Name,ApplicationType,ApplicationReason,StartTime,EndTime,ComputingTime,ApplicationDate,State) values(@StaffId,@Name,@ApplicationType,@ApplicationReason,@StartTime,@EndTime,@ComputingTime,@ApplicationDate,@State)";
                 var result = conn.Execute(sql, travelOnVacation);
                 return result;
             }
