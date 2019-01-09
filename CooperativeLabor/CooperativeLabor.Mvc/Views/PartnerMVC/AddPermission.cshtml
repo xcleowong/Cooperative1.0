@@ -13,6 +13,10 @@
     <link href="~/BootstrapSouce/css/bootstrap.css" rel="stylesheet" />
     <script>
         $(function () {
+            $("#Getpermission").click(function () {
+                location.href = "/PartnerMVC/GetPermission";
+            })
+
             $("input[name=isPid]").click(function () {
                 if ($("input[name=isPid]:checked").val() == "1") {
                     $("#pIDShow").show();
@@ -35,7 +39,11 @@
                     }
                 })
             })
+           
         })
+        //function Getpermission() {
+            //    location.href = "/PartnerMVC/GetPermission";
+            //}
     </script>
 </head>
 <body>
@@ -53,7 +61,7 @@
                 </tr>
                 <tr>
                     <td>创建时间</td>
-                    <td><input id="Text1" type="date" name="CreateTime" /></td>
+                    <td><input id="Text1" type="datetime-local" name="CreateTime" /></td>
                 </tr>
                 <tr>
                     <td>是否是父节点</td>
@@ -83,7 +91,7 @@
                     <td colspan="2" align="center">
                         <input style="width:90px;" id="AddPermission" type="button" class="btn btn-info"  value="添加权限" />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input style="width:90px;"id="GetPermission" type="button"class="btn btn-danger" value="显示" />
+                        <input id="Getpermission" style="width:90px;"id="GetPermission" type="button"class="btn btn-danger" onclick="Getpermission()" value="显示" />
                     </td>
                 </tr>
             </table>

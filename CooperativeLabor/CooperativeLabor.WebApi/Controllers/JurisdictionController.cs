@@ -21,6 +21,7 @@ namespace CooperativeLabor.WebApi.Controllers
         /// </summary>
         [Dependency]
        public IPermissionServices permission  { get; set; }
+        #region 权限表信息
         /// <summary>
         /// 添加权限信息
         /// </summary>
@@ -95,6 +96,68 @@ namespace CooperativeLabor.WebApi.Controllers
             var result = this.permission.GetPermissionsByPid(Pid);
             return result;
         }
+        #endregion
+        /// <summary>
+        /// 角色表
+        /// </summary>
+        [Dependency]
+        public IRolesServices role { get; set; }
+        #region
+        /// <summary>
+        /// 添加角色
+        /// </summary>
+        /// <param name="roles"></param>
+        /// <returns></returns>
+        [Route("AddRoles")]
+        [HttpPost]
+        public int AddRoles(Roles roles)
+        {
+            int i = this.role.AddRole(roles);
+            return i;
+        }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [Route("DeleteRoles")]
+        [HttpGet]
+        public int DeleteRoles(int Id)
+        {
+            int i = this.role.DeleteRole(Id);
+            return i;
+        }
+        /// <summary>
+        /// 显示
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetRoles")]
+        [HttpGet]
+        public IEnumerable<Roles> GetRoles()
+        {
+            var result = this.role.GetRoles();
+            return result;
+        }
+        /// <summary>
+        /// 根据Id获取单个角色
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [Route("GetRolesById")]
+        [HttpGet]
+        public Roles GetRolesById(int Id)
+        {
+            var result = this.role.GetRolesById(Id);
+            return result;
+        }
+        [Route("UpdateRoles")]
+        [HttpPost]
+        public int UpdateRoles(Roles roles)
+        {
+            int i = this.role.UpdateRoles(roles);
+            return i;
+        }
+        #endregion
 
     }
 }
