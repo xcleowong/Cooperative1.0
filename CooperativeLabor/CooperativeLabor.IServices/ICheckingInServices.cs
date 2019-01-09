@@ -23,25 +23,22 @@ namespace CooperativeLabor.IServices
         /// 查询本月签到情况
         /// </summary>
         /// <param name="StaffID">员工ID</param>
-        /// <param name="StaffName">员工姓名</param>
         /// <returns></returns>
-        List<CheckingIn> GetCheckingIns(int StaffId, string StaffName);
+        List<CheckingIn> GetCheckingIns(int StaffId);
 
         /// <summary>
         /// 查询特别签录
         /// </summary>
         /// <param name="StaffId">员工ID</param>
-        /// <param name="Name">员工姓名</param>
         /// <returns></returns>
-        List<SpecialSignTheRecord> GetSpecialSignTheRecords(int StaffId, string Name);
+        List<SpecialSignTheRecord> GetSpecialSignTheRecords(int StaffId );
 
         /// <summary>
         /// 获取差旅休假信息
         /// </summary>
         /// <param name="StaffId">员工ID</param>
-        /// <param name="Name">员工姓名</param>
         /// <returns></returns>
-        List<TravelOnVacation> GetTravelOnVacations(int StaffId, string Name);
+        List<TravelOnVacation> GetTravelOnVacations(int StaffId );
 
         /// <summary>
         /// 添加签到记录
@@ -49,7 +46,20 @@ namespace CooperativeLabor.IServices
         /// <param name="checkingIn">考勤签到</param>
         /// <returns></returns>
         int AddCheckingIn(CheckingIn checkingIn);
-        
+
+        /// <summary>
+        /// 获取最新时间的第一条记录
+        /// </summary>
+        /// <returns></returns>
+        List<CheckingIn> GetLatestTime(int staffId);
+
+        /// <summary>
+        /// 添加签退记录
+        /// </summary>
+        /// <param name="checkingIn">考勤签到</param>
+        /// <returns></returns>
+        int UpdateCheckingIn(int Id, string SignBackTime, string SignInState);
+
 
     }
 }

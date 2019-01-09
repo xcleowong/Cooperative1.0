@@ -27,18 +27,23 @@ namespace CooperativeLabor.Model
         /// <summary>
         /// 签到时间
         /// </summary>           
-        public DateTime SignInTime { get; set; }
+        public string SignInTime { get; set; }
 
         /// <summary>
         /// 签退时间
         /// </summary>           
-        public DateTime SignBackTime { get; set; }
+        public string SignBackTime { get; set; }
 
         /// <summary>
         /// 签到状态
         /// </summary>
-        /// 0迟到、1签到、2早退、3旷工、4请假、5加班
+        /// 0迟到、1签到、2签退、3早退、4旷工、5请假、6加班
         public string SignInState { get; set; }
+
+        /// <summary>
+        /// 签到状态文字
+        /// </summary>
+        public string StrState { get; set; }
 
     }
 }
