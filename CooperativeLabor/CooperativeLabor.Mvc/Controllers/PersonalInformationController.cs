@@ -17,5 +17,17 @@ namespace CooperativeLabor.Mvc.Controllers
         {
             return View();
         }
+
+        public ActionResult PersonalIndex()
+        {
+            return View();
+        }
+
+        public ActionResult PersonalAdd()
+        {
+            return View();
+        }
+
+
     }
 }

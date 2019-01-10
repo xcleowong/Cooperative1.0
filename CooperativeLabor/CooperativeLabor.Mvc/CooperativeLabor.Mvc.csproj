@@ -399,6 +399,7 @@
     <Content Include="Content\Layui_X_Admin\lib\layui\font\iconfont.woff" />
     <Content Include="Content\Layui_X_Admin\README.md" />
     <Content Include="Content\Layui_X_Admin\user.json" />
+    <Content Include="Content\Layui_X_Admin\admin-add.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -852,6 +853,7 @@
     <None Include="Views\PartnerMVC\RoleList.cshtml" />
     <None Include="Views\PartnerMVC\PermissionType.cshtml" />
     <None Include="Views\PartnerMVC\PermissionList.cshtml" />
+    <None Include="Views\Login\Welcome.cshtml" />
     <!--<Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />-->
     <Content Include="VueScripts\axios.js" />
@@ -997,6 +999,8 @@
     <Content Include="Views\PartnerMVC\UpdateRoles.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Views\PersonalInformation\PersonalIndex.cshtml" />
+    <Content Include="Views\PersonalInformation\PersonalAdd.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
