@@ -52,25 +52,25 @@
             </tr>
             <tr v-for="(item,index) in GetPersonalInformation">
                 <td>{{item.Id}}</td>
-                <td><input type="text" v-model="item.Name"/></td>
-                <td><input type="text" v-model="item.UserName" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.Gender" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.Birthday" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.Nation" style="width:80px;" /></td>
-                <td><input type="text" v-model="item.Employingnit" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.PartnerName" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.ProfessionalSkill" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.MaritalStatus" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.IDNumber" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.PartyGroupings" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.Email" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.Post" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.Phone" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.CardNo" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.OpeningBank" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.CreationTime" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.ModificationTime" style="width:80px;"/></td>
-                <td><input type="text" v-model="item.IsDelete" style="width:80px;"/></td>
+                <td>{{item.Name}}</td>
+                <td>{{item.UserName}}</td>
+                <td>{{item.Gender}}</td>
+                <td>{{item.Birthday}}</td>
+                <td>{{item.Nation}}</td>
+                <td><input type="text" v-model="item.Employingnit" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.PartnerName" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.ProfessionalSkill" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.MaritalStatus" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.IDNumber" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.PartyGroupings" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.Email" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.Post" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.Phone" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.CardNo" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.OpeningBank" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.CreationTime" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.ModificationTime" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.IsDelete" style="width:80px;" /></td>
                 <td>
                     <div v-if="GetPersonalInformation.Id!=''" style="width:80px;">
                         <a href="#" v-on:click="updateContact(GetPersonalInformation.Name, GetPersonalInformation.UserName, GetPersonalInformation.Gender, GetPersonalInformation.Birthday, GetPersonalInformation.Nation, GetPersonalInformation.Employingnit, GetPersonalInformation.PartnerName, GetPersonalInformation.ProfessionalSkill, GetPersonalInformation.MaritalStatus, GetPersonalInformation.IDNumber, GetPersonalInformation.PartyGroupings, GetPersonalInformation.Email, GetPersonalInformation.Post, GetPersonalInformation.Phone, GetPersonalInformation.CardNo, GetPersonalInformation.OpeningBank, GetPersonalInformation.CreationTime, GetPersonalInformation.ModificationTime, GetPersonalInformation.IsDelete,GetPersonalInformation.Id)">修改</a>

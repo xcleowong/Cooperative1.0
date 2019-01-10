@@ -12,7 +12,5 @@ namespace CooperativeLabor.IServices
     ///</summary>
     public interface IDepartmentMaintenanceServices
     {
-
-
     }
 }

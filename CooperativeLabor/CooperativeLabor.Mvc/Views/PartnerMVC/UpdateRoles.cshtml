@@ -1,0 +1,94 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>UpdateRoles</title>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <link href="~/BootstrapSouce/css/bootstrap.css" rel="stylesheet" />
+    <script>
+        $(function () {
+            $("#Getpermission").click(function () {
+                location.href = "/PartnerMVC/GetRoles";
+            })
+              //反填
+            $.ajax({
+                url: "http://localhost:8099/Jurisdiction/GetRolesById",
+                type: "get",
+                data: {
+                    Id:@Request.QueryString["Id"]
+                    @*Id:@ViewBag.Id*@
+                },
+                success:function (data) {
+                    console.log(data)
+                    $("#Id").val(data.Id);
+                    $("input[name=RoleName]").val(data.RoleName);
+                    $("input[name=Role_PeremissionIds]").val(data.Role_PeremissionIds);
+                    $("input[name=CreateTime]").val(data.CreateTime);                   
+                    $("input[name=IsStart][value ='" + data.IsStart + "'] ").attr("checked","checked");
+                }
+            })
+
+            //修改
+            $("#AddPermission").click(function () {
+                $.ajax({
+                    url: "http://localhost:8099/Jurisdiction/UpdateRoles",
+                    type: "post",
+                    data: $("#addform").serialize(),
+                    success: function (data) {
+                        if (data > 0) {
+                            alert("修改成功！");
+                        }
+                    }
+                })
+            })
+
+        })
+        //function Getpermission() {
+            //    location.href = "/PartnerMVC/GetPermission";
+            //}
+    </script>
+</head>
+<body>
+    <form id="addform">
+        <div style="text-align: center;">
+            <span style="font-size:30px;text-align:center">添加角色</span>
+            <table align="center" class="table table-hover table-bordered" style="width:500px;text-align:center;line-height:60px">
+                <tr>
+                    <td>角色名称</td>
+                    <td><input id="Text1" type="text" name="RoleName" /></td>
+                </tr>
+                <tr>
+                    <td>权限ID</td>
+                    <td><input id="Text1" type="text" name="Role_PeremissionIds" /></td>
+                </tr>
+                <tr>
+                    <td>创建时间</td>
+                    <td><input id="Text1" type="datetime-local" name="CreateTime" /></td>
+                </tr>
+
+                <tr>
+                    <td>是否启用</td>
+                    <td>
+                        <input id="Radio1" type="radio" name="IsStart" value="1" />是
+                        <input id="Radio1" type="radio" name="IsStart" value="0" />否
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input style="width:90px;" id="AddPermission" type="button" class="btn btn-info" value="修改角色" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input id="Getpermission" style="width:90px;" type="button" class="btn btn-danger" onclick="Getpermission()" value="显示" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+
+</body>
+</html>

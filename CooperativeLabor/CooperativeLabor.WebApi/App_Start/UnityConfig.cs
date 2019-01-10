@@ -55,7 +55,8 @@ namespace CooperativeLabor.WebApi
             container.RegisterType<ISpecialSignTheRecordServices, SpecialSignTheRecordServices>();
             //х╗оч
             container.RegisterType<IPermissionServices, PermissionServices>();
-
+            //╫ги╚
+            container.RegisterType<IRolesServices, RolesServices>();
 
             container.RegisterType<IAllowancesServices, AllowancesServices>();
             container.RegisterType<IHolidaySettingsServices, HolidaySettingsServices>();
