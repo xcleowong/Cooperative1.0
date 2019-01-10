@@ -21,7 +21,7 @@ namespace CooperativeLabor.Model
 
         /// <summary>
         /// 用工单位
-        /// </summary>           
+        /// </summary>
         public string EmployingUnit { get; set; }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace CooperativeLabor.Model
 
         /// <summary>
         /// 是否删除
-        /// </summary>           
+        /// </summary>          
         public int IsDelete { get; set; }
 
     }
