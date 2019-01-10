@@ -39,6 +39,6 @@ namespace CooperativeLabor.Model
         /// 是否启用
         /// </summary>           
         public int IsStart { get; set; }
-
+        public string names { get; set; }
     }
 }

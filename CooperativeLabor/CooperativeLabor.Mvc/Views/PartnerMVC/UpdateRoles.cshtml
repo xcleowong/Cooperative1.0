@@ -1,5 +1,7 @@
 ﻿
 @{
+    /**/
+
     Layout = null;
 }
 
@@ -46,8 +48,9 @@
 
             //加载权限
             $.ajax({
-                url: "http://localhost:8099/Jurisdiction/GetPermissions", 
+                url: "http://localhost:8099/Jurisdiction/GetPermissions",
                 type: "get",
+                async: false,
                 success: function (data) {
                     console.log(data);
                     list = data;
@@ -60,11 +63,28 @@
                         $("#div1").append(str);
                     })
                 }
+
+                //  success: function (data) {
+                //    //var str = '<dl>';
+                //    var str = '<table><tr>';
+                //    list = data;
+                //    $(data).each(function (index, data) {
+                //        if (data.Pid == 0) {
+                //            str += "<label> <input type='checkbox' onclick='PermisionShow(this)'  name='PermissionName' value=" + data.Id + ">" + data.PermissionName + "</label>&nbsp;&nbsp;&nbsp;&nbsp;<label></label>"                           
+                //        }
+                //    })
+
+                //    //str += '</dl>'
+                //    str += '</tr></table>';
+                //    $("#div1").append(str);
+                //}
+
+
             });
 
 
-       
-       
+
+
 
               //反填
             $.ajax({
@@ -75,7 +95,6 @@
                     Id:@ViewBag.Id,
                 },
                 success:function (data) {
-                    console.log(data)
                     $("input[name = Id]").val(data.Id);
                     $("input[name=RoleName]").val(data.RoleName);
                   //  $("input[name=Role_PeremissionIds]").val(data.Role_PeremissionIds);
@@ -83,20 +102,34 @@
                     $("input[name=CreateTime]").val(data.CreateTime);
                     $("input[name=IsStart][value ='" + data.IsStart + "'] ").attr("checked","checked");
 
-                    console.log(data.Role_PeremissionIds)
                     $(data.Role_PeremissionIds.split(",")).each(function (index, data) {
                         console.log(data)
                         $("input[name=PermissionNames][value=" + data + "]").prop("checked", true);
                     })
+                    var ids = data.Role_PeremissionIds.split(",");
+                    $("input[name=PermissionNames]:checked").each(function (index, data) {
+                        var checkBox = data;
+                        $(list).each(function (index, data) {
+                            if ($(checkBox).val() == data.Pid) {
+                                var judge = false;
 
-                            $("input[name=PermissionNames]:checked").each(function (index, data) {
+                                $(ids).each(function (index, id) {
+                                    if (id == data.Id) {
+                                        judge = true;
+                                    }
+                                })
                                 var str = "<ul>";
-                                if (data.Pid == $("input[name=PermissionNames][value=" + data + "]").val()) {
+                                if (judge) {
+                                    str += "<li><input type='checkbox'   name='PermissionNames' checked='checked' value=" + data.Id + ">" + data.PermissionName + "</li>";
+                                }
+                                else {
                                     str += "<li><input type='checkbox'   name='PermissionNames' value=" + data.Id + ">" + data.PermissionName + "</li>";
                                 }
                                 str += "</ul>";
-                                $("input[name=PermissionNames][value=" + data + "]").parent().next().append(str)
-                            })
+                                $(checkBox).parent().next().append(str)
+                            }
+                        })
+                    })
                 }
             })
 
@@ -141,7 +174,7 @@
                     <td>角色名称</td>
                     <td><input id="Text1" type="text" name="RoleName" /></td>
                 </tr>
-                
+
                 <tr>
                     <td>权限</td>
                     <td>
@@ -150,7 +183,7 @@
                 </tr>
                 <tr hidden="hidden">
                     <td>创建时间</td>
-                    <td><input id="Text1" type="text" name="CreateTime" value="@DateTime.Now"/></td>
+                    <td><input id="Text1" type="text" name="CreateTime" value="@DateTime.Now" /></td>
                 </tr>
 
                 <tr>
