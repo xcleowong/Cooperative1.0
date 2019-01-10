@@ -19,5 +19,16 @@ namespace CooperativeLabor.Mvc.Controllers
         {
             return View();
         }
+        /// <summary>
+        /// 页面
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CheckingIndex()
+        {
+            return View();
+        }
+
+
+
     }
 }

@@ -6,28 +6,20 @@ using System.Web.Mvc;
 
 namespace CooperativeLabor.Mvc.Controllers
 {
-    public class PersonalInformationController : Controller
+    public class LoginController : Controller
     {
-        // GET: PersonalInformation
+        // GET: Login
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult Add()
+        public ActionResult Login()
         {
             return View();
         }
-
-        public ActionResult PersonalIndex()
+        public ActionResult Welcome()
         {
             return View();
         }
-
-        public ActionResult PersonalAdd()
-        {
-            return View();
-        }
-
-
     }
 }
