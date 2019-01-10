@@ -13,10 +13,11 @@
     <link href="~/BootstrapSouce/css/bootstrap.css" rel="stylesheet" />
     <script>
         $(function () {
+            //跳转到显示
             $("#Getpermission").click(function () {
                 location.href = "/PartnerMVC/GetPermission";
             })
-
+            //判断是否是父节点
             $("input[name=isPid]").click(function () {
                 if ($("input[name=isPid]:checked").val() == "1") {
                     $("#pIDShow").show();
@@ -25,8 +26,19 @@
                     $("#pIDShow").hide();
                 }
             })
+            //获得权限父节点
+            $.ajax({
+                url: "http://localhost:8099/Jurisdiction/GetPermissionsByPid?Pid=0",
+                type: "get",
+                success: function (data) {
+                    $(data).each(function (index, data) {
+                        $("#selet").append("<option value='" + data.Id + "'>" + data.PermissionName + "</option>");
+                    })
+                }
+            })
 
 
+            //添加
             $("#AddPermission").click(function () {
                 $.ajax({
                     url: "http://localhost:8099/Jurisdiction/AddPermission",
@@ -74,9 +86,9 @@
                 <tr id="pIDShow">
                     <td>父节点</td>
                     <td>
-                        <select id="Select1" name="Pid">
-                            <option>==请选择==</option>
-                            <option value="111">111</option>
+                        <select id="selet" name="Pid">
+                            <option value="0">==请选择==</option>
+                           
                         </select>
                     </td>
                 </tr>

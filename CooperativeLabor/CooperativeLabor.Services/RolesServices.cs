@@ -59,6 +59,7 @@ namespace CooperativeLabor.Services
                             PermissionsAndRoles permissionsAndRoles = new PermissionsAndRoles();
                             permissionsAndRoles.RoleId = id;//为角色ID赋值
                             permissionsAndRoles.PermissionId = Convert.ToInt32(permids[j]);//为权限ID赋值
+                            permissionsAndRoles.CreateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                             //角色权限关联表添加语句
                             string sql4 = "insert into PermissionsAndRoles(PermissionId,RoleId,CreateTime)VALUES(@PermissionId,@RoleId,@CreateTime)";
                             i = conn.Execute(sql4, permissionsAndRoles);

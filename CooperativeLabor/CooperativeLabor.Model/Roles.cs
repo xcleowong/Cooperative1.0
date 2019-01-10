@@ -4,6 +4,8 @@ using System.Text;
 
 namespace CooperativeLabor.Model
 {
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.ComponentModel.DataAnnotations;
     ///<summary>
     ///角色表
     ///</summary>
@@ -18,6 +20,8 @@ namespace CooperativeLabor.Model
         /// 角色名称
         /// </summary>           
         public string RoleName { get; set; }
+        public string PermissionName { get; set; }
+
 
         /// <summary>
         /// 创建时间
@@ -27,6 +31,9 @@ namespace CooperativeLabor.Model
         ///   权限ID
         /// </summary>
         public string Role_PeremissionIds { get; set; }
+
+        //通过复选框循环遍历获取选中的值
+        public string[] PermissionNames { get; set; }
 
         /// <summary>
         /// 是否启用

@@ -11,31 +11,105 @@
     <title>UpdateRoles</title>
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <link href="~/BootstrapSouce/css/bootstrap.css" rel="stylesheet" />
+    <style>
+        li {
+            list-style: none;
+        }
+    </style>
     <script>
+
+        var permissionId = 0;
+        var list = [];
+        function PermisionShow(obj) {
+            //判断选中权限父节点追加权限子节点
+            if ($(obj).prop("checked")) {
+                $(list).each(function (index, data) {
+                    var str = "<ul>";
+                    if (data.Pid == $(obj).val()) {
+                        str += "<li><input type='checkbox' class='cks'  name='PermissionNames' value=" + data.Id + ">" + data.PermissionName + "</li>";
+                    }
+                    str += "</ul>";
+                    $(obj).parent().next().append(str)
+                })
+            }
+            else {
+                $(obj).parent().next().empty();
+            }
+        }
+
         $(function () {
+            //跳转到显示
             $("#Getpermission").click(function () {
                 location.href = "/PartnerMVC/GetRoles";
             })
+
+
+            //加载权限
+            $.ajax({
+                url: "http://localhost:8099/Jurisdiction/GetPermissions", 
+                type: "get",
+                success: function (data) {
+                    console.log(data);
+                    list = data;
+                    $(data).each(function (index, data) {
+                        var str = "<ul>";
+                        if (data.Pid == 0) {
+                            str += "<li><input type='checkbox' class='cks' onclick='PermisionShow(this)' name='PermissionNames' value=" + data.Id + ">" + data.PermissionName + "</li><div></div>"
+                        }
+                        str += "</ul>";
+                        $("#div1").append(str);
+                    })
+                }
+            });
+
+
+       
+       
+
               //反填
             $.ajax({
                 url: "http://localhost:8099/Jurisdiction/GetRolesById",
                 type: "get",
                 data: {
-                    Id:@Request.QueryString["Id"]
-                    @*Id:@ViewBag.Id*@
+                    @*Id:@Request.QueryString["Id"],*@
+                    Id:@ViewBag.Id,
                 },
                 success:function (data) {
                     console.log(data)
-                    $("#Id").val(data.Id);
+                    $("input[name = Id]").val(data.Id);
                     $("input[name=RoleName]").val(data.RoleName);
-                    $("input[name=Role_PeremissionIds]").val(data.Role_PeremissionIds);
-                    $("input[name=CreateTime]").val(data.CreateTime);                   
+                  //  $("input[name=Role_PeremissionIds]").val(data.Role_PeremissionIds);
+
+                    $("input[name=CreateTime]").val(data.CreateTime);
                     $("input[name=IsStart][value ='" + data.IsStart + "'] ").attr("checked","checked");
+
+                    console.log(data.Role_PeremissionIds)
+                    $(data.Role_PeremissionIds.split(",")).each(function (index, data) {
+                        console.log(data)
+                        $("input[name=PermissionNames][value=" + data + "]").prop("checked", true);
+                    })
+
+                            $("input[name=PermissionNames]:checked").each(function (index, data) {
+                                var str = "<ul>";
+                                if (data.Pid == $("input[name=PermissionNames][value=" + data + "]").val()) {
+                                    str += "<li><input type='checkbox'   name='PermissionNames' value=" + data.Id + ">" + data.PermissionName + "</li>";
+                                }
+                                str += "</ul>";
+                                $("input[name=PermissionNames][value=" + data + "]").parent().next().append(str)
+                            })
                 }
             })
 
             //修改
             $("#AddPermission").click(function () {
+                var PeremissionIds = [];
+                $("input[name=PermissionNames]:checked").each(function () {
+                    PeremissionIds.push($(this).val());
+                })
+                var PermissionNames = [];
+                $("input[name=PermissionName]:checked").each(function () {
+                    PermissionNames.push($(this).parent().text());
+                })
                 $.ajax({
                     url: "http://localhost:8099/Jurisdiction/UpdateRoles",
                     type: "post",
@@ -60,16 +134,23 @@
             <span style="font-size:30px;text-align:center">添加角色</span>
             <table align="center" class="table table-hover table-bordered" style="width:500px;text-align:center;line-height:60px">
                 <tr>
+                    <td>编号</td>
+                    <td><input id="Text1" type="text" name="Id" /></td>
+                </tr>
+                <tr>
                     <td>角色名称</td>
                     <td><input id="Text1" type="text" name="RoleName" /></td>
                 </tr>
+                
                 <tr>
-                    <td>权限ID</td>
-                    <td><input id="Text1" type="text" name="Role_PeremissionIds" /></td>
+                    <td>权限</td>
+                    <td>
+                        <div id="div1"></div>
+                    </td>
                 </tr>
-                <tr>
+                <tr hidden="hidden">
                     <td>创建时间</td>
-                    <td><input id="Text1" type="datetime-local" name="CreateTime" /></td>
+                    <td><input id="Text1" type="text" name="CreateTime" value="@DateTime.Now"/></td>
                 </tr>
 
                 <tr>
