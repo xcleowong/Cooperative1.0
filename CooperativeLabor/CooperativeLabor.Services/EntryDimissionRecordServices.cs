@@ -75,7 +75,7 @@ namespace CooperativeLabor.Services
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
-                string sql = "select a.Name,a.PersonnelId,a.OperationType,a.DatesEmployed,a.DepartureTime,a.CreationTime,a.ModificationTime,a.IsDelete,b.* from entrydimissionrecord a inner join personalinformation b on a.PersonnelId=b.Id";
+                string sql = "select a.Id,a.Name,a.PersonnelId,a.OperationType,a.DatesEmployed,a.DepartureTime,a.CreationTime,a.ModificationTime,a.IsDelete from entrydimissionrecord a inner join personalinformation b on a.PersonnelId=b.Id";
                 IEnumerable<EntryDimissionRecord> list = conn.Query<EntryDimissionRecord>(sql, null);
                 return list.ToList();
             }

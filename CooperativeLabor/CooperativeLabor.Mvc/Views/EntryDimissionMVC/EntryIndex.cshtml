@@ -3,10 +3,10 @@
   
 <head>
     <meta charset="UTF-8">
-    <title>补助标准界面</title>
+    <title>人员入离职记录页面</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    @*<meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />*@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
     <link href="~/Content/Layui_X_Admin/css/font.css" rel="stylesheet" />
@@ -19,9 +19,7 @@
     <script src="~/Content/VueScripts/vue.js"></script>
     <script src="~/Content/VueScripts/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-    <script src="~/Content/My97DatePicker/My97DatePicker/WdatePicker.js"></script>
-    @*<script src="~/Content/My97DatePicker/My97DatePicker/calendar.js"></script>*@
-    <script src="~/Content/My97DatePicker/My97DatePicker/lang/zh-cn.js"></script>
+
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -93,89 +91,96 @@
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">基本配置</a>
+        <a href="">合作方人员管理</a>
         <a>
-            <cite>补助标准配置</cite></a>
+          <cite>人员入离职记录</cite></a>
       </span>
       <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body" id="app">
-        <div class="layui-row">
-            <form class="layui-form layui-col-md12 x-so">
+      <div class="layui-row">
+          <form class="layui-form layui-col-md12 x-so">
 
-                <input type="text" name="username" placeholder="请输入名称" autocomplete="off" class="layui-input">
-                <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-            </form>
-        </div>
-        <xblock>
-            <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-            <button class="layui-btn" onclick="x_admin_show('添加补助标准','/AllowancesView/AddAllowancesView',700,500)"><i class="layui-icon"></i>添加</button>
-            <span class="x-right" style="line-height:40px">共有数据：88 条</span>
-        </xblock>
-        <table class="layui-table" lay-size="sm" v-show="list.length">
-            <thead>
-                <tr>
-                    <th>
-                        <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-                    </th>
-                    <th>ID</th>
-                    <th>平日工作补助</th>
-                    <th>出差补助</th>
-                    <th>公休节假日加班补助</th>
-                    <th>公休节假日休息补助</th>
-                    <th>倒休补助</th>
-                    <th>每日餐补</th>
-                    <th>发布时间</th>
-                    <th>历史信息</th>
-                    <th>历史信息是否发布</th>
-                    <th>是否只读</th>
-                    <th>编辑</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in list">
-                    <td>
-                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-                    </td>
-                    <td>{{item.Id}}</td>
-                    <td>{{item.WeekDaysSubsidy}}</td>
-                    <td>{{item.EvectionSubsidy}}</td>
-                    <td>{{item.HolidaysOverTime}}</td>
-                    <td>{{item.HolidaysRest}}</td>
-                    <td>{{item.ExchangeSubsidy}}</td>
-                    <td>{{item.MealSubsidy}}</td>
-                    <td>{{item.ReleaseTime.substring(0,10)}}</td>
-                    <td>{{item.HistoricalInformation}}</td>
-                    <td>
-                        <span class="layui-btn layui-btn-normal layui-btn-xs">{{item.HistoricalInformationNum==1?"已发布":"未发布"}}</span>
-                    </td>
-                    <td>{{item.IsReadOnly==1?"是":"否"}}</td>
-                    
-                    <td class="td-manage">
-                        
-                        <a href="#" v-on:click="DeleteAllowances(item.Id)" title="删除">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <div class="page-bar">
-            <ul>
-                <li v-if="cur>1"><a v-on:click="cur--,pageClick()">上一页</a></li>
-                <li v-if="cur==1"><a class="banclick">上一页</a></li>
-                <li v-for="index in indexs" v-bind:class="{ 'active': cur == index}">
-                    <a v-on:click="btnClick(index)">{{ index }}</a>
-                </li>
-                <li v-if="cur!=all"><a v-on:click="cur++,pageClick()">下一页</a></li>
-                <li v-if="cur == all"><a class="banclick">下一页</a></li>
-                <li><a>共<i>{{all}}</i>页</a></li>
-            </ul>
-        </div>
+              <input type="text" name="username" placeholder="请输入姓名" autocomplete="off" class="layui-input">
+              <input type="text" name="username" placeholder="请输入用工单位" autocomplete="off" class="layui-input">
+              <input type="text" name="username" placeholder="请输入合作方名称" autocomplete="off" class="layui-input">
+              <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+          </form>
+      </div>
+      <xblock>
+        <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+        <button class="layui-btn" onclick="x_admin_show('添加人员入离职记录','/EntryDimissionMVC/Add',700,500)"><i class="layui-icon"></i>添加</button>
+        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+      </xblock>
+      <table class="layui-table" v-show="GetEntryDimission.length" lay-size="sm">
+        <thead>
+            <tr>
+                <th>
+                    <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+                </th>
+                <th>序号</th>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>操作类型</th>
+                <th>入职时间</th>
+                <th>离职时间</th>
+                <th>创建时间</th>
+                <th>修改时间</th>
+                <th>是否删除</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="(item,index) in GetEntryDimission">
+                <td>
+                    <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+                </td>
+                <td>{{item.Id}}</td>
+                <td>{{item.PersonnelId}}</td>
+                <td>{{item.Name}}</td>
+                <td>{{item.OperationType}}</td>
+                <td>{{item.DatesEmployed.substring(0,10)}}</td>
+                <td>{{item.DepartureTime.substring(0,10)}}</td>
+                <td>{{item.CreationTime.substring(0,10)}}</td>
+                <td>{{item.ModificationTime.substring(0,10)}}</td>
+                <td class="td-status">
+                    <span class="layui-btn layui-btn-normal layui-btn-xs">{{item.IsDelete==0?"已启用":"已停用"}}</span>
+                </td>
+                <td class="td-manage">
+                    <a onclick="member_stop(this,'10001')" href="javascript:;" title="启用">
+                        <i class="layui-icon">&#xe601;</i>
+                    </a>
+                    <a title="编辑" onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
+                        <i class="layui-icon">&#xe642;</i>
+                    </a>
+                    <a onclick="x_admin_show('修改密码','member-password.html',600,400)" title="修改密码" href="javascript:;">
+                        <i class="layui-icon">&#xe631;</i>
+                    </a>
+                    <a title="删除" v-on:click="deleteById(item.Id)" href="javascript:;">
+                        <i class="layui-icon">&#xe640;</i>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+      <div class="page-bar">
+          <ul>
+              <li v-if="cur>1"><a v-on:click="cur--,pageClick()">上一页</a></li>
+              <li v-if="cur==1"><a class="banclick">上一页</a></li>
+              <li v-for="index in indexs" v-bind:class="{ 'active': cur == index}">
+                  <a v-on:click="btnClick(index)">{{ index }}</a>
+              </li>
+              <li v-if="cur!=all"><a v-on:click="cur++,pageClick()">下一页</a></li>
+              <li v-if="cur == all"><a class="banclick">下一页</a></li>
+              <li><a>共<i>{{all}}</i>页</a></li>
+          </ul>
+      </div>
 
     </div>
     <script>
+      
+
        /*用户-停用*/
       function member_stop(obj,id){
           layer.confirm('确认要停用吗？',function(index){
@@ -235,11 +240,7 @@
     var vm = new Vue({
         el: "#app",
         data: {
-            HistoricalInformationList: ['已发布', '未发布'],
-            //HistoricalInformation: "请选择",
-            HistoricalInformationNum: "",
-            IsReadOnly: "",
-            list: [],
+            GetEntryDimission: [],
             all: 6, //总页数
             cur: 1//当前页码
         },
@@ -248,76 +249,32 @@
             }
         },
         mounted() {
-            this.getList(this.cur);
+            this.GetEntry(this.cur);
         },
         methods: {
             btnClick: function (data) {//页码点击事件
                 if (data != this.cur) {
                     this.cur = data;
-                    this.getList(data);
+                    this.GetEntry(data);
 
 
                 }
             },
             pageClick: function () {
                 //console.log('现在在' + this.cur + '页');
-                this.getList(this.cur);
+                this.GetEntry(this.cur);
             },
-
-            //获取补助标准标准信息
-            getList: function (id) {
-                axios.get('http://localhost:8099/Allowances/GetAllowances', { params: { pageIndex: id } }).then((response) => {
-                    this.list = [];
-                    this.cur = response.data.CurrentPage;
-                    this.all = response.data.TotlePage;
-                    for (var i = 0; i < response.data.Data.length; i++) {
-                        this.list.push(response.data.Data[i]);
-                    }
-                },
+            //显示入离职记录
+            GetEntry: function (id) {
+                axios.get("http://localhost:8099/EntryDimission/GetEntryDimissionRecords", { params: { pageIndex: id } }).then(
                     (response) => {
-                        alert(response.status);
-                    }
-                ).catch(function (response) {
-                    alert(response);
-                });
-            },
-            //删除补助标准标准信息
-            DeleteAllowances: function (id) {
-                axios.get('http://localhost:8099/Allowances/DeleteAllowances?Id=' + id).then((respose) => {
-                    if (respose.data > 0) {
-                        alert("删除成功!!!");
-                        this.getList();
-                    }
-                },
-                    (response) => {
-                        alert(response.status);
-                    }
-                ).catch(function (response) {
-                    alert(response);
-                });
-            },
-            //修改补助标准标准信息
-            UpdateAllowances: function (Id, WeekDaysSubsidy, EvectionSubsidy, HolidaysOverTime, HolidaysRest, ExchangeSubsidy, MealSubsidy, ReleaseTime, HistoricalInformation, HistoricalInformationNum, IsReadOnly) {
-                var params = new URLSearchParams();
-                params.append('Id', Id);
-                params.append('WeekDaysSubsidy', WeekDaysSubsidy);
-                params.append('EvectionSubsidy', EvectionSubsidy);
-                params.append('HolidaysOverTime', HolidaysOverTime);
-                params.append('HolidaysRest', HolidaysRest);
-                params.append('ExchangeSubsidy', ExchangeSubsidy);
-                params.append('MealSubsidy', MealSubsidy);
-                params.append('ReleaseTime', ReleaseTime);
-                params.append('HistoricalInformation', HistoricalInformation);
-                params.append('HistoricalInformationNum', HistoricalInformationNum);
-                params.append('IsReadOnly', IsReadOnly);
-                axios.post('http://localhost:8099/Allowances/UpdateAllowances?Id=' + Id, params).then(
-                    (response) => {
-                        console.log(response.data);
-                        if (response.data > 0) {
-                            alert("修改成功!!!");
-                            this.getList();
+                        console.log(response);
+                        this.GetEntryDimission = [],
+                        this.cur = response.data.CurrentPage;
+                        this.all = response.data.TotlePage;
+                        for (var i = 0; i < response.data.Data.length; i++) {
+                            this.GetEntryDimission.push(response.data.Data[i]);
                         }
-                        //console.info(this.list);
                     },
                     (response) => {
                         alert(response.status);
@@ -327,6 +284,57 @@
                 });
             },
 
+
+
+            //删除
+            deleteById: function (id) {
+                layer.confirm('确认要删除吗？', function (index) {
+                    axios.post('http://localhost:8099/EntryDimission/DeleteEntry?id=' + id).then(
+                        (response) => {
+                            if (response.data > 0) {
+                                layer.msg('已删除!', { icon: 1, time: 1000 });
+
+                            }
+
+                        },
+                        (response) => {
+                            alert(response.status);
+                        }
+                    ).catch(function (response) {
+                        alert(response);
+                    });
+                    //$(obj).parents("tr").remove();
+
+
+                })
+
+            },
+
+
+
+            ////修改入离职信息
+            updateContact: function (OperationType, DatesEmployed, DepartureTime, ModificationTime, IsDelete, Id) {
+                var params = new URLSearchParams();
+                params.append('OperationType', OperationType);
+                params.append('DatesEmployed', DatesEmployed);
+                params.append('DepartureTime', DepartureTime);
+                params.append('ModificationTime', ModificationTime);
+                params.append('IsDelete', IsDelete);
+                params.append('Id', Id);
+                axios.post('http://localhost:8099/EntryDimission/UpdateEntry?Id=' + Id, params).then(
+                    (response) => {
+                        if (response.data > 0) {
+                            alert("修改成功");
+                            this.GetPersonal();
+                        }
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
         },
         //计算属性
         computed: {
@@ -357,7 +365,6 @@
 
         }
 
-
-
     })
 </script>
+

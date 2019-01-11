@@ -1382,6 +1382,7 @@
     <Content Include="Views\CheckingIn\CheckingIndex.cshtml" />
     <Content Include="Views\PartnerMVC\GetUserManagement.cshtml" />
     <Content Include="Views\PartnerMVC\AddUserManagement.cshtml" />
+    <Content Include="Views\EntryDimissionMVC\EntryIndex.cshtml" />
     <None Include="Views\PartnerMVC\IndexEss1.cshtml" />
     <None Include="Views\PartnerMVC\IndexEnt.cshtml" />
     <None Include="Views\PartnerMVC\AdminList.cshtml" />
@@ -1481,8 +1482,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\AllowancesView\AddAllowancesView.cshtml" />
-    <Content Include="Views\AllowancesView\Index.cshtml" />
-    <Content Include="Views\AllowancesView\ShowIndex.cshtml" />
     <Content Include="Views\AllowancesView\GetAllowancesView.cshtml" />
     <Content Include="Views\HolidaySettingsView\AddHolidaySettingsView.cshtml" />
     <Content Include="Views\HolidaySettingsView\GetHolidaySettingsView.cshtml" />
@@ -1540,6 +1539,7 @@
     <Content Include="Views\SpecialSignMVC\Add.cshtml" />
     <Content Include="Views\TravelOnVacation\TravelIndex.cshtml" />
     <Content Include="Views\PartnerMVC\UpdateUserManagement.cshtml" />
+    <Content Include="Views\SpecialSignMVC\SpecialIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
