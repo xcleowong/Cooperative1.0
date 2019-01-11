@@ -36,7 +36,7 @@
                     <td>
                         <select id="Select1" name="Pid">
                             <option value="0">--请选择--</option>
-                     
+
 
                         </select>
                     </td>
@@ -50,7 +50,7 @@
                 <tr>
                     <td>是否启用：</td>
                     <td>
-                        <input id="Radio1" type="radio" name="IsStart" value="1" checked="checked" />是
+                        <input id="Radio1" type="radio" name="IsStart" value="1" />是
                         &nbsp;&nbsp;&nbsp;
                         <input id="Radio1" type="radio" name="IsStart" value="0" />否
                     </td>
@@ -164,13 +164,14 @@
             url: "http://localhost:8099/DepartmentMaintenance/GetAloneDepartmentMaintenance?Id=" + id,//数据请求地址
             type: "get",
             dataType: "json",
+            async: false,
             success: function (d) {
                 console.log(d);
                 $("[name=UnitDepartment]").val(d.UnitDepartment);
                 $("[name=Pid]").val(d.Pid);
                 $("[name=Id]").val(d.Id);
-                $("input[name=IsStart][value='" + d.IsStart + "']").attr("checked","checked");
-                $("input[name=CreationTime]").val(d.CreationTime);
+                $("[name=IsStart][value='" + d.IsStart + "']").attr("checked", "checked");
+                $("[name=CreationTime]").val(d.CreationTime);
             }
         })
     }
@@ -189,7 +190,7 @@
                     $("[name=Pid]").val(0);
                     $("[name=Id]").val("");
                     $("[name=CreationTime]").val("");
-                 
+
                 }
             }
         })

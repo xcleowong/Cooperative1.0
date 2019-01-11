@@ -116,7 +116,7 @@ namespace CooperativeLabor.Services
                 conn.Open();
                 departmentMaintenance.ModificationTime = System.DateTime.Now;
                 departmentMaintenance.EmployingUnit = departmentMaintenance.Pid.ToString();
-                string sql = @"UPDATE departmentmaintenance SET  EmployingUnit=@EmployingUnit,UnitDepartment=UnitDepartment,IsStart=@IsStart,CreationTime=@CreationTime,ModificationTime=@ModificationTime,Pid=@Pid WHERE Id=@Id";
+                string sql = @"UPDATE departmentmaintenance SET  EmployingUnit=@EmployingUnit,UnitDepartment=@UnitDepartment,IsStart=@IsStart,CreationTime=@CreationTime,ModificationTime=@ModificationTime,Pid=@Pid WHERE Id=@Id";
                 var result = conn.Execute(sql, departmentMaintenance);
                 return result;
             }

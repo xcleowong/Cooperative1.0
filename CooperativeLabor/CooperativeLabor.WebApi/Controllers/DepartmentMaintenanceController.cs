@@ -82,7 +82,7 @@ namespace CooperativeLabor.WebApi.Controllers
             var result = IdepartmentMaintenanceServices.GetDepartmentMaintenance();
             if (Pid == 0)
             {
-                result = result.Where(a => a.Pid.Equals(Pid)).ToList();
+                //result = result.Where(a => a.Pid.Equals(Pid)).ToList();
                 return result.ToList();
             }
             return Json<List<DepartmentMaintenance>>(result);
