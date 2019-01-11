@@ -11,16 +11,22 @@
     <title>Add</title>
     <script src="~/Content/VueScripts/vue.js"></script>
     <script src="~/Content/VueScripts/axios.js"></script>
-    <link href="~/bootstrap-3.3.7-dist/bootstrap337/css/bootstrap.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <link href="~/BootstrapSouce/css/bootstrap.css" rel="stylesheet" />
+
+
 </head>
 <body>
     <input type="hidden" v-model="PersonnelId"/>
     <div id="add">
-        <table class="table table-hover">
+        <table class="table">
             <tr>
                 <td>姓名：</td>
-                <td><input type="text" v-model="Name" /><input type="button" onclick="location.href='/EntryDimissionMVC/People'" value="+" /></td>
+                <td><input type="text" v-model="Name" /><input type="button" onclick="location.href='/EntryDimissionMVC/People'" value="+" style="clear:both" /></td>
+            </tr>
+            <tr>
+                <td>人员ID：</td>
+                <td><input type="text" v-model="PersonnelId" /></td>
             </tr>
             <tr>
                 <td>性别：</td>
@@ -31,17 +37,17 @@
             </tr>
             <tr>
                 <td>身份证号：</td>
-                <td><input type="text" v-model="IDNumber" /></td>
+                <td><input type="text" v-model="IDNumber" class="layui-input" /></td>
             </tr>
             <tr>
                 <td>用工单位：</td>
-                <td><input type="text" v-model="Employingnit" /></td>
+                <td><input type="text" v-model="Employingnit" class="layui-input" /></td>
             </tr>
             <tr>
                 <td>合作方名称：</td>
                 <td>
                     <select id="Select2" v-model="PartnerName">
-                        <option value="请选择">--请选择--</option>
+                        <option value="请选择">请选择</option>
                         <option v-for="item in EntryByIdName" v-bind:value="item.PartnerName">{{item.PartnerName}}</option>
                     </select>
                 </td>
@@ -49,24 +55,28 @@
             <tr>
                 <td>操作类型：</td>
                 <td>
-                    c
+                    <select id="Select1" v-model="OperationType">
+                        <option value="请选择">请选择</option>
+                        <option value="入职">入职</option>
+                        <option value="离职">离职</option>
+                    </select>
                 </td>
             </tr>
             <tr>
                 <td>入职时间：</td>
-                <td><input type="date" v-model="DatesEmployed" /></td>
+                <td><input type="date" v-model="DatesEmployed" class="layui-input" /></td>
             </tr>
             <tr>
                 <td>离职时间：</td>
-                <td><input type="date" v-model="DepartureTime" /></td>
+                <td><input type="date" v-model="DepartureTime" class="layui-input" /></td>
             </tr>
             <tr>
                 <td>创建时间：</td>
-                <td><input type="date" v-model="CreationTime" /></td>
+                <td><input type="date" v-model="CreationTime" class="layui-input" /></td>
             </tr>
             <tr>
                 <td>修改时间：</td>
-                <td><input type="date" v-model="ModificationTime" /></td>
+                <td><input type="date" v-model="ModificationTime" class="layui-input" /></td>
             </tr>
             <tr>
                 <td>是否删除：</td>
@@ -76,8 +86,11 @@
                 </td>
             </tr>
             <tr>
-                <td><a href="javascript:;" v-on:click="AddQCPlan1(Name,PersonnelId,OperationType,DatesEmployed,DepartureTime,CreationTime,ModificationTime,IsDelete)">添加</a></td>
-                <td><a href="#" onclick="location.href='Index'">取消</a></td>
+                <td>
+                    <button type="button" v-on:click="AddQCPlan1(Name,PersonnelId,OperationType,DatesEmployed,DepartureTime,CreationTime,ModificationTime,IsDelete)" class="btn btn-default">添加</button>
+                    @*<a href="javascript:;" v-on:click="AddQCPlan1(Name,PersonnelId,OperationType,DatesEmployed,DepartureTime,CreationTime,ModificationTime,IsDelete)">添加</a>*@
+                </td>
+                <td></td>
             </tr>
         </table>
     </div>
@@ -87,27 +100,20 @@
     var vm = new Vue({
         el: "#add",
         data: {
+            Name: "",
+            PersonnelId:"",
+            Gender: "",
+            IDNumber: "",
+            Employingnit: "",
+            OperationType:"请选择",
+            DatesEmployed: "",
+            DepartureTime: "",
+            CreationTime: "",
+            ModificationTime: "",
+            IsDelete:"",
             EntryByIdName: [],
             PartnerName: "请选择",
-            //Name:"",
-            //UserName: "",
-            //Gender: "",
-            //Birthday: "",
-            //Nation: "",
-            //Employingnit: "",
-            //PartnerName: "",
-            //ProfessionalSkill: "",
-            //MaritalStatus: "",
-            //IDNumber: "",
-            //PartyGroupings: "",
-            //Email: "",
-            //Post: "",
-            //Phone: "",
-            //CardNo: "",
-            //OpeningBank: "",
-            //CreationTime: "",
-            //ModificationTime: "",
-            //IsDelete=1
+            
         },
 
         mounted() {

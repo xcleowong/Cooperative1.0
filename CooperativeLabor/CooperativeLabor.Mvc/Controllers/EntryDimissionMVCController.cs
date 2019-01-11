@@ -21,5 +21,16 @@ namespace CooperativeLabor.Mvc.Controllers
         {
             return View();
         }
+
+
+        public ActionResult EntryIndex()
+        {
+            return View();
+        }
+
+        public ActionResult EntryAdd()
+        {
+            return View();
+        }
     }
 }
