@@ -1383,6 +1383,8 @@
     <Content Include="Views\PartnerMVC\GetUserManagement.cshtml" />
     <Content Include="Views\PartnerMVC\AddUserManagement.cshtml" />
     <Content Include="Views\EntryDimissionMVC\EntryIndex.cshtml" />
+    <Content Include="Views\AllowancesView\Index.cshtml" />
+    <Content Include="Views\HolidaySettingsView\Index.cshtml" />
     <None Include="Views\PartnerMVC\IndexEss1.cshtml" />
     <None Include="Views\PartnerMVC\IndexEnt.cshtml" />
     <None Include="Views\PartnerMVC\AdminList.cshtml" />
