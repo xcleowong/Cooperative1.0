@@ -24,6 +24,18 @@
       <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
       <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <style>
+        ul, li {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        li {
+            list-style: none
+        }
+    </style>
+
 </head>
   
   <body class="layui-anim layui-anim-up">
@@ -49,7 +61,7 @@
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加用户','./member-add.html',600,400)"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加用户','/PersonalInformation/Add',700,500)"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
       <table class="layui-table" lay-size="sm">
@@ -109,16 +121,18 @@
             </tr>
         </tbody>
       </table>
-      <div class="page">
-        <div>
-          <a class="prev" href="">&lt;&lt;</a>
-          <a class="num" href="">1</a>
-          <span class="current">2</span>
-          <a class="num" href="">3</a>
-          <a class="num" href="">489</a>
-          <a class="next" href="">&gt;&gt;</a>
-        </div>
-      </div>
+      @*<div class="page">
+          <ul>
+              <li v-if="cur>1"><a v-on:click="cur--,pageClick()">上一页</a></li>
+              <li v-if="cur==1"><a class="banclick">上一页</a></li>
+              <li v-for="index in indexs" v-bind:class="{ 'active': cur == index}">
+                  <a v-on:click="btnClick(index)">{{ index }}</a>
+              </li>
+              <li v-if="cur!=all"><a v-on:click="cur++,pageClick()">下一页</a></li>
+              <li v-if="cur == all"><a class="banclick">下一页</a></li>
+              <li><a>共<i>{{all}}</i>页</a></li>
+          </ul>
+      </div>*@
 
     </div>
     <script>
@@ -195,12 +209,31 @@
     var vm = new Vue({
         el: "#app",
         data: {
-            GetPersonalInformation: []
+            GetPersonalInformation: [],
+            //all: 6, //总页数
+            //cur: 1//当前页码
         },
+        //watch: {
+        //    cur: function (oldValue, newValue) {
+        //    }
+        //},
         mounted() {
+            //this.getList(this.cur);
             this.GetPersonal();
         },
         methods: {
+            //btnClick: function (data) {//页码点击事件
+            //    if (data != this.cur) {
+            //        this.cur = data;
+            //        this.getList(data);
+
+
+            //    }
+            //},
+            //pageClick: function () {
+            //    //console.log('现在在' + this.cur + '页');
+            //    this.getList(this.cur);
+            //},
             //显示
             GetPersonal: function () {
                 axios.get("http://localhost:8099/PersonalInformation/GetPersonalInformation").then(
