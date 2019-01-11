@@ -12,7 +12,7 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <script src="~/Content/VueScripts/vue.js"></script>
     <script src="~/Content/VueScripts/axios.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 </head>
 <body>
     <div id="app">
@@ -35,7 +35,7 @@
                 <td>是否删除</td>
                 <td>操作</td>
             </tr>
-            <tr v-for="(EssentialInformation,index) in EssentialInformationList">
+            <tr v-for="EssentialInformation in EssentialInformationList">
                 <td><input type="text" v-model="EssentialInformation.Id" /></td>
                 <td><input type="text" v-model="EssentialInformation.PartnerName" /></td>
                 <td><input type="text" v-model="EssentialInformation.PartnerCategory" /></td>
@@ -88,7 +88,7 @@ EssentialInformation.IsDelete,
             EssentialInformationList: []
         },
         mounted() {
-            this.getAllEntryAndExitRecords(2);
+            this.getAllEntryAndExitRecords();
         },
         methods: {
             //显示
@@ -167,8 +167,7 @@ EssentialInformation.IsDelete,
                 BankCard,
                 CreationTime,
                 ModificationTime,
-                IsDelete)
-             {
+                IsDelete) {
                 var params = new URLSearchParams();
                 params.append('Id', Id);
                 params.append('PartnerName', PartnerName);
@@ -177,7 +176,7 @@ EssentialInformation.IsDelete,
                 params.append('BusinessLicenseURL', BusinessLicenseURL);
                 params.append('IsStart', IsStart);
                 params.append('Remark', Remark);
-                params.append('Post', Post);               
+                params.append('Post', Post);
                 params.append('TechnicalGrade', TechnicalGrade);
                 params.append('MonthlyPay', MonthlyPay);
                 params.append('BankCard', BankCard);
