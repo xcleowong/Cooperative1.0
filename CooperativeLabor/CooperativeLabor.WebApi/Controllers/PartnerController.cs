@@ -15,7 +15,8 @@ namespace CooperativeLabor.WebApi.Controllers
     [RoutePrefix("Partner")]
     public class PartnerController : ApiController
     {
-        private const int PAGESIZE = 3;
+        private const int PAGESIZE = 8;
+
         /// <summary>
         /// 入离场记录
         /// </summary>
