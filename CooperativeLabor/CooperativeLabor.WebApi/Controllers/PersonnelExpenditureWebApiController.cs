@@ -33,7 +33,9 @@ namespace CooperativeLabor.WebApi.Controllers
         [Route("AddPersonnelExpenditure")]
         public int AddPersonnelExpenditure(PersonnelExpenditure personnelExpenditure)
         {
-            personnelExpenditure.CreationTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") ;
+            personnelExpenditure.CreationTime = personnelExpenditure.CreationTime + "年";
+            personnelExpenditure.CreationTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            personnelExpenditure.Status = 1;
             var result = IPersonnelExpenditureServices.AddPersonnelExpenditure(personnelExpenditure);
             return result;
         }

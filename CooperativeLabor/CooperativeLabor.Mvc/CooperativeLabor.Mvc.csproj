@@ -1379,7 +1379,7 @@
     <Content Include="Scripts\Plugins\TypeAhead\typeahead.bundle.js" />
     <Content Include="Scripts\vue-resource.js" />
     <Content Include="Views\DepartmentMaintenanceView\AddDepartmentMaintenanceView.cshtml" />
-    <Content Include="Views\CheckingIn\CheckingIndex.cshtml" />
+    <Content Include="Views\CheckingIn\Index.cshtml" />
     <None Include="Views\PartnerMVC\IndexEss1.cshtml" />
     <None Include="Views\PartnerMVC\IndexEnt.cshtml" />
     <None Include="Views\PartnerMVC\AdminList.cshtml" />
@@ -1488,9 +1488,7 @@
     <Content Include="Views\PartnerMVC\AddEnt.cshtml" />
     <Content Include="Views\PersonalInformation\Add.cshtml" />
     <Content Include="Views\PersonalInformation\Index.cshtml" />
-    <Content Include="Views\CheckingIn\CheckingInIndex.cshtml" />
-    <Content Include="Views\TravelOnVacation\Index.cshtml" />
-    <Content Include="Views\TravelOnVacation\TravelOnVacationIndex.cshtml" />
+    <Content Include="Views\TravelOnVacation\discardIndex.cshtml" />
     <Content Include="Views\EntryDimissionMVC\Index.cshtml" />
     <Content Include="Views\EntryDimissionMVC\Add.cshtml" />
     <Content Include="Views\EntryDimissionMVC\People.cshtml" />
@@ -1536,7 +1534,7 @@
     <Content Include="Views\PersonalInformation\PersonalAdd.cshtml" />
     <Content Include="Views\PersonnelExpenditure\Index.cshtml" />
     <Content Include="Views\SpecialSignMVC\Add.cshtml" />
-    <Content Include="Views\TravelOnVacation\TravelIndex.cshtml" />
+    <Content Include="Views\TravelOnVacation\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,204 +1,263 @@
-﻿@*@{
-        Layout = null;
-    }
+﻿<!DOCTYPE html>
+<html>
 
-    <!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>绩效考核-差旅休假</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
-        <!--废弃的Vue.js 差旅休假 页面-->
+    <link href="~/Content/Layui_X_Admin/css/font.css" rel="stylesheet" />
+    <link href="~/Content/Layui_X_Admin/css/xadmin.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/Content/Layui_X_Admin/lib/layui/layui.js"></script>
+    <script src="~/Content/Layui_X_Admin/js/xadmin.js"></script>
 
-    <html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-        <title>差旅休假</title>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.7/vue.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.1.17/vue-resource.js"></script>
-        <script src="~/Scripts/vue.js"></script>
-        <script src="~/Scripts/vue.min.js"></script>
-        <script src="~/Scripts/vue-resource.js"></script>
-        <script src="~/Scripts/axios.js"></script>
-        <script src="~/Scripts/axios.min.js"></script>
-        <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    </head>
-    <body>
-        <div>
-            <div id="app">
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <input type="button" class="btn" value="+差旅休假" v-on:click="signIn()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <table class="table-condensed" border="1" style="width:100%">
-                    <tr>
-                        <td>序号</td>
-                        <td>申请类型</td>
-                        <td>申请事由</td>
-                        <td>开始时间</td>
-                        <td>结束时间</td>
-                        <td>计算时长</td>
-                        <td>申请日期</td>
-                        <td>状态</td>
-                        <td>操作</td>
-                    </tr>
-                    <tr v-for="(item,index) in GetTravelOnVacations">
-                        <td>{{index+1}}</td>
-                        <td>{{item.ApplicationType}}</td>
-                        <td>{{item.ApplicationReason}}</td>
-                        <td>{{item.StartTime}}</td>
-                        <td>{{item.EndTime}}</td>
-                        <td>{{item.ComputingTime}}</td>
-                        <td>{{item.ApplicationDate}}</td>
-                        <td>{{item.StrState}}</td>
-                        <td>
-                            <a href="javascript:void(0)" v-on:click="deleteOrRecall({{item.Id}},{{item.State}})">{{item.ReverseStrState}}</a>
-                        </td>
-                    </tr>
-                </table>
-                <table class="table-condensed" style="width:50%">
-                    <tr>
-                        <td>姓名：</td>
-                        <td>
-                            <input class="Text1" type="text" v-model="Name" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>申请类型：</td>
-                        <td>
-                            <input class="Text1" type="text" v-model="ApplicationType" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>申请事由：</td>
-                        <td>
-                            <input class="Text1" type="text" v-model="ApplicationReason" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>开始时间：</td>
-                        <td>
-                            <input class="Text1" type="text" v-model="StartTime" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>结束时间：</td>
-                        <td>
-                            <input class="Text1" type="text" v-model="EndTime" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>计算时长：</td>
-                        <td>
-                            <input class="Text1" type="text" v-model="ComputingTime" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>申请日期：</td>
-                        <td>
-                            <input class="Text1 input-sm" type="text" v-model="ApplicationDate" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>
-                            <input id="AddBtn" type="button" value="添加" v-on:click="addTravelOnVacation(Name,ApplicationType,ApplicationReason,StartTime,EndTime,ComputingTime,ApplicationDate)" />
-                        </td>
-                    </tr>
-                </table>
+    @*vue*@
+    <script src="~/Content/VueScripts/vue.js"></script>
+    <script src="~/Content/VueScripts/axios.js"></script>
+
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="layui-anim layui-anim-up">
+    <div class="x-nav">
+        <span class="layui-breadcrumb">
+            <a href="">首页</a>
+            <a href="">绩效考核</a>
+            <a>
+                <cite>差旅休假</cite>
+            </a>
+        </span>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon" style="line-height:30px">ဂ</i>
+        </a>
+    </div>
+    <div class="x-body" id="app">
+        <div class="layui-row">
+            <form class="layui-form layui-col-md12 x-so">
+                <div style="width:150px;float:left;">
+                    <select>
+                        <option value="value">-申请类型-</option>
+                        <option value="出差">出差</option>
+                        <option value="休假">休假</option>
+                    </select>
+                </div>
+                <div style="width:150px;float:left;">
+                    <select>
+                        <option value="value">-申请状态-</option>
+                        <option value="出差">提交中</option>
+                        <option value="休假">草稿</option>
+                    </select>
+                </div>
+                &nbsp;&nbsp;
+                <input type="text" name="startendtime" placeholder="选择日期" autocomplete="off" class="layui-input" id="startendtime" style="width:200px;">
+                <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+            </form>
+        </div>
+        <xblock>
+            @*<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>*@
+            <button class="layui-btn" onclick="addBtn()"><i class="layui-icon"></i>差旅休假</button>
+            <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        </xblock>
+        <table class="layui-table" lay-size="sm">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>申请类型</th>
+                    <th>申请事由</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>计算时长</th>
+                    <th>申请日期</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="tabody"></tbody>
+        </table>
+        <div class="page">
+            <div>
+                <a class="prev" href="">&lt;&lt;</a>
+                <a class="num" href="">1</a>
+                <span class="current">2</span>
+                <a class="num" href="">3</a>
+                <a class="num" href="">489</a>
+                <a class="next" href="">&gt;&gt;</a>
             </div>
         </div>
-    </body>
-    </html>
 
-    <script type="text/javascript">
-        var StaffId = 1;
-        var vm = new Vue({
-            el: "#app",
-            data: {
-                GetTravelOnVacations: [],
+    </div>
+    <script>
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#startendtime' //指定元素
+                , range: true //或 range: '~' 来自定义分割字符
+            });
+        });
+    </script>
+    <script>
+        var _hmt = _hmt || []; (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</body>
+</html>
 
-                ApplicationType: "",
-                ApplicationReason: "",
-                StartTime: "",
-                EndTime: "",
-                ComputingTime: "",
-                ApplicationDate: "",
-                State: 1
+<script type="text/javascript">
+    //登录人ID
+    var StaffId = 1;
+    var StaffName = "张三";//登录人姓名
+    $(function () {
+        getTravelOnVacation(StaffId);//显示
+    });
 
-            },
-            // 挂载完成时
-            mounted() {
-                this.getTravelOnVacation(StaffId);
-            },
-            methods: {
-                //显示
-                getTravelOnVacation: function (StaffId) {
-                    axios.get("http://localhost:8099/travelOnVacation/getTravelOnVacation?StaffId=" + StaffId).then(
-                        (response) => {
-                            console.log(response);
-                            this.GetTravelOnVacations = response.data;
-                        },
-                        (response) => {
-                            alert(response.status);
-                        }
-                    ).catch(function (response) {
-                        alert(response);
-                    });
-                },
-                //添加差旅休假
-                addTravelOnVacation: function (Name, ApplicationType, ApplicationReason, StartTime, EndTime, ComputingTime, ApplicationDate) {
-                    var staffId = 1;
-                    var params = new URLSearchParams();
-                    params.append('StaffId', staffId);
-                    params.append('Name', Name);
-                    params.append('ApplicationType', ApplicationType);
-                    params.append('ApplicationReason', ApplicationReason);
-                    params.append('StartTime', StartTime);
-                    params.append('EndTime', EndTime);
-                    params.append('ComputingTime', ComputingTime);
-                    params.append('ApplicationDate', ApplicationDate);
-                    params.append('State', 1);
-
-                    axios.post('http://localhost:8099/travelOnVacation/addTravelOnVacation', params).then(
-                        (response) => {
-                            console.log(response.data);
-                            if (response.data > 0) {
-                                alert("添加成功!");
-                                this.getTravelOnVacations(staffId);
-                            }
-                            //console.info(this.list);
-                        },
-                        (response) => {
-                            alert(response.status);
-                        }
-                    ).catch(function (response) {
-                        alert(response);
-                    });
-                },
-                //删除/撤回
-                deleteOrRecall: function (id, state) {
-
-                    var params = new URLSearchParams();
-                    params.append('Id', id);
-                    params.append('State', state);
-
-                    axios.post('http://localhost:8099/travelOnVacation/updateTravelOnVacation',params ).then(
-                        (response) => {
-                            console.log(response.data);
-                            if (response.data > 0) {
-                                if (state = 1) {
-                                    alert("撤回成功!");
-                                }
-                                if (state = 2) {
-                                    alert("删除成功!");
-                                }
-                                this.getCheckingIn(staffId);
-                            }
-                            //console.info(this.list);
-                        },
-                        (response) => {
-                            alert(response.status);
-                        }
-                    ).catch(function (response) {
-                        alert(response);
-                    });
+    //显示
+    function getTravelOnVacation(StaffId) {
+        $.ajax({
+            url: 'http://localhost:8099/travelOnVacation/getTravelOnVacation?StaffId=' + StaffId,
+            type: 'get',
+            success: function (data) {
+                $("#tabody").html("");
+                var index = 0;
+                for (var i = 0; i < data.length; i++) {
+                    var tabody = '<tr>'
+                        + '<td>' + (index + 1) + '</td>'
+                        + '<td>' + data[i].ApplicationType + '</td>'
+                        + '<td>' + data[i].ApplicationReason + '</td>'
+                        + '<td>' + data[i].StartTime + '</td>'
+                        + '<td>' + data[i].EndTime + '</td>'
+                        + '<td>' + data[i].ComputingTime + '</td>'
+                        + '<td>' + data[i].ApplicationDate + '</td>'
+                        + '<td>' + data[i].StrState + '</td>'
+                        + '<td><button class="layui-btn layui-btn-sm" onclick="deleteOrRecall(' + data[i].Id + ',' + data[i].State + ', ' + StaffId + ')">' + data[i].ReverseStrState + '</button></td>'
+                        + '</tr>';
+                    $("#tabody").append(tabody);
                 }
             }
         })
+    };
 
-    </script>*@
+    //显示添加控件
+    function addBtn() {
+        //页面层
+        layer.open({
+            type: 1,
+            skin: 'layui-layer-rim', //加上边框
+            title: "添加信息",
+            area: ['450px', '600px'], //宽高
+            content: '<div id="addDiv"><form action="/" method="post" id="form1" ><table class="layui-table" style=""><tr hidden="hidden"><td></td><td><input class="layui-input" type="text" name="State" value="1" /><input class="layui-input" type="text" name="StaffId" /></td></tr><tr><td>姓名：</td><td><input class="layui-input" type="text" name="Name" readonly="readonly" /></td></tr><tr><td>申请类型：</td><td><div style="height:30px;"><select style="height:40px;" class="select1" name="ApplicationType"><option value="出差">出差</option><option value="休假">休假</option></select></div></td></tr><tr><td>申请事由：</td><td><textarea class="layui-input" name="ApplicationReason" id="applicationReason"></textarea></td></tr><tr><td>开始时间：</td><td><input id="startTime" class="clickTime layui-input" type="text" name="StartTime" readOnly="readOnly" /></td></tr><tr><td>结束时间：</td><td><input id="endTime" class="clickTime layui-input" type="text" name="EndTime" readOnly="readOnly" /></td></tr><tr><td>计算时长：</td><td><input class="layui-input" type="text" name="ComputingTime" id="computingTime" /></td></tr><tr><td>申请日期：</td><td><input class="layui-input" type="text" name="ApplicationDate" readonly="readonly" /></td></tr><tr><td></td><td><input id="AddBtn" class="layui-btn layui-btn-small" type="button" value="提交" onclick="addTravelOnVacation()" /></td></tr></table></form></div>'
+        });
+
+        $("[name=StaffId]").val(StaffId);//赋值用户ID
+        $("[name=Name]").val(StaffName);//赋值姓名
+        var myDate = new Date();//获取系统当前时间
+        //var datetime = myDate.toLocaleString();//获取当前日期时间
+        //获取当前日期时间
+        var datetime = myDate.getFullYear() + '-' + myDate.getMonth() + 1 + '-' + myDate.getDate() + ' ' + myDate.getHours() + ':' + myDate.getMinutes() + ':' + myDate.getSeconds();
+        $("[name=ApplicationDate]").val(datetime);//赋值姓名
+
+        //时间控件
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#startTime' //指定元素
+            });
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#endTime' //指定元素
+            });
+        });
+    }
+
+    //添加差旅休假
+    function addTravelOnVacation() {
+
+        //申请事由非空
+        if ($("#applicationReason").val() == "") {
+            //tips层
+            layer.tips('请填写申请事由', '#applicationReason');
+            return;
+        }
+        //开始时间非空
+        if ($("#startTime").val() == "") {
+            //tips层
+            layer.tips('请选择开始时间', '#startTime');
+            return;
+        }
+        //结束时间非空
+        if ($("#endTime").val() == "") {
+            //tips层
+            layer.tips('请选择结束时间', '#endTime');
+            return;
+        }
+        //计算时长非空
+        if ($("#computingTime").val() == "") {
+            //tips层
+            layer.tips('请填写计算时长', '#computingTime');
+            return;
+        }
+
+        //添加
+        $.ajax({
+            url: 'http://localhost:8099/travelOnVacation/addTravelOnVacation',
+            type: 'post',
+            data: $("#form1").serialize(),
+            success: function (data) {
+                if (data > 0) {
+                    layer.msg("提交成功！", { icon: 6 });
+                    getTravelOnVacation(StaffId);
+                }
+                else {
+                    layer.msg("提交失败！", { icon: 5 });
+                }
+            }
+        })
+    };
+
+    //删除/撤回 差旅休假
+    function deleteOrRecall(id, state, staffId) {
+        var msg, msg1 = "";
+        if (state == 1) {
+            msg = "确认撤回吗？";
+            msg1 = "撤回";
+        }
+        if (state == 2) {
+            msg = "确认删除吗？";
+            msg1 = "删除";
+        }
+        //询问框
+        layer.confirm(msg, {
+            btn: ['确定', '取消'] //按钮
+        }, function () {
+            $.ajax({
+                url: 'http://localhost:8099/travelOnVacation/updateTravelOnVacation?Id=' + id + '&State=' + state,
+                type: 'post',
+                success: function (data) {
+                    if (data > 0) {
+                        layer.msg(msg1 + "成功！", { icon: 6 });
+                        getTravelOnVacation(staffId);
+                    }
+                    else {
+                        layer.msg(msg1 + "失败！", { icon: 5 });
+                    }
+                }
+            })
+        })
+    };
+
+</script>
+
