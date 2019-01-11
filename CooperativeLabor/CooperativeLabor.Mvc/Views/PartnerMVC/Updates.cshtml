@@ -1,0 +1,118 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>修改</title>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <link href="~/BootstrapSouce/css/bootstrap.css" rel="stylesheet" />
+
+</head>
+<body>
+    <form id="addform">
+        <div style="text-align: center;">
+            <span style="font-size:30px;text-align:center">修改权限</span>
+            <table align="center" class="table table-hover table-bordered" style="width:500px;text-align:center;line-height:60px">
+                <tr>
+                    <td>编号：</td>
+                    <td><input id="Id" type="text" name="Id" /></td>
+                </tr>
+                <tr>
+                    <td>权限名称</td>
+                    <td><input id="PermissionName" type="text" name="PermissionName" /></td>
+                </tr>
+                <tr>
+                    <td>权限URL</td>
+                    <td><input id="Text1" type="text" name="PermissionUrl" /></td>
+                </tr>
+                <tr>
+                    <td>创建时间</td>
+                    <td><input id="Text1" type="date" name="CreateTime" /></td>
+                </tr>
+                <tr>
+                    <td>是否是父节点</td>
+                    <td>
+                        <input id="IsPid" type="radio" name="isPid" value="0" />是
+                        <input id="NoPid" type="radio" name="isPid" value="1" checked="checked" />否
+                    </td>
+                </tr>
+
+                <tr id="pIDShow">
+                    <td>父节点</td>
+                    <td>
+                        <select id="Select1" name="Pid">
+                            <option>==请选择==</option>
+                            <option value="111">111</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>是否启用</td>
+                    <td>
+                        <input id="Radio1" type="radio" name="IsStart" value="1" />是
+                        <input id="Radio1" type="radio" name="IsStart" value="0" />否
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input style="width:90px;" id="AddPermission" type="button" class="btn btn-info" value="添加权限" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input style="width:90px;" id="GetPermission" type="button" class="btn btn-danger" value="显示" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+
+</body>
+</html>
+<script type="text/javascript">
+    $(function () {
+        alert(0)
+            //反填
+            $.ajax({
+                url: "http://localhost:8099/Jurisdiction/GetPermissionById",
+                type: "get",
+                data: {
+                    @*Id:@Request.QueryString["Id"]*@
+                    Id:@ViewBag.Id,
+                },
+                success:function (data) {
+                    console.log(data)
+                    $("#Id").val(data.Id);
+                    $("#PermissionName").val(data.PermissionName);
+                    $("input[name=PermissionUrl]").val(data.PermissionUrl);
+                    $("input[name=CreateTime]").val(data.CreateTime);
+                    $("select[name=Pid]").val(data.Pid);
+                    $("input[name=IsStart][value ='" + data.IsStart + "'] ").attr("checked","checked");
+                }
+            })
+            $("input[name=isPid]").click(function () {
+                if ($("input[name=isPid]:checked").val() == "1") {
+                    $("#pIDShow").show();
+                }
+                else {
+                    $("#pIDShow").hide();
+                }
+            })
+
+
+            $("#AddPermission").click(function () {
+                $.ajax({
+                    url: "http://localhost:8099/Jurisdiction/UpdatePermission",
+                    type: "post",
+                    data: $("#addform").serialize(),
+                    success: function (data) {
+                        if (data > 0) {
+                            alert("修改成功！");
+                        }
+                    }
+                })
+            })
+        })
+</script>
