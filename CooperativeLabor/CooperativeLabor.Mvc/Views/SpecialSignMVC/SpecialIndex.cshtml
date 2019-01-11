@@ -3,7 +3,7 @@
   
 <head>
     <meta charset="UTF-8">
-    <title>人员基本信息维护</title>
+    <title>特别签录页面</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -42,9 +42,9 @@
     <div class="x-nav">
       <span class="layui-breadcrumb">
         <a href="">首页</a>
-        <a href="">合作方人员管理</a>
+        <a href="">绩效考核</a>
         <a>
-          <cite>人员基本信息维护</cite></a>
+          <cite>特别签录</cite></a>
       </span>
       <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
@@ -54,14 +54,12 @@
           <form class="layui-form layui-col-md12 x-so">
 
               <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
-              <input type="text" name="username" placeholder="请输入用工单位" autocomplete="off" class="layui-input">
-              <input type="text" name="username" placeholder="请输入合作方名称" autocomplete="off" class="layui-input">
               <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
           </form>
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
-        <button class="layui-btn" onclick="x_admin_show('添加人员基本信息','/PersonalInformation/Add',700,500)"><i class="layui-icon"></i>添加</button>
+        <button class="layui-btn" onclick="x_admin_show('添加特别签录','/SpecialSignMVC/Add',700,500)"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
       <table class="layui-table" lay-size="sm">
@@ -72,44 +70,39 @@
                 </th>
                 <th>ID</th>
                 <th>姓名</th>
-                <th>性别</th>
-                <th>用工单位</th>
-                <th>合作方名称</th>
-                <th>专业技术资格</th>
-                <th>邮箱</th>
-                <th>岗位</th>
-                <th>联系电话</th>
-                <th>创建时间</th>
-                <th>修改时间</th>
-                <th>状态</th>
+                <th>部门</th>
+                <th>出勤日期</th>
+                <th>出勤类型</th>
+                <th>签录时间</th>
+                <th>签退时间</th>
+                <th>修改签到时间</th>
+                <th>修改签退时间</th>
+                <th>特签人</th>
+                <th>特签时间</th>
+                <th>特签原由</th>
                 <th>操作</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="(item,index) in GetPersonalInformation">
+            <tr v-for="(item,index) in GetSpecialSign">
                 <td>
                     <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
                 </td>
                 <td>{{item.Id}}</td>
                 <td>{{item.Name}}</td>
-                <td>{{item.Gender}}</td>
-                <td>{{item.Employingnit}}</td>
-                <td>{{item.PartnerName}}</td>
-                <td>{{item.ProfessionalSkill}}</td>
-                <td>{{item.Email}}</td>
-                <td>{{item.Post}}</td>
-                <td>{{item.Phone}}</td>
-                <td>{{item.CreationTime.substring(0,10)}}</td>
-                <td>{{item.ModificationTime.substring(0,10)}}</td>
-                <td class="td-status">
-                    <span class="layui-btn layui-btn-normal layui-btn-xs">已启用</span>
-                </td>
+                <td>{{item.Department}}</td>
+                <td>{{item.AttendanceDate}}</td>
+                <td>{{item.AttendanceTypes}}</td>
+                <td>{{item.SignInDate.substring(0,10)}}</td>
+                <td>{{item.SignOutDate.substring(0,10)}}</td>
+                <td>{{item.AlterSignInDate.substring(0,10)}}</td>
+                <td>{{item.AlterSignOutDate.substring(0,10)}}</td>
+                <td>{{item.ThoseSign}}</td>
+                <td>{{item.SignedTime.substring(0,10)}}</td>
+                <td>{{item.SpecialSign}}</td>
                 <td class="td-manage">
-                    <a onclick="member_stop(this,'10001')" href="javascript:;" title="启用">
-                        <i class="layui-icon">&#xe601;</i>
-                    </a>
-                    <a title="编辑" onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
-                        <i class="layui-icon">&#xe642;</i>
+                    <a title="恢复签录" onclick="x_admin_show('恢复签录','member-edit.html',600,400)" href="javascript:;">
+                        <i class="layui-icon">&#xe633;</i>
                     </a>
                     <a title="删除" v-on:click="deleteById(item.Id)" href="javascript:;">
                         <i class="layui-icon">&#xe640;</i>
@@ -206,37 +199,16 @@
     var vm = new Vue({
         el: "#app",
         data: {
-            GetPersonalInformation: [],
-            //all: 6, //总页数
-            //cur: 1//当前页码
+            GetSpecialSign: []
         },
-        //watch: {
-        //    cur: function (oldValue, newValue) {
-        //    }
-        //},
         mounted() {
-            //this.getList(this.cur);
-            this.GetPersonal();
+            this.SpecialSignTheRecord();
         },
         methods: {
-            //btnClick: function (data) {//页码点击事件
-            //    if (data != this.cur) {
-            //        this.cur = data;
-            //        this.getList(data);
-
-
-            //    }
-            //},
-            //pageClick: function () {
-            //    //console.log('现在在' + this.cur + '页');
-            //    this.getList(this.cur);
-            //},
-            //显示
-            GetPersonal: function () {
-                axios.get("http://localhost:8099/PersonalInformation/GetPersonalInformation").then(
+            SpecialSignTheRecord: function () {
+                axios.get("http://localhost:8099/SpecialSignTheRecord/GetSpecialSignTheRecord").then(
                     (response) => {
-                        console.log(response);
-                        this.GetPersonalInformation = response.data;
+                        this.GetSpecialSign = response.data;
                     },
                     (response) => {
                         alert(response.status);
@@ -245,62 +217,13 @@
                     alert(response);
                 });
             },
-            //删除
-            deleteById: function (id) {
-                layer.confirm('确认要删除吗？', function (index) {
-                    axios.post('http://localhost:8099/PersonalInformation/DeletePersonalInformation?id=' + id).then(
-                        (response) => {
-
-                            if (response.data > 0) {
-                               
-                                layer.msg('已删除!', { icon: 1, time: 1000 });     
-                                this.GetPersonal();
-                            }
-                           
-                        },
-                        (response) => {
-                            alert(response.status);
-                        }
-                    ).catch(function (response) {
-                        alert(response);
-                        });
-                    //$(obj).parents("tr").remove();
-                   
-                    
-                })
-                
-            },
-            ////修改质检计划信息
-            updateContact: function (Name, UserName, Gender, Birthday, Nation, Employingnit, PartnerName, ProfessionalSkill, MaritalStatus, IDNumber, PartyGroupings, Email, Post, Phone, CardNo, OpeningBank, CreationTime, ModificationTime, IsDelete, Id) {
-                var params = new URLSearchParams();
-                params.append('Name', Name);
-                params.append('UserName', UserName);
-                params.append('Gender', Gender);
-                params.append('Birthday', Birthday);
-                params.append('Nation', Nation);
-                params.append('Employingnit', Employingnit);
-                params.append('PartnerName', PartnerName);
-                params.append('ProfessionalSkill', ProfessionalSkill);
-                params.append('MaritalStatus', MaritalStatus);
-                params.append('IDNumber', IDNumber);
-                params.append('PartyGroupings', PartyGroupings);
-                params.append('Email', Email);
-                params.append('Post', Post);
-                params.append('Phone', Phone);
-                params.append('CardNo', CardNo);
-                params.append('OpeningBank', OpeningBank);
-                params.append('CreationTime', CreationTime);
-                params.append('ModificationTime', ModificationTime);
-                params.append('IsDelete', IsDelete);
-                params.append('Id', Id);
-                axios.post('http://localhost:8099/PersonalInformation/UpdatePersonalInformation?id=' + Id, params).then(
+            deleteById: function (Id) {
+                axios.post('http://localhost:8099/SpecialSignTheRecord/DeleteSpecialSignTheRecord?id=' + Id).then(
                     (response) => {
-                        console.log(response.data);
                         if (response.data > 0) {
-                            alert("修改成功!!!");
-                            this.getList();
+                            alert("删除成功！");
+                            this.SpecialSignTheRecord();
                         }
-                        //console.info(this.list);
                     },
                     (response) => {
                         alert(response.status);
@@ -309,7 +232,10 @@
                     alert(response);
                 });
             },
+
         }
     })
+
+
 </script>
 

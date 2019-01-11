@@ -1538,6 +1538,7 @@
     <Content Include="Views\SpecialSignMVC\Add.cshtml" />
     <Content Include="Views\TravelOnVacation\TravelIndex.cshtml" />
     <Content Include="Views\PartnerMVC\UpdateUserManagement.cshtml" />
+    <Content Include="Views\SpecialSignMVC\SpecialIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
