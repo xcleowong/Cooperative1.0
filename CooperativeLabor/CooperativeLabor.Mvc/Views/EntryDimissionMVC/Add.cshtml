@@ -150,7 +150,6 @@
                 params.append('IsDelete', IsDelete);
                 axios.post('http://localhost:8099/EntryDimission/AddEntry', params).then(
                     (response) => {
-                        alert(response)
                         alert("添加成功")
                     },
                     (response) => {

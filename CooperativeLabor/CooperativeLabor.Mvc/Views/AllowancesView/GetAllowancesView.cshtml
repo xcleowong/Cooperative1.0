@@ -1,6 +1,8 @@
 ﻿
 @{
-    Layout = null;
+                /**/
+
+                Layout = null;
 }
 
 <!DOCTYPE html>
@@ -130,19 +132,19 @@
 
         </table>
         <div class="page-bar">
-    <ul>
-        <li v-if="cur>1"><a v-on:click="cur--,pageClick()">上一页</a></li>
-        <li v-if="cur==1"><a class="banclick">上一页</a></li>
-        <li v-for="index in indexs" v-bind:class="{ 'active': cur == index}">
-            <a v-on:click="btnClick(index)">{{ index }}</a>
-        </li>
-        <li v-if="cur!=all"><a v-on:click="cur++,pageClick()">下一页</a></li>
-        <li v-if="cur == all"><a class="banclick">下一页</a></li>
-        <li><a>共<i>{{all}}</i>页</a></li>
-    </ul>
-</div>
+            <ul>
+                <li v-if="cur>1"><a v-on:click="cur--,pageClick()">上一页</a></li>
+                <li v-if="cur==1"><a class="banclick">上一页</a></li>
+                <li v-for="index in indexs" v-bind:class="{ 'active': cur == index}">
+                    <a v-on:click="btnClick(index)">{{ index }}</a>
+                </li>
+                <li v-if="cur!=all"><a v-on:click="cur++,pageClick()">下一页</a></li>
+                <li v-if="cur == all"><a class="banclick">下一页</a></li>
+                <li><a>共<i>{{all}}</i>页</a></li>
+            </ul>
+        </div>
     </div>
-    
+
 </body>
 </html>
 <script type="text/javascript">
@@ -227,7 +229,7 @@
                 axios.post('http://localhost:8099/Allowances/UpdateAllowances?Id=' + Id, params).then(
                     (response) => {
                         console.log(response.data);
-                        if (response.data >0) {
+                        if (response.data > 0) {
                             alert("修改成功!!!");
                             this.getList();
                         }

@@ -18,6 +18,7 @@
     @*vue*@
     <script src="~/Content/VueScripts/vue.js"></script>
     <script src="~/Content/VueScripts/axios.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
@@ -26,6 +27,10 @@
     <![endif]-->
 
     <style>
+        .page-bar {
+            margin: 40px;
+        }
+
         ul, li {
             margin: 0px;
             padding: 0px;
@@ -33,6 +38,50 @@
 
         li {
             list-style: none
+        }
+
+        .page-bar li:first-child > a {
+            margin-left: 0px
+        }
+
+        .page-bar a {
+            border: 1px solid #ddd;
+            text-decoration: none;
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            margin-left: -1px;
+            line-height: 1.42857143;
+            color: #337ab7;
+            cursor: pointer
+        }
+
+            .page-bar a:hover {
+                background-color: #eee;
+            }
+
+            .page-bar a.banclick {
+                cursor: not-allowed;
+            }
+
+        .page-bar .active a {
+            color: #fff;
+            cursor: default;
+            background-color: #337ab7;
+            border-color: #337ab7;
+        }
+
+        .page-bar i {
+            font-style: normal;
+            color: #d44950;
+            margin: 0px 4px;
+            font-size: 12px;
+        }
+
+
+        .div-td table td {
+            width: 30px;
+            line-height: 15px
         }
     </style>
 
@@ -62,7 +111,7 @@
         <button class="layui-btn" onclick="x_admin_show('添加特别签录','/SpecialSignMVC/Add',700,500)"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
-      <table class="layui-table" lay-size="sm">
+      <table class="layui-table" lay-size="sm"  v-show="GetSpecialSign.length">
         <thead>
             <tr>
                 <th>
@@ -111,7 +160,7 @@
             </tr>
         </tbody>
       </table>
-      @*<div class="page">
+      <div class="page-bar">
           <ul>
               <li v-if="cur>1"><a v-on:click="cur--,pageClick()">上一页</a></li>
               <li v-if="cur==1"><a class="banclick">上一页</a></li>
@@ -122,23 +171,11 @@
               <li v-if="cur == all"><a class="banclick">下一页</a></li>
               <li><a>共<i>{{all}}</i>页</a></li>
           </ul>
-      </div>*@
+      </div>
 
     </div>
     <script>
-      layui.use('laydate', function(){
-        var laydate = layui.laydate;
-        
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#start' //指定元素
-        });
-
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#end' //指定元素
-        });
-      });
+      
 
        /*用户-停用*/
       function member_stop(obj,id){
@@ -199,30 +236,36 @@
     var vm = new Vue({
         el: "#app",
         data: {
-            GetSpecialSign: []
+            GetSpecialSign: [],
+            all: 6, //总页数
+            cur: 1//当前页码
+        },
+        watch: {
+            cur: function (oldValue, newValue) {
+            }
         },
         mounted() {
-            this.SpecialSignTheRecord();
+            this.SpecialSignTheRecord(this.cur);
         },
         methods: {
-            SpecialSignTheRecord: function () {
-                axios.get("http://localhost:8099/SpecialSignTheRecord/GetSpecialSignTheRecord").then(
-                    (response) => {
-                        this.GetSpecialSign = response.data;
-                    },
-                    (response) => {
-                        alert(response.status);
-                    }
-                ).catch(function (response) {
-                    alert(response);
-                });
+            btnClick: function (data) {//页码点击事件
+                if (data != this.cur) {
+                    this.cur = data;
+                    this.SpecialSignTheRecord(data);
+                }
             },
-            deleteById: function (Id) {
-                axios.post('http://localhost:8099/SpecialSignTheRecord/DeleteSpecialSignTheRecord?id=' + Id).then(
+            pageClick: function () {
+                //console.log('现在在' + this.cur + '页');
+                this.SpecialSignTheRecord(this.cur);
+            },
+            SpecialSignTheRecord: function (id) {
+                axios.get("http://localhost:8099/SpecialSignTheRecord/GetSpecialSignTheRecord", { params: { pageIndex: id } }).then(
                     (response) => {
-                        if (response.data > 0) {
-                            alert("删除成功！");
-                            this.SpecialSignTheRecord();
+                        this.GetSpecialSign = [];
+                        this.cur = response.data.CurrentPage;
+                        this.all = response.data.TotlePage;
+                        for (var i = 0; i < response.data.Data.length; i++) {
+                            this.GetSpecialSign.push(response.data.Data[i]);
                         }
                     },
                     (response) => {
@@ -232,8 +275,80 @@
                     alert(response);
                 });
             },
+            //删除
+            deleteById: function(Id) {
+                layer.confirm('确认要删除吗？', function (index) {
+                axios.post('http://localhost:8099/SpecialSignTheRecord/DeleteSpecialSignTheRecord?id=' + Id).then(
+                    (response) => {
+                        if (response.data > 0) {
+                            layer.msg('已删除!', { icon: 1, time: 1000 });
+                            //this.SpecialSignTheRecord();
+                        }
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                        });
+                })
+            },
+
+            //删除
+            //deleteById: function (Id) {
+            //    layer.confirm('确认要删除吗？', function (index) {
+            //        axios.post('http://localhost:8099/SpecialSignTheRecord/DeleteSpecialSignTheRecord?id=' + id).then(
+            //            (response) => {
+            //                if (response.data > 0) {
+            //                    layer.msg('已删除!', { icon: 1, time: 1000 });
+            //                    //this.SpecialSignTheRecord();
+            //                }
+
+            //            },
+            //            (response) => {
+            //                alert(response.status);
+            //            }
+            //        ).catch(function (response) {
+            //            alert(response);
+            //        });
+            //        //$(obj).parents("tr").remove();
+
+
+            //    })
+
+            //},
+
+
+        },
+        //计算属性
+        computed: {
+            indexs: function () {
+                var left = 1;
+                var right = this.all;
+                var ar = [];
+                if (this.all >= 5) {
+                    if (this.cur > 3 && this.cur < this.all - 2) {
+                        left = this.cur - 2
+                        right = this.cur + 2
+                    } else {
+                        if (this.cur <= 3) {
+                            left = 1
+                            right = 5
+                        } else {
+                            right = this.all
+                            left = this.all - 4
+                        }
+                    }
+                }
+                while (left <= right) {
+                    ar.push(left)
+                    left++
+                }
+                return ar
+            }
 
         }
+
     })
 
 
