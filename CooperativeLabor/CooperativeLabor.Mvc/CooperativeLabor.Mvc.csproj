@@ -1382,6 +1382,7 @@
     <Content Include="Views\CheckingIn\CheckingIndex.cshtml" />
     <Content Include="Views\PartnerMVC\GetUserManagement.cshtml" />
     <Content Include="Views\PartnerMVC\AddUserManagement.cshtml" />
+    <Content Include="Views\EntryDimissionMVC\EntryIndex.cshtml" />
     <None Include="Views\PartnerMVC\IndexEss1.cshtml" />
     <None Include="Views\PartnerMVC\IndexEnt.cshtml" />
     <None Include="Views\PartnerMVC\AdminList.cshtml" />
