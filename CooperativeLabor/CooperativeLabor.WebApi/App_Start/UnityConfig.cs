@@ -68,6 +68,8 @@ namespace CooperativeLabor.WebApi
             container.RegisterType<ICheckingInServices, CheckingInServices>();
             //差旅休假
             container.RegisterType<ITravelOnVacationServices, TravelOnVacationServices>();
+            //人员费
+            container.RegisterType<IPersonnelExpenditureServices, PersonnelExpenditureServices>();
 
             //单位科室
             container.RegisterType<IDepartmentMaintenanceServices, DepartmentMaintenanceServices>();

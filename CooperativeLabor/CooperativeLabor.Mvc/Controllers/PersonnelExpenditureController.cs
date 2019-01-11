@@ -6,15 +6,19 @@ using System.Web.Mvc;
 
 namespace CooperativeLabor.Mvc.Controllers
 {
-    public class TravelOnVacationController : Controller
+    public class PersonnelExpenditureController : Controller
     {
-        // GET: TravelOnVacation
-        public ActionResult TravelOnVacationIndex()
+        // GET: PersonnelExpenditure
+        public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult TravelIndex()
+        /// <summary>
+        /// 添加
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Add()
         {
             return View();
         }

@@ -43,9 +43,9 @@ namespace CooperativeLabor.Services
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
                 conn.Open();
-                string sql = string.Format("SELECT * from permission where Pid!=0");
+                string sql = string.Format("SELECT * from permission ");
                 IEnumerable<Permission> permissions = conn.Query<Permission>(sql,null);
-                return permissions.ToList(); ;
+                return permissions.ToList();
             }
         }
         /// <summary>

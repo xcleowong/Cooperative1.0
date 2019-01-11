@@ -79,8 +79,8 @@
                 url: "http://localhost:8099/Jurisdiction/GetPermissionById",
                 type: "get",
                 data: {
-                    Id:@Request.QueryString["Id"]
-                    @*Id:@ViewBag.Id*@
+                    @*Id:@Request.QueryString["Id"]*@
+                    Id:@ViewBag.Id,
                 },
                 success:function (data) {
                     console.log(data)

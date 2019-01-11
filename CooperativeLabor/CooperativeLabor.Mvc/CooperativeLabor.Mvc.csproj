@@ -154,6 +154,7 @@
     <Compile Include="App_Start\RouteConfig2.cs" />
     <Compile Include="Controllers\DepartmentMaintenanceViewController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\PersonnelExpenditureController.cs" />
     <Compile Include="Controllers\SpecialSignMVCController.cs" />
     <Compile Include="Controllers\CheckingInController.cs" />
     <Compile Include="Controllers\AllowancesViewController.cs" />
@@ -1531,6 +1532,7 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\PersonalInformation\PersonalIndex.cshtml" />
     <Content Include="Views\PersonalInformation\PersonalAdd.cshtml" />
+    <Content Include="Views\PersonnelExpenditure\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
