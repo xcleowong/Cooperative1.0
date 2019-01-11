@@ -58,7 +58,9 @@ namespace CooperativeLabor.WebApi
             //角色
             container.RegisterType<IRolesServices, RolesServices>();
 
+            //补助标准配置
             container.RegisterType<IAllowancesServices, AllowancesServices>();
+            //假期设置
             container.RegisterType<IHolidaySettingsServices, HolidaySettingsServices>();
          
 
@@ -66,6 +68,11 @@ namespace CooperativeLabor.WebApi
             container.RegisterType<ICheckingInServices, CheckingInServices>();
             //差旅休假
             container.RegisterType<ITravelOnVacationServices, TravelOnVacationServices>();
+            //人员费
+            container.RegisterType<IPersonnelExpenditureServices, PersonnelExpenditureServices>();
+
+            //单位科室
+            container.RegisterType<IDepartmentMaintenanceServices, DepartmentMaintenanceServices>();
 
         }
     }

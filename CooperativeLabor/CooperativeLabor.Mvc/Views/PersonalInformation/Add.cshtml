@@ -9,9 +9,11 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Add</title>
+    <link href="~/bootstrap-3.3.7-dist/bootstrap337/css/bootstrap.css" rel="stylesheet" />
+
     <script src="~/Content/VueScripts/vue.js"></script>
     <script src="~/Content/VueScripts/axios.js"></script>
-    <link href="~/bootstrap-3.3.7-dist/bootstrap337/css/bootstrap.css" rel="stylesheet" />
+
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 </head>
 <body>
@@ -177,6 +179,7 @@
             },
             //保存
             AddQCPlan1: function (Name, UserName, Gender, Birthday, Nation, Employingnit, PartnerName, ProfessionalSkill, MaritalStatus, IDNumber, PartyGroupings, Email, Post, Phone, CardNo, OpeningBank, CreationTime, ModificationTime, IsDelete) {
+
                 var params = new URLSearchParams();
                 params.append('Name', Name);
                 params.append('UserName', UserName);

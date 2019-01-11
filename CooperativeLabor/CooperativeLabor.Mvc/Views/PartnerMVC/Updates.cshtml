@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                     <td>创建时间</td>
-                    <td><input id="Text1" type="datetime-local" name="CreateTime" /></td>
+                    <td><input id="Text1" type="date" name="CreateTime" /></td>
                 </tr>
                 <tr>
                     <td>是否是父节点</td>
@@ -79,8 +79,8 @@
                 url: "http://localhost:8099/Jurisdiction/GetPermissionById",
                 type: "get",
                 data: {
-                    Id:@Request.QueryString["Id"]
-                    @*Id:@ViewBag.Id*@
+                    @*Id:@Request.QueryString["Id"]*@
+                    Id:@ViewBag.Id,
                 },
                 success:function (data) {
                     console.log(data)

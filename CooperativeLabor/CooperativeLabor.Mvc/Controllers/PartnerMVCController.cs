@@ -119,8 +119,9 @@ namespace CooperativeLabor.Mvc.Controllers
         /// 修改
         /// </summary>
         /// <returns></returns>
-        public ActionResult UpdateRoles()
+        public ActionResult UpdateRoles(int Id)
         {
+            ViewBag.Id = Id;
             return View();
         }
 

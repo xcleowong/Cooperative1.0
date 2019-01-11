@@ -112,6 +112,9 @@ namespace CooperativeLabor.WebApi.Controllers
         [HttpPost]
         public int AddRoles(Roles roles)
         {
+            //roles.Role_PeremissionIds = string.Join(",", roles.PeremissionIds);
+            roles.Role_PeremissionIds = string.Join(",", roles.PermissionNames);
+            roles.CreateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             int i = this.role.AddRole(roles);
             return i;
         }
@@ -154,6 +157,8 @@ namespace CooperativeLabor.WebApi.Controllers
         [HttpPost]
         public int UpdateRoles(Roles roles)
         {
+            roles.Role_PeremissionIds = string.Join(",", roles.PermissionNames);
+            roles.CreateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
             int i = this.role.UpdateRoles(roles);
             return i;
         }

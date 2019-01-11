@@ -59,6 +59,7 @@ namespace CooperativeLabor.Services
                             PermissionsAndRoles permissionsAndRoles = new PermissionsAndRoles();
                             permissionsAndRoles.RoleId = id;//为角色ID赋值
                             permissionsAndRoles.PermissionId = Convert.ToInt32(permids[j]);//为权限ID赋值
+                            permissionsAndRoles.CreateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                             //角色权限关联表添加语句
                             string sql4 = "insert into PermissionsAndRoles(PermissionId,RoleId,CreateTime)VALUES(@PermissionId,@RoleId,@CreateTime)";
                             i = conn.Execute(sql4, permissionsAndRoles);
@@ -120,7 +121,12 @@ namespace CooperativeLabor.Services
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
                 conn.Open();
-                string sql = "SELECT * FROM roles";
+                string sql = "SELECT r.*,rr.PermissionId,GROUP_CONCAT(a.PermissionName separator ',') as PermissionName from PermissionsAndRoles as rr JOIN roles as r ON rr.RoleId = r.Id JOIN permission AS a ON rr.PermissionId = a.Id GROUP BY r.Id,r.RoleName";
+
+
+
+
+                //string sql = "SELECT * FROM roles ";
                 IEnumerable<Roles> roles = conn.Query<Roles>(sql, null);
                 return roles.ToList();
             }
@@ -144,7 +150,35 @@ namespace CooperativeLabor.Services
                 parameters.Add("@IsStart", roles.IsStart, null, null, null);
 
                 string sql = string.Format("UPDATE roles set  RoleName=@RoleName,CreateTime=@CreateTime,Role_PeremissionIds=@Role_PeremissionIds,IsStart=@IsStart where Id=@Id");
+
                 int i = conn.Execute(sql, parameters);
+                if (i > 0)
+                {
+                    string sql2 = "delete from permissionsandroles where RoleId=@Id";
+
+                    var result2 = conn.Execute(sql2, parameters);
+                    if (result2 > 0)
+                    {
+                        //根据角色名称查询Id
+                        string sql3 = "select Id from roles where RoleName=@RoleName";
+                        //返回一个对象(第一个元素)
+                        var id = conn.Query<int>(sql3, roles).FirstOrDefault();
+                        //分割权限id
+                        var permids = roles.Role_PeremissionIds.Split(',');
+                        //循环添加到角色权限关联表
+                        for (int j = 0; j < permids.Length; j++)
+                        {
+                            //实例化角色权限关联表
+                            PermissionsAndRoles permissionsAndRoles = new PermissionsAndRoles();
+                            permissionsAndRoles.RoleId = id;//为角色ID赋值
+                            permissionsAndRoles.PermissionId = Convert.ToInt32(permids[j]);//为权限ID赋值
+                            permissionsAndRoles.CreateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            //角色权限关联表添加语句
+                            string sql4 = "insert into PermissionsAndRoles(PermissionId,RoleId,CreateTime)VALUES(@PermissionId,@RoleId,@CreateTime)";
+                            i = conn.Execute(sql4, permissionsAndRoles);
+                        }
+                    }
+                }
                 return i;
             }
         }

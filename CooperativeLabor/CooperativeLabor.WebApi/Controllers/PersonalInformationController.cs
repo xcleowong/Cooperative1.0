@@ -13,6 +13,7 @@ namespace CooperativeLabor.WebApi.Controllers
     [RoutePrefix("PersonalInformation")]
     public class PersonalInformationController : ApiController
     {
+        private const int PAGESIZE = 10;
         IPersonalInformationServices personals = null;
         public PersonalInformationController(IPersonalInformationServices ipersonal)
         {
@@ -50,7 +51,19 @@ namespace CooperativeLabor.WebApi.Controllers
         [HttpGet]
         public List<PersonalInformation> GetPersonalInformation()
         {
+
+            //if (pageIndex == null)
+            //{
+            //    pageIndex = 1;
+            //}
+            //List<PersonalInformation> listGA = personals.GetPersonalInformation().ToList();
+            //PageNumber pageNumber = new PageNumber();
+            //pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
+            //pageNumber.TotlePage = (listGA.Count / PAGESIZE) + (listGA.Count % PAGESIZE == 0 ? 0 : 1);
+            //pageNumber.Data = listGA.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);
+            //return pageNumber;
             return personals.GetPersonalInformation();
+            
         }
         /// <summary>
         /// 根据ID获取人员基本信息

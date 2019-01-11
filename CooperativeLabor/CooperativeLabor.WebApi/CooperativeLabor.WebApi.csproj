@@ -150,7 +150,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AllowancesController.cs" />
     <Compile Include="Controllers\CheckingInWebApiController.cs" />
+    <Compile Include="Controllers\DepartmentMaintenanceController.cs" />
     <Compile Include="Controllers\EntryDimissionController.cs" />
+    <Compile Include="Controllers\PersonnelExpenditureWebApiController.cs" />
     <Compile Include="Controllers\SpecialSignTheRecordController.cs" />
     <Compile Include="Controllers\TravelOnVacationWebApiController.cs" />
     <Compile Include="Controllers\HolidaySettingsController.cs" />

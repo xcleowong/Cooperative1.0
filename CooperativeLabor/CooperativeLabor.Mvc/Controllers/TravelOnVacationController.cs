@@ -13,5 +13,10 @@ namespace CooperativeLabor.Mvc.Controllers
         {
             return View();
         }
+
+        public ActionResult TravelIndex()
+        {
+            return View();
+        }
     }
 }

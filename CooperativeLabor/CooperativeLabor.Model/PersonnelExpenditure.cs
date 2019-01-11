@@ -15,6 +15,11 @@ namespace CooperativeLabor.Model
         public int Id { get; set; }
 
         /// <summary>
+        /// 员工ID
+        /// </summary>
+        public int StaffId { get; set; }
+
+        /// <summary>
         /// 姓名
         /// </summary>           
         public string Name { get; set; }
@@ -32,12 +37,12 @@ namespace CooperativeLabor.Model
         /// <summary>
         /// 年度
         /// </summary>           
-        public int Year { get; set; }
+        public string Year { get; set; }
 
         /// <summary>
         /// 季度
         /// </summary>           
-        public int Quarter { get; set; }
+        public string Quarter { get; set; }
 
         /// <summary>
         /// 工作完成情况
@@ -57,22 +62,32 @@ namespace CooperativeLabor.Model
         /// <summary>
         /// 创建时间
         /// </summary>           
-        public DateTime CreationTime { get; set; }
+        public string CreationTime { get; set; }
 
         /// <summary>
         /// 修改时间
         /// </summary>           
-        public DateTime ModificationTime { get; set; }
-
+        public string ModificationTime { get; set; }
+        
         /// <summary>
-        /// 是否提交
+        /// 提交状态
+        /// 0删除、1提交、2草稿
         /// </summary>           
-        public int IsCommit { get; set; }
+        public int Status { get; set; }
 
         /// <summary>
-        /// 是否删除
-        /// </summary>          
-        public int IsDelete { get; set; }
+        /// 提交状态(文字)
+        /// </summary>           
+        public string StrStatus { get; set; }
+        
+        /// 提交状态(文字 反)
+        /// </summary>           
+        public string ReverseStrStatus { get; set; }
 
+        /// <summary>
+        /// 审批Id
+        /// </summary>
+        public int AId { get; set; }
+        public string StrAId { get; set; }
     }
 }
