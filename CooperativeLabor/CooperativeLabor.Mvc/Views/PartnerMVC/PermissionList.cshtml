@@ -73,7 +73,7 @@
                     </select>
                 </div>
                 <input class="layui-input" placeholder="权限名" name="cate_name">
-                <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon" id="AddPermission" onclick="location.href='/PartnerMVC/AddPermission'"></i>增加</button>
+                <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon" id="AddPermission" onclick="x_admin_show('添加权限','/PartnerMVC/AddPermission')"></i>增加</button>
                 <button style="width:90px;margin-left:270px;" id="AddPermission" type="button" class="btn btn-info" onclick="location.href='/PartnerMVC/AddPermission'">添加权限</button>
             </form>
         </div>
@@ -129,15 +129,15 @@
     </div>
     <script>
         $(function () {
-            //$("#AddPermission").click(function () {
-            //    location.href = '/PartnerMVC/AddPermission';
-            //})
+            $("#AddPermission").click(function () {
+                location.href = '/PartnerMVC/AddPermission';
+            })
             $.ajax({
                 url: "http://localhost:8099/Jurisdiction/GetPermissions",
                 type: "get",
                 success: function (data) {
                     $(data).each(function (index, data) {
-                        $("#tab").append("<tr><td><div class= 'layui-unselect layui-form-checkbox' lay - skin='primary' data - id='2' > <i class='layui-icon'>&#xe605;</i></div ></td ><td>" + data.Id + "</td> <td>" + data.PermissionName + "</td> <td>" + data.PermissionUrl + "</td> <td>" + data.CreateTime + "</td> <td>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td> <td><a title='编辑' onclick='x_admin_show('编辑', 'Updates.cshtml')' href='/PartnerMVC/AddPermission'>修改✎</a><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> </td > </tr > ");
+                        $("#tab").append("<tr><td><div class= 'layui-unselect layui-form-checkbox' lay - skin='primary' data - id='2' > <i class='layui-icon'>&#xe605;</i></div ></td ><td>" + data.Id + "</td> <td>" + data.PermissionName + "</td> <td>" + data.PermissionUrl + "</td> <td>" + data.CreateTime + "</td> <td>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td> <td><a title='编辑' onclick='x_admin_show('编辑', 'Updates.cshtml')' href='/PartnerMVC/Updates?Id=" + data.Id +"'>修改✎</a><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> </td > </tr > ");
                     })
                 }
             })
