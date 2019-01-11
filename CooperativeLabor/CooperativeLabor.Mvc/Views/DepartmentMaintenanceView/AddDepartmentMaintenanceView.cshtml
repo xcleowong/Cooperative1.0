@@ -169,8 +169,8 @@
                 $("[name=UnitDepartment]").val(d.UnitDepartment);
                 $("[name=Pid]").val(d.Pid);
                 $("[name=Id]").val(d.Id);
-                $("[name=IsStart][value='" + d.IsStart + "']").attr("checked","checked");
-                $("[name=CreationTime]").val(d.CreationTime);
+                $("input[name=IsStart][value='" + d.IsStart + "']").attr("checked","checked");
+                $("input[name=CreationTime]").val(d.CreationTime);
             }
         })
     }

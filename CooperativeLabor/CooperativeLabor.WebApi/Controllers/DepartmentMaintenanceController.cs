@@ -66,8 +66,8 @@ namespace CooperativeLabor.WebApi.Controllers
         public object GetAloneDepartmentMaintenance(int Id)
         {
             var dept = IdepartmentMaintenanceServices.GetAloneDepartmentMaintenance(Id);
-            return dept;
-
+            //return dept;
+            return Json<DepartmentMaintenance>(dept);
         }
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace CooperativeLabor.WebApi.Controllers
                 result = result.Where(a => a.Pid.Equals(Pid)).ToList();
                 return result.ToList();
             }
-                return Json<List<DepartmentMaintenance>>(result);
-           
+            return Json<List<DepartmentMaintenance>>(result);
+
         }
 
         /// <summary>
