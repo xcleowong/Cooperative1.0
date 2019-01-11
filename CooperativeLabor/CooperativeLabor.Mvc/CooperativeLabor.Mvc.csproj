@@ -1481,8 +1481,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\AllowancesView\AddAllowancesView.cshtml" />
-    <Content Include="Views\AllowancesView\Index.cshtml" />
-    <Content Include="Views\AllowancesView\ShowIndex.cshtml" />
     <Content Include="Views\AllowancesView\GetAllowancesView.cshtml" />
     <Content Include="Views\HolidaySettingsView\AddHolidaySettingsView.cshtml" />
     <Content Include="Views\HolidaySettingsView\GetHolidaySettingsView.cshtml" />
