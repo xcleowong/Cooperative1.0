@@ -46,5 +46,13 @@ namespace CooperativeLabor.IServices
         /// <returns></returns>
         UserManagement GetAloneUserManagementById(int Id);
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="UserName"></param>
+        /// <param name="UserPassword"></param>
+        /// <returns></returns>
+        UserManagement Login(string UserName, string UserPassword);
+
     }
 }

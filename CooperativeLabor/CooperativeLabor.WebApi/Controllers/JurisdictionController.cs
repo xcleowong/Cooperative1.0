@@ -99,12 +99,13 @@ namespace CooperativeLabor.WebApi.Controllers
         #endregion
 
 
+        #region 角色表信息
         /// <summary>
         /// 角色表
         /// </summary>
         [Dependency]
         public IRolesServices role { get; set; }
-        #region 角色表信息
+        
         /// <summary>
         /// 添加角色
         /// </summary>
@@ -215,6 +216,11 @@ namespace CooperativeLabor.WebApi.Controllers
             var result = this.userManagement.GetAloneUserManagementById(Id);
             return result;
         }
+        /// <summary>
+        /// 修改用户信息
+        /// </summary>
+        /// <param name="userManagement"></param>
+        /// <returns></returns>
         [Route("UpdateUser")]
         [HttpPost]
         public int UpdateUser(UserManagement userManagement)

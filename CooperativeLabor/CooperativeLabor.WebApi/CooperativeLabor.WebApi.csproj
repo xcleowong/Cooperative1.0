@@ -152,6 +152,7 @@
     <Compile Include="Controllers\CheckingInWebApiController.cs" />
     <Compile Include="Controllers\DepartmentMaintenanceController.cs" />
     <Compile Include="Controllers\EntryDimissionController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PersonnelExpenditureWebApiController.cs" />
     <Compile Include="Controllers\SpecialSignTheRecordController.cs" />
     <Compile Include="Controllers\TravelOnVacationWebApiController.cs" />

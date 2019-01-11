@@ -22,7 +22,7 @@
     <div class="x-body layui-anim layui-anim-up">
         <blockquote class="layui-elem-quote">
             欢迎管理员：
-            <span class="x-red">test</span>！当前时间:<span id="span1"></span>
+            <span class="x-red"><%Response.Write(Session("UserName"))%></span>！当前时间:<span id="span1"></span>
         </blockquote>
         @*<fieldset class="layui-elem-field">
                 <legend>数据统计</legend>

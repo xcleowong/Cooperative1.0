@@ -6,20 +6,25 @@ using System.Web.Mvc;
 
 namespace CooperativeLabor.Mvc.Controllers
 {
+    
     public class LoginController : Controller
     {
         // GET: Login
-        public ActionResult Index()
+        public ActionResult Index(string UserName)
         {
+            Session["UserName"] = UserName;
+         
             return View();
         }
         public ActionResult Login()
         {
+            
             return View();
         }
         public ActionResult Welcome()
         {
             return View();
         }
+   
     }
 }

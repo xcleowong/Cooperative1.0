@@ -16,6 +16,7 @@ namespace CooperativeLabor.Services
     ///</summary>
     public class UserManagementServices : IUserManagementServices
     {
+
         /// <summary>
         /// 添加人员管理信息
         /// </summary>
@@ -42,7 +43,9 @@ namespace CooperativeLabor.Services
                 {
                     //添加角色
                     string sql2 = "INSERT INTO usermanagement(UserName,UserPassword,InstitutionalFramework,RoleId,IsStart,CreationTime,ModificationTime)VALUES(@UserName,@UserPassword,@InstitutionalFramework,@RoleId,IsStart,@CreationTime,@ModificationTime)";
-                    var result = conn.Execute(sql2, parameters);
+                    var result = conn.Execute(sql2, parameters);
+
+
                     //如果上条语句执行成功则执行下面语句
                     if (result > 0)
                     {
@@ -163,7 +166,7 @@ namespace CooperativeLabor.Services
 
                 string sql = string.Format("UPDATE usermanagement set  UserName=@UserName,UserPassword=@UserPassword,InstitutionalFramework=@InstitutionalFramework,RoleId=@RoleId,IsStart=@IsStart,CreationTime=@CreationTime,ModificationTime=@ModificationTime where Id=@Id");
                 int i = conn.Execute(sql, parameters);
-                if (i>0)
+                if (i > 0)
                 {
 
                     string sql2 = "delete from rolesandusers where UserId=@Id";
@@ -196,5 +199,21 @@ namespace CooperativeLabor.Services
             }
         }
 
+
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <returns></returns>
+        public UserManagement Login(string UserName, string UserPassword)
+        {
+            using (MySqlConnection conn = DapperHelper.GetConnString())
+            {
+                conn.Open();
+                string sql = "select * from usermanagement where UserName=@UserName and UserPassword=@UserPassword";
+                var result = conn.Query<UserManagement>(sql, new { UserName = UserName, UserPassword = UserPassword }).FirstOrDefault();
+                return result;
+             
+            }
+        }
     }
 }
