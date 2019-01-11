@@ -8,6 +8,7 @@ namespace CooperativeLabor.Mvc.Controllers
 {
     public class PartnerMVCController : Controller
     {
+        #region 入离厂信息
         // GET: PartnerMVC
         /// <summary>
         /// 显示入离厂信息
@@ -34,7 +35,9 @@ namespace CooperativeLabor.Mvc.Controllers
         {
             return View();
         }
+        #endregion
 
+        #region 基本信息页面
         /// <summary>
         /// 基本信息页面
         /// </summary>
@@ -60,6 +63,8 @@ namespace CooperativeLabor.Mvc.Controllers
         {
             return View();
         }
+
+        #endregion
         public ActionResult aaa()
         {
             return View();
@@ -125,11 +130,62 @@ namespace CooperativeLabor.Mvc.Controllers
             return View();
         }
 
-    
+
         #endregion
 
+
+
+        #region 用户表信息
         /// <summary>
-        /// 管理员列表
+        /// 添加用户
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AddUserManagement()
+        {
+            
+            return View();
+        }
+
+        /// <summary>
+        /// 显示用户
+        /// </summary>
+        /// <returns></returns>
+        //public ActionResult GetUserManagement()
+        //{
+        //    return View();
+        //}
+
+        /// <summary>
+        /// 修改用户
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UpdateUserManagement(int Id)
+        {
+            ViewBag.Id = Id;
+            return View();
+        }
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /// <summary>
+        /// 用户列表
         /// </summary>
         /// <returns></returns>
         public ActionResult AdminList()

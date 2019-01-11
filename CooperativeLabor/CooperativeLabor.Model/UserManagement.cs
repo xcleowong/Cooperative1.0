@@ -32,7 +32,9 @@ namespace CooperativeLabor.Model
         /// <summary>
         /// 角色Id
         /// </summary>           
-        public int RoleId { get; set; }
+        public string RoleId { get; set; }
+
+        public string[] RoleIds { get; set; }
 
         /// <summary>
         /// 角色名称

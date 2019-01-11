@@ -62,7 +62,7 @@
                     <td colspan="2" align="center">
                         <input style="width:90px;" id="AddPermission" type="button" class="btn btn-info" value="添加权限" />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input style="width:90px;" id="GetPermission" type="button" class="btn btn-danger" value="显示" />
+                        <input style="width:90px;" id="GetPermissio" type="button" class="btn btn-danger" value="显示" />
                     </td>
                 </tr>
             </table>
@@ -73,7 +73,12 @@
 </html>
 <script type="text/javascript">
     $(function () {
-        alert(0)
+
+        //跳转到显示
+        $("#GetPermissio").click(function () {
+            location.href = "/PartnerMVC/AdminList";
+        })
+     
             //反填
             $.ajax({
                 url: "http://localhost:8099/Jurisdiction/GetPermissionById",

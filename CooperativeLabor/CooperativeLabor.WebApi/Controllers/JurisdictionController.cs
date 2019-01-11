@@ -20,7 +20,7 @@ namespace CooperativeLabor.WebApi.Controllers
         /// 权限表
         /// </summary>
         [Dependency]
-       public IPermissionServices permission  { get; set; }
+        public IPermissionServices permission { get; set; }
         #region 权限表信息
         /// <summary>
         /// 添加权限信息
@@ -97,12 +97,14 @@ namespace CooperativeLabor.WebApi.Controllers
             return result;
         }
         #endregion
+
+
         /// <summary>
         /// 角色表
         /// </summary>
         [Dependency]
         public IRolesServices role { get; set; }
-        #region
+        #region 角色表信息
         /// <summary>
         /// 添加角色
         /// </summary>
@@ -163,6 +165,68 @@ namespace CooperativeLabor.WebApi.Controllers
             return i;
         }
         #endregion
+
+        [Dependency]
+        public IUserManagementServices userManagement { get; set; }
+
+        #region 用户表信息
+        [Route("AddUser")]
+        [HttpPost]
+        public int AddUser(UserManagement userManagement)
+        {
+            //roles.Role_PeremissionIds = string.Join(",", roles.PeremissionIds);
+            userManagement.RoleId = string.Join(",", userManagement.RoleIds);
+            userManagement.CreationTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            int i = this.userManagement.Add(userManagement);
+            return i;
+        }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [Route("DeleteUser")]
+        [HttpGet]
+        public int DeleteUser(int Id)
+        {
+            int i = this.userManagement.Delete(Id);
+            return i;
+        }
+        /// <summary>
+        /// 显示
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetUsers")]
+        [HttpGet]
+        public IEnumerable<UserManagement> GetUsers()
+        {
+            var result = this.userManagement.GetUserManagements();
+            return result;
+        }
+        /// <summary>
+        /// 根据Id获取单个用户
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        [Route("GetUserById")]
+        [HttpGet]
+        public UserManagement GetUserById(int Id)
+        {
+            var result = this.userManagement.GetAloneUserManagementById(Id);
+            return result;
+        }
+        [Route("UpdateUser")]
+        [HttpPost]
+        public int UpdateUser(UserManagement userManagement)
+        {
+            userManagement.RoleId = string.Join(",", userManagement.RoleIds);
+            userManagement.CreationTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+            int i = this.userManagement.Update(userManagement);
+            return i;
+        }
+        #endregion
+
+    
 
     }
 }

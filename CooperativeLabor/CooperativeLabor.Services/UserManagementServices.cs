@@ -21,9 +21,58 @@ namespace CooperativeLabor.Services
         /// </summary>
         /// <param name="userManagement"></param>
         /// <returns></returns>
-        public int AddUserManagement(UserManagement userManagement)
+        public int Add(UserManagement userManagement)
         {
-            throw new NotImplementedException();
+            using (MySqlConnection conn = DapperHelper.GetConnString())
+            {
+                conn.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@UserName", userManagement.UserName, null, null, null);
+                parameters.Add("@UserPassword", userManagement.UserPassword, null, null, null);
+                parameters.Add("@InstitutionalFramework", userManagement.InstitutionalFramework, null, null, null);
+                parameters.Add("@RoleId", userManagement.RoleId, null, null, null);
+                parameters.Add("@IsStart", userManagement.IsStart, null, null, null);
+                parameters.Add("@CreationTime", userManagement.CreationTime, null, null, null);
+                parameters.Add("@ModificationTime", userManagement.ModificationTime, null, null, null);
+                string sql = "SELECT * FROM usermanagement where UserName=@UserName"; // 根据角色名称查询角色
+                var user = conn.Query<UserManagement>(sql, userManagement);
+                int i = -1;
+                //判断是否存在角色
+                if (user.Count() == 0)
+                {
+                    //添加角色
+                    string sql2 = "INSERT INTO usermanagement(UserName,UserPassword,InstitutionalFramework,RoleId,IsStart,CreationTime,ModificationTime)VALUES(@UserName,@UserPassword,@InstitutionalFramework,@RoleId,IsStart,@CreationTime,@ModificationTime)";
+                    var result = conn.Execute(sql2, parameters);
+                    //如果上条语句执行成功则执行下面语句
+                    if (result > 0)
+                    {
+
+
+                        //根据角色名称查询Id
+                        //string sql3 = "select Id from roles where RoleName=@RoleName";
+                        string sql3 = "select Id FROM usermanagement where UserName=@UserName";
+                        //返回一个对象(第一个元素)
+                        var id = conn.Query<int>(sql3, userManagement).FirstOrDefault();
+                        //分割权限id
+                        var permids = userManagement.RoleId.Split(',');
+                        //循环添加到角色权限关联表
+                        for (int j = 0; j < permids.Length; j++)
+                        {
+                            //实例化角色、用户关联表
+                            RolesAndUsers rolesAndUsers = new RolesAndUsers();
+                            rolesAndUsers.UserId = id;//为用户ID赋值
+                            rolesAndUsers.RoleId = Convert.ToInt32(permids[j]);//为角色ID赋值
+                            rolesAndUsers.CreateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            //角色、用户关联表添加语句
+                            string sql4 = "INSERT into rolesandusers(RoleId,UserId,CreateTime) VALUES(@RoleId,@UserId,@CreateTime);";
+                            i = conn.Execute(sql4, rolesAndUsers);
+                        }
+                    }
+
+                }
+
+                return i;
+            }
         }
 
         /// <summary>
@@ -31,9 +80,22 @@ namespace CooperativeLabor.Services
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public int DeleteUserManagement(int Id)
+        public int Delete(int Id)
         {
-            throw new NotImplementedException();
+            using (MySqlConnection conn = DapperHelper.GetConnString())
+            {
+                conn.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Id", Id, null, null, null);
+                string sql = "DELETE from usermanagement where Id =@Id";
+                int i = conn.Execute(sql, parameters);
+                if (i > 0)
+                {
+                    string sql2 = "delete from rolesandusers where UserId=@Id";
+                    var result2 = conn.Execute(sql2, parameters);
+                }
+                return i;
+            }
         }
 
         /// <summary>
@@ -41,7 +103,21 @@ namespace CooperativeLabor.Services
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public UserManagement GetAloneUserManagement(int Id)
+        public UserManagement GetAloneUserManagementById(int Id)
+        {
+            using (MySqlConnection conn = DapperHelper.GetConnString())
+            {
+                conn.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Id", Id, null, null, null);
+                string sql = "select * FROM usermanagement  WHERE Id=@Id";
+                UserManagement userManagement = conn.Query<UserManagement>(sql, parameters).FirstOrDefault();
+                return userManagement;
+
+            }
+        }
+
+        public UserManagement GetAloneUserManagementById(UserManagement userManagement)
         {
             throw new NotImplementedException();
         }
@@ -52,7 +128,15 @@ namespace CooperativeLabor.Services
         /// <returns></returns>
         public List<UserManagement> GetUserManagements()
         {
-            throw new NotImplementedException();
+            using (MySqlConnection conn = DapperHelper.GetConnString())
+            {
+                conn.Open();
+
+                string sql = "SELECT r.*,rr.RoleId,GROUP_CONCAT(a.RoleName separator ',') as RoleName from rolesandusers as rr JOIN usermanagement as r ON rr.UserId = r.Id JOIN roles AS a ON rr.RoleId = a.Id GROUP BY r.Id,r.UserName";
+
+                IEnumerable<UserManagement> userManagement = conn.Query<UserManagement>(sql, null);
+                return userManagement.ToList();
+            }
         }
 
         /// <summary>
@@ -60,9 +144,57 @@ namespace CooperativeLabor.Services
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public int UpdateUserManagement(int Id)
+        public int Update(UserManagement userManagement)
         {
-            throw new NotImplementedException();
+
+            using (MySqlConnection conn = DapperHelper.GetConnString())
+            {
+
+                conn.Open();
+                DynamicParameters parameters = new DynamicParameters();
+                parameters.Add("@Id", userManagement.Id, null, null, null);
+                parameters.Add("@UserName", userManagement.UserName, null, null, null);
+                parameters.Add("@UserPassword", userManagement.UserPassword, null, null, null);
+                parameters.Add("@InstitutionalFramework", userManagement.InstitutionalFramework, null, null, null);
+                parameters.Add("@RoleId", userManagement.RoleId, null, null, null);
+                parameters.Add("@IsStart", userManagement.IsStart, null, null, null);
+                parameters.Add("@CreationTime", userManagement.CreationTime, null, null, null);
+                parameters.Add("@ModificationTime", userManagement.ModificationTime, null, null, null);
+
+                string sql = string.Format("UPDATE usermanagement set  UserName=@UserName,UserPassword=@UserPassword,InstitutionalFramework=@InstitutionalFramework,RoleId=@RoleId,IsStart=@IsStart,CreationTime=@CreationTime,ModificationTime=@ModificationTime where Id=@Id");
+                int i = conn.Execute(sql, parameters);
+                if (i>0)
+                {
+
+                    string sql2 = "delete from rolesandusers where UserId=@Id";
+                    var result2 = conn.Execute(sql2, parameters);
+                    //如果上条语句执行成功则执行下面语句
+                    if (result2 > 0)
+                    {
+                        //根据角色名称查询Id
+                        //string sql3 = "select Id from roles where RoleName=@RoleName";
+                        string sql3 = "select Id FROM usermanagement where UserName=@UserName";
+                        //返回一个对象(第一个元素)
+                        var id = conn.Query<int>(sql3, userManagement).FirstOrDefault();
+                        //分割权限id
+                        var permids = userManagement.RoleId.Split(',');
+                        //循环添加到角色权限关联表
+                        for (int j = 0; j < permids.Length; j++)
+                        {
+                            //实例化角色、用户关联表
+                            RolesAndUsers rolesAndUsers = new RolesAndUsers();
+                            rolesAndUsers.UserId = id;//为用户ID赋值
+                            rolesAndUsers.RoleId = Convert.ToInt32(permids[j]);//为角色ID赋值
+                            rolesAndUsers.CreateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            //角色、用户关联表添加语句
+                            string sql4 = "INSERT into rolesandusers(RoleId,UserId,CreateTime) VALUES(@RoleId,@UserId,@CreateTime);";
+                            i = conn.Execute(sql4, rolesAndUsers);
+                        }
+                    }
+                }
+                return i;
+            }
         }
+
     }
 }

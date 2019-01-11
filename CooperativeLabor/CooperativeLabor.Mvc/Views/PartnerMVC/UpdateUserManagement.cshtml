@@ -1,0 +1,215 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddUserManagement</title>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <link href="~/BootstrapSouce/css/bootstrap.css" rel="stylesheet" />
+    <style>
+        li {
+            list-style: none;
+        }
+    </style>
+    <script>
+        var permissionId = 0;
+        var list = [];
+        //function PermisionShow(obj) {
+        //    //判断选中权限父节点追加权限子节点
+        //    if ($(obj).prop("checked")) {
+        //        $(list).each(function (index, data) {
+        //            var str = "<ul>";
+        //            if (data.Pid == $(obj).val()) {
+        //                str += "<li><input type='checkbox' class='cks'  name='PermissionNames' value=" + data.Id + ">" + data.PermissionName + "</li>";
+        //            }
+        //            str += "</ul>";
+        //            $(obj).parent().next().append(str)
+        //        })
+        //    }
+        //    else {
+        //        $(obj).parent().next().empty();
+        //    }
+        //}
+
+        $(function () {
+            //跳转到显示
+            $("#GetUsers").click(function () {
+                location.href = "/PartnerMVC/PermissionList";
+            })
+
+            //加载角色
+            $.ajax({
+                url: "http://localhost:8099/Jurisdiction/GetRoles",
+                type: "get",
+                //success: function (data) {
+                //    console.log(data);
+                //    list = data;
+                //    $(data).each(function (index, data) {
+                //        var str = "<ul>";
+                //        //if (data.Pid == 0) {
+                //        str += "<li><input type='checkbox' class='cks' onclick='PermisionShow(this)' name='RoleName' value=" + data.Id + ">" + data.RoleName + "</li><div></div>"
+                //        //}
+                //        str += "</ul>";
+                //        $("#div1").append(str);
+                //    })
+                //}
+
+
+
+                success: function (data) {
+                    //var str = '<dl>';
+                    var str = '<table><tr>';
+                    list = data;
+                    $(data).each(function (index, data) {
+
+                        str += "<label> <input type='checkbox'  name='RoleIds' value=" + data.Id + ">" + data.RoleName + "</label>&nbsp;&nbsp;&nbsp;&nbsp;<label></label>"
+
+                    })
+                    //str += '</dl>'
+                    str += '</tr></table>';
+                    $("#div1").append(str);
+                }
+            });
+
+
+
+              //反填
+            $.ajax({
+                url: "http://localhost:8099/Jurisdiction/GetUserById",
+                type: "get",
+                data: {
+                    @*Id:@Request.QueryString["Id"],*@
+                    Id:@ViewBag.Id,
+                },
+                success:function (data) {
+                    $("input[name=Id]").val(data.Id);
+                    $("input[name=UserName]").val(data.UserName);
+                    $("input[name=UserPassword]").val(data.UserPassword);
+                    $("input[name=InstitutionalFramework]").val(data.InstitutionalFramework);
+
+                    $(data.RoleId.split(",")).each(function (index, data) {
+                        console.log(data)
+                        $("input[name=RoleIds][value=" + data + "]").prop("checked", true);
+                    })
+
+                    $("input[name=CreationTime]").val(data.CreationTime);
+                    $("input[name=ModificationTime]").val(data.ModificationTime);
+
+
+                    $("input[name=IsStart][value ='" + data.IsStart + "'] ").attr("checked","checked");
+
+
+                }
+            })
+
+
+
+
+
+
+            //添加
+            $("#AddUser").click(function () {
+                //var PeremissionIds = [];
+                //$("input[name=PermissionNames]:checked").each(function () {
+                //    PeremissionIds.push($(this).val());
+                //})
+                var RoleIds = [];
+                $("input[name=RoleId]:checked").each(function () {
+                    RoleIds.push($(this).parent().text());
+                })
+
+                $.ajax({
+                    url: "http://localhost:8099/Jurisdiction/UpdateUser",
+                    type: "post",
+                    data: $("#addform").serialize(),
+                    //data: {
+                        //RoleName: $("input[name=RoleName]").val(),
+                        //Role_PeremissionIds: PeremissionIds.join(','),
+                        //CreateTime: $("input[name=CreateTime]").val(),
+
+                        //IsStart: $("input[name=CreateTime]").attr("checked","checked"),
+
+                    //},
+                    success: function (data) {
+                        console.log(data)
+                        if (data > 0) {
+                            alert("修改成功！");
+                            location.href = "/PartnerMVC/AdminList";
+                        }
+                    }
+                })
+            })
+        })
+        //function Getpermission() {
+        //    location.href = "/PartnerMVC/GetPermission";
+        //}
+    </script>
+</head>
+<body>
+    <form id="addform">
+        <div style="text-align: center;">
+            <span style="font-size:30px;text-align:center">添加用户</span>
+            <table align="center" class="table table-hover table-bordered" style="width:600px;text-align:center;line-height:60px">
+                <tr hidden="hidden">
+                    <td>ID：</td>
+                    <td><input id="Text1" type="text" name="Id" /></td>
+                </tr>
+                <tr>
+                    <td>登录名：</td>
+                    <td><input id="Text1" type="text" name="UserName" /></td>
+                </tr>
+
+                <tr>
+                    <td>密码：</td>
+                    <td>
+                        <input id="Text1" type="text" name="UserPassword" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>组织机构：</td>
+                    <td>
+                        <input id="Text1" type="text" name="InstitutionalFramework" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>角色：</td>
+                    <td>
+
+                        <div id="div1"></div>
+                    </td>
+                </tr>
+
+
+                <tr hidden="hidden">
+                    <td>创建时间</td>
+                    <td><input id="Text1" type="text" name="CreationTime" value="@DateTime.Now" /></td>
+                </tr>
+                <tr hidden="hidden">
+                    <td>修改时间</td>
+                    <td><input id="Text1" type="text" name="ModificationTime" value="@DateTime.Now" /></td>
+                </tr>
+                <tr>
+                    <td>是否启用</td>
+                    <td>
+                        <input id="Radio1" type="radio" name="IsStart" checked="checked" value="1" />是
+                        <input id="Radio1" type="radio" name="IsStart" value="0" />否
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <input style="width:90px;" id="AddUser" type="button" class="btn btn-info" value="添加角色" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <input id="GetUsers" style="width:90px;" type="button" class="btn btn-danger" onclick="Getpermission()" value="返回" />
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </form>
+
+</body>
+</html>

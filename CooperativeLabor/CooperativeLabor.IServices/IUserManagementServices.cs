@@ -17,21 +17,21 @@ namespace CooperativeLabor.IServices
         /// </summary>
         /// <param name="userManagement"></param>
         /// <returns></returns>
-        int AddUserManagement(UserManagement userManagement);
+        int Add(UserManagement userManagement);
 
         /// <summary>
         /// 修改人员管理信息
         /// </summary>
         /// <param name=""></param>
         /// <returns></returns>
-        int UpdateUserManagement(int Id);
+        int Update(UserManagement userManagement);
 
         /// <summary>
         /// 删除人员管理信息
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        int DeleteUserManagement(int Id);
+        int Delete(int Id);
 
         /// <summary>
         /// 获取人员管理信息
@@ -44,7 +44,7 @@ namespace CooperativeLabor.IServices
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        UserManagement GetAloneUserManagement(int Id);
+        UserManagement GetAloneUserManagementById(int Id);
 
     }
 }
