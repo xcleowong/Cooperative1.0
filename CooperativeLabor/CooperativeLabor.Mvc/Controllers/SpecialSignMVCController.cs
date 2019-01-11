@@ -16,7 +16,10 @@ namespace CooperativeLabor.Mvc.Controllers
         public ActionResult Add()
         {
             return View();
-
+        }
+        public ActionResult SpecialIndex()
+        {
+            return View();
         }
     }
 }
