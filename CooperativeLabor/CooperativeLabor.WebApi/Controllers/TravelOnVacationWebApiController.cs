@@ -63,19 +63,21 @@ namespace CooperativeLabor.WebApi.Controllers
                 if (list[i].State == 2) { strState = "草稿 "; reverseStrState = "删除 "; }
 
                 //实例化差旅休假Model
-                TravelOnVacation travelOnVacations = new TravelOnVacation();
-                travelOnVacations.Id = list[i].Id;//主键（自增）
-                travelOnVacations.StaffId = list[i].StaffId;//员工ID
-                travelOnVacations.Name = list[i].Name;//姓名
-                travelOnVacations.ApplicationType = list[i].ApplicationType;//申请类型
-                travelOnVacations.ApplicationReason = list[i].ApplicationReason;//申请事由
-                travelOnVacations.StartTime = list[i].StartTime;//开始时间
-                travelOnVacations.EndTime = list[i].EndTime;//结束时间
-                travelOnVacations.ComputingTime = list[i].ComputingTime;//计算时长
-                travelOnVacations.ApplicationDate = list[i].ApplicationDate;//申请日期
-                travelOnVacations.State = list[i].State;//状态
-                travelOnVacations.StrState = strState;//状态文字
-                travelOnVacations.ReverseStrState = reverseStrState;//状态文字(反)
+                TravelOnVacation travelOnVacations = new TravelOnVacation
+                {
+                    Id = list[i].Id,//主键（自增）
+                    StaffId = list[i].StaffId,//员工ID
+                    Name = list[i].Name,//姓名
+                    ApplicationType = list[i].ApplicationType,//申请类型
+                    ApplicationReason = list[i].ApplicationReason,//申请事由
+                    StartTime = list[i].StartTime,//开始时间
+                    EndTime = list[i].EndTime,//结束时间
+                    ComputingTime = list[i].ComputingTime,//计算时长
+                    ApplicationDate = list[i].ApplicationDate,//申请日期
+                    State = list[i].State,//状态
+                    StrState = strState,//状态文字
+                    ReverseStrState = reverseStrState//状态文字(反)
+                };
                 //Add Model In List
                 travelOnVacationsList.Add(travelOnVacations);
             }
