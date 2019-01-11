@@ -19,14 +19,14 @@
             姓名：<input type="text" name="Name" />
             用工单位：<input type="text" name="Employingnit" />
             合作方名称：<input type="text" name="PartnerName" />
-            <input type="button" value="搜索" />
-            <input type="button" value="添加" onclick="location.href='/PersonalInformation/Add'"/>
+            <input type="button" value="搜索" class="btn btn-info"/>
+            <input type="button" value="添加" class="btn btn-info" onclick="location.href='/PersonalInformation/Add'"/>
         </p>
     </div>
 
 
     <div id="app"> 
-        <table  v-show="GetPersonalInformation.length" class="table-condensed" border="1" style="width:100%">
+        <table  v-show="GetPersonalInformation.length" class="table table-bordered" >
             <tr>
                 <td>序号</td>
                 <td>姓名</td>
@@ -51,33 +51,33 @@
                 <td>操作</td>
             </tr>
             <tr v-for="(item,index) in GetPersonalInformation">
-                <td><input type="text" v-model="item.Id" /></td>
-                <td><input type="text" v-model="item.Name" /></td>
-                <td><input type="text" v-model="item.UserName" /></td>
-                <td><input type="text" v-model="item.Gender" /></td>
-                <td><input type="text" v-model="item.Birthday" /></td>
-                <td><input type="text" v-model="item.Nation" /></td>
-                <td><input type="text" v-model="item.Employingnit" /></td>
-                <td><input type="text" v-model="item.PartnerName" /></td>
-                <td><input type="text" v-model="item.ProfessionalSkill" /></td>
-                <td><input type="text" v-model="item.MaritalStatus" /></td>
-                <td><input type="text" v-model="item.IDNumber" /></td>
-                <td><input type="text" v-model="item.PartyGroupings" /></td>
-                <td><input type="text" v-model="item.Email" /></td>
-                <td><input type="text" v-model="item.Post" /></td>
-                <td><input type="text" v-model="item.Phone" /></td>
-                <td><input type="text" v-model="item.CardNo" /></td>
-                <td><input type="text" v-model="item.OpeningBank" /></td>
-                <td><input type="text" v-model="item.CreationTime" /></td>
-                <td><input type="text" v-model="item.ModificationTime" /></td>
-                <td><input type="text" v-model="item.IsDelete" /></td>
+                <td>{{item.Id}}</td>
+                <td>{{item.Name}}</td>
+                <td>{{item.UserName}}</td>
+                <td>{{item.Gender}}</td>
+                <td>{{item.Birthday}}</td>
+                <td>{{item.Nation}}</td>
+                <td><input type="text" v-model="item.Employingnit" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.PartnerName" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.ProfessionalSkill" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.MaritalStatus" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.IDNumber" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.PartyGroupings" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.Email" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.Post" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.Phone" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.CardNo" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.OpeningBank" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.CreationTime" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.ModificationTime" style="width:80px;" /></td>
+                <td><input type="text" v-model="item.IsDelete" style="width:80px;" /></td>
                 <td>
-                    <div v-if="GetPersonalInformation.Id!=''">
+                    <div v-if="GetPersonalInformation.Id!=''" style="width:80px;">
                         <a href="#" v-on:click="updateContact(GetPersonalInformation.Name, GetPersonalInformation.UserName, GetPersonalInformation.Gender, GetPersonalInformation.Birthday, GetPersonalInformation.Nation, GetPersonalInformation.Employingnit, GetPersonalInformation.PartnerName, GetPersonalInformation.ProfessionalSkill, GetPersonalInformation.MaritalStatus, GetPersonalInformation.IDNumber, GetPersonalInformation.PartyGroupings, GetPersonalInformation.Email, GetPersonalInformation.Post, GetPersonalInformation.Phone, GetPersonalInformation.CardNo, GetPersonalInformation.OpeningBank, GetPersonalInformation.CreationTime, GetPersonalInformation.ModificationTime, GetPersonalInformation.IsDelete,GetPersonalInformation.Id)">修改</a>
                         <a href="#" v-on:click="deleteById(GetPersonalInformation.Id)">删除</a>
 
                     </div>
-                    <div v-else>
+                    <div v-else style="width:80px;">
                         <a href="#" v-on:click="addContact(EntryAndExitRecord.PartnerName,EntryAndExitRecord.PartnerCategory,EntryAndExitRecord.BusinessLicense,EntryAndExitRecord.OperationType,EntryAndExitRecord.ApproachTime,EntryAndExitRecord.Departuretime,EntryAndExitRecord.Remark,EntryAndExitRecord.AttachmentName,EntryAndExitRecord.AttachmentPath,EntryAndExitRecord.CreationTime,EntryAndExitRecord.ModificationTime,EntryAndExitRecord.IsDelete)">添加</a>
                     </div>
                 </td>

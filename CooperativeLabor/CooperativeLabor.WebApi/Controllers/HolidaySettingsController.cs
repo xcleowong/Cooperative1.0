@@ -18,13 +18,14 @@ namespace CooperativeLabor.WebApi.Controllers
     [RoutePrefix("HolidaySettings")]
     public class HolidaySettingsController : ApiController
     {
+        private const int PAGESIZE = 3;
         //方法一
         //需要引用 using Unity.Attributes;
         /// <summary>
         /// 属性实例化
         /// </summary>
         [Dependency]
-        public IHolidaySettingsServices holidaySettings  { get; set; }
+        public IHolidaySettingsServices IholidaySettings  { get; set; }
 
         /// <summary>
         /// 添加假期信息
@@ -35,7 +36,7 @@ namespace CooperativeLabor.WebApi.Controllers
         [HttpPost]
         public int AddHolidaySettings(HolidaySettings holiday)
         {
-            int i = holidaySettings.AddHolidaySettings(holiday);
+            int i = IholidaySettings.AddHolidaySettings(holiday);
             return i;
 
         }
@@ -49,7 +50,7 @@ namespace CooperativeLabor.WebApi.Controllers
         [HttpGet]
         public int DeleteHolidaySettings(int id)
         {
-            int i = holidaySettings.DeleteHolidaySettings(id);
+            int i = IholidaySettings.DeleteHolidaySettings(id);
             return i;
         }
 
@@ -62,7 +63,7 @@ namespace CooperativeLabor.WebApi.Controllers
         [HttpGet]
         public HolidaySettings GetAloneHolidaySettings(int id)
         {
-            var aloneHoliday = holidaySettings.GetAloneHolidaySettings(id);
+            var aloneHoliday = IholidaySettings.GetAloneHolidaySettings(id);
             return aloneHoliday;
         }
 
@@ -72,10 +73,19 @@ namespace CooperativeLabor.WebApi.Controllers
         /// <returns></returns>
         [Route("GetHolidaySettings")]
         [HttpGet]
-        public List<HolidaySettings> GetHolidaySettings()
+        public PageNumber GetHolidaySettings(int ? pageIndex)
         {
-            var list = holidaySettings.GetHolidaySettings();
-            return list;
+            if (pageIndex == null)
+            {
+                pageIndex = 1;
+            }
+            List<HolidaySettings> listGH = IholidaySettings.GetHolidaySettings().ToList();
+            PageNumber pageNumber = new PageNumber();
+            pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
+            pageNumber.TotlePage = (listGH.Count / PAGESIZE) + (listGH.Count % PAGESIZE == 0 ? 0 : 1);
+            pageNumber.Data = listGH.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);
+            return pageNumber;
+          
         }
 
         /// <summary>
@@ -87,7 +97,7 @@ namespace CooperativeLabor.WebApi.Controllers
         [HttpPost]
         public int UpdateHolidaySettings(HolidaySettings holiday)
         {
-            int i = holidaySettings.UpdateHolidaySettings(holiday);
+            int i = IholidaySettings.UpdateHolidaySettings(holiday);
             return i;
 
         }

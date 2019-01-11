@@ -1,0 +1,78 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>People</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Content/VueScripts/vue.js"></script>
+    <script src="~/Content/VueScripts/axios.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p><input type="text" class="form-inline" id="name" style="margin-left:100px;" placeholder="请输入姓名"><input type="button" class="btn btn-info" style="width:80px;margin-left:30px;" value="搜索" /></p>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th><input type="radio" name="check" /></th>
+                    <th>编号</th>
+                    <th>姓名</th>
+                    <th>性别</th>
+                    <th>身份证号</th>
+                    <th>用工单位</th>
+                    <th>合作方名称</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in GetPersonals">
+                    <td><input type="radio" name="check" /></td>
+                    <td>{{item.Id}}</td>
+                    <td>{{item.Name}}</td>
+                    <td>{{item.Gender}}</td>
+                    <td>{{item.IDNumber}}</td>
+                    <td>{{item.Employingnit}}</td>
+                    <td>{{item.PartnerName}}</td>
+                </tr>
+
+            </tbody>
+
+        </table>
+        <input type="button" class="btn btn-primary" style="width:80px;" value="确定" />
+        <input type="button" class="btn btn-default" style="width:80px;" value="取消" />
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    var vm = new Vue({
+        el: "#app",
+        data: {
+            GetPersonals: []
+        },
+        mounted() {
+            this.GetPersonal();
+        },
+        methods: {
+            //显示
+            GetPersonal: function () {
+                axios.get("http://localhost:8099/EntryDimission/GetPersonals").then(
+                    (response) => {
+                        console.log(response);
+                        this.GetPersonals = response.data;
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
+
+
+        }
+    })
+</script>

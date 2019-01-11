@@ -1,0 +1,73 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetPermission</title>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <link href="~/BootstrapSouce/css/bootstrap.css" rel="stylesheet" />
+    <script>
+        $(function () {
+            $("#AddPermission").click(function () {
+                location.href = '/PartnerMVC/AddPermission';
+            })
+            $.ajax({
+                url: "http://localhost:8099/Jurisdiction/GetPermissions",
+                type: "get",
+                success: function (data) {
+                    $(data).each(function (index, data) {
+                        $("#tab").append("<tr> <td>" + data.Id + "</td> <td>" + data.PermissionName + "</td> <td>" + data.PermissionUrl + "</td> <td>" + data.CreateTime + "</td> <td>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/Updates?Id="+ data.Id+"'>修改</a></td> </tr>");
+                    })
+                }
+            })
+
+        })
+
+
+        //删除
+        function Delete(Id,obj) {
+            $.ajax({
+                url: "http://localhost:8099/Jurisdiction/DeletePermission?Id=" + Id,
+                type: "post",              
+                success: function (data) {
+                    if (data > 0) {
+                        alert("删除成功");
+                        $(obj).parent().parent().remove();
+                    }
+                }
+            })
+        }
+
+       
+    </script>
+</head>
+<body>
+
+    <div style="text-align: center;">
+        <span style="font-size:30px;text-align:center">权限信息</span><br />
+        
+            <table>
+                <tr>
+                    <td><input style="width:90px;margin-left:270px;" id="AddPermission" type="button" class="btn btn-info" value="添加权限"/></td>
+                </tr>
+            </table>
+
+            <table align="center" class="table table-hover table-bordered" style="width:1000px;text-align:center;" id="tab">
+                <tr>
+                    <td>编号</td>
+                    <td>权限名称</td>
+                    <td>权限URL</td>
+                    <td>创建时间</td>
+                    <td>是否启用</td>
+                    <td>操作</td>
+                </tr>
+            </table>
+        </div>
+  
+</body>
+</html>

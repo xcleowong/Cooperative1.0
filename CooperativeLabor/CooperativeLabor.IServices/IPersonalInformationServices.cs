@@ -40,5 +40,6 @@ namespace CooperativeLabor.IServices
         /// <param name="id"></param>
         /// <returns></returns>
         int UpdatePersonalInformation(PersonalInformation personal);
+        
     }
 }

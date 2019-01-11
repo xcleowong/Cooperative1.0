@@ -12,19 +12,22 @@ namespace CooperativeLabor.WebApi.Controllers
     using CooperativeLabor.IServices;
     using CooperativeLabor.Cache;
     using Unity.Attributes;
+    using Dapper;
+
     /// <summary>
     /// 补助标准配置
     /// </summary>
     [RoutePrefix("Allowances")]
     public class AllowancesController : ApiController
     {
+        private const int PAGESIZE = 3;
         //方法一
         //需要引用 using Unity.Attributes;
         /// <summary>
         /// 属性实例化
         /// </summary>
         [Dependency]
-        public IAllowancesServices allowancesServices { get; set; }
+        public IAllowancesServices IallowancesServices { get; set; }
         /// <summary>
         /// 添加补助标准
         /// </summary>
@@ -34,7 +37,7 @@ namespace CooperativeLabor.WebApi.Controllers
         [HttpPost]
         public int AddAllowances(Allowances addAllowances)
         {
-            int i = allowancesServices.AddAllowances(addAllowances);
+            int i = IallowancesServices.AddAllowances(addAllowances);
             return i;
         }
 
@@ -47,7 +50,7 @@ namespace CooperativeLabor.WebApi.Controllers
         [HttpGet]
         public int DeleteAllowances(int id)
         {
-            int i = allowancesServices.DeleteAllowances(id);
+            int i = IallowancesServices.DeleteAllowances(id);
             return i;
 
         }
@@ -58,10 +61,18 @@ namespace CooperativeLabor.WebApi.Controllers
         /// <returns></returns>
         [Route("GetAllowances")]
         [HttpGet]
-        public IEnumerable<Allowances> GetAllowances()
+        public PageNumber GetAllowances(int? pageIndex)
         {
-            var list = allowancesServices.GetAllowances();
-            return list;
+            if (pageIndex == null)
+            {
+                pageIndex = 1;
+            }
+            List<Allowances> listGA = IallowancesServices.GetAllowances().ToList();
+            PageNumber pageNumber = new PageNumber();
+            pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
+            pageNumber.TotlePage = (listGA.Count / PAGESIZE) + (listGA.Count % PAGESIZE == 0 ? 0 : 1);
+            pageNumber.Data = listGA.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);
+            return pageNumber;
         }
 
         /// <summary>
@@ -73,7 +84,7 @@ namespace CooperativeLabor.WebApi.Controllers
         [HttpGet]
         public Allowances GetAloneAllowances(int Id)
         {
-            var aloneAllowances = allowancesServices.GetAloneAllowances(Id);
+            var aloneAllowances = IallowancesServices.GetAloneAllowances(Id);
             return aloneAllowances;
         }
 
@@ -86,7 +97,7 @@ namespace CooperativeLabor.WebApi.Controllers
         [HttpPost]
         public int UpdateAllowances(Allowances uptAllowances)
         {
-            int i = allowancesServices.UpdateAllowances(uptAllowances);
+            int i = IallowancesServices.UpdateAllowances(uptAllowances);
             return i;
 
         }

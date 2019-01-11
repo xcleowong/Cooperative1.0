@@ -1,0 +1,225 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AddDepartmentMaintenanceView</title>
+    @*<script src="~/Scripts/vue.js"></script>
+        <script src="~/Scripts/axios.js"></script>*@
+
+    @*<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>*@
+    <script src="~/Content/jquery-3.1.1.js"></script>
+    <link href="~/Content/zTree-zTree_v3-master/zTree_v3/css/demo.css" rel="stylesheet" />
+    <link href="~/Content/zTree-zTree_v3-master/zTree_v3/css/zTreeStyle/zTreeStyle.css" rel="stylesheet" />
+    <script src="~/Content/zTree-zTree_v3-master/zTree_v3/js/jquery.ztree.core.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+
+</head>
+<body>
+    <div style="float:left">
+        <ul id="treeDemo" class="ztree"></ul>
+    </div>
+
+
+    <div id="add" style="float:left">
+        <form id="FormData">
+            <input type="hidden" name="Id" />
+            <table class="table table-bordered">
+                <tr>
+                    <td>用工单位组织机构：</td>
+                    <td>
+                        <select id="Select1" name="Pid">
+                            <option value="0">--请选择--</option>
+                     
+
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>单位科室：</td>
+                    <td>
+                        <input id="Text1" type="text" name="UnitDepartment" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>是否启用：</td>
+                    <td>
+                        <input id="Radio1" type="radio" name="IsStart" value="1" checked="checked" />是
+                        &nbsp;&nbsp;&nbsp;
+                        <input id="Radio1" type="radio" name="IsStart" value="0" />否
+                    </td>
+                </tr>
+                <tr>
+                    <td>创建时间：</td>
+                    <td>
+                        <input id="Text1" type="date" name="CreationTime" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="AddBtn" type="button" value="添加" onclick="add()" />&nbsp;&nbsp;&nbsp;
+                        <input id="UpdateBtn" type="button" value="修改" onclick="update()" />&nbsp;&nbsp;&nbsp;
+                        <input id="DeleteBtn" type="button" value="删除" onclick="del()" />&nbsp;
+                    </td>
+
+                </tr>
+            </table>
+
+        </form>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    //父级Id
+    var PId = 0;
+    //setting配置
+    var setting = {
+        view: {
+            dblClickExpand: false,
+            showLine: false,
+            selectedMulti: false
+        },
+        data: {
+            simpleData: {
+                enable: true,
+                idKey: "id",
+                pIdKey: "pId",
+                rootPId: ""
+            }
+        },
+        callback: {
+            onClick: onclick
+        }
+    };
+    //点击事件
+    function onclick(event, treeId, treeNode) {
+        var treeObj = $.fn.zTree.getZTreeObj("treeDemo");
+        var nodes = treeObj.getSelectedNodes();
+        PId = nodes[0]["id"];
+        upd(PId);
+    }
+    //节点数组
+    var zNodes = [];
+    /*文档就绪，显示类型树*/
+    $(function () {
+        show();
+        $.ajax({
+            url: "http://localhost:8099/DepartmentMaintenance/GetDepartmentMaintenance?Pid=0",//数据请求地址
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                console.log(d);
+                for (var i = 0; i < d.length; i++) {
+                    var op = '<option value="' + d[i].Id + '">' + d[i].UnitDepartment + '</option>'
+                    $("[name=Pid]").append(op);
+                }
+            }
+        })
+    });
+    //显示
+    function show() {
+        $.ajax({
+            url: "http://localhost:8099/DepartmentMaintenance/GetDepartmentMaintenance?Pid=1",//数据请求地址
+            type: "get",
+            success: function (a) {
+                var data = a;//JSON.parse(a);
+                zNodes = [];
+                for (var i = 0; i < data.length; i++) {
+                    zNodes.push({ id: data[i]["Id"], pId: data[i]["Pid"], name: data[i]["UnitDepartment"] });
+                }
+                var t = $("#treeDemo");
+                t = $.fn.zTree.init(t, setting, zNodes);
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        })
+    }
+    //新增
+    function add() {
+        $.ajax({
+            url: "http://localhost:8099/DepartmentMaintenance/AddDepartmentMaintenance",
+            type: "post",
+            data: $("#FormData").serialize(),
+            success: function (d) {
+                console.log(d);
+                if (d > 0) {
+                    alert("提交成功");
+                    show();
+                    $("[name=UnitDepartment]").val("");
+                    $("[name=Pid]").val(0);
+                }
+            }
+        })
+    }
+    //返填
+    function upd(id) {
+        $.ajax({
+            url: "http://localhost:8099/DepartmentMaintenance/GetAloneDepartmentMaintenance?Id=" + id,//数据请求地址
+            type: "get",
+            dataType: "json",
+            success: function (d) {
+                console.log(d);
+                $("[name=UnitDepartment]").val(d.UnitDepartment);
+                $("[name=Pid]").val(d.Pid);
+                $("[name=Id]").val(d.Id);
+                $("[name=IsStart][value='" + d.IsStart + "']").attr("checked","checked");
+                $("[name=CreationTime]").val(d.CreationTime);
+            }
+        })
+    }
+    //修改
+    function update() {
+        $.ajax({
+            url: "http://localhost:8099/DepartmentMaintenance/UpdateDepartmentMaintenance",
+            type: "post",
+            data: $("#FormData").serialize(),
+            success: function (d) {
+                console.log(d);
+                if (d > 0) {
+                    alert("提交成功");
+                    show();
+                    $("[name=UnitDepartment]").val("");
+                    $("[name=Pid]").val(0);
+                    $("[name=Id]").val("");
+                    $("[name=CreationTime]").val("");
+                 
+                }
+            }
+        })
+    }
+    //删除
+    function del() {
+        if ($("[name=Id]").val() == "") {
+            alert("请选择要操作的数据");
+            return;
+        }
+        if (confirm("确认删除吗?")) {
+            $.ajax({
+                url: "http://localhost:8099/DepartmentMaintenance/DeleteDepartmentMaintenance?Id=" + $("[name=Id]").val(),
+                type: "get",
+                success: function (d) {
+                    console.log(d);
+                    if (d > 0) {
+                        alert("删除成功");
+                        show();
+                        $("[name=UnitDepartment]").val("");
+                        $("[name=Pid]").val(0);
+                        $("[name=Id]").val("");
+                        $("[name=CreationTime]").val("");
+                    }
+                }
+            })
+        }
+    }
+</script>
+
+
+
+

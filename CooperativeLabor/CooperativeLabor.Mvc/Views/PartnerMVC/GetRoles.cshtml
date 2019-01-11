@@ -1,0 +1,74 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetRoles</title>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <link href="~/BootstrapSouce/css/bootstrap.css" rel="stylesheet" />
+    <script type="text/javascript">
+       
+        $(function () {
+            $("#AddRoles").click(function () {
+                location.href = '/PartnerMVC/AddRoles';
+            })
+
+            $.ajax({
+                url: "http://localhost:8099/Jurisdiction/GetRoles",
+                type: "get",
+                success: function (data) {
+                    $(data).each(function (index, data) {
+                        $("#tab").append("<tr> <td>" + data.Id + "</td> <td>" + data.RoleName + "</td> <td>" + data.Role_PeremissionIds + "</td> <td>" + data.PermissionName + "</td><td>" + data.CreateTime + "</td> <td>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr>");
+                    })
+                }
+            })
+        })
+
+        //删除
+        function Delete(Id, obj) {
+            $.ajax({
+                url: "http://localhost:8099/Jurisdiction/DeleteRoles?Id=" + Id,
+                type: "get",
+                success: function (data) {
+                    if (data > 0) {
+                        alert("删除成功");
+                        $(obj).parent().parent().remove();
+                    }
+                }
+            })
+        }
+
+
+    </script>
+</head>
+<body>
+
+    <div style="text-align: center;">
+        <span style="font-size:30px;text-align:center">角色信息</span><br />
+
+        <table>
+            <tr>
+                <td><input style="width:90px;margin-left:270px;" id="AddRoles" type="button" class="btn btn-info" value="添加角色" /></td>
+            </tr>
+        </table>
+
+        <table align="center" class="table table-hover table-bordered" style="width:1000px;text-align:center;" id="tab">
+            <tr>
+                <td>编号</td>
+                <td>角色名称</td>
+                <td>权限ID</td>
+                <td>权限名称</td>
+                <td>创建时间</td>
+                <td>是否启用</td>
+                <td>操作</td>
+            </tr>
+        </table>
+    </div>
+
+</body>
+</html>

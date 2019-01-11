@@ -1,0 +1,204 @@
+﻿@*@{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+        <!--废弃的Vue.js 差旅休假 页面-->
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>差旅休假</title>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/vue/1.0.7/vue.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-resource/0.1.17/vue-resource.js"></script>
+        <script src="~/Scripts/vue.js"></script>
+        <script src="~/Scripts/vue.min.js"></script>
+        <script src="~/Scripts/vue-resource.js"></script>
+        <script src="~/Scripts/axios.js"></script>
+        <script src="~/Scripts/axios.min.js"></script>
+        <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div>
+            <div id="app">
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="button" class="btn" value="+差旅休假" v-on:click="signIn()" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <table class="table-condensed" border="1" style="width:100%">
+                    <tr>
+                        <td>序号</td>
+                        <td>申请类型</td>
+                        <td>申请事由</td>
+                        <td>开始时间</td>
+                        <td>结束时间</td>
+                        <td>计算时长</td>
+                        <td>申请日期</td>
+                        <td>状态</td>
+                        <td>操作</td>
+                    </tr>
+                    <tr v-for="(item,index) in GetTravelOnVacations">
+                        <td>{{index+1}}</td>
+                        <td>{{item.ApplicationType}}</td>
+                        <td>{{item.ApplicationReason}}</td>
+                        <td>{{item.StartTime}}</td>
+                        <td>{{item.EndTime}}</td>
+                        <td>{{item.ComputingTime}}</td>
+                        <td>{{item.ApplicationDate}}</td>
+                        <td>{{item.StrState}}</td>
+                        <td>
+                            <a href="javascript:void(0)" v-on:click="deleteOrRecall({{item.Id}},{{item.State}})">{{item.ReverseStrState}}</a>
+                        </td>
+                    </tr>
+                </table>
+                <table class="table-condensed" style="width:50%">
+                    <tr>
+                        <td>姓名：</td>
+                        <td>
+                            <input class="Text1" type="text" v-model="Name" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>申请类型：</td>
+                        <td>
+                            <input class="Text1" type="text" v-model="ApplicationType" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>申请事由：</td>
+                        <td>
+                            <input class="Text1" type="text" v-model="ApplicationReason" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>开始时间：</td>
+                        <td>
+                            <input class="Text1" type="text" v-model="StartTime" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>结束时间：</td>
+                        <td>
+                            <input class="Text1" type="text" v-model="EndTime" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>计算时长：</td>
+                        <td>
+                            <input class="Text1" type="text" v-model="ComputingTime" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>申请日期：</td>
+                        <td>
+                            <input class="Text1 input-sm" type="text" v-model="ApplicationDate" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input id="AddBtn" type="button" value="添加" v-on:click="addTravelOnVacation(Name,ApplicationType,ApplicationReason,StartTime,EndTime,ComputingTime,ApplicationDate)" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>
+    </html>
+
+    <script type="text/javascript">
+        var StaffId = 1;
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                GetTravelOnVacations: [],
+
+                ApplicationType: "",
+                ApplicationReason: "",
+                StartTime: "",
+                EndTime: "",
+                ComputingTime: "",
+                ApplicationDate: "",
+                State: 1
+
+            },
+            // 挂载完成时
+            mounted() {
+                this.getTravelOnVacation(StaffId);
+            },
+            methods: {
+                //显示
+                getTravelOnVacation: function (StaffId) {
+                    axios.get("http://localhost:8099/travelOnVacation/getTravelOnVacation?StaffId=" + StaffId).then(
+                        (response) => {
+                            console.log(response);
+                            this.GetTravelOnVacations = response.data;
+                        },
+                        (response) => {
+                            alert(response.status);
+                        }
+                    ).catch(function (response) {
+                        alert(response);
+                    });
+                },
+                //添加差旅休假
+                addTravelOnVacation: function (Name, ApplicationType, ApplicationReason, StartTime, EndTime, ComputingTime, ApplicationDate) {
+                    var staffId = 1;
+                    var params = new URLSearchParams();
+                    params.append('StaffId', staffId);
+                    params.append('Name', Name);
+                    params.append('ApplicationType', ApplicationType);
+                    params.append('ApplicationReason', ApplicationReason);
+                    params.append('StartTime', StartTime);
+                    params.append('EndTime', EndTime);
+                    params.append('ComputingTime', ComputingTime);
+                    params.append('ApplicationDate', ApplicationDate);
+                    params.append('State', 1);
+
+                    axios.post('http://localhost:8099/travelOnVacation/addTravelOnVacation', params).then(
+                        (response) => {
+                            console.log(response.data);
+                            if (response.data > 0) {
+                                alert("添加成功!");
+                                this.getTravelOnVacations(staffId);
+                            }
+                            //console.info(this.list);
+                        },
+                        (response) => {
+                            alert(response.status);
+                        }
+                    ).catch(function (response) {
+                        alert(response);
+                    });
+                },
+                //删除/撤回
+                deleteOrRecall: function (id, state) {
+
+                    var params = new URLSearchParams();
+                    params.append('Id', id);
+                    params.append('State', state);
+
+                    axios.post('http://localhost:8099/travelOnVacation/updateTravelOnVacation',params ).then(
+                        (response) => {
+                            console.log(response.data);
+                            if (response.data > 0) {
+                                if (state = 1) {
+                                    alert("撤回成功!");
+                                }
+                                if (state = 2) {
+                                    alert("删除成功!");
+                                }
+                                this.getCheckingIn(staffId);
+                            }
+                            //console.info(this.list);
+                        },
+                        (response) => {
+                            alert(response.status);
+                        }
+                    ).catch(function (response) {
+                        alert(response);
+                    });
+                }
+            }
+        })
+
+    </script>*@

@@ -9,13 +9,16 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Add</title>
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/bootstrap-3.3.7-dist/bootstrap337/css/bootstrap.css" rel="stylesheet" />
+
     <script src="~/Content/VueScripts/vue.js"></script>
     <script src="~/Content/VueScripts/axios.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 </head>
 <body>
     <div id="add"> 
-        <table>
+        <table class="table table-hover">
             <tr>
                 <td>姓名：</td>
                 <td><input type="text" v-model="Name" /></td>
@@ -46,9 +49,9 @@
             <tr>
                 <td>合作方名称：</td>
                 <td>
-                    <select id="Select2" v-model="ObjType_ID">
+                    <select id="Select2" v-model="PartnerName">
                         <option value="请选择">--请选择--</option>
-                        <option v-for="item in QCPlanObjType" v-bind:value="ObType.ObjType_ID">{{ObType.ObjType_Name}}</option>
+                        <option v-for="item in EntryByIdName" v-bind:value="item.PartnerName">{{item.PartnerName}}</option>
 
                     </select>
                 </td>
@@ -130,50 +133,53 @@
     var vm = new Vue({
         el: "#add",
         data: {
-            //QCPlanType: [],
-            //QCPlanObjType: [],
-            //Process: [],
-            //Facility: [],
-            //TargetType: [],
-            //Target: [],
-            //Type_ID: "请选择",
-            //ObjType_ID: "请选择",
-            //Process_ID: "请选择",
-            //Facility_ID: "请选择",
-            //TargetType_ID: "请选择",
-            //Target_ID: "请选择",
-
+            EntryByIdName: [],
+            PartnerName: "请选择",
+            //Name:"",
+            //UserName: "",
+            //Gender: "",
+            //Birthday: "",
+            //Nation: "",
+            //Employingnit: "",
+            //PartnerName: "",
+            //ProfessionalSkill: "",
+            //MaritalStatus: "",
+            //IDNumber: "",
+            //PartyGroupings: "",
+            //Email: "",
+            //Post: "",
+            //Phone: "",
+            //CardNo: "",
+            //OpeningBank: "",
+            //CreationTime: "",
+            //ModificationTime: "",
+            //IsDelete=1
         },
-        mounted() {
 
-            //this.getQCPlanType();
-            //this.getQCPlanObjType();
-            //this.getProcesses();
-            //this.getTargetType();
-            //this.getFacility();
-            //this.getTarget();
+        mounted() {
+            this.getEntryByIdName();
         },
         methods:
         {
-            //获取对象类型表
-            //getQCPlanObjType: function () {
-            //    axios.get('http://localhost:8089/GetQCPlanObjTypes').then(
-            //        (response) => {
-            //            this.QCPlanObjType = [];
-            //            for (var i = 0; i < response.data.length; i++) {
-            //                this.QCPlanObjType.push(response.data[i]);
-            //            }
-            //        },
-            //        (response) => {
-            //            alert(response.status);
-            //        }
-            //    ).catch(function (response) {
-            //        alert(response);
-            //    });
-
-            //},
+            //获取合作方名称
+            getEntryByIdName: function () {
+                axios.get('http://localhost:8099/Partner/GetEntryByIdName').then(
+                    (response) => {
+                        this.EntryByIdName = [];
+                        for (var i = 0; i < response.data.length; i++) {
+                            this.EntryByIdName.push(response.data[i]);
+                        }
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
             //保存
             AddQCPlan1: function (Name, UserName, Gender, Birthday, Nation, Employingnit, PartnerName, ProfessionalSkill, MaritalStatus, IDNumber, PartyGroupings, Email, Post, Phone, CardNo, OpeningBank, CreationTime, ModificationTime, IsDelete) {
+
                 var params = new URLSearchParams();
                 params.append('Name', Name);
                 params.append('UserName', UserName);

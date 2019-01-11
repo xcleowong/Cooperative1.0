@@ -41,6 +41,10 @@ namespace CooperativeLabor.IServices
         /// <returns></returns>
         int UpdateEntryDimissionRecord(EntryDimissionRecord entry);
 
-
+        /// <summary>
+        /// 获取人员基本信息
+        /// </summary>
+        /// <returns></returns>
+        List<PersonalInformation> GetPersonals();
     }
 }
