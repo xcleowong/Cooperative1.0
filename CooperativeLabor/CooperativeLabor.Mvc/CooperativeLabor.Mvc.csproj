@@ -1565,6 +1565,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CooperativeLabor.Common\CooperativeLabor.Common.csproj">
+      <Project>{d31a57e0-280e-46a2-b54f-c37979b69e9a}</Project>
+      <Name>CooperativeLabor.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CooperativeLabor.Model\CooperativeLabor.Model.csproj">
       <Project>{5532cc8e-108e-4f34-a814-4181e32945c8}</Project>
       <Name>CooperativeLabor.Model</Name>

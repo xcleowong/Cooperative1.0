@@ -1,5 +1,7 @@
 ﻿
 @{
+    /**/
+
     Layout = null;
 }
 
@@ -76,7 +78,7 @@
 </head>
 <body>
     <div id="app">
-        <table v-show="EssentialInformationList.length" class="table-condensed" border="1" style="width:100px">
+        <table align="center" v-show="EssentialInformationList.length" class="table-condensed" border="1" style="width:1500px">
 
             <tr>
                 <td>编号</td>
@@ -95,6 +97,23 @@
                 <td>是否删除</td>
                 <td>操作</td>
             </tr>
+
+            <tr v-for="(EssentialInformation,index) in EssentialInformationList">
+                <td>{{EssentialInformation.Id}}</td>
+                <td>{{EssentialInformation.PartnerName}}</td>
+                <td>{{EssentialInformation.PartnerCategory}}</td>
+                <td>{{EssentialInformation.BusinessLicenseName}}</td>
+                <td>{{EssentialInformation.BusinessLicenseURL}}</td>
+                <td>{{EssentialInformation.IsStart}}</td>
+                <td>{{EssentialInformation.Remark}}</td>
+                <td>{{EssentialInformation.Post}}</td>
+                <td>{{EssentialInformation.TechnicalGrade}}</td>
+                <td>{{EssentialInformation.MonthlyPay}}</td>
+                <td>{{EssentialInformation.BankCard}}</td>
+                <td>{{EssentialInformation.CreationTime}}</td>
+                <td>{{EssentialInformation.ModificationTime}}</td>
+                <td>{{EssentialInformation.IsDelete}}</td>
+
             <tr v-for="EssentialInformation in EssentialInformationList">
                 <td><input type="text" v-model="EssentialInformation.Id" /></td>
                 <td><input type="text" v-model="EssentialInformation.PartnerName" /></td>
@@ -110,6 +129,7 @@
                 <td><input type="text" v-model="EssentialInformation.CreationTime" /></td>
                 <td><input type="text" v-model="EssentialInformation.ModificationTime" /></td>
                 <td><input type="text" v-model="EssentialInformation.IsDelete" /></td>
+
                 <td>
                     <div v-if="EssentialInformation.Id!=''">
                         <a href="#" v-on:click="updateContact(EssentialInformation.Id,
