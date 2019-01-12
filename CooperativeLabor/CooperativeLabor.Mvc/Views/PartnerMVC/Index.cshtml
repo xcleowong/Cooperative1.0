@@ -75,7 +75,7 @@
 </head>
 <body>
     <div id="app">
-        <table v-show="EntryAndExitRecordList.length" class="table-condensed" border="1" style="width:100px">
+        <table v-show="EntryAndExitRecordList.length" class="table-condensed" border="1" >
 
             <tr>
                 <td>ddd</td>
@@ -94,19 +94,19 @@
                 <td>操作</td>
             </tr>
             <tr v-for="EntryAndExitRecord in EntryAndExitRecordList">
-                <td><input type="text" v-model="EntryAndExitRecord.Id" /></td>
-                <td><input type="text" v-model="EntryAndExitRecord.PartnerName" /></td>
-                <td><input type="text" v-model="EntryAndExitRecord.PartnerCategory" /></td>
-                <td><input type="text" v-model="EntryAndExitRecord.BusinessLicense" /></td>
-                <td><input type="text" v-model="EntryAndExitRecord.OperationType" /></td>
-                <td><input type="text" v-model="EntryAndExitRecord.ApproachTime" /></td>
-                <td><input type="text" v-model="EntryAndExitRecord.Departuretime" /></td>
-                <td><input type="text" v-model="EntryAndExitRecord.Remark" /></td>
-                <td><input type="text" v-model="EntryAndExitRecord.AttachmentName" /></td>
-                <td><input type="text" v-model="EntryAndExitRecord.AttachmentPath" /></td>
-                <td><input type="text" v-model="EntryAndExitRecord.CreationTime" /></td>
-                <td><input type="text" v-model="EntryAndExitRecord.ModificationTime" /></td>
-                <td><input type="text" v-model="EntryAndExitRecord.IsDelete" /></td>
+                <td>{{EntryAndExitRecord.Id}}</td>
+                <td>{{EntryAndExitRecord.PartnerName}}</td>
+                <td>{{EntryAndExitRecord.PartnerCategory}}</td>
+                <td>{{EntryAndExitRecord.BusinessLicense}}</td>
+                <td>{{EntryAndExitRecord.OperationType}}</td>
+                <td>{{EntryAndExitRecord.ApproachTime.substring(0,10)}}</td>
+                <td>{{EntryAndExitRecord.Departuretime.substring(0,10)}}</td>
+                <td>{{EntryAndExitRecord.Remark}}</td>
+                <td>{{EntryAndExitRecord.AttachmentName}}</td>
+                <td>{{EntryAndExitRecord.AttachmentPath}}</td>
+                <td>{{EntryAndExitRecord.CreationTime.substring(0,10)}}</td>
+                <td>{{EntryAndExitRecord.ModificationTime.substring(0,10)}}</td>
+                <td>{{EntryAndExitRecord.IsDelete}}</td>
                 <td>
                     <div v-if="EntryAndExitRecord.Id!=''">
                         <a href="#" v-on:click="updateContact(EntryAndExitRecord.Id,EntryAndExitRecord.PartnerName,EntryAndExitRecord.PartnerCategory,EntryAndExitRecord.BusinessLicense,EntryAndExitRecord.OperationType,EntryAndExitRecord.ApproachTime,EntryAndExitRecord.Departuretime,EntryAndExitRecord.Remark,EntryAndExitRecord.AttachmentName,EntryAndExitRecord.AttachmentPath,EntryAndExitRecord.CreationTime,EntryAndExitRecord.ModificationTime,EntryAndExitRecord.IsDelete)">修改</a>
