@@ -60,7 +60,7 @@
                 </form>-->
             </div>
             <xblock>
-                <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+                <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量操作</button>
                 <button class="layui-btn" onclick="add()"><i class="layui-icon"></i>添加</button>
                 <span class="x-right" style="line-height:40px">共有数据：88 条</span>
             </xblock>
@@ -86,24 +86,26 @@
                             <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
                         </td>
                         <td>{{index + 1}}</td>
+                        <td hidden="hidden">
+                            <span id="staffId">{{item.StaffId}}</span>
+                            <span id="name">{{item.Name}}</span>
+                            <span id="employingUnit">{{item.EmployingUnit}}</span>
+                            <span id="partnerName">{{item.PartnerName}}</span>
+                            <span id="post">{{item.Post}}</span>
+                        </td>
                         <td>{{item.Year}}</td>
                         <td>{{item.Quarter}}</td>
-                        <td>{{item.Post}}</td>
+                        <td id="post">{{item.Post}}</td>
                         <td>{{item.Completeness}}</td>
                         <td>{{item.CreationTime}}</td>
                         <td>{{item.StrStatus}}<span id="reverse" hidden="hidden">{{item.ReverseStrStatus}}</span></td>
                         <td class="td-manage" id="tdreverse">
-                            <a href="javascript:;" v-on:click="recallOrDelete(item.Id ,item.Status)">{{item.ReverseStrStatus}}</a>
+                            <button class="layui-btn layui-btn-sm" v-on:click="recallOrDelete(item.Id ,item.Status)">{{item.ReverseStrStatus}}</button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <table>
-                <tr>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </table>
+            
             <div class="page">
                 <div>
                     <a class="prev" href="">&lt;&lt;</a>
@@ -119,14 +121,14 @@
     </div>
 
     <script>
+
+        //时间控件
         layui.use('laydate', function () {
             var laydate = layui.laydate;
-
             //执行一个laydate实例
             laydate.render({
                 elem: '#start' //指定元素
             });
-
             //执行一个laydate实例
             laydate.render({
                 elem: '#end' //指定元素
@@ -139,11 +141,63 @@
             layer.open({
                 type: 1,
                 skin: 'layui-layer-rim', //加上边框
-                area: ['600px', '800px'], //宽高
-                content: 'html内容'
+                title: "添加信息",
+                area: ['450px', '600px'], //宽高
+                content: '<div id="addInfo"><form action="/" method="post" id="form1" ><input type="text" class="layui-input" name="StaffId" readonly="readonly" hidden="hidden" /><table class="layui-table" ><tr><td>姓名：</td><td><input type="text" class="layui-input" name="Name" readonly="readonly" /></td></tr><tr><td>用工单位：</td><td><input type="text" class="layui-input" name="EmployingUnit" readonly="readonly" /></td></tr><tr><td>合作方名称：</td><td><input type="text" class="layui-input" name="PartnerName" readonly="readonly" /></td></tr><tr><td>岗位：</td><td><input type="text" class="layui-input" name="Post" readonly="readonly" /></td></tr><tr><td>年度：</td><td><input type="text" id="year" class="layui-input" name="Year" readonly="readonly" /></td></tr><tr><td>季度：</td><td><select style="height:40px;" class="select1" name="Quarter" lay-verify=""><option value="第一季度">第一季度</option><option value="第二季度">第二季度</option><option value="第三季度">第三季度</option><option value="第四季度">第四季度</option></select></td></tr><tr><td>工作完成情况：</td><td><textarea class="layui-textarea" name="Completeness" id="completeness"></textarea></td></tr><tr><td></td><td><input id="addBtn" class="layui-btn layui-btn-small" type="button" value="提交" onclick="addPersonnelExp()" /></td></tr></table></form></div>'
             });
+
+            $("[name=StaffId]").val($("#staffId").html());//姓名
+            $("[name=Name]").val($("#name").html());//姓名
+            $("[name=EmployingUnit]").val($("#employingUnit").html());//用工单位
+            $("[name=PartnerName]").val($("#partnerName").html());//合作方名称
+            $("[name=Post]").val($("#post").html());//岗位
+
+            //时间控件
+            layui.use('laydate', function () {
+                var laydate = layui.laydate;
+                //执行一个laydate实例
+                laydate.render({
+                    elem: '#year' //指定元素
+                    , type: 'year'
+                    , min: 0
+                    , max: 0
+                });
+            });
+
         }
-        
+
+        //添加人员费
+        function addPersonnelExp() {
+
+            //年度非空
+            if ($("#year").val() == "") {
+                //tips层
+                layer.tips('请选择年度', '#year');
+                return;
+            }
+            //工作完成情况非空
+            if ($("#completeness").val() == "") {
+                //tips层
+                layer.tips('请选择工作完成情况', '#completeness');
+                return;
+            }
+
+            //添加
+            $.ajax({
+                url: 'http://localhost:8099/PersonnelExpenditure/AddPersonnelExpenditure',
+                type: 'post',
+                data: $("#form1").serialize(),
+                success: function (data) {
+                    if (data > 0) {
+                        layer.msg("提交成功！", { icon: 6 });
+                        this.getPersonnelExpenditure();
+                    }
+                    else {
+                        layer.msg("提交失败！", { icon: 5 });
+                    }
+                }
+            })
+        }
 
     </script>
     <script>
@@ -183,6 +237,7 @@
                     alert(response);
                 });
             },
+            
             //撤回/删除
             recallOrDelete: function (id, status) {
                 //定义提示变量

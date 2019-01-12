@@ -9,14 +9,10 @@ namespace CooperativeLabor.Mvc.Controllers
     public class TravelOnVacationController : Controller
     {
         // GET: TravelOnVacation
-        public ActionResult TravelOnVacationIndex()
+        public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult TravelIndex()
-        {
-            return View();
-        }
+        
     }
 }

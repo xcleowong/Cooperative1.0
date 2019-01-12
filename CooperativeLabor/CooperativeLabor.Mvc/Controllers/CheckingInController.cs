@@ -15,20 +15,10 @@ namespace CooperativeLabor.Mvc.Controllers
         /// 显示/删除/修改/
         /// </summary>
         /// <returns></returns>
-        public ActionResult CheckingInIndex()
+        public ActionResult Index()
         {
             return View();
         }
-        /// <summary>
-        /// 页面
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult CheckingIndex()
-        {
-            return View();
-        }
-
-
-
+        
     }
 }
