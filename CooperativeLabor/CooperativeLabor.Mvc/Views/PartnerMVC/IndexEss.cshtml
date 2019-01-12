@@ -1,5 +1,7 @@
 ﻿
 @{
+    /**/
+
     Layout = null;
 }
 
@@ -16,7 +18,7 @@
 </head>
 <body>
     <div id="app">
-        <table v-show="EssentialInformationList.length" class="table-condensed" border="1" style="width:100px">
+        <table align="center" v-show="EssentialInformationList.length" class="table-condensed" border="1" style="width:1500px">
 
             <tr>
                 <td>编号</td>
@@ -36,20 +38,20 @@
                 <td>操作</td>
             </tr>
             <tr v-for="(EssentialInformation,index) in EssentialInformationList">
-                <td><input type="text" v-model="EssentialInformation.Id" /></td>
-                <td><input type="text" v-model="EssentialInformation.PartnerName" /></td>
-                <td><input type="text" v-model="EssentialInformation.PartnerCategory" /></td>
-                <td><input type="text" v-model="EssentialInformation.BusinessLicenseName" /></td>
-                <td><input type="text" v-model="EssentialInformation.BusinessLicenseURL" /></td>
-                <td><input type="text" v-model="EssentialInformation.IsStart" /></td>
-                <td><input type="text" v-model="EssentialInformation.Remark" /></td>
-                <td><input type="text" v-model="EssentialInformation.Post" /></td>
-                <td><input type="text" v-model="EssentialInformation.TechnicalGrade" /></td>
-                <td><input type="text" v-model="EssentialInformation.MonthlyPay" /></td>
-                <td><input type="text" v-model="EssentialInformation.BankCard" /></td>
-                <td><input type="text" v-model="EssentialInformation.CreationTime" /></td>
-                <td><input type="text" v-model="EssentialInformation.ModificationTime" /></td>
-                <td><input type="text" v-model="EssentialInformation.IsDelete" /></td>
+                <td>{{EssentialInformation.Id}}</td>
+                <td>{{EssentialInformation.PartnerName}}</td>
+                <td>{{EssentialInformation.PartnerCategory}}</td>
+                <td>{{EssentialInformation.BusinessLicenseName}}</td>
+                <td>{{EssentialInformation.BusinessLicenseURL}}</td>
+                <td>{{EssentialInformation.IsStart}}</td>
+                <td>{{EssentialInformation.Remark}}</td>
+                <td>{{EssentialInformation.Post}}</td>
+                <td>{{EssentialInformation.TechnicalGrade}}</td>
+                <td>{{EssentialInformation.MonthlyPay}}</td>
+                <td>{{EssentialInformation.BankCard}}</td>
+                <td>{{EssentialInformation.CreationTime}}</td>
+                <td>{{EssentialInformation.ModificationTime}}</td>
+                <td>{{EssentialInformation.IsDelete}}</td>
                 <td>
                     <div v-if="EssentialInformation.Id!=''">
                         <a href="#" v-on:click="updateContact(EssentialInformation.Id,
@@ -152,7 +154,7 @@ EssentialInformation.IsDelete,
             //    },
 
 
-            ////修改质检计划信息
+            ////修改
             updateContact: function (
                 Id,
                 PartnerName,
@@ -167,8 +169,7 @@ EssentialInformation.IsDelete,
                 BankCard,
                 CreationTime,
                 ModificationTime,
-                IsDelete)
-             {
+                IsDelete) {
                 var params = new URLSearchParams();
                 params.append('Id', Id);
                 params.append('PartnerName', PartnerName);
@@ -177,7 +178,7 @@ EssentialInformation.IsDelete,
                 params.append('BusinessLicenseURL', BusinessLicenseURL);
                 params.append('IsStart', IsStart);
                 params.append('Remark', Remark);
-                params.append('Post', Post);               
+                params.append('Post', Post);
                 params.append('TechnicalGrade', TechnicalGrade);
                 params.append('MonthlyPay', MonthlyPay);
                 params.append('BankCard', BankCard);

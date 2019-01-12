@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-
+using CooperativeLabor.Comm;
 namespace CooperativeLabor.WebApi.Controllers
 {
     using CooperativeLabor.Model;
@@ -21,8 +21,10 @@ namespace CooperativeLabor.WebApi.Controllers
         [HttpGet]
         public UserManagement Login(string UserName, string UserPassword)
         {
-         var result = this.userManagement.Login(UserName, UserPassword);
-            
+            var result = this.userManagement.Login(UserName, UserPassword);
+
+            CookieHelper.SetCookie("cookie_rememberme", UserName, 1);
+
             return result;
         }
     }
