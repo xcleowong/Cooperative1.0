@@ -167,23 +167,6 @@ namespace CooperativeLabor.Mvc.Controllers
         #endregion
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         /// <summary>
         /// 用户列表
         /// </summary>

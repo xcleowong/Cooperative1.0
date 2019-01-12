@@ -77,13 +77,12 @@ namespace CooperativeLabor.Services
                 return i;
             }
         }
-
-        /// <summary>
-        /// 删除人员管理信息
-        /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        public int Delete(int Id)
+    /// <summary>
+    /// 删除人员管理信息
+    /// </summary>
+    /// <param name="Id"></param>
+    /// <returns></returns>
+    public int Delete(int Id)
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {

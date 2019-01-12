@@ -10,10 +10,9 @@ namespace CooperativeLabor.Mvc.Controllers
     public class LoginController : Controller
     {
         // GET: Login
-        public ActionResult Index()
+        public ActionResult Index(int id)
         {
-         
-         
+            System.Web.HttpContext.Current.Session["userID"] = id;
             return View();
         }
         public ActionResult Login()

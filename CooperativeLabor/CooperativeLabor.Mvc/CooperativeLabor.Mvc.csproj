@@ -940,6 +940,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Md5\md5.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\vue-resource.js" />
     <Content Include="Scripts\Plugins\BootstrapDialog\css\bootstrap-dialog.css" />
@@ -1379,16 +1380,13 @@
     <Content Include="Scripts\Plugins\TypeAhead\typeahead.bundle.js" />
     <Content Include="Scripts\vue-resource.js" />
     <Content Include="Views\DepartmentMaintenanceView\AddDepartmentMaintenanceView.cshtml" />
-
     <Content Include="Views\CheckingIn\CheckingIndex.cshtml" />
     <Content Include="Views\PartnerMVC\GetUserManagement.cshtml" />
     <Content Include="Views\PartnerMVC\AddUserManagement.cshtml" />
     <Content Include="Views\EntryDimissionMVC\EntryIndex.cshtml" />
     <Content Include="Views\AllowancesView\Index.cshtml" />
     <Content Include="Views\HolidaySettingsView\Index.cshtml" />
-
     <Content Include="Views\CheckingIn\Index.cshtml" />
-
     <None Include="Views\PartnerMVC\IndexEss1.cshtml" />
     <None Include="Views\PartnerMVC\IndexEnt.cshtml" />
     <None Include="Views\PartnerMVC\AdminList.cshtml" />
@@ -1541,13 +1539,10 @@
     <Content Include="Views\PersonalInformation\PersonalAdd.cshtml" />
     <Content Include="Views\PersonnelExpenditure\Index.cshtml" />
     <Content Include="Views\SpecialSignMVC\Add.cshtml" />
-
     <Content Include="Views\TravelOnVacation\TravelIndex.cshtml" />
     <Content Include="Views\PartnerMVC\UpdateUserManagement.cshtml" />
     <Content Include="Views\SpecialSignMVC\SpecialIndex.cshtml" />
-
     <Content Include="Views\TravelOnVacation\Index.cshtml" />
-
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

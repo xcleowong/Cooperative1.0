@@ -15,70 +15,10 @@
     <script src="~/Content/VueScripts/vue.js"></script>
     <script src="~/Content/VueScripts/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
-    <style>
-        .page-bar {
-            margin: 40px;
-        }
-
-        ul, li {
-            margin: 0px;
-            padding: 0px;
-        }
-
-        li {
-            list-style: none
-        }
-
-        .page-bar li:first-child > a {
-            margin-left: 0px
-        }
-
-        .page-bar a {
-            border: 1px solid #ddd;
-            text-decoration: none;
-            position: relative;
-            float: left;
-            padding: 6px 12px;
-            margin-left: -1px;
-            line-height: 1.42857143;
-            color: #337ab7;
-            cursor: pointer
-        }
-
-            .page-bar a:hover {
-                background-color: #eee;
-            }
-
-            .page-bar a.banclick {
-                cursor: not-allowed;
-            }
-
-        .page-bar .active a {
-            color: #fff;
-            cursor: default;
-            background-color: #337ab7;
-            border-color: #337ab7;
-        }
-
-        .page-bar i {
-            font-style: normal;
-            color: #d44950;
-            margin: 0px 4px;
-            font-size: 12px;
-        }
-
-
-        .div-td table td {
-            width: 30px;
-            line-height: 15px
-        }
-    </style>
-
-
 </head>
 <body>
     <div id="app">
-        <table align="center" v-show="EssentialInformationList.length" class="table-condensed" border="1" style="width:1500px">
+        <table align="center" v-show="EssentialInformationList.length" class="table-condensed" border="1" style="width:1000px">
 
             <tr>
                 <td>编号</td>
@@ -132,20 +72,21 @@
 
                 <td>
                     <div v-if="EssentialInformation.Id!=''">
-                        <a href="#" v-on:click="updateContact(EssentialInformation.Id,
-EssentialInformation.PartnerName,
-EssentialInformation.PartnerCategory,
-EssentialInformation.BusinessLicenseName,
-EssentialInformation.BusinessLicenseURL,
-EssentialInformation.IsStart,
-EssentialInformation.Remark,
-EssentialInformation.Post,
-EssentialInformation.TechnicalGrade,
-EssentialInformation.MonthlyPay,
-EssentialInformation.BankCard,
-EssentialInformation.CreationTime,
-EssentialInformation.ModificationTime,
-EssentialInformation.IsDelete,
+                        <a href="#" v-on:click="updateContact(
+                                    EssentialInformation.Id,
+                                    EssentialInformation.PartnerName,
+                                    EssentialInformation.PartnerCategory,
+                                    EssentialInformation.BusinessLicenseName,
+                                    EssentialInformation.BusinessLicenseURL,
+                                    EssentialInformation.IsStart,
+                                    EssentialInformation.Remark,
+                                    EssentialInformation.Post,
+                                    EssentialInformation.TechnicalGrade,
+                                    EssentialInformation.MonthlyPay,
+                                    EssentialInformation.BankCard,
+                                    EssentialInformation.CreationTime,
+                                    EssentialInformation.ModificationTime,
+                                    EssentialInformation.IsDelete,
 )">修改</a>
                         <a href="#" v-on:click="deleteContactById(EssentialInformation.Id)">删除</a>
 
@@ -156,8 +97,20 @@ EssentialInformation.IsDelete,
                     </div>
                 </td>
             </tr>
-
         </table>
+
+        <div class="page-bar">
+            <ul>
+                <li v-if="cur>1"><a v-on:click="cur--,pageClick()">上一页</a></li>
+                <li v-if="cur==1"><a class="banclick">上一页</a></li>
+                <li v-for="index in indexs" v-bind:class="{ 'active': cur == index}">
+                    <a v-on:click="btnClick(index)">{{ index }}</a>
+                </li>
+                <li v-if="cur!=all"><a v-on:click="cur++,pageClick()">下一页</a></li>
+                <li v-if="cur == all"><a class="banclick">下一页</a></li>
+                <li><a>共<i>{{all}}</i>页</a></li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>
@@ -178,10 +131,7 @@ EssentialInformation.IsDelete,
                     (response) => {
                         console.log(response);
                         this.EssentialInformationList = response.data;
-                        //for (var i = 0; i < response.data.length; i++) {
-                        //    this.EssentialInformationList.push(response.data[i]);
-                        //}
-                        // this.EssentialInformationList.push({ Id: "", PartnerName: "222", PartnerCategory: "", BusinessLicense: "", OperationType: "", ApproachTime: "", Departuretime: "", Remark: "", AttachmentName: "", AttachmentPath: "", CreationTime: "", ModificationTime: "", IsDelete: ""});
+
                     },
                     (response) => {
                         alert(response.status);
@@ -194,13 +144,10 @@ EssentialInformation.IsDelete,
             //删除
             deleteContactById: function (Id) {
                 axios.get('http://localhost:8099/Partner/DeleteEss?Id=' + Id).then(
-                    //axios.post('http://localhost:8099/Partner/DeleteEss', { Id: Id }).then(
+
                     (response) => {
                         this.EssentialInformationList = response.data;
-                        //for (var i = 0; i < response.data.length; i++) {
-                        //    this.contactsList.push(response.data[i]);
-                        //}
-                        //this.contactsList.push({ Id: "", Name: "", PhoneNo: "", EmailAddress: "" });
+
                     },
                     (response) => {
                         alert(response.status);
@@ -209,27 +156,7 @@ EssentialInformation.IsDelete,
                     alert(response);
                 });
             },
-            //修改
-            //updateContact: function (Id, PartnerName, PartnerCategory, BusinessLicense, OperationType, ApproachTime, Departuretime, Remark, AttachmentName, AttachmentPath, CreationTime, ModificationTime, IsDelete) {
-            //    axios.post('http://localhost:8099/Partner/UpdateEss?Id=' + Id, { contact: { Id: Id, PartnerName: PartnerName, PartnerCategory: PartnerCategory, BusinessLicense: BusinessLicense, OperationType: OperationType, ApproachTime: ApproachTime, Departuretime: Departuretime, Remark: Remark, AttachmentName: AttachmentName, AttachmentPath: AttachmentPath, CreationTime: CreationTime, ModificationTime: ModificationTime, IsDelete: IsDelete} }).then(
-            //        (response) => {
-            //            if (response.data>0) {
-            //                alert("修改成功!!!");
-            ////this.EssentialInformationList
-            //            }
-            //              //  this.EssentialInformationList = response.data;
-            //                //for (var i = 0; i < response.data.length; i++) {
-            //                //    this.contactsList.push(response.data[i]);
-            //                //}
-            //                //this.contactsList.push({ Id: "", Name: "", PhoneNo: "", EmailAddress: "" });
-            //            },
-            //            (response) => {
-            //                alert(response.status);
-            //            }
-            //        ).catch(function (response) {
-            //            alert(response);
-            //        });
-            //    },
+
 
 
             ////修改
@@ -279,6 +206,35 @@ EssentialInformation.IsDelete,
                     alert(response);
                 });
             },
+        }
+
+            //计算属性
+        computed: {
+            indexs: function () {
+                var left = 1;
+                var right = this.all;
+                var ar = [];
+                if (this.all >= 5) {
+                    if (this.cur > 3 && this.cur < this.all - 2) {
+                        left = this.cur - 2
+                        right = this.cur + 2
+                    } else {
+                        if (this.cur <= 3) {
+                            left = 1
+                            right = 5
+                        } else {
+                            right = this.all
+                            left = this.all - 4
+                        }
+                    }
+                }
+                while (left <= right) {
+                    ar.push(left)
+                    left++
+                }
+                return ar
+            }
+
         }
 
     })
