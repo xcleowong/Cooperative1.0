@@ -26,7 +26,7 @@ namespace CooperativeLabor.Model
 
         /// <summary>
         /// 用工单位
-        /// </summary>           
+        /// </summary>
         public string EmployingUnit { get; set; }
 
         /// <summary>
@@ -79,8 +79,7 @@ namespace CooperativeLabor.Model
         /// 提交状态(文字)
         /// </summary>           
         public string StrStatus { get; set; }
-
-        /// <summary>
+        
         /// 提交状态(文字 反)
         /// </summary>           
         public string ReverseStrStatus { get; set; }

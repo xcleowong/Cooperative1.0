@@ -26,7 +26,7 @@ namespace CooperativeLabor.IServices
         /// <param name="personnelExpenditure"></param>
         /// <returns></returns>
         int AddPersonnelExpenditure(PersonnelExpenditure personnelExpenditure);
-
+        
         /// <summary>
         /// 获取审批流程信息
         /// </summary>

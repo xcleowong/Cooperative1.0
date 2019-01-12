@@ -14,7 +14,7 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <script src="~/Content/VueScripts/vue.js"></script>
     <script src="~/Content/VueScripts/axios.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 </head>
 <body>
     <div id="app">
@@ -37,6 +37,7 @@
                 <td>是否删除</td>
                 <td>操作</td>
             </tr>
+
             <tr v-for="(EssentialInformation,index) in EssentialInformationList">
                 <td>{{EssentialInformation.Id}}</td>
                 <td>{{EssentialInformation.PartnerName}}</td>
@@ -52,6 +53,23 @@
                 <td>{{EssentialInformation.CreationTime}}</td>
                 <td>{{EssentialInformation.ModificationTime}}</td>
                 <td>{{EssentialInformation.IsDelete}}</td>
+
+            <tr v-for="EssentialInformation in EssentialInformationList">
+                <td><input type="text" v-model="EssentialInformation.Id" /></td>
+                <td><input type="text" v-model="EssentialInformation.PartnerName" /></td>
+                <td><input type="text" v-model="EssentialInformation.PartnerCategory" /></td>
+                <td><input type="text" v-model="EssentialInformation.BusinessLicenseName" /></td>
+                <td><input type="text" v-model="EssentialInformation.BusinessLicenseURL" /></td>
+                <td><input type="text" v-model="EssentialInformation.IsStart" /></td>
+                <td><input type="text" v-model="EssentialInformation.Remark" /></td>
+                <td><input type="text" v-model="EssentialInformation.Post" /></td>
+                <td><input type="text" v-model="EssentialInformation.TechnicalGrade" /></td>
+                <td><input type="text" v-model="EssentialInformation.MonthlyPay" /></td>
+                <td><input type="text" v-model="EssentialInformation.BankCard" /></td>
+                <td><input type="text" v-model="EssentialInformation.CreationTime" /></td>
+                <td><input type="text" v-model="EssentialInformation.ModificationTime" /></td>
+                <td><input type="text" v-model="EssentialInformation.IsDelete" /></td>
+
                 <td>
                     <div v-if="EssentialInformation.Id!=''">
                         <a href="#" v-on:click="updateContact(EssentialInformation.Id,
@@ -90,7 +108,7 @@ EssentialInformation.IsDelete,
             EssentialInformationList: []
         },
         mounted() {
-            this.getAllEntryAndExitRecords(2);
+            this.getAllEntryAndExitRecords();
         },
         methods: {
             //显示
