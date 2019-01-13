@@ -77,12 +77,12 @@ namespace CooperativeLabor.Services
                 return i;
             }
         }
-    /// <summary>
-    /// 删除人员管理信息
-    /// </summary>
-    /// <param name="Id"></param>
-    /// <returns></returns>
-    public int Delete(int Id)
+        /// <summary>
+        /// 删除人员管理信息
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public int Delete(int Id)
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
@@ -210,9 +210,23 @@ namespace CooperativeLabor.Services
                 conn.Open();
                 string sql = "select * from usermanagement where UserName=@UserName and UserPassword=@UserPassword";
                 var result = conn.Query<UserManagement>(sql, new { UserName = UserName, UserPassword = UserPassword }).FirstOrDefault();
-                return result;
-             
+                if (result != null)
+                {
+                    string sql1 = "select * from permission where Id in(select  PermissionId  from permissionsandroles where RoleId in(select RoleId from rolesandusers where UserId=(select id from usermanagement where UserName=@UserName and UserPassword=@UserPassword)))";
+                    var result2 = conn.Query<Permission>(sql1, new { UserName = UserName, UserPassword = UserPassword });
+                    result.ListPermission = result2.ToList();
+                    return result;
+
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
+
+
+
+
     }
 }

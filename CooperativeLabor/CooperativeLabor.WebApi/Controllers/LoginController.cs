@@ -16,12 +16,12 @@ namespace CooperativeLabor.WebApi.Controllers
     {
 
         [Dependency]
-        public IUserManagementServices userManagement { get; set; }
+        public IUserManagementServices IUserManagement { get; set; }
         [Route("Login")]
         [HttpGet]
         public UserManagement Login(string UserName, string UserPassword)
         {
-            var result = this.userManagement.Login(UserName, UserPassword);
+            var result = this.IUserManagement.Login(UserName, UserPassword);
 
             CookieHelper.SetCookie("cookie_rememberme", UserName, 1);
 

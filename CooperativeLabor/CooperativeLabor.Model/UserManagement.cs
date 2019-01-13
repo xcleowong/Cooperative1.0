@@ -4,6 +4,7 @@ using System.Text;
 
 namespace CooperativeLabor.Model
 {
+    using System.Collections.Generic;
     ///<summary>
     ///用户管理维护表
     ///</summary>
@@ -55,6 +56,11 @@ namespace CooperativeLabor.Model
         /// 修改时间
         /// </summary>           
         public DateTime ModificationTime { get; set; }
+
+        /// <summary>
+        /// 权限集合
+        /// </summary>
+        public List<Permission> ListPermission { get; set; }
 
     }
 }
