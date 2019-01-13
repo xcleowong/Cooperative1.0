@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-
+using System.Collections.Generic;
 namespace CooperativeLabor.Model
 {
     ///<summary>
@@ -55,6 +55,11 @@ namespace CooperativeLabor.Model
         /// 修改时间
         /// </summary>           
         public DateTime ModificationTime { get; set; }
+
+        /// <summary>
+        /// 权限集合
+        /// </summary>
+        public List<Permission> permissionsList { get; set; }
 
     }
 }

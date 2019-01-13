@@ -16,7 +16,7 @@ namespace CooperativeLabor.WebApi.Controllers
     {
 
         [Dependency]
-        public IUserManagementServices userManagement { get; set; }
+        public IUserManagementServices userManagement { get; set; } 
         [Route("Login")]
         [HttpGet]
         public UserManagement Login(string UserName, string UserPassword)
