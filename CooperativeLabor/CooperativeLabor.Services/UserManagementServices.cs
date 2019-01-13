@@ -148,10 +148,8 @@ namespace CooperativeLabor.Services
         /// <returns></returns>
         public int Update(UserManagement userManagement)
         {
-
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
-
                 conn.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Id", userManagement.Id, null, null, null);
@@ -167,7 +165,6 @@ namespace CooperativeLabor.Services
                 int i = conn.Execute(sql, parameters);
                 if (i > 0)
                 {
-
                     string sql2 = "delete from rolesandusers where UserId=@Id";
                     var result2 = conn.Execute(sql2, parameters);
                     //如果上条语句执行成功则执行下面语句
@@ -197,7 +194,6 @@ namespace CooperativeLabor.Services
                 return i;
             }
         }
-
 
         /// <summary>
         /// 登录

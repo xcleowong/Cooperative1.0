@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
-
+using System.Collections.Generic;
 namespace CooperativeLabor.Model
 {
     using System.Collections.Generic;
@@ -60,7 +60,10 @@ namespace CooperativeLabor.Model
         /// <summary>
         /// 权限集合
         /// </summary>
+      
+
         public List<Permission> ListPermission { get; set; }
+
 
     }
 }

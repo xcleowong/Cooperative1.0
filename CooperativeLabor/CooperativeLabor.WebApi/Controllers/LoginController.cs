@@ -15,13 +15,22 @@ namespace CooperativeLabor.WebApi.Controllers
     public class LoginController : ApiController
     {
 
+        //[Dependency]
+
+        //public IUserManagementServices userManagement { get; set; }
         [Dependency]
-        public IUserManagementServices IUserManagement { get; set; }
+        public IUserManagementServices iUserManagement { get; set; }
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="UserName"></param>
+        /// <param name="UserPassword"></param>
+        /// <returns></returns>
         [Route("Login")]
         [HttpGet]
         public UserManagement Login(string UserName, string UserPassword)
         {
-            var result = this.IUserManagement.Login(UserName, UserPassword);
+            var result = this.iUserManagement.Login(UserName, UserPassword);
 
             CookieHelper.SetCookie("cookie_rememberme", UserName, 1);
 

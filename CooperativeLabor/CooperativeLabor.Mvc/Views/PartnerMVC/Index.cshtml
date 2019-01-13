@@ -178,10 +178,7 @@
                         for (var i = 0; i < response.data.Data.length; i++) {
                             this.EntryAndExitRecordList.push(response.data.Data[i]);
                         }
-                        //for (var i = 0; i < response.data.length; i++) {
-                        //    this.EntryAndExitRecordList.push(response.data[i]);
-                        //}
-                        // this.EntryAndExitRecordList.push({ Id: "", PartnerName: "222", PartnerCategory: "", BusinessLicense: "", OperationType: "", ApproachTime: "", Departuretime: "", Remark: "", AttachmentName: "", AttachmentPath: "", CreationTime: "", ModificationTime: "", IsDelete: ""});
+                       
                     },
                     (response) => {
                         alert(response.status);
@@ -194,13 +191,10 @@
             //删除
             deleteContactById: function (Id) {
                 axios.post('http://localhost:8099/Partner/DeleteEnt?Id=' + Id).then(
-                    //axios.post('http://localhost:8099/Partner/DeleteEnt', { Id: Id }).then(
+                 
                     (response) => {
                         this.EntryAndExitRecordList = response.data;
-                        //for (var i = 0; i < response.data.length; i++) {
-                        //    this.contactsList.push(response.data[i]);
-                        //}
-                        //this.contactsList.push({ Id: "", Name: "", PhoneNo: "", EmailAddress: "" });
+                       
                     },
                     (response) => {
                         alert(response.status);
@@ -209,28 +203,8 @@
                     alert(response);
                 });
             },
-            //修改
-            //updateContact: function (Id, PartnerName, PartnerCategory, BusinessLicense, OperationType, ApproachTime, Departuretime, Remark, AttachmentName, AttachmentPath, CreationTime, ModificationTime, IsDelete) {
-            //    axios.post('http://localhost:8099/Partner/UpdateEnt?Id=' + Id, { contact: { Id: Id, PartnerName: PartnerName, PartnerCategory: PartnerCategory, BusinessLicense: BusinessLicense, OperationType: OperationType, ApproachTime: ApproachTime, Departuretime: Departuretime, Remark: Remark, AttachmentName: AttachmentName, AttachmentPath: AttachmentPath, CreationTime: CreationTime, ModificationTime: ModificationTime, IsDelete: IsDelete} }).then(
-            //        (response) => {
-            //            if (response.data>0) {
-            //                alert("修改成功!!!");
-            ////this.EntryAndExitRecordList
-            //            }
-            //              //  this.EntryAndExitRecordList = response.data;
-            //                //for (var i = 0; i < response.data.length; i++) {
-            //                //    this.contactsList.push(response.data[i]);
-            //                //}
-            //                //this.contactsList.push({ Id: "", Name: "", PhoneNo: "", EmailAddress: "" });
-            //            },
-            //            (response) => {
-            //                alert(response.status);
-            //            }
-            //        ).catch(function (response) {
-            //            alert(response);
-            //        });
-            //    },
-            ////修改质检计划信息
+           
+            ////修改
             updateContact: function (Id, PartnerName, PartnerCategory, BusinessLicense, OperationType, ApproachTime, Departuretime, Remark, AttachmentName, AttachmentPath, CreationTime, ModificationTime, IsDelete) {
                 var params = new URLSearchParams();
                 params.append('Id', Id);
