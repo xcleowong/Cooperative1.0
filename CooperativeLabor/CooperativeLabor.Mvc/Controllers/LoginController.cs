@@ -7,7 +7,7 @@ using System.Web.Mvc;
 namespace CooperativeLabor.Mvc.Controllers
 {
     
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
         // GET: Login
         public ActionResult Index(int id)

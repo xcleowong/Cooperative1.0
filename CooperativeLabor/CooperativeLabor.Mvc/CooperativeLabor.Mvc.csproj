@@ -47,10 +47,56 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.7.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.7\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.5.11\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+    </Reference>
+    <Reference Include="RPoney.Framework, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RPoney.Framework.1.0.0\lib\RPoney.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="RPoney.Log, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RPoney.Log.1.0.0\lib\RPoney.Log.dll</HintPath>
+    </Reference>
+    <Reference Include="RPoney.Utilty, Version=1.0.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RPoney.Utilty.1.0.1.1\lib\RPoney.Utilty.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Common, Version=3.9.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Common.3.9.11\lib\net35\ServiceStack.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Interfaces, Version=3.9.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Common.3.9.11\lib\net35\ServiceStack.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Redis, Version=3.9.60.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Redis.3.9.60\lib\net35\ServiceStack.Redis.dll</HintPath>
+    </Reference>
+    <Reference Include="ServiceStack.Text, Version=3.9.60.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ServiceStack.Text.3.9.60\lib\net35\ServiceStack.Text.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -104,6 +150,10 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Utilty, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\..\C#学习\PersonWebApi.WebApi\packages\Newtonsoft.Json.6.0.4\lib\netcore45\Utilty.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -152,6 +202,7 @@
     <Compile Include="App_Start\FilterConfig2.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\RouteConfig2.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DepartmentMaintenanceViewController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PersonnelExpenditureController.cs" />
@@ -163,6 +214,7 @@
     <Compile Include="Controllers\PartnerMVCController.cs" />
     <Compile Include="Controllers\PersonalInformationController.cs" />
     <Compile Include="Controllers\TravelOnVacationController.cs" />
+    <Compile Include="Fatier\LoginFatier.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -930,6 +982,8 @@
     <Content Include="Content\zTree-zTree_v3-master\zTree_v3\css\awesomeStyle\awesome.less" />
     <Content Include="Content\zTree-zTree_v3-master\zTree_v3\css\awesomeStyle\fa.less" />
     <Content Include="Content\zTree-zTree_v3-master\zTree_v3\README.md" />
+    <Content Include="config\RPoneyRedisLog.config" />
+    <Content Include="config\log4net.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -1379,6 +1433,7 @@
     <Content Include="Scripts\Plugins\moment\moment.min.js" />
     <Content Include="Scripts\Plugins\TypeAhead\typeahead.bundle.js" />
     <Content Include="Scripts\vue-resource.js" />
+    <Content Include="Utilty.dll" />
     <Content Include="Views\DepartmentMaintenanceView\AddDepartmentMaintenanceView.cshtml" />
     <Content Include="Views\CheckingIn\CheckingIndex.cshtml" />
     <Content Include="Views\PartnerMVC\GetUserManagement.cshtml" />
@@ -1547,6 +1602,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+    <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -1560,6 +1616,10 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CooperativeLabor.Cache\CooperativeLabor.Cache.csproj">
+      <Project>{25a5a2cf-ba9b-4690-aa00-e8110ae1d4aa}</Project>
+      <Name>CooperativeLabor.Cache</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CooperativeLabor.Common\CooperativeLabor.Common.csproj">
       <Project>{d31a57e0-280e-46a2-b54f-c37979b69e9a}</Project>
       <Name>CooperativeLabor.Common</Name>
@@ -1568,6 +1628,9 @@
       <Project>{5532cc8e-108e-4f34-a814-4181e32945c8}</Project>
       <Name>CooperativeLabor.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
