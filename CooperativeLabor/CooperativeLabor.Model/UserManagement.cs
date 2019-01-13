@@ -4,6 +4,7 @@ using System.Text;
 using System.Collections.Generic;
 namespace CooperativeLabor.Model
 {
+    using System.Collections.Generic;
     ///<summary>
     ///用户管理维护表
     ///</summary>
@@ -59,7 +60,10 @@ namespace CooperativeLabor.Model
         /// <summary>
         /// 权限集合
         /// </summary>
-        public List<Permission> permissionsList { get; set; }
+      
+
+        public List<Permission> ListPermission { get; set; }
+
 
     }
 }
