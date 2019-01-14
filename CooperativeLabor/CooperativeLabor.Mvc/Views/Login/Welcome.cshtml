@@ -22,7 +22,11 @@
     <div class="x-body layui-anim layui-anim-up">
         <blockquote class="layui-elem-quote">
             欢迎管理员：
-            <span class="x-red"><%Response.Write(Session("UserName"))%></span>！当前时间:<span id="span1"></span>
+
+            <span id="userName" class="x-red"></span>！当前时间:<span id="span1"></span>
+
+       
+
         </blockquote>
         @*<fieldset class="layui-elem-field">
                 <legend>数据统计</legend>
@@ -163,6 +167,11 @@
 
     </div>
     <script>
+        $(function () {
+            var user = JSON.parse(localStorage.user);
+            $("#userName").text(user.UserName)
+            console.log(user);
+        })
         var _hmt = _hmt || [];
         (function () {
             var hm = document.createElement("script");

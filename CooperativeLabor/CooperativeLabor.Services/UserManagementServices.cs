@@ -77,7 +77,6 @@ namespace CooperativeLabor.Services
                 return i;
             }
         }
-
         /// <summary>
         /// 删除人员管理信息
         /// </summary>
@@ -149,10 +148,8 @@ namespace CooperativeLabor.Services
         /// <returns></returns>
         public int Update(UserManagement userManagement)
         {
-
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
-
                 conn.Open();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Id", userManagement.Id, null, null, null);
@@ -168,7 +165,6 @@ namespace CooperativeLabor.Services
                 int i = conn.Execute(sql, parameters);
                 if (i > 0)
                 {
-
                     string sql2 = "delete from rolesandusers where UserId=@Id";
                     var result2 = conn.Execute(sql2, parameters);
                     //如果上条语句执行成功则执行下面语句
@@ -199,7 +195,6 @@ namespace CooperativeLabor.Services
             }
         }
 
-
         /// <summary>
         /// 登录
         /// </summary>
@@ -211,9 +206,23 @@ namespace CooperativeLabor.Services
                 conn.Open();
                 string sql = "select * from usermanagement where UserName=@UserName and UserPassword=@UserPassword";
                 var result = conn.Query<UserManagement>(sql, new { UserName = UserName, UserPassword = UserPassword }).FirstOrDefault();
-                return result;
-             
+                if (result != null)
+                {
+                    string sql1 = "select * from permission where Id in(select  PermissionId  from permissionsandroles where RoleId in(select RoleId from rolesandusers where UserId=(select id from usermanagement where UserName=@UserName and UserPassword=@UserPassword)))";
+                    var result2 = conn.Query<Permission>(sql1, new { UserName = UserName, UserPassword = UserPassword });
+                    result.ListPermission = result2.ToList();
+                    return result;
+
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
+
+
+
+
     }
 }

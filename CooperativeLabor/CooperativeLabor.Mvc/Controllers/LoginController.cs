@@ -7,15 +7,20 @@ using System.Web.Mvc;
 namespace CooperativeLabor.Mvc.Controllers
 {
     
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
         // GET: Login
-        public ActionResult Index(string UserName)
+        public ActionResult Index()
         {
-            Session["UserName"] = UserName;
-         
+           
             return View();
         }
+
+        //public ActionResult Index(int id)
+        //{
+        //    System.Web.HttpContext.Current.Session["userID"] = id;
+        //    return View();
+        //}
         public ActionResult Login()
         {
             

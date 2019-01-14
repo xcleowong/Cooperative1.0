@@ -1,5 +1,7 @@
 ﻿
 @{
+    /**/
+
     Layout = null;
 }
 
@@ -16,7 +18,7 @@
 </head>
 <body>
     <div id="app">
-        <table v-show="EssentialInformationList.length" class="table-condensed" border="1" style="width:100px">
+        <table align="center" v-show="EssentialInformationList.length" class="table table-hover" border="1">
 
             <tr>
                 <td>编号</td>
@@ -32,10 +34,54 @@
                 <td>单位入账卡号</td>
                 <td>创建时间</td>
                 <td>修改时间</td>
-                <td>是否删除</td>
+                <td>是否删</td>
                 <td>操作</td>
             </tr>
+
             <tr v-for="EssentialInformation in EssentialInformationList">
+                <td>{{EssentialInformation.Id}}</td>
+                <td>{{EssentialInformation.PartnerName}}</td>
+                <td>{{EssentialInformation.PartnerCategory}}</td>
+                <td>{{EssentialInformation.BusinessLicenseName}}</td>
+                <td>{{EssentialInformation.BusinessLicenseURL}}</td>
+                <td>{{EssentialInformation.IsStart}}</td>
+                <td>{{EssentialInformation.Remark}}</td>
+                <td>{{EssentialInformation.Post}}</td>
+                <td>{{EssentialInformation.TechnicalGrade}}</td>
+                <td>{{EssentialInformation.MonthlyPay}}</td>
+                <td>{{EssentialInformation.BankCard}}</td>
+                <td>{{EssentialInformation.CreationTime}}</td>
+                <td>{{EssentialInformation.ModificationTime}}</td>
+                <td>{{EssentialInformation.IsDelete}}</td>
+
+
+                <td>
+                    <div v-if="EssentialInformation.Id!=''">
+                        <a href="#" v-on:click="updateContact(
+                                    EssentialInformation.Id,
+                                    EssentialInformation.PartnerName,
+                                    EssentialInformation.PartnerCategory,
+                                    EssentialInformation.BusinessLicenseName,
+                                    EssentialInformation.BusinessLicenseURL,
+                                    EssentialInformation.IsStart,
+                                    EssentialInformation.Remark,
+                                    EssentialInformation.Post,
+                                    EssentialInformation.TechnicalGrade,
+                                    EssentialInformation.MonthlyPay,
+                                    EssentialInformation.BankCard,
+                                    EssentialInformation.CreationTime,
+                                    EssentialInformation.ModificationTime,
+                                    EssentialInformation.IsDelete,
+)">修改</a>
+                        <a href="#" v-on:click="deleteContactById(EssentialInformation.Id)">删除</a>
+
+                    </div>
+                    <div v-else>
+                        <a href="#" v-on:click="addContact(EssentialInformationList.PartnerName,EssentialInformationList.PartnerCategory,EssentialInformationList.BusinessLicense,EssentialInformationList.OperationType,EssentialInformationList.ApproachTime,
+                               EssentialInformationList.Departuretime,EssentialInformationList.Remark,EssentialInformationList.AttachmentName,EssentialInformationList.AttachmentPath,EssentialInformationList.CreationTime,EssentialInformationList.ModificationTime,EssentialInformationList.IsDelete)">添加</a>
+                    </div>
+                </td>
+@*<tr v-for="EssentialInformation in EssentialInformationList">
                 <td><input type="text" v-model="EssentialInformation.Id" /></td>
                 <td><input type="text" v-model="EssentialInformation.PartnerName" /></td>
                 <td><input type="text" v-model="EssentialInformation.PartnerCategory" /></td>
@@ -50,22 +96,24 @@
                 <td><input type="text" v-model="EssentialInformation.CreationTime" /></td>
                 <td><input type="text" v-model="EssentialInformation.ModificationTime" /></td>
                 <td><input type="text" v-model="EssentialInformation.IsDelete" /></td>
+
                 <td>
                     <div v-if="EssentialInformation.Id!=''">
-                        <a href="#" v-on:click="updateContact(EssentialInformation.Id,
-EssentialInformation.PartnerName,
-EssentialInformation.PartnerCategory,
-EssentialInformation.BusinessLicenseName,
-EssentialInformation.BusinessLicenseURL,
-EssentialInformation.IsStart,
-EssentialInformation.Remark,
-EssentialInformation.Post,
-EssentialInformation.TechnicalGrade,
-EssentialInformation.MonthlyPay,
-EssentialInformation.BankCard,
-EssentialInformation.CreationTime,
-EssentialInformation.ModificationTime,
-EssentialInformation.IsDelete,
+                        <a href="#" v-on:click="updateContact(
+                                    EssentialInformation.Id,
+                                    EssentialInformation.PartnerName,
+                                    EssentialInformation.PartnerCategory,
+                                    EssentialInformation.BusinessLicenseName,
+                                    EssentialInformation.BusinessLicenseURL,
+                                    EssentialInformation.IsStart,
+                                    EssentialInformation.Remark,
+                                    EssentialInformation.Post,
+                                    EssentialInformation.TechnicalGrade,
+                                    EssentialInformation.MonthlyPay,
+                                    EssentialInformation.BankCard,
+                                    EssentialInformation.CreationTime,
+                                    EssentialInformation.ModificationTime,
+                                    EssentialInformation.IsDelete,
 )">修改</a>
                         <a href="#" v-on:click="deleteContactById(EssentialInformation.Id)">删除</a>
 
@@ -75,9 +123,9 @@ EssentialInformation.IsDelete,
                                EssentialInformationList.Departuretime,EssentialInformationList.Remark,EssentialInformationList.AttachmentName,EssentialInformationList.AttachmentPath,EssentialInformationList.CreationTime,EssentialInformationList.ModificationTime,EssentialInformationList.IsDelete)">添加</a>
                     </div>
                 </td>
-            </tr>
-
+            </tr>*@
         </table>
+
     </div>
 </body>
 </html>
@@ -98,10 +146,7 @@ EssentialInformation.IsDelete,
                     (response) => {
                         console.log(response);
                         this.EssentialInformationList = response.data;
-                        //for (var i = 0; i < response.data.length; i++) {
-                        //    this.EssentialInformationList.push(response.data[i]);
-                        //}
-                        // this.EssentialInformationList.push({ Id: "", PartnerName: "222", PartnerCategory: "", BusinessLicense: "", OperationType: "", ApproachTime: "", Departuretime: "", Remark: "", AttachmentName: "", AttachmentPath: "", CreationTime: "", ModificationTime: "", IsDelete: ""});
+
                     },
                     (response) => {
                         alert(response.status);
@@ -114,13 +159,10 @@ EssentialInformation.IsDelete,
             //删除
             deleteContactById: function (Id) {
                 axios.get('http://localhost:8099/Partner/DeleteEss?Id=' + Id).then(
-                    //axios.post('http://localhost:8099/Partner/DeleteEss', { Id: Id }).then(
+
                     (response) => {
                         this.EssentialInformationList = response.data;
-                        //for (var i = 0; i < response.data.length; i++) {
-                        //    this.contactsList.push(response.data[i]);
-                        //}
-                        //this.contactsList.push({ Id: "", Name: "", PhoneNo: "", EmailAddress: "" });
+
                     },
                     (response) => {
                         alert(response.status);
@@ -129,30 +171,10 @@ EssentialInformation.IsDelete,
                     alert(response);
                 });
             },
-            //修改
-            //updateContact: function (Id, PartnerName, PartnerCategory, BusinessLicense, OperationType, ApproachTime, Departuretime, Remark, AttachmentName, AttachmentPath, CreationTime, ModificationTime, IsDelete) {
-            //    axios.post('http://localhost:8099/Partner/UpdateEss?Id=' + Id, { contact: { Id: Id, PartnerName: PartnerName, PartnerCategory: PartnerCategory, BusinessLicense: BusinessLicense, OperationType: OperationType, ApproachTime: ApproachTime, Departuretime: Departuretime, Remark: Remark, AttachmentName: AttachmentName, AttachmentPath: AttachmentPath, CreationTime: CreationTime, ModificationTime: ModificationTime, IsDelete: IsDelete} }).then(
-            //        (response) => {
-            //            if (response.data>0) {
-            //                alert("修改成功!!!");
-            ////this.EssentialInformationList
-            //            }
-            //              //  this.EssentialInformationList = response.data;
-            //                //for (var i = 0; i < response.data.length; i++) {
-            //                //    this.contactsList.push(response.data[i]);
-            //                //}
-            //                //this.contactsList.push({ Id: "", Name: "", PhoneNo: "", EmailAddress: "" });
-            //            },
-            //            (response) => {
-            //                alert(response.status);
-            //            }
-            //        ).catch(function (response) {
-            //            alert(response);
-            //        });
-            //    },
 
 
-            ////修改质检计划信息
+
+            ////修改
             updateContact: function (
                 Id,
                 PartnerName,
@@ -200,6 +222,8 @@ EssentialInformation.IsDelete,
                 });
             },
         }
+
+       
 
     })
 </script>
