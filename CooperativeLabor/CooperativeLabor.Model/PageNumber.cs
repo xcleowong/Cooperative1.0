@@ -25,6 +25,10 @@ namespace CooperativeLabor.Model
         /// 总页数
         /// </summary>
         public int TotlePage { get; set; }
+        /// <summary>
+        /// 总数据条数
+        /// </summary>
+        public int DataCount { get; set; }
 
     }
 }

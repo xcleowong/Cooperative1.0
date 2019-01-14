@@ -70,17 +70,19 @@ namespace CooperativeLabor.WebApi.Controllers
         /// <returns></returns>
         [Route("GetEntryAndExitRecordsEnt")]
         [HttpGet]
-        public PageNumber GetEntryAndExitRecords(int? pageIndex)
-        {
+        public PageNumber GetEntryAndExitRecordsEnt(int? pageIndex)
+        { 
             if (pageIndex == null)
             {
                 pageIndex = 1;
             }
             var result = this.entryAndExitRecord.GetEntryAndExitRecords().ToList();
             PageNumber pageNumber = new PageNumber();
+            pageNumber.DataCount = result.Count;
             pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
             pageNumber.TotlePage = (result.Count / PAGESIZE) + (result.Count % PAGESIZE == 0 ? 0 : 1);
             pageNumber.Data = result.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);
+            
             return pageNumber;
         }
         /// <summary>
@@ -149,9 +151,7 @@ namespace CooperativeLabor.WebApi.Controllers
         [Route("GetEssentialInformationsEss")]
         [HttpGet]
         public PageNumber GetEssentialInformations(int? pageIndex)
-        {
-            //      var result = this.essentialInformation.GetEssentialInformations();
-            //      return result;
+        {       
             if (pageIndex == null)
             {
                 pageIndex = 1;
