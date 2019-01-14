@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 namespace CooperativeLabor.Mvc.Controllers
 {
+    using CooperativeLabor.Mvc.Fatier;
+    using Utility;
     public class PartnerMVCController : Controller
     {
         #region 入离厂信息
@@ -140,6 +142,7 @@ namespace CooperativeLabor.Mvc.Controllers
         /// 添加用户
         /// </summary>
         /// <returns></returns>
+        [LoginFatier]
         public ActionResult AddUserManagement()
         {
             
@@ -159,6 +162,7 @@ namespace CooperativeLabor.Mvc.Controllers
         /// 修改用户
         /// </summary>
         /// <returns></returns>
+        [LoginFatier]
         public ActionResult UpdateUserManagement(int Id)
         {
             ViewBag.Id = Id;
