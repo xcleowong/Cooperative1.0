@@ -6,7 +6,10 @@ using System.Web.Mvc;
 
 namespace CooperativeLabor.Mvc.Controllers
 {
-    
+    using CooperativeLabor.Model;
+    using CooperativeLabor.Common;
+    using CooperativeLabor.Cache;
+    using Newtonsoft.Json;
     public class LoginController : BaseController
     {
         // GET: Login
@@ -30,6 +33,38 @@ namespace CooperativeLabor.Mvc.Controllers
         {
             return View();
         }
-   
+
+        /// <summary>
+        /// forms 身份认证
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public int Logins(UserManagement userManagement )
+        {
+            Session["Id"] = userManagement.Id;
+            Session["UserName"] = userManagement.UserName;
+            WriteDataToCookie(userManagement);
+            return 1;
+        }
+
+        /// <summary>
+        /// 登录首页
+        /// </summary>
+        /// <returns></returns>
+        /// 
+        public ActionResult LoginIndex()
+        {
+            ViewBag.Id = Session["Id"];
+            ViewBag.UserName = Session["UserName"];
+            return View();
+        }
+
+        public string GetPermissionList(string id)
+        {
+            UserManagement u = RedisHelper.Get<UserManagement>(id);
+            string permission = JsonConvert.SerializeObject(u.ListPermission);
+            return permission;
+        }
+
     }
 }
