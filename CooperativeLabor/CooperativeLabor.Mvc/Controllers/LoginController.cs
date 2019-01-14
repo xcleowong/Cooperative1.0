@@ -16,7 +16,7 @@ namespace CooperativeLabor.Mvc.Controllers
         // GET: Login
         public ActionResult Index()
         {
-           
+
             return View();
         }
 
@@ -27,7 +27,7 @@ namespace CooperativeLabor.Mvc.Controllers
         //}
         public ActionResult Login()
         {
-            
+
             return View();
         }
         public ActionResult Welcome()
@@ -40,7 +40,7 @@ namespace CooperativeLabor.Mvc.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public int Logins(UserManagement userManagement )
+        public int Logins(UserManagement userManagement)
         {
             Session["Id"] = userManagement.Id;
             Session["UserName"] = userManagement.UserName;
@@ -52,7 +52,6 @@ namespace CooperativeLabor.Mvc.Controllers
         /// 登录首页
         /// </summary>
         /// <returns></returns>
-        /// 
         public ActionResult LoginIndex()
         {
             ViewBag.Id = Session["Id"];
@@ -62,7 +61,7 @@ namespace CooperativeLabor.Mvc.Controllers
 
         public string GetPermissionList(string id)
         {
-            UserManagement u = Cache.RedisHelper.Get<UserManagement>(id);
+            UserManagement u = Utility.RedisHelper.Get<UserManagement>(id);
             string permission = JsonConvert.SerializeObject(u.ListPermission);
             return permission;
         }
