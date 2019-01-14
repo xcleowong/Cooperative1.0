@@ -11,7 +11,7 @@ namespace CooperativeLabor.Mvc.Fatier
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
             //filterContext.HttpContext.Session["URL"] = filterContext.HttpContext.Request.RawUrl;
-            if (filterContext.HttpContext.Session["MenagerName"] == null)
+            if (filterContext.HttpContext.Session["UserName"] == null)
             {
                 filterContext.HttpContext.Response.Redirect("/Login/Login");
             }
