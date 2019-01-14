@@ -790,6 +790,28 @@
     <Content Include="Content\zTree-zTree_v3-master\zTree_v3\js\jquery.ztree.exhide.min.js" />
     <Content Include="Content\zTree-zTree_v3-master\zTree_v3\log v3.x.txt" />
     <Content Include="Content\zTree-zTree_v3-master\新建文本文档.txt" />
+    <Content Include="css\kitadmin.css" />
+    <Content Include="css\layui.css" />
+    <Content Include="css\layui.mobile.css" />
+    <Content Include="css\login.css" />
+    <Content Include="css\modules\code.css" />
+    <Content Include="css\modules\laydate\default\laydate.css" />
+    <Content Include="css\modules\layer\default\icon-ext.png" />
+    <Content Include="css\modules\layer\default\icon.png" />
+    <Content Include="css\modules\layer\default\layer.css" />
+    <Content Include="css\modules\layer\default\loading-0.gif" />
+    <Content Include="css\modules\layer\default\loading-1.gif" />
+    <Content Include="css\modules\layer\default\loading-2.gif" />
+    <Content Include="css\nprogress.css" />
+    <Content Include="css\theme\blue-dark.css" />
+    <Content Include="css\theme\blue-light.css" />
+    <Content Include="css\theme\default.css" />
+    <Content Include="css\theme\green-dark.css" />
+    <Content Include="css\theme\green-light.css" />
+    <Content Include="css\theme\purple-dark.css" />
+    <Content Include="css\theme\purple-light.css" />
+    <Content Include="css\theme\red-dark.css" />
+    <Content Include="css\theme\red-light.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -929,6 +951,11 @@
     <Content Include="Content\Layui_X_Admin\role-add.html" />
     <Content Include="Content\Layui_X_Admin\unicode.html" />
     <Content Include="Content\Layui_X_Admin\welcome.html" />
+    <Content Include="kitadmin.js" />
+    <Content Include="layui.all.js" />
+    <Content Include="layui.js" />
+    <Content Include="mockjs-config.js" />
+    <Content Include="polyfill.min.js" />
     <Content Include="Scripts\axios.js" />
     <Content Include="Scripts\axios.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -1442,6 +1469,7 @@
     <Content Include="Views\AllowancesView\Index.cshtml" />
     <Content Include="Views\HolidaySettingsView\Index.cshtml" />
     <Content Include="Views\CheckingIn\Index.cshtml" />
+    <Content Include="Views\Login\LoginIndex.cshtml" />
     <None Include="Views\PartnerMVC\IndexEss1.cshtml" />
     <None Include="Views\PartnerMVC\IndexEnt.cshtml" />
     <None Include="Views\PartnerMVC\AdminList.cshtml" />
@@ -1601,6 +1629,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DateControl\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
