@@ -10,6 +10,7 @@ namespace CooperativeLabor.Mvc.Controllers
     using CooperativeLabor.Common;
     using CooperativeLabor.Cache;
     using Newtonsoft.Json;
+    using Utility;
     public class LoginController : BaseController
     {
         // GET: Login
@@ -61,7 +62,7 @@ namespace CooperativeLabor.Mvc.Controllers
 
         public string GetPermissionList(string id)
         {
-            UserManagement u = RedisHelper.Get<UserManagement>(id);
+            UserManagement u = Cache.RedisHelper.Get<UserManagement>(id);
             string permission = JsonConvert.SerializeObject(u.ListPermission);
             return permission;
         }
