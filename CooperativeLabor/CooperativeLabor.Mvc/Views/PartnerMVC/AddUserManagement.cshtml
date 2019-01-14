@@ -15,19 +15,38 @@
         li {
             list-style: none;
         }
+        /*顶部下拉信息提示框*/
+        .messageBox {
+            height: 52px;
+            padding: 0 53px 0 78px;
+            line-height: 52px;
+            /*background: url(/Images/img-set1.png) -441px -613px #ffffe7 no-repeat;*/
+            background: url(../../Images/img-set1.png) -441px -613px #ffffe7 no-repeat;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            position: fixed;
+            top: -60px;
+            left: 50%;
+            border: 5px solid #ddd;
+            border-top: 0;
+            color: #444;
+            font-size: 18px;
+            z-index: 9999;
+        }
+
+        .messageError {
+            background-position: -441px -673px;
+        }
     </style>
     <script>
         var permissionId = 0;
         var list = [];
      
-
         $(function () {
-            ////跳转到显示
-            //$("#GetUsers").click(function () {
-            //    location.href = "/PartnerMVC/AdminList";
-            //})
-
-
+            //跳转到显示
+            $("#GetUsers").click(function () {
+                location.href = "/PartnerMVC/AdminList";
+            })
             //加载角色
             $.ajax({
                 url: "http://localhost:8099/Jurisdiction/GetRoles",
@@ -37,42 +56,61 @@
                     var str = '<table><tr>';
                     list = data;
                     $(data).each(function (index, data) {
-                        
-                        str += "<label> <input type='checkbox'  name='RoleIds' value=" + data.Id + ">" + data.RoleName + "</label>&nbsp;&nbsp;&nbsp;&nbsp;<label></label>"
-                       
+                        str += "<label><input type='checkbox' name='RoleIds' value=" + data.Id + ">" + data.RoleName + "</label>&nbsp;&nbsp;&nbsp;&nbsp;<label></label>"
                     })
-
                     //str += '</dl>'
                     str += '</tr></table>';
                     $("#div1").append(str);
                 }
 
             });
-            //添加
-            $("#AddUser").click(function () {
-            
-                var RoleIds = [];
-                $("input[name=RoleId]:checked").each(function () {
-                    RoleIds.push($(this).parent().text());
-                })
-
-             
-                $.ajax({
-                    url: "http://localhost:8099/Jurisdiction/AddUser",
-                    type: "post",
-                    data: $("#addform").serialize(), 
-                   
-                    success: function (data) {
-                        console.log(data)
-                        if (data > 0) {
-                           // alert("添加成功！");
-                            location.href = "/PartnerMVC/AdminList";
-                        }
-                    }
-                })
-            })
         })
-     
+       
+        //添加      
+        function addUser() {
+            var RoleIds = [];
+            $("input[name=RoleIds]:checked").each(function () {
+                RoleIds.push($(this).val());
+               // RoleIds.push($(this).val());
+            })
+
+            var pwd = $("input[name=UserPassword]").val();
+            $.ajax({
+                url: "/PartnerMVC/GetMd5Str",
+                data: {
+                    UserPassword: pwd,
+                },
+                type: "post",
+                success: function (data) {
+                    $.ajax({
+                        url: "http://localhost:8099/Jurisdiction/AddUser",
+                        type: "post",
+                        data: {
+                            UserName: $("input[name=UserName]").val(),
+                            UserPassword: data,
+                            InstitutionalFramework: $("input[name=InstitutionalFramework]").val(),
+                            RoleIds: RoleIds,
+                            CreationTime: $("input[name=CreationTime]").val(),
+                            ModificationTime: $("input[name=ModificationTime]").val(),
+                            IsStart: $("input[name=IsStart]:checked").val(),
+                        },
+                        success: function (data) {
+                            console.log(data)
+                            if (data > 0) {
+                                //页头下拉提示框
+                                $(".messageBox").removeClass("messageError").text("添加成功！").css("margin-left", -($(".messageBox").outerWidth() / 2)).animate({ top: 0 }, "fast").delay(1500).animate({ top: "-57px" }, "fast");
+                                location.href = "/PartnerMVC/AdminList";
+
+                            } else {
+                                //页头下拉提示框
+                                $(".messageBox").addClass("messageError").text("该用户已存在").css("margin-left", -($(".messageBox").outerWidth() / 2)).animate({ top: 0 }, "fast").delay(1500).animate({ top: "-57px" }, "fast");
+                            }
+
+                        }
+                    })
+                }
+            })
+        }
     </script>
 </head>
 <body>
@@ -80,7 +118,7 @@
         <div style="text-align: center;">
             <span style="font-size:30px;text-align:center">添加用户</span>
             <table align="center" class="table table-hover table-bordered" style="width:600px;line-height:60px">
-                <tr >
+                <tr>
                     <td style="width:100px">登录名：</td>
                     <td><input id="Text1" type="text" name="UserName" /></td>
                 </tr>
@@ -88,7 +126,7 @@
                 <tr>
                     <td>密码：</td>
                     <td>
-                        <input id="Text1" type="text"  name="UserPassword" />
+                        <input id="Text1" type="text" name="UserPassword" />
                     </td>
                 </tr>
                 <tr>
@@ -97,15 +135,15 @@
                         <input id="Text1" type="text" name="InstitutionalFramework" />
                     </td>
                 </tr>
-                <tr>
+                <tr >
                     <td>角色：</td>
                     <td>
-                       
+
                         <div id="div1"></div>
                     </td>
                 </tr>
-       
-                
+
+
                 <tr hidden="hidden">
                     <td>创建时间</td>
                     <td><input id="Text1" type="text" name="CreationTime" value="@DateTime.Now" /></td>
@@ -123,7 +161,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <input style="width:90px;" id="AddUser" type="button" class="btn btn-info" value="添加用户" />
+                        <input style="width:90px;" id="AddUser" type="button" class="btn btn-info" value="添加用户" onclick="addUser()" />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <input id="GetUsers" style="width:90px;" type="button" class="btn btn-danger" value="显示" />
                     </td>
@@ -132,5 +170,7 @@
         </div>
     </form>
 
+    <!-- 通用提示框 -->
+    <div class="messageBox"></div>
 </body>
 </html>

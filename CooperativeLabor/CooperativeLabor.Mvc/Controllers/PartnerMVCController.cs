@@ -8,6 +8,8 @@ namespace CooperativeLabor.Mvc.Controllers
 {
     using CooperativeLabor.Mvc.Fatier;
     using Utility;
+    using System.Text;
+    using System.Security.Cryptography;
     public class PartnerMVCController : Controller
     {
         #region 入离厂信息
@@ -138,12 +140,26 @@ namespace CooperativeLabor.Mvc.Controllers
 
 
         #region 用户表信息
-        /// <summary>
-        /// 添加用户
+
+        /// MD5 16位加密 加密后密码为大写
         /// </summary>
+        /// <param name="ConvertString"></param>
         /// <returns></returns>
-        //[LoginFatier]
-        public ActionResult AddUserManagement()
+        [HttpPost]
+        public string GetMd5Str(string UserPassword)
+        {
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            string t2 = BitConverter.ToString(md5.ComputeHash(UTF8Encoding.Default.GetBytes(UserPassword)), 4, 8);
+            t2 = t2.Replace("-", "");
+            return t2;
+        }
+    
+    /// <summary>
+    /// 添加用户
+    /// </summary>
+    /// <returns></returns>
+    //[LoginFatier]
+       public ActionResult AddUserManagement()
         {            
             return View();
         }
@@ -163,7 +179,7 @@ namespace CooperativeLabor.Mvc.Controllers
         /// 修改用户
         /// </summary>
         /// <returns></returns>
-        [LoginFatier]
+       // [LoginFatier]
         public ActionResult UpdateUserManagement(int Id)
         {
             ViewBag.Id = Id;

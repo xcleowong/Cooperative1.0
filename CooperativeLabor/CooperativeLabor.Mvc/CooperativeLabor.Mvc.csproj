@@ -951,6 +951,7 @@
     <Content Include="Content\Layui_X_Admin\role-add.html" />
     <Content Include="Content\Layui_X_Admin\unicode.html" />
     <Content Include="Content\Layui_X_Admin\welcome.html" />
+    <Content Include="Images\img-set1.png" />
     <Content Include="kitadmin.js" />
     <Content Include="layui.all.js" />
     <Content Include="layui.js" />

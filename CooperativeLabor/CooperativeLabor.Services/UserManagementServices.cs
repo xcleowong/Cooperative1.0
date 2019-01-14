@@ -115,7 +115,6 @@ namespace CooperativeLabor.Services
                 string sql = "select * FROM usermanagement  WHERE Id=@Id";
                 UserManagement userManagement = conn.Query<UserManagement>(sql, parameters).FirstOrDefault();
                 return userManagement;
-
             }
         }
 
@@ -133,9 +132,7 @@ namespace CooperativeLabor.Services
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
                 conn.Open();
-
-                string sql = "SELECT r.*,rr.RoleId,GROUP_CONCAT(a.RoleName separator ',') as RoleName from rolesandusers as rr JOIN usermanagement as r ON rr.UserId = r.Id JOIN roles AS a ON rr.RoleId = a.Id GROUP BY r.Id,r.UserName";
-
+                string sql = "SELECT r.*,r.RoleId,GROUP_CONCAT(a.RoleName separator ',') as RoleName from rolesandusers as rr JOIN usermanagement as r ON rr.UserId = r.Id JOIN roles AS a ON rr.RoleId = a.Id GROUP BY r.Id,r.UserName";
                 IEnumerable<UserManagement> userManagement = conn.Query<UserManagement>(sql, null);
                 return userManagement.ToList();
             }
