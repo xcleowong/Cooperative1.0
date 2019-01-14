@@ -142,12 +142,13 @@ namespace CooperativeLabor.Mvc.Controllers
         /// 添加用户
         /// </summary>
         /// <returns></returns>
-        [LoginFatier]
+        //[LoginFatier]
         public ActionResult AddUserManagement()
-        {
-            
+        {            
             return View();
         }
+        
+
 
         /// <summary>
         /// 显示用户

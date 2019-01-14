@@ -19,22 +19,7 @@
     <script>
         var permissionId = 0;
         var list = [];
-        //function PermisionShow(obj) {
-        //    //判断选中权限父节点追加权限子节点
-        //    if ($(obj).prop("checked")) {
-        //        $(list).each(function (index, data) {
-        //            var str = "<ul>";
-        //            if (data.Pid == $(obj).val()) {
-        //                str += "<li><input type='checkbox' class='cks'  name='PermissionNames' value=" + data.Id + ">" + data.PermissionName + "</li>";
-        //            }
-        //            str += "</ul>";
-        //            $(obj).parent().next().append(str)
-        //        })
-        //    }
-        //    else {
-        //        $(obj).parent().next().empty();
-        //    }
-        //}
+     
 
         $(function () {
             //跳转到显示
@@ -43,25 +28,10 @@
             })
 
 
-            //加载权限
+            //加载角色
             $.ajax({
                 url: "http://localhost:8099/Jurisdiction/GetRoles",
                 type: "get",
-                //success: function (data) {
-                //    console.log(data);
-                //    list = data;
-                //    $(data).each(function (index, data) {
-                //        var str = "<ul>";
-                //        //if (data.Pid == 0) {
-                //        str += "<li><input type='checkbox' class='cks' onclick='PermisionShow(this)' name='RoleName' value=" + data.Id + ">" + data.RoleName + "</li><div></div>"
-                //        //}
-                //        str += "</ul>";
-                //        $("#div1").append(str);
-                //    })
-                //}
-
-
-
                 success: function (data) {
                     //var str = '<dl>';
                     var str = '<table><tr>';
@@ -80,10 +50,7 @@
             });
             //添加
             $("#AddUser").click(function () {
-                //var PeremissionIds = [];
-                //$("input[name=PermissionNames]:checked").each(function () {
-                //    PeremissionIds.push($(this).val());
-                //})
+            
                 var RoleIds = [];
                 $("input[name=RoleId]:checked").each(function () {
                     RoleIds.push($(this).parent().text());
@@ -94,37 +61,27 @@
                     url: "http://localhost:8099/Jurisdiction/AddUser",
                     type: "post",
                     data: $("#addform").serialize(), 
-                    //data: {
-                        //RoleName: $("input[name=RoleName]").val(),
-                        //Role_PeremissionIds: PeremissionIds.join(','),
-                        //CreateTime: $("input[name=CreateTime]").val(),
-
-                        //IsStart: $("input[name=CreateTime]").attr("checked","checked"),
-
-                    //},
+                   
                     success: function (data) {
                         console.log(data)
                         if (data > 0) {
                            // alert("添加成功！");
                             location.href = "/PartnerMVC/AdminList";
                         }
-                        
                     }
                 })
             })
         })
-        //function Getpermission() {
-        //    location.href = "/PartnerMVC/GetPermission";
-        //}
+     
     </script>
 </head>
 <body>
     <form id="addform">
         <div style="text-align: center;">
             <span style="font-size:30px;text-align:center">添加用户</span>
-            <table align="center" class="table table-hover table-bordered" style="width:600px;text-align:center;line-height:60px">
-                <tr>
-                    <td>登录名：</td>
+            <table align="center" class="table table-hover table-bordered" style="width:600px;line-height:60px">
+                <tr >
+                    <td style="width:100px">登录名：</td>
                     <td><input id="Text1" type="text" name="UserName" /></td>
                 </tr>
 
@@ -166,9 +123,9 @@
                 </tr>
                 <tr>
                     <td colspan="2" align="center">
-                        <input style="width:90px;" id="AddUser" type="button" class="btn btn-info" value="添加角色" />
+                        <input style="width:90px;" id="AddUser" type="button" class="btn btn-info" value="添加用户" />
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <input id="GetUsers" style="width:90px;" type="button" class="btn btn-danger" onclick="Getpermission()" value="显示" />
+                        <input id="GetUsers" style="width:90px;" type="button" class="btn btn-danger" value="显示" />
                     </td>
                 </tr>
             </table>
