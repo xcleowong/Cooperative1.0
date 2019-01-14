@@ -15,7 +15,7 @@ namespace CooperativeLabor.WebApi.Controllers
     [RoutePrefix("Partner")]
     public class PartnerController : ApiController
     {
-        private const int PAGESIZE = 8;
+        private const int PAGESIZE = 5;
 
         /// <summary>
         /// 入离场记录
@@ -104,7 +104,11 @@ namespace CooperativeLabor.WebApi.Controllers
         public IEssentialInformationServices essentialInformation { get; set; }
 
 
-
+        /// <summary>
+        /// 添加
+        /// </summary>
+        /// <param name="essentialInformation"></param>
+        /// <returns></returns>
         [Route("AddEss")]
         [HttpPost]
         public int Add(EssentialInformation essentialInformation)
@@ -112,6 +116,11 @@ namespace CooperativeLabor.WebApi.Controllers
             int i = this.essentialInformation.Add(essentialInformation);
             return i;
         }
+        /// <summary>
+        /// 删除
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         [Route("DeleteEss")]
         [HttpGet]
         public int Deletes(int Id)
@@ -119,6 +128,12 @@ namespace CooperativeLabor.WebApi.Controllers
             int i = this.essentialInformation.Deletes(Id);
             return i;
         }
+
+        /// <summary>
+        /// 根据Id显示
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         [Route("GetEssentialInformationByIdEss")]
         [HttpGet]
         public EssentialInformation GetEssentialInformationById(int Id)
@@ -126,13 +141,34 @@ namespace CooperativeLabor.WebApi.Controllers
             var result = this.essentialInformation.GetEssentialInformationById(Id);
             return result;
         }
+
+        /// <summary>
+        /// 显示
+        /// </summary>
+        /// <returns></returns>
         [Route("GetEssentialInformationsEss")]
         [HttpGet]
-        public IEnumerable<EssentialInformation> GetEssentialInformations()
+        public PageNumber GetEssentialInformations(int? pageIndex)
         {
-            var result = this.essentialInformation.GetEssentialInformations();
-            return result;
+            //      var result = this.essentialInformation.GetEssentialInformations();
+            //      return result;
+            if (pageIndex == null)
+            {
+                pageIndex = 1;
+            }
+            var result = this.essentialInformation.GetEssentialInformations().ToList();
+            PageNumber pageNumber = new PageNumber();
+            pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
+            pageNumber.TotlePage = (result.Count / PAGESIZE) + (result.Count % PAGESIZE == 0 ? 0 : 1);
+            pageNumber.Data = result.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);
+            return pageNumber;
         }
+
+        /// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="essentialInformation"></param>
+        /// <returns></returns>
         [Route("UpdateEss")]
         [HttpPost]
         public int Update(EssentialInformation essentialInformation)
@@ -140,6 +176,7 @@ namespace CooperativeLabor.WebApi.Controllers
             int i = this.essentialInformation.Update(essentialInformation);
             return i;
         }
+
         /// <summary>
         /// 获取合作方Id，名称
         /// </summary>
