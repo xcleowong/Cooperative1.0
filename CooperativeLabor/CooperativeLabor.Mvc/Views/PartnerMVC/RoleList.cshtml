@@ -57,7 +57,7 @@
             </th>
             <th>ID</th>
             <th>角色名称</th>
-            <th>权限ID</th>
+           
             <th>拥有权限规则</th>
             <th>创建时间</th>
             <th>状态</th>
@@ -112,7 +112,7 @@
                 type: "get",
                 success: function (data) {
                     $(data).each(function (index, data) {
-                        $("#tab").append("<tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.RoleName + "</td> <td>" + data.Role_PeremissionIds + "</td> <td>" + data.PermissionName + "</td><td>" + data.CreateTime.substring(0, 10) +"&nbsp;" + data.CreateTime.substring(11, 19) + "</td> <td class='td - manage'>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr>");
+                        $("#tab").append("<tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.RoleName + "</td> <td>" + data.PermissionName + "</td><td>" + data.CreateTime.substring(0, 10) +"&nbsp;" + data.CreateTime.substring(11, 19) + "</td> <td class='td - manage'>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr>");
                     })
 
                     //$(data).each(function (index, data) {

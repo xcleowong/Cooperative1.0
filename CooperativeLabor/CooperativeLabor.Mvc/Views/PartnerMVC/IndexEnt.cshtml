@@ -141,13 +141,13 @@
                     <td>{{EntryAndExitRecord.PartnerCategory}}</td>
                     <td>{{EntryAndExitRecord.BusinessLicense}}</td>
                     <td>{{EntryAndExitRecord.OperationType}}</td>
-                    <td>{{EntryAndExitRecord.ApproachTime.substring(0,10)}}</td>
-                    <td>{{EntryAndExitRecord.Departuretime.substring(0,10)}}</td>
+                    <td>{{EntryAndExitRecord.ApproachTime}}</td>
+                    <td>{{EntryAndExitRecord.Departuretime}}</td>
                     <td>{{EntryAndExitRecord.Remark}}</td>
                     <td>{{EntryAndExitRecord.AttachmentName}}</td>
                     <td>{{EntryAndExitRecord.AttachmentPath}}</td>
-                    <td>{{EntryAndExitRecord.CreationTime.substring(0,10)}}</td>
-                    <td>{{EntryAndExitRecord.ModificationTime.substring(0,10)}}</td>
+                    <td>{{EntryAndExitRecord.CreationTime}}</td>
+                    <td>{{EntryAndExitRecord.ModificationTime}}</td>
                     <td class="td-status">
                         <span class="layui-btn layui-btn-danger layui-btn-mini">
                             {{EntryAndExitRecord.IsDelete==0?"离厂":"入厂"}}
@@ -171,6 +171,9 @@
                                EntryAndExitRecord.Departuretime,EntryAndExitRecord.Remark,EntryAndExitRecord.AttachmentName,EntryAndExitRecord.AttachmentPath,EntryAndExitRecord.CreationTime,EntryAndExitRecord.ModificationTime,EntryAndExitRecord.IsDelete)">添加</a>
                         </div>
                     </td>
+
+            </tbody>
+            
         </table>
         <div class="page-bar">
             <ul>
@@ -184,7 +187,6 @@
                 <li><a>共<i>{{all}}</i>页</a></li>
             </ul>
         </div>
-
     </div>
 
     <script type="text/javascript">
@@ -194,7 +196,7 @@
                 EntryAndExitRecordList: [],
                 all: 6, //总页数
                 cur: 1,//当前页码
-                count:0//总条数
+                count: 0//总条数
             },
             watch: {
                 cur: function (oldValue, newValue) {
