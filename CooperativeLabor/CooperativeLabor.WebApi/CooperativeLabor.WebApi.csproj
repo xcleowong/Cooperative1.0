@@ -149,6 +149,7 @@
     <Compile Include="App_Start\UnityWebApiActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AllowancesController.cs" />
+    <Compile Include="Controllers\AttendanceController.cs" />
     <Compile Include="Controllers\CheckingInWebApiController.cs" />
     <Compile Include="Controllers\DepartmentMaintenanceController.cs" />
     <Compile Include="Controllers\EntryDimissionController.cs" />
