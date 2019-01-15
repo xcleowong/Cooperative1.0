@@ -102,10 +102,9 @@
       <div class="layui-row">
           <form class="layui-form layui-col-md12 x-so">
 
-              <input type="text" name="username" placeholder="请输入姓名" autocomplete="off" class="layui-input">
-              <input type="text" name="username" placeholder="请输入用工单位" autocomplete="off" class="layui-input">
-              <input type="text" name="username" placeholder="请输入合作方名称" autocomplete="off" class="layui-input">
-              <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+              <input type="text" placeholder="请输入姓名" autocomplete="off" class="layui-input" v-model="searchName">
+              @*<button class="layui-btn" v-on:click="searchEntry(searchName)"><i class="layui-icon">&#xe615;</i></button>*@
+              <input type="button" class="layui-btn" value="搜索" v-on:click="searchEntry(searchName)" />
           </form>
       </div>
       <xblock>
@@ -240,6 +239,7 @@
     var vm = new Vue({
         el: "#app",
         data: {
+            searchName: "",
             GetEntryDimission: [],
             all: 6, //总页数
             cur: 1//当前页码
@@ -283,7 +283,23 @@
                     alert(response);
                 });
             },
-
+            searchEntry: function (data) {
+                axios.get("http://localhost:8099/EntryDimission/GetEntryDimissionRecords", { params: { pageIndex: 1,name: data } }).then(
+                    (response) => {
+                        this.GetEntryDimission = [],
+                            this.cur = response.data.CurrentPage;
+                        this.all = response.data.TotlePage;
+                        for (var i = 0; i < response.data.Data.length; i++) {
+                            this.GetEntryDimission.push(response.data.Data[i]);
+                        }
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
 
 
             //删除

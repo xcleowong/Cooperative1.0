@@ -49,7 +49,7 @@ namespace CooperativeLabor.WebApi.Controllers
         /// <returns></returns>
         [Route("GetPersonalInformation")]
         [HttpGet]
-        public PageNumber GetPersonalInformation(int? pageIndex)
+        public PageNumber GetPersonalInformation(int? pageIndex,string name="",string employingnit="",string partnerName="")
         {
 
             if (pageIndex == null)
@@ -58,6 +58,18 @@ namespace CooperativeLabor.WebApi.Controllers
             }
             List<PersonalInformation> listGA = personals.GetPersonalInformation().ToList();
             PageNumber pageNumber = new PageNumber();
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                listGA = listGA.Where(m => m.Name.Contains(name)).ToList();
+            }
+            if (!string.IsNullOrWhiteSpace(employingnit))
+            {
+                listGA = listGA.Where(m => m.Employingnit.Contains(employingnit)).ToList();
+            }
+            if (!string.IsNullOrWhiteSpace(partnerName))
+            {
+                listGA = listGA.Where(m => m.PartnerName.Contains(partnerName)).ToList();
+            }
             pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
             pageNumber.TotlePage = (listGA.Count / PAGESIZE) + (listGA.Count % PAGESIZE == 0 ? 0 : 1);
             pageNumber.Data = listGA.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);

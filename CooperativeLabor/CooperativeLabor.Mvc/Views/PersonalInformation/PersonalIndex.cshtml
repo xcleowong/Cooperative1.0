@@ -103,10 +103,11 @@
       <div class="layui-row">
           <form class="layui-form layui-col-md12 x-so">
 
-              <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
-              <input type="text" name="username" placeholder="请输入用工单位" autocomplete="off" class="layui-input">
-              <input type="text" name="username" placeholder="请输入合作方名称" autocomplete="off" class="layui-input">
-              <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+              <input type="text" v-model="searchName" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+              <input type="text" v-model="searchemployingnit" placeholder="请输入用工单位" autocomplete="off" class="layui-input">
+              <input type="text" v-model="searchpartnerName" placeholder="请输入合作方名称" autocomplete="off" class="layui-input">
+              @*<button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>*@
+              <input type="button" class="layui-btn" value="搜索" v-on:click="searchPersonal(searchName,searchemployingnit,searchpartnerName)" />
           </form>
       </div>
       <xblock>
@@ -183,20 +184,6 @@
 
     </div>
     <script>
-      layui.use('laydate', function(){
-        var laydate = layui.laydate;
-        
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#start' //指定元素
-        });
-
-        //执行一个laydate实例
-        laydate.render({
-          elem: '#end' //指定元素
-        });
-      });
-
        /*用户-停用*/
       function member_stop(obj,id){
           layer.confirm('确认要停用吗？',function(index){
@@ -220,17 +207,6 @@
               
           });
       }
-
-      /*用户-删除*/
-      //function member_del(obj,id){
-      //    layer.confirm('确认要删除吗？',function(index){
-      //        //发异步删除数据
-      //        $(obj).parents("tr").remove();
-      //        layer.msg('已删除!',{icon:1,time:1000});
-      //    });
-      //}
-
-
 
       function delAll (argument) {
 
@@ -256,6 +232,9 @@
     var vm = new Vue({
         el: "#app",
         data: {
+            searchName: "",
+            searchemployingnit: "",
+            searchpartnerName: "",
             GetPersonalInformation: [],
             all: 6, //总页数
             cur: 1//当前页码
@@ -298,7 +277,23 @@
                     alert(response);
                 });
             },
-            
+            searchPersonal: function (searchName, searchemployingnit, searchpartnerName) {
+                axios.get("http://localhost:8099/PersonalInformation/GetPersonalInformation?pageIndex=1" + "&name=" + searchName + "&employingnit=" + searchemployingnit + "&partnerName=" + searchpartnerName).then(
+                    (response) => {
+                        this.GetPersonalInformation = [];
+                        this.cur = response.data.CurrentPage;
+                        this.all = response.data.TotlePage;
+                        for (var i = 0; i < response.data.Data.length; i++) {
+                            this.GetPersonalInformation.push(response.data.Data[i]);
+                        }
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
 
 
             //删除
