@@ -140,7 +140,6 @@
             //页面层
             layer.open({
                 type: 1,
-                skin: 'layui-layer-rim', //加上边框
                 title: "添加信息",
                 area: ['450px', '600px'], //宽高
                 content: '<div id="addInfo"><form action="/" method="post" id="form1" ><input type="text" class="layui-input" name="StaffId" readonly="readonly" hidden="hidden" /><table class="layui-table" ><tr><td>姓名：</td><td><input type="text" class="layui-input" name="Name" readonly="readonly" /></td></tr><tr><td>用工单位：</td><td><input type="text" class="layui-input" name="EmployingUnit" readonly="readonly" /></td></tr><tr><td>合作方名称：</td><td><input type="text" class="layui-input" name="PartnerName" readonly="readonly" /></td></tr><tr><td>岗位：</td><td><input type="text" class="layui-input" name="Post" readonly="readonly" /></td></tr><tr><td>年度：</td><td><input type="text" id="year" class="layui-input" name="Year" readonly="readonly" /></td></tr><tr><td>季度：</td><td><select style="height:40px;" class="select1" name="Quarter" lay-verify=""><option value="第一季度">第一季度</option><option value="第二季度">第二季度</option><option value="第三季度">第三季度</option><option value="第四季度">第四季度</option></select></td></tr><tr><td>工作完成情况：</td><td><textarea class="layui-textarea" name="Completeness" id="completeness"></textarea></td></tr><tr><td></td><td><input id="addBtn" class="layui-btn layui-btn-small" type="button" value="提交" onclick="addPersonnelExp()" /></td></tr></table></form></div>'

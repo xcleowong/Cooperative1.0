@@ -102,8 +102,8 @@ namespace CooperativeLabor.Services
             {
                 conn.Open();
 
-               // entryAndExitRecord.ModificationTime =Convert.ToDateTime(DateTime.Now.ToString("yyyy/MM/dd HH:mm"));                
-                entryAndExitRecord.ModificationTime =Convert.ToString(DateTime.Now);                
+               // entryAndExitRecord.ModificationTime =Convert.ToDateTime(DateTime.Now.ToString("yyyy/MM/dd HH:mm")); 
+                entryAndExitRecord.ModificationTime =DateTime.Now.ToString();
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Id", entryAndExitRecord.Id, null, null, null);
                 parameters.Add("@PartnerName", entryAndExitRecord.PartnerName, null, null, null);
