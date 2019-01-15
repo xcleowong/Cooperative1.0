@@ -153,17 +153,17 @@ namespace CooperativeLabor.Mvc.Controllers
             t2 = t2.Replace("-", "");
             return t2;
         }
-    
-    /// <summary>
-    /// 添加用户
-    /// </summary>
-    /// <returns></returns>
-    //[LoginFatier]
-       public ActionResult AddUserManagement()
-        {            
+
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <returns></returns>
+        //[LoginFatier]
+        public ActionResult AddUserManagement()
+        {
             return View();
         }
-        
+
 
 
         /// <summary>
@@ -179,7 +179,7 @@ namespace CooperativeLabor.Mvc.Controllers
         /// 修改用户
         /// </summary>
         /// <returns></returns>
-       // [LoginFatier]
+        //[LoginFatier]
         public ActionResult UpdateUserManagement(int Id)
         {
             ViewBag.Id = Id;
