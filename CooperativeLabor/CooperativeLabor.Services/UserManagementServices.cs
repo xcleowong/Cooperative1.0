@@ -45,12 +45,9 @@ namespace CooperativeLabor.Services
                     string sql2 = "INSERT INTO usermanagement(UserName,UserPassword,InstitutionalFramework,RoleId,IsStart,CreationTime,ModificationTime)VALUES(@UserName,@UserPassword,@InstitutionalFramework,@RoleId,IsStart,@CreationTime,@ModificationTime)";
                     var result = conn.Execute(sql2, parameters);
 
-
                     //如果上条语句执行成功则执行下面语句
                     if (result > 0)
                     {
-
-
                         //根据角色名称查询Id
                         //string sql3 = "select Id from roles where RoleName=@RoleName";
                         string sql3 = "select Id FROM usermanagement where UserName=@UserName";
@@ -73,10 +70,10 @@ namespace CooperativeLabor.Services
                     }
 
                 }
-
                 return i;
             }
         }
+
         /// <summary>
         /// 删除人员管理信息
         /// </summary>

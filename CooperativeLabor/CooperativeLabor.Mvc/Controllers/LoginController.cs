@@ -25,6 +25,14 @@ namespace CooperativeLabor.Mvc.Controllers
         //    System.Web.HttpContext.Current.Session["userID"] = id;
         //    return View();
         //}
+
+       
+
+       
+       /// <summary>
+       /// 登录
+       /// </summary>
+       /// <returns></returns>
         public ActionResult Login()
         {
 

@@ -181,6 +181,7 @@ namespace CooperativeLabor.WebApi.Controllers
             int i = this.userManagement.Add(userManagement);
             return i;
         }
+
         /// <summary>
         /// 删除
         /// </summary>
@@ -193,6 +194,7 @@ namespace CooperativeLabor.WebApi.Controllers
             int i = this.userManagement.Delete(Id);
             return i;
         }
+
         /// <summary>
         /// 显示
         /// </summary>
@@ -204,6 +206,7 @@ namespace CooperativeLabor.WebApi.Controllers
             var result = this.userManagement.GetUserManagements();
             return result;
         }
+
         /// <summary>
         /// 根据Id获取单个用户
         /// </summary>
@@ -216,6 +219,7 @@ namespace CooperativeLabor.WebApi.Controllers
             var result = this.userManagement.GetAloneUserManagementById(Id);
             return result;
         }
+
         /// <summary>
         /// 修改用户信息
         /// </summary>
@@ -231,8 +235,6 @@ namespace CooperativeLabor.WebApi.Controllers
             return i;
         }
         #endregion
-
-    
-
+        
     }
 }
