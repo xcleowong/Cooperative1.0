@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     /**/
 
     Layout = null;
@@ -12,6 +11,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>IndexEss</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    @*<script src="~/Content/VueScripts/vue.js"></script>*@
+    @*<script src="~/Content/VueScripts/axios.js"></script>*@
     <script src="~/Content/VueScripts/vue.js"></script>
     <script src="~/Content/VueScripts/axios.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
@@ -161,7 +162,7 @@
         el: "#app",
         data: {
             EssentialInformationList: [],
-             all: 6, //总页数
+            all: 6, //总页数
             cur: 1//当前页码
         },
         watch: {
@@ -277,7 +278,7 @@
             },
         },
 
-                //计算属性
+        //计算属性
         computed: {
             indexs: function () {
                 var left = 1;
