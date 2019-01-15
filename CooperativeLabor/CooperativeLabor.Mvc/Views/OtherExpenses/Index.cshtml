@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>费用管理-其他费用</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+    <link href="~/Content/Layui_X_Admin/css/font.css" rel="stylesheet" />
+    <link href="~/Content/Layui_X_Admin/css/xadmin.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/Content/Layui_X_Admin/lib/layui/layui.js"></script>
+    <script src="~/Content/Layui_X_Admin/js/xadmin.js"></script>
+
+    @*vue*@
+    <script src="~/Content/VueScripts/vue.js"></script>
+    <script src="~/Content/VueScripts/axios.js"></script>
+
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body class="layui-anim layui-anim-up">
+    <div class="x-nav">
+        <span class="layui-breadcrumb">
+            <a href="">首页</a>
+            <a href="">费用管理</a>
+            <a>
+                <cite>其他费用</cite>
+            </a>
+        </span>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon" style="line-height:30px">ဂ</i>
+        </a>
+    </div>
+    <div class="x-body" id="app">
+        <div class="layui-row">
+            <form class="layui-form layui-col-md12 x-so">
+                <div style="width:150px;float:left;">
+                    <input type="text" name="employingUnit" placeholder="请输入用工单位" autocomplete="off" class="layui-input">
+                </div>
+                <div style="width:150px;float:left;">
+                    <input type="text" name="partnerName" placeholder="请输入合作方名称" autocomplete="off" class="layui-input">
+                </div>
+                <div style="width:150px;float:left;">
+                    <select>
+                        <option value="value">-请选择-</option>
+                        <option value="出差">慰问费</option>
+                        <option value="出差">工会活动</option>
+                        <option value="出差">党建建设</option>
+                        <option value="休假">团委活动</option>
+                    </select>
+                </div>
+                <div style="width:150px;float:left;">
+                    <select>
+                        <option value="value">-审核状态-</option>
+                        <option value="休假">草稿</option>
+                        <option value="出差">已提交</option>
+                        <option value="出差">研究院财务已审核</option>
+                        <option value="出差">用工单位负责人已审核</option>
+                        <option value="出差">研究院归口部门已审核</option>
+                    </select>
+                </div>
+                &nbsp;&nbsp;
+                <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+            </form>
+        </div>
+        <xblock>
+            @*<button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>*@
+            <button class="layui-btn" onclick="addBtn()"><i class="layui-icon"></i>其他费用</button>
+            <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        </xblock>
+        <table class="layui-table" lay-size="sm">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>填报人</th>
+                    <th>用工单位</th>
+                    <th>合作方名称</th>
+                    <th>开始时间</th>
+                    <th>结束时间</th>
+                    <th>项目类型</th>
+                    <th>入账卡号</th>
+                    <th>实际花费/元</th>
+                    <th>填报时间</th>
+                    <th>事项及内容</th>
+                    <th>人员姓名</th>
+                    <th>提交状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="tabody"></tbody>
+        </table>
+        <div class="page">
+            <div>
+                <a class="prev" href="">&lt;&lt;</a>
+                <a class="num" href="">1</a>
+                <span class="current">2</span>
+                <a class="num" href="">3</a>
+                <a class="num" href="">489</a>
+                <a class="next" href="">&gt;&gt;</a>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        var _hmt = _hmt || []; (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</body>
+</html>
+
+<script type="text/javascript">
+    //登录人ID
+    var StaffId = 1;
+    var StaffName = "张三";//登录人姓名
+    $(function () {
+        GetOtherExpenses(StaffId);//显示
+    });
+
+    //显示
+    function GetOtherExpenses(StaffId) {
+        $.ajax({
+            url: 'http://localhost:8099/OtherExpense/GetOtherExpenses?StaffId=' + StaffId,
+            type: 'get',
+            success: function (data) {
+                $("#tabody").html("");
+                var index = 0;
+                for (var i = 0; i < data.length; i++) {
+                    var tabody = '<tr>'
+                        + '<td>' + (index + 1) + '</td>'
+                        + '<td>' + data[i].Informant + '</td>'
+                        + '<td id="' + data[i].EmployingUnit + '">' + data[i].EmployingUnit + '</td>'
+                        + '<td>' + data[i].PartnerName + '</td>'
+                        + '<td title="' + data[i].StartTime + '">' + (data[i].StartTime).split(' ')[0] + '</td>'
+                        + '<td title="' + data[i].EndTime + '">' + (data[i].EndTime).split(' ')[0] + '</td>'
+                        + '<td>' + data[i].ProjectTypes + '</td>'
+                        + '<td>' + data[i].BankCard + '</td>'
+                        + '<td>' + data[i].ActualCost + '</td>'
+                        + '<td title="' + data[i].ReportedDate + '">' + (data[i].ReportedDate).split(' ')[0] + '</td>'
+                        + '<td title="' + data[i].Content + '">' + (data[i].Content).substring(0, 5) + '...' + '</td>'
+                        + '<td title="' + data[i].Names + '">' + (data[i].Names).substring(0, 10) + '</td>'
+                        + '<td>' + data[i].StrStatus + '</td>'
+                        + '<td><button class="layui-btn layui-btn-sm" onclick="deleteOrRecall(' + data[i].Id + ',' + data[i].Status + ', ' + StaffId + ')">' + data[i].ReverseStrStatus + '</button></td>'
+                        + '</tr>';
+                    $("#tabody").append(tabody);
+                }
+            }
+        })
+    };
+
+    //绑定合作方名称下拉
+    function GetPartnerNames() {
+        $.ajax({
+            url: 'http://localhost:8099/OtherExpense/GetEntryAndExitRecords',
+            type: 'get',
+            success: function (data) {
+                $("#partnerName").html("");
+                for (var i = 0; i < data.length; i++) {
+                    var option = '<option value="' + data[i].PartnerName + '">' + data[i].PartnerName + '</option>';
+                    $("#partnerName").append(option);
+                }
+            }
+        })
+    };
+
+    //自动显示登录人所在用工单位
+    function ShowEmployingnit(Uid) {
+        $.ajax({
+            url: 'http://localhost:8099/OtherExpense/GetPersonalInformation?UId=' + Uid,
+            type: 'get',
+            success: function (data) {
+                $("[name=EmployingUnit]").val(data[0].Employingnit);
+            }
+        })
+    };
+
+    //绑定姓名
+    function addName() {
+        
+    };
+    
+    //显示添加控件
+    function addBtn() {
+        //页面层
+        layer.open({
+            type: 1,
+            title: "添加信息",
+            area: ['450px', '600px'], //宽高
+            content: '<div id="addDiv"><form action="/" method="post" id="form1" class= "layui-form layui-col-md12 x-so" ><table class="layui-table" style=""><tr hidden="hidden"><td></td><td><input class="layui-input" type="text" name="Status" value="1" /><input class="layui-input" type="text" name="StaffId" /></td></tr><tr><td>填报人：</td><td><input class="layui-input" type="text" name="Informant" readonly="readonly" /></td></tr><tr><td>用工单位：</td><td><input class="layui-input" type="text" name="EmployingUnit" readonly="readonly" /></td></tr><tr><td>合作方名称：</td><td><div style="height:30px;"><select name="PartnerName" id="partnerName"></select></div></td></tr><tr><td>开始时间：</td><td><input id="startTime" class="clickTime layui-input" type="text" name="StartTime" readOnly="readOnly" /></td></tr><tr><td>结束时间：</td><td><input id="endTime" class="clickTime layui-input" type="text" name="EndTime" readOnly="readOnly" /></td></tr><tr><td>项目类型：</td><td><div style="width:150px;float:left;"><select name="ProjectTypes" id="select1"><option value="value">—请选择—</option><option value="出差">慰问费</option><option value="出差">工会活动</option><option value="出差">党建建设</option><option value="休假">团委活动</option></select></div></td></tr><tr><td>入账卡号：</td><td><div style="height:30px;"><input class="layui-input" type="text" id="bankCard" name="BankCard" placeholder="最多可输入19位数字" /></div></td></tr><tr><td>实际花费：</td><td><div style="height:30px;"><input class="layui-input" type="text" id="actualCost" name="ActualCost" placeholder="最多可输入8位数字" /></div></td></tr><tr><td>填报时间：</td><td><div style="height:30px;"><input class="layui-input" type="text" name="ReportedDate" readonly="readonly" /></div></td></tr><tr><td>事项及内容：</td><td><textarea class="layui-input" name="Content" id="content"></textarea></td></tr><tr><td>姓名：</td><td><div style="height:30px;"><input class="layui-input" type="text" name="Names" id="names" /><button class="layui-btn layui-btn-sm" onclick="addName()"><i class="layui-icon"></i>更多</button></div></td></tr><tr><td></td><td><input id="AddBtn" class="layui-btn layui-btn-small" type="button" value="提交" onclick="addOtherExpense()" /></td></tr></table></form></div>'
+        });
+
+        //自动显示登录人所在用工单位
+        ShowEmployingnit(StaffId);
+
+        $("[name=StaffId]").val(StaffId);//赋值用户ID
+        $("[name=Informant]").val(StaffName);//赋值填报人
+        $("[name=EmployingUnit]").val($("#EmployingUnit").val());//赋值用工单位
+        var myDate = new Date();//获取系统当前时间
+        //获取当前日期时间
+        var datetime = myDate.getFullYear() + '-' + myDate.getMonth() + 1 + '-' + myDate.getDate() + ' ' + myDate.getHours() + ':' + myDate.getMinutes() + ':' + myDate.getSeconds();
+        $("[name=ReportedDate]").val(datetime);//赋值姓名
+
+        //时间控件
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#startTime' //指定元素
+            });
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#endTime' //指定元素
+            });
+        });
+
+        layui.use('form', function () {
+            var form = layui.form;
+            form.render();
+        });
+
+        //绑定合作方名称下拉
+        GetPartnerNames();
+    };
+
+    //添加其他费用
+    function addOtherExpense() {
+
+        //项目类型非空
+        if ($("#select1").val() == "value") {
+            //tips层
+            layer.tips('请选择项目类型', '#select1');
+            return;
+        }
+        //开始时间非空
+        if ($("#startTime").val() == "") {
+            //tips层
+            layer.tips('请选择开始时间', '#startTime');
+            return;
+        }
+        //结束时间非空
+        if ($("#endTime").val() == "") {
+            //tips层
+            layer.tips('请选择结束时间', '#endTime');
+            return;
+        }
+        //入账卡号非空
+        if ($("#bankCard").val() == "") {
+            //tips层
+            layer.tips('请填写入账卡号', '#bankCard');
+            return;
+        }
+        //入账卡号正整数
+        if (!(/(^[1-9]\d*$)/.test($("#bankCard").val()))) {
+            //tips层
+            layer.tips('入账卡号为正整数', '#bankCard');
+            return;
+        }
+        //实际花费非空
+        if ($("#actualCost").val() == "") {
+            //tips层
+            layer.tips('请填写实际花费', '#actualCost');
+            return;
+        }
+        //实际花费非负数
+        if ((/(^\\d+(\\.\\d+)?$)/.test($("#actualCost").val()))) {
+            //tips层
+            layer.tips('实际花费为非负数', '#actualCost');
+            return;
+        }
+        //事项及内容非空
+        if ($("#content").val() == "") {
+            //tips层
+            layer.tips('请填写事项及内容', '#content');
+            return;
+        }
+        //姓名非空
+        if ($("#names").val() == "") {
+            //tips层
+            layer.tips('请填写/选择姓名', '#names');
+            return;
+        }
+
+        //添加
+        $.ajax({
+            url: 'http://localhost:8099/OtherExpense/AddOtherExpense',
+            type: 'post',
+            data: $("#form1").serialize(),
+            success: function (data) {
+                if (data > 0) {
+                    layer.msg("提交成功！", { icon: 6 });
+                    GetOtherExpenses(StaffId);
+                }
+                else {
+                    layer.msg("提交失败！", { icon: 5 });
+                }
+            }
+        })
+    };
+
+    //删除/撤回 其他费用
+    function deleteOrRecall(id, status, staffId) {
+        var msg, msg1 = "";
+        if (status == 1) {
+            msg = "确认撤回吗？";
+            msg1 = "撤回";
+        }
+        if (status == 2) {
+            msg = "确认删除吗？";
+            msg1 = "删除";
+        }
+        //询问框
+        layer.confirm(msg, {
+            btn: ['确定', '取消'] //按钮
+        }, function () {
+            $.ajax({
+                url: 'http://localhost:8099/OtherExpense/RecallOrDelete?Id=' + id + '&Status=' + status,
+                type: 'post',
+                success: function (data) {
+                    if (data > 0) {
+                        layer.msg(msg1 + "成功！", { icon: 6 });
+                        GetOtherExpenses(staffId);
+                    }
+                    else {
+                        layer.msg(msg1 + "失败！", { icon: 5 });
+                    }
+                }
+            })
+        })
+    };
+
+    layui.use('form', function () {
+        var form = layui.form;
+        form.render();
+    });
+</script>
+
