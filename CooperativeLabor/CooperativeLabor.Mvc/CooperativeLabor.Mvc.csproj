@@ -205,6 +205,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\DepartmentMaintenanceViewController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\OtherExpensesController.cs" />
     <Compile Include="Controllers\PersonnelExpenditureController.cs" />
     <Compile Include="Controllers\SpecialSignMVCController.cs" />
     <Compile Include="Controllers\CheckingInController.cs" />
@@ -1442,6 +1443,7 @@
     <Content Include="Views\AllowancesView\Index.cshtml" />
     <Content Include="Views\HolidaySettingsView\Index.cshtml" />
     <Content Include="Views\CheckingIn\Index.cshtml" />
+    <Content Include="Views\OtherExpenses\Index.cshtml" />
     <None Include="Views\PartnerMVC\IndexEss1.cshtml" />
     <None Include="Views\PartnerMVC\IndexEnt.cshtml" />
     <None Include="Views\PartnerMVC\AdminList.cshtml" />
@@ -1594,7 +1596,6 @@
     <Content Include="Views\PersonalInformation\PersonalAdd.cshtml" />
     <Content Include="Views\PersonnelExpenditure\Index.cshtml" />
     <Content Include="Views\SpecialSignMVC\Add.cshtml" />
-    <Content Include="Views\TravelOnVacation\TravelIndex.cshtml" />
     <Content Include="Views\PartnerMVC\UpdateUserManagement.cshtml" />
     <Content Include="Views\SpecialSignMVC\SpecialIndex.cshtml" />
     <Content Include="Views\TravelOnVacation\Index.cshtml" />

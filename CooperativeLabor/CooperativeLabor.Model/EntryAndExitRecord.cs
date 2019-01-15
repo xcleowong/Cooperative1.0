@@ -37,12 +37,12 @@ namespace CooperativeLabor.Model
         /// <summary>
         /// 入场时间
         /// </summary>           
-        public DateTime ApproachTime { get; set; }
+        public string ApproachTime { get; set; }
 
         /// <summary>
         /// 离场时间
         /// </summary>           
-        public DateTime Departuretime { get; set; }
+        public string Departuretime { get; set; }
 
         /// <summary>
         /// 备注
@@ -62,12 +62,12 @@ namespace CooperativeLabor.Model
         /// <summary>
         /// 创建时间
         /// </summary>           
-        public DateTime CreationTime { get; set; }
+        public string CreationTime { get; set; }
 
         /// <summary>
         /// 修改时间
         /// </summary>           
-        public DateTime ModificationTime { get; set; }
+        public string ModificationTime { get; set; }
 
         /// <summary>
         /// 是否删除

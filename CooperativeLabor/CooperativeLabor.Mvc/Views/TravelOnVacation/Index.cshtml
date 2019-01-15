@@ -155,7 +155,6 @@
         //页面层
         layer.open({
             type: 1,
-            skin: 'layui-layer-rim', //加上边框
             title: "添加信息",
             area: ['450px', '600px'], //宽高
             content: '<div id="addDiv"><form action="/" method="post" id="form1" ><table class="layui-table" style=""><tr hidden="hidden"><td></td><td><input class="layui-input" type="text" name="State" value="1" /><input class="layui-input" type="text" name="StaffId" /></td></tr><tr><td>姓名：</td><td><input class="layui-input" type="text" name="Name" readonly="readonly" /></td></tr><tr><td>申请类型：</td><td><div style="height:30px;"><select style="height:40px;" class="select1" name="ApplicationType"><option value="出差">出差</option><option value="休假">休假</option></select></div></td></tr><tr><td>申请事由：</td><td><textarea class="layui-input" name="ApplicationReason" id="applicationReason"></textarea></td></tr><tr><td>开始时间：</td><td><input id="startTime" class="clickTime layui-input" type="text" name="StartTime" readOnly="readOnly" /></td></tr><tr><td>结束时间：</td><td><input id="endTime" class="clickTime layui-input" type="text" name="EndTime" readOnly="readOnly" /></td></tr><tr><td>计算时长：</td><td><input class="layui-input" type="text" name="ComputingTime" id="computingTime" /></td></tr><tr><td>申请日期：</td><td><input class="layui-input" type="text" name="ApplicationDate" readonly="readonly" /></td></tr><tr><td></td><td><input id="AddBtn" class="layui-btn layui-btn-small" type="button" value="提交" onclick="addTravelOnVacation()" /></td></tr></table></form></div>'
