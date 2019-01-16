@@ -113,7 +113,7 @@
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加人员基本信息','/PersonalInformation/Add',700,500)"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <span class="x-right" style="line-height:40px">共有数据：{{count}} 条</span>
       </xblock>
       <table class="layui-table"  v-show="GetPersonalInformation.length" lay-size="sm">
         <thead>
@@ -237,7 +237,8 @@
             searchpartnerName: "",
             GetPersonalInformation: [],
             all: 6, //总页数
-            cur: 1//当前页码
+            cur: 1,//当前页码
+            count: 0//总条数
         },
         watch: {
             cur: function (oldValue, newValue) {
@@ -264,6 +265,7 @@
                         this.GetPersonalInformation = [];
                         this.cur = response.data.CurrentPage;
                         this.all = response.data.TotlePage;
+                        this.count = response.data.DataCount;
                         for (var i = 0; i < response.data.Data.length; i++) {
                             this.GetPersonalInformation.push(response.data.Data[i]);
                         }
@@ -302,9 +304,7 @@
                         (response) => {
                             if (response.data > 0) {
                                 layer.msg('已删除!', { icon: 1, time: 1000 }); 
-
                             }
-                           
                         },
                         (response) => {
                             alert(response.status);
@@ -313,10 +313,7 @@
                         alert(response);
                         });
                     //$(obj).parents("tr").remove();
-                   
-                    
                 })
-                
             },
             ////修改
             updateContact: function (Name, UserName, Gender, Birthday, Nation, Employingnit, PartnerName, ProfessionalSkill, MaritalStatus, IDNumber, PartyGroupings, Email, Post, Phone, CardNo, OpeningBank, CreationTime, ModificationTime, IsDelete, Id) {

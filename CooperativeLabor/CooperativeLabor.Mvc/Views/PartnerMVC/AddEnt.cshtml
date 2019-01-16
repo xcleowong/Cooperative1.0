@@ -11,6 +11,14 @@
     <title>AddEnt</title>
     <script src="~/Content/VueScripts/vue.js"></script>
     <script src="~/Content/VueScripts/axios.js"></script>
+
+
+    @*LayUI*@
+    <link href="~/Content/Layui_X_Admin/css/font.css" rel="stylesheet" />
+    <link href="~/Content/Layui_X_Admin/css/xadmin.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/Content/Layui_X_Admin/lib/layui/layui.js"></script>
+    <script src="~/Content/Layui_X_Admin/js/xadmin.js"></script>
 </head>
 <body>
     <div id="add">
@@ -77,7 +85,7 @@
             <tr>
                 <td>创建时间</td>
                 <td>
-                    <input id="date" type="text" v-model="CreationTime" />
+                    <input id="date" type="date" v-model="CreationTime" />
                 </td>
             </tr>
             <tr>
@@ -147,14 +155,9 @@
                 params.append('IsDelete', IsDelete);
                 axios.post('http://localhost:8099/Partner/AddEnt', params).then(
                     (response) => {
-                        alert(response)
-
-
-                        alert("添加成功")
-
-
-
-
+                        //alert(response)
+                        //alert("添加成功")
+                        layer.msg('已添加!', { icon: 1, time: 1000 });
                     },
                     (response) => {
                         alert(response.status);

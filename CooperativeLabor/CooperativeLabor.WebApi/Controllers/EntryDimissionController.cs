@@ -75,6 +75,7 @@ namespace CooperativeLabor.WebApi.Controllers
             {
                 listGA = listGA.Where(s => s.Name.Contains(name)).ToList();
             }
+            pageNumber.DataCount = listGA.Count;
             pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
             pageNumber.TotlePage = (listGA.Count / PAGESIZE) + (listGA.Count % PAGESIZE == 0 ? 0 : 1);
             pageNumber.Data = listGA.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);
