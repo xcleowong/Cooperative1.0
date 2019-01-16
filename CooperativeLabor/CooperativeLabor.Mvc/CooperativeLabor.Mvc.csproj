@@ -241,7 +241,9 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\echarts.min.js" />
     <Content Include="Content\jquery-3.1.1.js" />
+    <Content Include="Content\jquery-3.3.1.js" />
     <Content Include="Content\My97DatePicker\demo.htm" />
     <Content Include="Content\My97DatePicker\My97DatePicker\calendar.js" />
     <Content Include="Content\My97DatePicker\My97DatePicker\lang\en.js" />
@@ -814,6 +816,29 @@
     <Content Include="css\theme\purple-light.css" />
     <Content Include="css\theme\red-dark.css" />
     <Content Include="css\theme\red-light.css" />
+    <Content Include="DateControl\calendar.js" />
+    <Content Include="DateControl\lang\en.js" />
+    <Content Include="DateControl\lang\zh-cn.js" />
+    <Content Include="DateControl\lang\zh-tw.js" />
+    <Content Include="DateControl\skin\datePicker.gif" />
+    <Content Include="DateControl\skin\default\datepicker.css" />
+    <Content Include="DateControl\skin\default\img.gif" />
+    <Content Include="DateControl\skin\WdatePicker.css" />
+    <Content Include="DateControl\skin\whyGreen\bg.jpg" />
+    <Content Include="DateControl\skin\whyGreen\datepicker.css" />
+    <Content Include="DateControl\skin\whyGreen\img.gif" />
+    <Content Include="DateControl\WdatePicker.js" />
+    <Content Include="DateControl\开发包\lang\en.js" />
+    <Content Include="DateControl\开发包\lang\zh-cn.js" />
+    <Content Include="DateControl\开发包\lang\zh-tw.js" />
+    <Content Include="DateControl\开发包\readme.txt" />
+    <Content Include="DateControl\开发包\skin\datePicker.gif" />
+    <Content Include="DateControl\开发包\skin\default\datepicker.css" />
+    <Content Include="DateControl\开发包\skin\default\img.gif" />
+    <Content Include="DateControl\开发包\skin\WdatePicker.css" />
+    <Content Include="DateControl\开发包\skin\whyGreen\bg.jpg" />
+    <Content Include="DateControl\开发包\skin\whyGreen\datepicker.css" />
+    <Content Include="DateControl\开发包\skin\whyGreen\img.gif" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -1633,7 +1658,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DateControl\" />
     <Folder Include="Models\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
