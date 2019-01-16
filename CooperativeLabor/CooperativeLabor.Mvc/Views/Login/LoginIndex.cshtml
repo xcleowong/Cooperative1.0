@@ -86,18 +86,23 @@
             Load();
         });
         function Load() {
+            var user = JSON.parse(localStorage.user);
+            //console.log(user);
+            //console.log(user.Id),
             $.ajax({
                 url: "/Login/GetPermissionList",
                 data: {
-                    id:@Request.QueryString["id"].ToString(),
-                },
+                    @*Id:@Request.QueryString["Id"].ToString(),*@
+                    //UserName: user.UserName,
+                    Id: user.Id,   
+                },                
                 dataType:"json",
                 success: function (data) {
+                    console.log(data);
                     $(data).each(function (index, data) {
                         $("#menu-box").append("<ul class='kit-menu'><li class= 'kit-menu-item layui-show'><a href='" + data.PermissionUrl + "' target='BodyContent'><i class='layui-icon'></i><span>" + data.PermissionName+"</span></a></li></ul>");
                     })
                 }
-
             })
         }
 

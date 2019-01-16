@@ -35,7 +35,7 @@ namespace CooperativeLabor.Services
                 parameters.Add("@IsStart", userManagement.IsStart, null, null, null);
                 parameters.Add("@CreationTime", userManagement.CreationTime, null, null, null);
                 parameters.Add("@ModificationTime", userManagement.ModificationTime, null, null, null);
-                string sql = "SELECT * FROM usermanagement where UserName=@UserName"; // 根据角色名称查询角色
+                string sql = "SELECT * FROM usermanagement where UserName=@UserName"; // 根据用户名称查询用户
                 var user = conn.Query<UserManagement>(sql, userManagement);
                 int i = -1;
                 //判断是否存在角色
