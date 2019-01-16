@@ -101,13 +101,13 @@
         <i class="layui-icon" style="line-height:30px">ဂ</i></a>
     </div>
     <div class="x-body" id="app">
-        <div class="layui-row">
+        @*<div class="layui-row">
             <form class="layui-form layui-col-md12 x-so">
 
                 <input type="text" name="username" placeholder="请输入假期" autocomplete="off" class="layui-input">
                 <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
             </form>
-        </div>
+        </div>*@
         <xblock>
             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
             <button class="layui-btn" onclick="x_admin_show('添加用户','/HolidaySettingsView/AddHolidaySettingsView',700,500)"><i class="layui-icon"></i>添加</button>
@@ -260,7 +260,7 @@
                 this.getList(this.cur);
             },
 
-            //获取补助标准标准信息
+            //获取假期设置信息
             getList: function (id) {
                 axios.get('http://localhost:8099/HolidaySettings/GetHolidaySettings', { params: { pageIndex: id } }).then((response) => {
                     this.list = [];
@@ -278,22 +278,26 @@
                     alert(response);
                 });
             },
-            //删除补助标准标准信息
+            //删除假期设置信息
             DeleteHolidaySettings: function (id) {
-                axios.get('http://localhost:8099/HolidaySettings/DeleteHolidaySettings?Id=' + id).then((respose) => {
-                    if (respose.data > 0) {
-                        alert("删除成功!!!");
-                        this.getList();
-                    }
-                },
-                    (response) => {
-                        alert(response.status);
-                    }
-                ).catch(function (response) {
-                    alert(response);
-                });
+                layer.confirm('确认要删除吗？', function (index) {
+                    axios.get('http://localhost:8099/HolidaySettings/DeleteHolidaySettings?Id=' + id).then((respose) => {
+                        if (respose.data > 0) {
+                            //alert("删除成功!!!");
+                            layer.msg('已删除!', { icon: 1, time: 1000 }); 
+                            //this.getList();
+                        }
+                    },
+                        (response) => {
+                            alert(response.status);
+                        }
+                    ).catch(function (response) {
+                        alert(response);
+                    });
+                })
+                
             },
-            //修改补助标准标准信息
+            //修改假期设置信息
             UpdateHolidaySettings: function (Id, OfficeHoursam, ClosingTimeam, OfficeHourspm, ClosingTimepm, CreationTime, IsStart) {
                 var params = new URLSearchParams();
                 params.append('Id', Id);

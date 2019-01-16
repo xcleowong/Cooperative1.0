@@ -251,8 +251,6 @@
                 if (data != this.cur) {
                     this.cur = data;
                     this.GetPersonal(data);
-
-
                 }
             },
             pageClick: function () {
@@ -277,6 +275,7 @@
                     alert(response);
                 });
             },
+            //查询
             searchPersonal: function (searchName, searchemployingnit, searchpartnerName) {
                 axios.get("http://localhost:8099/PersonalInformation/GetPersonalInformation?pageIndex=1" + "&name=" + searchName + "&employingnit=" + searchemployingnit + "&partnerName=" + searchpartnerName).then(
                     (response) => {

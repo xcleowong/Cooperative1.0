@@ -18,6 +18,7 @@ namespace CooperativeLabor.WebApi.Controllers
     [RoutePrefix("checkingIn")]
     public class CheckingInWebApiController : ApiController
     {
+        private const int PAGESIZE = 5;
         /// <summary>
         /// 考勤签到属性注入
         /// </summary>
@@ -130,14 +131,16 @@ namespace CooperativeLabor.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("getCheckingIn")]
-        public List<CheckingIn> GetCheckingIn(int StaffId)
+        public PageNumber GetCheckingIn(int StaffId, int? pageIndex)
         {
-            //当前页, string currentpage
-            //if (currentpage == null) { currentpage = "1"; }
-            //Breach List
+            if (pageIndex==null)
+            {
+                pageIndex = 1;
+            }
             List<CheckingIn> checkingInsList = new List<CheckingIn>();
             //查询本月签到情况
             var list = IcheckingInServices.GetCheckingIns(StaffId);
+            PageNumber pageNumber = new PageNumber();
             for (int i = 0; i < list.Count; i++)
             {
                 var strState = "";
@@ -167,15 +170,11 @@ namespace CooperativeLabor.WebApi.Controllers
                 checkingInsList.Add(checkingIn);
             }
             //分页 
-            //一页显示3条
-            //int totlepage = checkingInsList.Count / 3 + (checkingInsList.Count % 3 == 0 ? 0 : 1);
-            //checkingInsList = checkingInsList.Skip((int.Parse(currentpage) - 1) * 3).Take(3).ToList();
-            ////分页枚举
-            //PageBox pagebox = new PageBox();
-            //pagebox.CurrentPage = int.Parse(currentpage);
-            //pagebox.TotlePage = totlepage;
-            //pagebox.PageData = checkingInsList;
-            return checkingInsList;
+            
+            pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
+            pageNumber.TotlePage = (checkingInsList.Count / PAGESIZE) + (checkingInsList.Count % PAGESIZE == 0 ? 0 : 1);
+            pageNumber.Data = checkingInsList.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);
+            return pageNumber;
         }
 
     }
