@@ -6,6 +6,9 @@ using System.Web.Mvc;
 
 namespace CooperativeLabor.Mvc.Controllers
 {
+    /// <summary>
+    /// 考勤统计
+    /// </summary>
     public class AttendanceController : Controller
     {
         // GET: Attendance

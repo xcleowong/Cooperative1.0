@@ -125,6 +125,7 @@
     var vm = new Vue({
         el: "#app",
         data: {
+            searchVal:"",
             GetPersonals: [],
             all: 6, //总页数
             cur: 1//当前页码
@@ -168,6 +169,7 @@
                     alert(response);
                 });
             },
+            //查询
             searchPersonal: function (data) {
                 axios.get("http://localhost:8099/EntryDimission/GetPersonals", { params: { pageIndex: 1, name: data } }).then(
                     (response) => {

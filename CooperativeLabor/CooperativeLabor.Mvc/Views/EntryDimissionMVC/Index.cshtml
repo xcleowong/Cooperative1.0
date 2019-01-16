@@ -58,13 +58,11 @@
                     <input id="Radio1" type="radio" value="0" v-model="item.IsDelete" /><span>否</span>
                 </td>
                 <td>
-                    <div v-if="GetEntryDimission.Id!=''">
-                        <a href="#" v-on:click="updateContact(GetEntryDimission.OperationType,GetEntryDimission.DepartureTime,GetEntryDimission.DatesEmployed,GetEntryDimission.ModificationTime,GetEntryDimission.IsDelete,GetEntryDimission.Id)">修改</a>
-                        <a href="#" v-on:click="deleteById(GetPersonalInformation.Id)">删除</a>
+                    <div>
+                        <a href="#" v-on:click="updateContact(item.OperationType,item.DepartureTime,item.DatesEmployed,item.ModificationTime,item.IsDelete,item.Id)">修改</a>
+                        <a href="#" v-on:click="deleteById(item.Id)">删除</a>
                     </div>
-                    <div v-else>
-                        <a href="#" v-on:click="addContact(EntryAndExitRecord.PartnerName,EntryAndExitRecord.PartnerCategory,EntryAndExitRecord.BusinessLicense,EntryAndExitRecord.OperationType,EntryAndExitRecord.ApproachTime,EntryAndExitRecord.Departuretime,EntryAndExitRecord.Remark,EntryAndExitRecord.AttachmentName,EntryAndExitRecord.AttachmentPath,EntryAndExitRecord.CreationTime,EntryAndExitRecord.ModificationTime,EntryAndExitRecord.IsDelete)">添加</a>
-                    </div>
+                    
                 </td>
             </tr>
         </table>
@@ -97,20 +95,21 @@
             },
             //删除
             deleteById: function (id) {
-                axios.post('http://localhost:8099/EntryDimission/DeleteEntry?id=' + id).then(
-                    (response) => {
-                        this.GetEntryDimission = response.data;
-                        //for (var i = 0; i < response.data.length; i++) {
-                        //    this.contactsList.push(response.data[i]);
-                        //}
-                        //this.contactsList.push({ Id: "", Name: "", PhoneNo: "", EmailAddress: "" });
-                    },
-                    (response) => {
-                        alert(response.status);
-                    }
-                ).catch(function (response) {
-                    alert(response);
-                });
+                layer.confirm('确认要删除吗？', function (index) {
+                    axios.post('http://localhost:8099/EntryDimission/DeleteEntry?id=' + id).then(
+                        (response) => {
+                            if (response.data>0) {
+                                layer.msg('已删除!', { icon: 1, time: 1000 }); 
+                            }
+                        },
+                        (response) => {
+                            alert(response.status);
+                        }
+                    ).catch(function (response) {
+                        alert(response);
+                    });
+                })
+                
             },
             ////修改入离职信息
             updateContact: function (OperationType, DatesEmployed, DepartureTime, ModificationTime, IsDelete, Id) {

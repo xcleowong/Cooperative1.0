@@ -13,7 +13,7 @@
     <script src="~/Scripts/axios.js"></script>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/bootstrap.js"></script>
-    @*<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>*@
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <style>
         .page-bar {
             margin: 40px;
@@ -99,13 +99,13 @@
                 <td>{{EntryAndExitRecord.PartnerCategory}}</td>
                 <td>{{EntryAndExitRecord.BusinessLicense}}</td>
                 <td>{{EntryAndExitRecord.OperationType}}</td>
-                <td>{{EntryAndExitRecord.ApproachTime.substring(0,10)}}</td>
-                <td>{{EntryAndExitRecord.Departuretime.substring(0,10)}}</td>
+                <td>{{EntryAndExitRecord.ApproachTime}}</td>
+                <td>{{EntryAndExitRecord.Departuretime}}</td>
                 <td>{{EntryAndExitRecord.Remark}}</td>
                 <td>{{EntryAndExitRecord.AttachmentName}}</td>
                 <td>{{EntryAndExitRecord.AttachmentPath}}</td>
-                <td>{{EntryAndExitRecord.CreationTime.substring(0,10)}}</td>
-                <td>{{EntryAndExitRecord.ModificationTime.substring(0,10)}}</td>
+                <td>{{EntryAndExitRecord.CreationTime}}</td>
+                <td>{{EntryAndExitRecord.ModificationTime}}</td>
                 <td>{{EntryAndExitRecord.IsDelete}}</td>
                 <td>
                     <div v-if="EntryAndExitRecord.Id!=''">
@@ -113,10 +113,7 @@
                         <a href="#" v-on:click="deleteContactById(EntryAndExitRecord.Id)">删除</a>
 
                     </div>
-                    <div v-else>
-                        <a href="#" v-on:click="addContact(EntryAndExitRecord.PartnerName,EntryAndExitRecord.PartnerCategory,EntryAndExitRecord.BusinessLicense,EntryAndExitRecord.OperationType,EntryAndExitRecord.ApproachTime,
-                               EntryAndExitRecord.Departuretime,EntryAndExitRecord.Remark,EntryAndExitRecord.AttachmentName,EntryAndExitRecord.AttachmentPath,EntryAndExitRecord.CreationTime,EntryAndExitRecord.ModificationTime,EntryAndExitRecord.IsDelete)">添加</a>
-                    </div>
+           
                 </td>
             </tr>
 
@@ -156,16 +153,12 @@
                 if (data != this.cur) {
                     this.cur = data;
                     this.getAllEntryAndExitRecords(data);
-
-
                 }
             },
             pageClick: function () {
                 //console.log('现在在' + this.cur + '页');
                 this.getAllEntryAndExitRecords(this.cur);
             },
-
-
             //显示
             getAllEntryAndExitRecords: function (id) {
                 axios.get("http://localhost:8099/Partner/GetEntryAndExitRecordsEnt", { params: { pageIndex: id } }
@@ -178,7 +171,6 @@
                         for (var i = 0; i < response.data.Data.length; i++) {
                             this.EntryAndExitRecordList.push(response.data.Data[i]);
                         }
-                       
                     },
                     (response) => {
                         alert(response.status);
@@ -263,7 +255,6 @@
                 }
                 return ar
             }
-
         }
     })
 </script>

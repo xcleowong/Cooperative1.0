@@ -63,7 +63,7 @@ namespace CooperativeLabor.WebApi.Controllers
         /// <returns></returns>
         [Route("GetEntryDimissionRecords")]
         [HttpGet]
-        public PageNumber GetEntryDimissionRecords(int? pageIndex)
+        public PageNumber GetEntryDimissionRecords(int? pageIndex,string name="")
         {
             if (pageIndex == null)
             {
@@ -71,11 +71,14 @@ namespace CooperativeLabor.WebApi.Controllers
             }
             List<EntryDimissionRecord> listGA = entryDimission.GetEntryDimissionRecords().ToList();
             PageNumber pageNumber = new PageNumber();
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                listGA = listGA.Where(s => s.Name.Contains(name)).ToList();
+            }
             pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
             pageNumber.TotlePage = (listGA.Count / PAGESIZE) + (listGA.Count % PAGESIZE == 0 ? 0 : 1);
             pageNumber.Data = listGA.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);
             return pageNumber;
-            
         }
 
         /// <summary>

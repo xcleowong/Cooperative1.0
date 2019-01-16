@@ -150,7 +150,7 @@ namespace CooperativeLabor.WebApi.Controllers
         /// <returns></returns>
         [Route("GetEssentialInformationsEss")]
         [HttpGet]
-        public PageNumber GetEssentialInformations(int? pageIndex)
+        public PageNumber GetEssentialInformations(int? pageIndex,string partnerName="")
         {       
             if (pageIndex == null)
             {
@@ -158,6 +158,12 @@ namespace CooperativeLabor.WebApi.Controllers
             }
             var result = this.essentialInformation.GetEssentialInformations().ToList();
             PageNumber pageNumber = new PageNumber();
+            if (!string.IsNullOrWhiteSpace(partnerName))
+            {
+                result = result.Where(m => m.PartnerName.Contains(partnerName)).ToList();
+            }
+
+
             pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
             pageNumber.TotlePage = (result.Count / PAGESIZE) + (result.Count % PAGESIZE == 0 ? 0 : 1);
             pageNumber.Data = result.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);
