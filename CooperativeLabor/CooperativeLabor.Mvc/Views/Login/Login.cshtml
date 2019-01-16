@@ -84,19 +84,19 @@
 
                                 //页头下拉提示框
                                 $(".messageBox").removeClass("messageError").text("登录成功！！").css("margin-left", -($(".messageBox").outerWidth() / 2)).animate({ top: 0 }, "fast").delay(1500).animate({ top: "-57px" }, "fast");
-                                //localStorage.user = JSON.stringify(data);
-                                //location.href = '/Login/Index'
-                                $.ajax({
-                                    url: "/Login/Logins",
-                                    type: "post",
-                                    data: JSON.stringify(data),
-                                    async: false,
-                                    dataType: "json",
-                                    contentType: "application/json",
-                                    success: function (a) {
-                                        location.href = "/Login/LoginIndex?id=" + data.Id;
-                                    }
-                                })
+                                localStorage.user = JSON.stringify(data);
+                                location.href = '/Login/Index'
+                                //$.ajax({
+                                //    url: "/Login/Logins",
+                                //    type: "post",
+                                //    data: JSON.stringify(data),
+                                //    async: false,
+                                //    dataType: "json",
+                                //    contentType: "application/json",
+                                //    success: function (a) {
+                                //        location.href = "/Login/LoginIndex?id=" + data.Id;
+                                //    }
+                                //})
 
 
 
