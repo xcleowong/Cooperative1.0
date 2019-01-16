@@ -98,17 +98,16 @@
             </a>
         </span>
         <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-            <i class="layui-icon" style="line-height:30px">?</i>
+            <i class="layui-icon" style="line-height:30px">ဂ</i>
         </a>
     </div>
     <div class="x-body" id="app">
         <div class="layui-row">
             <form class="layui-form layui-col-md12 x-so">
 
-                <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
-                <input type="text" name="username" placeholder="请输入用工单位" autocomplete="off" class="layui-input">
-                <input type="text" name="username" placeholder="请输入合作方名称" autocomplete="off" class="layui-input">
-                <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                <input type="text" v-model="searchPartnerName" placeholder="请输入合作方名称" autocomplete="off" class="layui-input">
+                @*<button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>*@
+                <input type="button" class="layui-btn" value="搜索" v-on:click="searchEntry(searchPartnerName)" />
             </form>
         </div>
         <xblock>
@@ -165,7 +164,7 @@
                         <a title="编辑" onclick="x_admin_show('编辑','member-edit.html',600,400)" href="javascript:;">
                             <i class="layui-icon">&#xe642;</i>
                         </a>
-                        <a title="删除" v-on:click="deleteContactById(item.Id)" href="javascript:;">
+                        <a title="删除" v-on:click="deleteById(item.Id)" href="javascript:;">
                             <i class="layui-icon">&#xe640;</i>
                         </a>
                     </td>
@@ -243,6 +242,7 @@
     var vm = new Vue({
         el: "#app",
         data: {
+            searchPartnerName:"",
             EssentialInformationList: [],
             all: 6, //总页数
             cur: 1//当前页码
@@ -259,8 +259,6 @@
                 if (data != this.cur) {
                     this.cur = data;
                     this.getAllEntryAndExitRecords(data);
-
-
                 }
             },
             pageClick: function () {
@@ -285,8 +283,24 @@
                     alert(response);
                 });
             },
-
-
+            //查询
+            searchEntry: function (searchPartnerName) {
+                axios.get("http://localhost:8099/Partner/GetEssentialInformationsEss", { params: { pageIndex: 1, partnerName: searchPartnerName} }).then(
+                    (response) => {
+                        this.EssentialInformationList = [];
+                        this.cur = response.data.CurrentPage;
+                        this.all = response.data.TotlePage;
+                        for (var i = 0; i < response.data.Data.length; i++) {
+                            this.EssentialInformationList.push(response.data.Data[i]);
+                        }
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
 
             //删除
             deleteById: function (Id) {

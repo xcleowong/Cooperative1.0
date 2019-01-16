@@ -25,6 +25,7 @@ namespace CooperativeLabor.Services
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
+                entry.ModificationTime = System.DateTime.Now;
                 DynamicParameters parameters = new DynamicParameters();
                 parameters.Add("@Name",entry.Name , null, null, null);
                 parameters.Add("@PersonnelId", entry.PersonnelId, null, null, null);

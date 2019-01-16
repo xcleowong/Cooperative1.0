@@ -14,6 +14,13 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/bootstrap.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+
+
+    <link href="~/Content/Layui_X_Admin/css/font.css" rel="stylesheet" />
+    <link href="~/Content/Layui_X_Admin/css/xadmin.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/Content/Layui_X_Admin/lib/layui/layui.js"></script>
+    <script src="~/Content/Layui_X_Admin/js/xadmin.js"></script>
 </head>
 <body>
     <div id="add">
@@ -91,9 +98,9 @@
                 <td>
                     <input id="AddBtn" type="button" value="添加" v-on:click="AddAllowances(WeekDaysSubsidy, EvectionSubsidy, HolidaysOverTime, HolidaysRest, ExchangeSubsidy, MealSubsidy, ReleaseTime, HistoricalInformation, HistoricalInformationNum, IsReadOnly)" />
                 </td>
-                <td>
+                @*<td>
                     <a href="/AllowancesView/GetAllowancesView">显示</a>
-                </td>
+                </td>*@
             </tr>
         </table>
 
@@ -134,11 +141,9 @@
                 params.append('IsReadOnly', IsReadOnly);
                 axios.post('http://localhost:8099/Allowances/AddAllowances', params).then(
                     (response) => {
-                        alert(response)
-
-                        alert("添加成功")
-
-
+                        //alert(response)
+                        //alert("添加成功")
+                        layer.msg('已添加!', { icon: 1, time: 1000 });
                     },
                     (response) => {
                         alert(response.status);

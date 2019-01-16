@@ -15,6 +15,13 @@
     <link href="~/BootstrapSouce/css/bootstrap.css" rel="stylesheet" />
 
 
+
+    <link href="~/Content/Layui_X_Admin/css/font.css" rel="stylesheet" />
+    <link href="~/Content/Layui_X_Admin/css/xadmin.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/Content/Layui_X_Admin/lib/layui/layui.js"></script>
+    <script src="~/Content/Layui_X_Admin/js/xadmin.js"></script>
+
 </head>
 <body>
     <input type="hidden" v-model="PersonnelId"/>
@@ -75,10 +82,6 @@
                 <td><input type="date" v-model="CreationTime" class="layui-input" /></td>
             </tr>
             <tr>
-                <td>修改时间：</td>
-                <td><input type="date" v-model="ModificationTime" class="layui-input" /></td>
-            </tr>
-            <tr>
                 <td>是否删除：</td>
                 <td>
                     <input id="Radio1" type="radio" value="1" v-model="IsDelete" /><span>是</span>
@@ -87,7 +90,7 @@
             </tr>
             <tr>
                 <td>
-                    <button type="button" v-on:click="AddQCPlan1(Name,PersonnelId,OperationType,DatesEmployed,DepartureTime,CreationTime,ModificationTime,IsDelete)" class="btn btn-default">添加</button>
+                    <button type="button" v-on:click="AddQCPlan1(Name,PersonnelId,OperationType,DatesEmployed,DepartureTime,CreationTime,IsDelete)" class="btn btn-default">添加</button>
                     @*<a href="javascript:;" v-on:click="AddQCPlan1(Name,PersonnelId,OperationType,DatesEmployed,DepartureTime,CreationTime,ModificationTime,IsDelete)">添加</a>*@
                 </td>
                 <td></td>
@@ -109,7 +112,6 @@
             DatesEmployed: "",
             DepartureTime: "",
             CreationTime: "",
-            ModificationTime: "",
             IsDelete:"",
             EntryByIdName: [],
             PartnerName: "请选择",
@@ -138,7 +140,7 @@
                 });
             },
             //保存
-            AddQCPlan1: function (Name, PersonnelId, OperationType, DatesEmployed, DepartureTime, CreationTime, ModificationTime, IsDelete) {
+            AddQCPlan1: function (Name, PersonnelId, OperationType, DatesEmployed, DepartureTime, CreationTime, IsDelete) {
                 var params = new URLSearchParams();
                 params.append('Name', Name);
                 params.append('PersonnelId', PersonnelId);
@@ -146,11 +148,11 @@
                 params.append('DatesEmployed', DatesEmployed);
                 params.append('DepartureTime', DepartureTime);
                 params.append('CreationTime', CreationTime);
-                params.append('ModificationTime', ModificationTime);
                 params.append('IsDelete', IsDelete);
                 axios.post('http://localhost:8099/EntryDimission/AddEntry', params).then(
                     (response) => {
-                        alert("添加成功")
+                        //alert("添加成功")
+                        layer.msg('已添加!', { icon: 1, time: 1000 });
                     },
                     (response) => {
                         alert(response.status);

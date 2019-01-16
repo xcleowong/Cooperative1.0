@@ -18,7 +18,7 @@ namespace CooperativeLabor.WebApi.Controllers
     [RoutePrefix("HolidaySettings")]
     public class HolidaySettingsController : ApiController
     {
-        private const int PAGESIZE = 3;
+        private const int PAGESIZE = 6;
         //方法一
         //需要引用 using Unity.Attributes;
         /// <summary>
