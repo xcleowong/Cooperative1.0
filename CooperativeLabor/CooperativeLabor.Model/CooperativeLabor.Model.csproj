@@ -72,6 +72,7 @@
     <Compile Include="TrainingExpenses.cs" />
     <Compile Include="TravelExpense.cs" />
     <Compile Include="TravelOnVacation.cs" />
+    <Compile Include="UnitSummaryStatistics.cs" />
     <Compile Include="UserManagement.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
