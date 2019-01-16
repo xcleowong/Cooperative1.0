@@ -81,11 +81,11 @@
                         },
                         success: function (data) {
                             if (data != null) {
-
                                 //页头下拉提示框
                                 $(".messageBox").removeClass("messageError").text("登录成功！！").css("margin-left", -($(".messageBox").outerWidth() / 2)).animate({ top: 0 }, "fast").delay(1500).animate({ top: "-57px" }, "fast");
                                 localStorage.user = JSON.stringify(data);
-                                location.href = '/Login/Index'
+                               location.href = '/Login/LoginIndex'
+                               // location.href = '/Login/Index'
                             }
                             else {
                                 //页头下拉提示框

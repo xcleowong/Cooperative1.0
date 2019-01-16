@@ -66,10 +66,10 @@ namespace CooperativeLabor.Mvc.Controllers
             ViewBag.UserName = Session["UserName"];
             return View();
         }
-
-        public string GetPermissionList(string id)
+        
+        public string GetPermissionList(string Id)
         {
-            UserManagement u = Utility.RedisHelper.Get<UserManagement>(id);
+            UserManagement u = Utility.RedisHelper.Get<UserManagement>(Id);
             string permission = JsonConvert.SerializeObject(u.ListPermission);
             return permission;
         }
