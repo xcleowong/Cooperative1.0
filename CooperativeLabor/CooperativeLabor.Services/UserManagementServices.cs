@@ -42,7 +42,7 @@ namespace CooperativeLabor.Services
                 if (user.Count() == 0)
                 {
                     //添加角色
-                    string sql2 = "INSERT INTO usermanagement(UserName,UserPassword,InstitutionalFramework,RoleId,IsStart,CreationTime,ModificationTime)VALUES(@UserName,@UserPassword,@InstitutionalFramework,@RoleId,IsStart,@CreationTime,@ModificationTime)";
+                    string sql2 = "INSERT INTO usermanagement(UserName,UserPassword,InstitutionalFramework,RoleId,IsStart,CreationTime,ModificationTime)VALUES(@UserName,@UserPassword,@InstitutionalFramework,@RoleId,@IsStart,@CreationTime,@ModificationTime)";
                     var result = conn.Execute(sql2, parameters);
 
                     //如果上条语句执行成功则执行下面语句
