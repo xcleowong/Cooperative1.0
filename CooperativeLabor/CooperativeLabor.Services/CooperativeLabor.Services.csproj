@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AllowancesServices.cs" />
+    <Compile Include="AppProcessConfigurationServices.cs" />
     <Compile Include="ApprovalActivityServices.cs" />
     <Compile Include="ApprovalConditionsServices.cs" />
     <Compile Include="ApprovalHistoryServices.cs" />

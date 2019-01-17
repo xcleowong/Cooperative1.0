@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IAllowancesServices.cs" />
+    <Compile Include="IAppProcessConfigurationServices.cs" />
     <Compile Include="IApprovalActivityServices.cs" />
     <Compile Include="IApprovalConditionsServices.cs" />
     <Compile Include="IApprovalHistoryServices.cs" />

@@ -156,6 +156,8 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OtherExpensesController.cs" />
     <Compile Include="Controllers\PersonnelExpenditureWebApiController.cs" />
+    <Compile Include="Controllers\shenpi\AppProcessConfigurationController.cs" />
+    <Compile Include="Controllers\shenpi\ApprovalActivityController.cs" />
     <Compile Include="Controllers\SpecialSignTheRecordController.cs" />
     <Compile Include="Controllers\TravelOnVacationWebApiController.cs" />
     <Compile Include="Controllers\HolidaySettingsController.cs" />

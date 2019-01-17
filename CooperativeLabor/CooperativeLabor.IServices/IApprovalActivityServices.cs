@@ -44,7 +44,7 @@ namespace CooperativeLabor.IServices
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        ApprovalActivity GetAloneApprovalActivity(int Id);
+        ApprovalActivity GetApprovalActivityById(int Id);
 
 
     }

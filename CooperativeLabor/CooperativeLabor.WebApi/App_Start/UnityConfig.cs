@@ -59,7 +59,11 @@ namespace CooperativeLabor.WebApi
             container.RegisterType<IRolesServices, RolesServices>();
             //用户
             container.RegisterType<IUserManagementServices, UserManagementServices>();
-
+            //审批配置表
+            container.RegisterType<IAppProcessConfigurationServices, AppProcessConfigurationServices>();
+            //审批活动表
+            container.RegisterType<IApprovalActivityServices, ApprovalActivityServices>();
+            
 
             //补助标准配置
             container.RegisterType<IAllowancesServices, AllowancesServices>();

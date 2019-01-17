@@ -208,6 +208,8 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OtherExpensesController.cs" />
     <Compile Include="Controllers\PersonnelExpenditureController.cs" />
+    <Compile Include="Controllers\shenpi\AppProcessConfigurationController.cs" />
+    <Compile Include="Controllers\shenpi\ApprovalActivityController.cs" />
     <Compile Include="Controllers\SpecialSignMVCController.cs" />
     <Compile Include="Controllers\CheckingInController.cs" />
     <Compile Include="Controllers\AllowancesViewController.cs" />
@@ -1500,6 +1502,8 @@
     <Content Include="Views\Login\LoginIndex.cshtml" />
     <Content Include="Views\OtherExpenses\Index.cshtml" />
     <Content Include="Views\Attendance\Index.cshtml" />
+    <Content Include="Views\AppProcessConfiguration\Index.cshtml" />
+    <Content Include="Views\ApprovalActivity\Index.cshtml" />
     <None Include="Views\PartnerMVC\IndexEss1.cshtml" />
     <None Include="Views\PartnerMVC\IndexEnt.cshtml" />
     <None Include="Views\PartnerMVC\AdminList.cshtml" />
