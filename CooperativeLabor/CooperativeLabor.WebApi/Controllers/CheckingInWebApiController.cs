@@ -131,16 +131,11 @@ namespace CooperativeLabor.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("getCheckingIn")]
-        public PageNumber GetCheckingIn(int StaffId, int? pageIndex)
+        public PageNumber GetCheckingIn(int StaffId, int pageIndex=1)
         {
-            if (pageIndex==null)
-            {
-                pageIndex = 1;
-            }
             List<CheckingIn> checkingInsList = new List<CheckingIn>();
             //查询本月签到情况
             var list = IcheckingInServices.GetCheckingIns(StaffId);
-            PageNumber pageNumber = new PageNumber();
             for (int i = 0; i < list.Count; i++)
             {
                 var strState = "";
@@ -170,6 +165,7 @@ namespace CooperativeLabor.WebApi.Controllers
                 checkingInsList.Add(checkingIn);
             }
             //分页 
+            PageNumber pageNumber = new PageNumber();
             pageNumber.DataCount = checkingInsList.Count;
             pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
             pageNumber.TotlePage = (checkingInsList.Count / PAGESIZE) + (checkingInsList.Count % PAGESIZE == 0 ? 0 : 1);
