@@ -69,6 +69,7 @@
     <Compile Include="ITrainingExpensesServices.cs" />
     <Compile Include="ITravelExpenseServices.cs" />
     <Compile Include="ITravelOnVacationServices.cs" />
+    <Compile Include="IUnitSummaryStatisticsServices.cs" />
     <Compile Include="IUserManagementServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

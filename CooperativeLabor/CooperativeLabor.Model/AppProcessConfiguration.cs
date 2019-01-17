@@ -7,7 +7,7 @@ namespace CooperativeLabor.Model
     ///<summary>
     ///审批流程配置表
     ///</summary>
-    public class ProcessConfiguration
+    public class AppProcessConfiguration
     {
         /// <summary>
         /// 主键
@@ -42,32 +42,32 @@ namespace CooperativeLabor.Model
         /// <summary>
         /// 下一步审批角色ID
         /// </summary>           
-        public int NextApprovalRoleID { get; set; }
+        public int NextAppRoleId { get; set; }
 
         /// <summary>
         /// 审批人ID
         /// </summary>           
-        public int ApprovalUserID { get; set; }
+        public int AppUserId { get; set; }
 
         /// <summary>
         /// 下一步审批人ID
         /// </summary>           
-        public int NextApprovalUserID { get; set; }
+        public int NextAppUserId { get; set; }
 
         /// <summary>
         /// 使用流程角色ID
         /// </summary>           
-        public int ProcessRoleID { get; set; }
+        public string ProcessRoleID { get; set; }
 
         /// <summary>
         /// 判断条件ID
         /// </summary>           
-        public int JudgmentID { get; set; }
+        public int ConditionId { get; set; }
 
         /// <summary>
         /// 审批状态
         /// </summary>           
-        public int Condtion { get; set; }
+        public int AppStatusId { get; set; }
 
         /// <summary>
         /// 排序ID
@@ -84,5 +84,14 @@ namespace CooperativeLabor.Model
         /// </summary>           
         public DateTime CreateTime { get; set; }
 
+        /// <summary>
+        /// 父级Id
+        /// </summary>
+        public int PId { get; set; }
+
+        /// <summary>
+        /// 使用启用
+        /// </summary>
+        public int Disabled { get; set; }
     }
 }

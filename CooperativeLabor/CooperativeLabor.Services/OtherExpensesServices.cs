@@ -23,6 +23,7 @@ namespace CooperativeLabor.Services
         /// <returns></returns>
         public int AddOtherExpense(OtherExpenses otherExpenses)
         {
+            var datetime = Convert.ToDateTime(DateTime.Now.ToString());
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
                 string sql = @"insert into OtherExpenses(StaffId,Informant,EmployingUnit,PartnerName,StartTime,EndTime,ProjectTypes,BankCard,ActualCost,ReportedDate,Content,StaffIds,CreationTime,ModificationTime,AId) values(@StaffId,@Informant,@EmployingUnit,@PartnerName,@StartTime,@EndTime,@ProjectTypes,@BankCard,@ActualCost,@ReportedDate,@Content,@StaffIds,@CreationTime,@ModificationTime,@AId)";
