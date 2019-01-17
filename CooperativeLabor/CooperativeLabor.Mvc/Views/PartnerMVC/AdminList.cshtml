@@ -117,14 +117,12 @@
                 type: "get",
                 success: function (data) {
                     $(data).each(function (index, data) {
-                        $("#tab").append("<tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.UserName + "</td> <td>" + data.UserPassword + "</td> <td>" + data.InstitutionalFramework + "</td>  <td>" + data.RoleName.substring(0, 20) + "……</td><td>" + data.CreationTime.substring(0, 10) + "&nbsp;" + data.CreationTime.substring(11, 19) + "</td> <td>" + data.ModificationTime.substring(0, 10) + "&nbsp;" + data.ModificationTime.substring(11, 19) + "</td> <td class=" + "td - status"+"><span  class=" + "layui-btn layui-btn-normal layui-btn-mini"+">" + (data.IsStart == 0 ? "启用" : "禁用") + "</span></td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateUserManagement?Id=" + data.Id + "'>修改</a></td> </tr>");
+                        $("#tab").append("<tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.UserName + "</td> <td>" + data.UserPassword + "</td> <td>" + data.InstitutionalFramework + "</td>  <td>" + data.RoleName.substring(0, 20) + "……</td><td>" + data.CreationTime.substring(0, 10) + "&nbsp;" + data.CreationTime.substring(11, 19) + "</td> <td>" + data.ModificationTime.substring(0, 10) + "&nbsp;" + data.ModificationTime.substring(11, 19) + "</td> <td class='td - status'><span class='layui - btn layui - btn - normal layui - btn - mini'>" + (data.IsStart == 1 ? "启用" : "禁用") + "</span></td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateUserManagement?Id=" + data.Id + "'>修改</a></td> </tr>");
                     })
 
                     //$(data).each(function (index, data) {
-                    //    $("#tab").append("<tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.UserName + "</td> <td>" + data.UserPassword + "</td> <td>" + data.InstitutionalFramework + "</td>  <td>" + data.RoleName.substring(0, 20) + "……</td><td>" + data.CreationTime.substring(0, 10) + "&nbsp;" + data.CreationTime.substring(11, 19) + "</td> <td>" + data.ModificationTime.substring(0, 10) + "&nbsp;" + data.ModificationTime.substring(11, 19) + "</td> <td class=" + "td - status" + "><span  class=" + "layui-btn layui-btn-normal layui-btn-mini" + ">" + (data.IsStart == 1 ? "启用" : "禁用") + "</span></td><td class="+"td - manage"+"><a title=" + "删除" + " onclick=" + "Delete(" + data.Id + ", this)" + " href = " + "javascript:;" + " > <i class="+"layui - icon"+">&#xe640;</i></a> <a href='/PartnerMVC/UpdateUserManagement?Id=" + data.Id + "'>修改</a></td> </tr>");
+                    //    $("#tab").append("<tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.RoleName + "</td> <td>" + data.Role_PeremissionIds + "</td> <td>" + data.PermissionName + "</td><td>" + data.CreateTime + "</td> <td class='td-status'><span class='layui - btn layui - btn - normal layui - btn - mini'>已启用</span>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr>");
                     //})
-
-                    
                 }
             })
         })
@@ -178,9 +176,9 @@
                     $(obj).parents("tr").find(".td-status").find('span').removeClass('layui-btn-disabled').html('已启用');
                     layer.msg('已启用!', { icon: 5, time: 1000 });
                 }
-            });
-        } 、、   
 
+            });
+        }
 
         /*用户-删除*/
         function member_del(obj, id) {
@@ -190,6 +188,9 @@
                 layer.msg('已删除!', { icon: 1, time: 1000 });
             });
         }
+
+
+
         function delAll(argument) {
 
             var data = tableCheck.getData();
@@ -202,7 +203,7 @@
         }
     </script>
     <script>
-        var _hmt = _hmt || []; (function () {
+    var _hmt = _hmt || []; (function () {
             var hm = document.createElement("script");
             hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
             var s = document.getElementsByTagName("script")[0];
