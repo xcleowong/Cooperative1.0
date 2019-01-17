@@ -102,23 +102,7 @@
 
 
 
-                                localStorage.user = JSON.stringify(data);
-                               location.href = '/Login/LoginIndex'
-                               // location.href = '/Login/Index'
-
-                                //localStorage.user = JSON.stringify(data);
-                                //location.href = '/Login/Index'
-                                $.ajax({
-                                    url: "/Login/Logins",
-                                    type: "post",
-                                    data: JSON.stringify(data),
-                                    async: false,
-                                    dataType: "json",
-                                    contentType: "application/json",
-                                    success: function (a) {
-                                        location.href = "/Login/LoginIndex?id=" + data.Id;
-                                    }
-                                })
+                               
 
                             }
                             else {
