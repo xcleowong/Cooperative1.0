@@ -106,7 +106,8 @@
             </form>
         </div>
         <xblock>
-            <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量恢复</button>
+            <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
+            <button class="layui-btn" onclick="x_admin_show('添加入离场记录','/PartnerMVC/AddEnt',700,500)"><i class="layui-icon"></i>添加</button>
             <span class="x-right" style="line-height:40px">共有数据：{{count}} 条</span>
         </xblock>
         <table class="layui-table" v-show="EntryAndExitRecordList.length"  lay-size="sm">
@@ -243,18 +244,21 @@
 
                 //删除
                 member_del: function (Id) {
-                    axios.post('http://localhost:8099/Partner/DeleteEnt?Id=' + Id).then(
-
-                        (response) => {
-                            this.EntryAndExitRecordList = response.data;
-
-                        },
-                        (response) => {
-                            alert(response.status);
-                        }
-                    ).catch(function (response) {
-                        alert(response);
-                    });
+                    layer.confirm('确认要删除吗？', function (index) {
+                        axios.post('http://localhost:8099/Partner/DeleteEnt?Id=' + Id).then(
+                            (response) => {
+                                if (response.data>0) {
+                                    layer.msg('已删除!', { icon: 1, time: 1000 });
+                                    this.EntryAndExitRecordList = response.data;
+                                }
+                            },
+                            (response) => {
+                                alert(response.status);
+                            }
+                        ).catch(function (response) {
+                            alert(response);
+                        });
+                    })
                 },
 
                 ////修改

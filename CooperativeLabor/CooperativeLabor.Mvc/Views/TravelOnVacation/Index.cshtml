@@ -16,8 +16,8 @@
     <script src="~/Content/Layui_X_Admin/js/xadmin.js"></script>
 
     @*vue*@
-    <script src="~/Content/VueScripts/vue.js"></script>
-    <script src="~/Content/VueScripts/axios.js"></script>
+    @*<script src="~/Content/VueScripts/vue.js"></script>
+    <script src="~/Content/VueScripts/axios.js"></script>*@
 
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
@@ -44,22 +44,23 @@
         <div class="layui-row">
             <form class="layui-form layui-col-md12 x-so">
                 <div style="width:150px;float:left;">
-                    <select>
-                        <option value="value">-申请类型-</option>
+                    <select id="applicationType">
+                        <option value="申请类型">-申请类型-</option>
                         <option value="出差">出差</option>
                         <option value="休假">休假</option>
                     </select>
                 </div>
                 <div style="width:150px;float:left;">
-                    <select>
+                    <select id="state">
                         <option value="value">-申请状态-</option>
-                        <option value="出差">提交中</option>
-                        <option value="休假">草稿</option>
+                        <option value="1">提交中</option>
+                        <option value="0">草稿</option>
                     </select>
                 </div>
                 &nbsp;&nbsp;
-                <input type="text" name="startendtime" placeholder="选择日期" autocomplete="off" class="layui-input" id="startendtime" style="width:200px;">
-                <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                <input type="text" placeholder="选择日期" autocomplete="off" class="layui-input" style="width:200px;" v-model="applicationDate">
+                <input type="button" class="layui-btn" value="搜索" id="searchTravel" />
+                @*<button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>*@
             </form>
         </div>
         <xblock>
@@ -67,7 +68,7 @@
             <button class="layui-btn" onclick="addBtn()"><i class="layui-icon"></i>差旅休假</button>
             <span class="x-right" style="line-height:40px">共有数据：88 条</span>
         </xblock>
-        <table class="layui-table" lay-size="sm">
+        <table class="layui-table" lay-size="sm" id="tab1">
             <thead>
                 <tr>
                     <th>序号</th>
@@ -83,16 +84,10 @@
             </thead>
             <tbody id="tabody"></tbody>
         </table>
-        <div class="page">
-            <div>
-                <a class="prev" href="">&lt;&lt;</a>
-                <a class="num" href="">1</a>
-                <span class="current">2</span>
-                <a class="num" href="">3</a>
-                <a class="num" href="">489</a>
-                <a class="next" href="">&gt;&gt;</a>
-            </div>
-        </div>
+        <a href="#" onclick="FirstPage()">首页</a>
+        <a href="#" onclick="PrevPage()">上一页</a>
+        <a href="#" onclick="NextPage()">下一页</a>
+        <a href="#" onclick="LastPage()">尾页</a>
 
     </div>
     <script>
@@ -120,8 +115,19 @@
     //登录人ID
     var StaffId = 1;
     var StaffName = "张三";//登录人姓名
+    var cur = 1;//当前页码
+    var all = 0;//总页数 
+    var count = 0;//总条数
     $(function () {
         getTravelOnVacation(StaffId);//显示
+
+
+        ////查询
+        //$("#searchTravel").click(function () {
+        //    cur = 1;
+        //    getTravelOnVacation(StaffId);
+        //})
+
     });
 
     //显示
@@ -129,26 +135,66 @@
         $.ajax({
             url: 'http://localhost:8099/travelOnVacation/getTravelOnVacation?StaffId=' + StaffId,
             type: 'get',
+            data: {
+                pageIndex: cur,
+                //applicationType: $("#applicationType").val(),
+                //applicationDate: $("#state").val(),
+                //state: $("#state").val()
+            },
             success: function (data) {
+                cur = data.CurrentPage;
+                count = data.DataCount;
+                all = data.TotlePage;
                 $("#tabody").html("");
+                //$("#tab1 tr").not(":first").remove();
                 var index = 0;
-                for (var i = 0; i < data.length; i++) {
+                for (var i = 0; i < data.Data.length; i++) {
                     var tabody = '<tr>'
                         + '<td>' + (index + 1) + '</td>'
-                        + '<td>' + data[i].ApplicationType + '</td>'
-                        + '<td>' + data[i].ApplicationReason + '</td>'
-                        + '<td>' + data[i].StartTime + '</td>'
-                        + '<td>' + data[i].EndTime + '</td>'
-                        + '<td>' + data[i].ComputingTime + '</td>'
-                        + '<td>' + data[i].ApplicationDate + '</td>'
-                        + '<td>' + data[i].StrState + '</td>'
-                        + '<td><button class="layui-btn layui-btn-sm" onclick="deleteOrRecall(' + data[i].Id + ',' + data[i].State + ', ' + StaffId + ')">' + data[i].ReverseStrState + '</button></td>'
+                        + '<td>' + data.Data[i].ApplicationType + '</td>'
+                        + '<td>' + data.Data[i].ApplicationReason + '</td>'
+                        + '<td>' + data.Data[i].StartTime + '</td>'
+                        + '<td>' + data.Data[i].EndTime + '</td>'
+                        + '<td>' + data.Data[i].ComputingTime + '</td>'
+                        + '<td>' + data.Data[i].ApplicationDate + '</td>'
+                        + '<td>' + data.Data[i].StrState + '</td>'
+                        + '<td><button class="layui-btn layui-btn-sm" onclick="deleteOrRecall(' + data.Data[i].Id + ',' + data.Data[i].State + ', ' + StaffId + ')">' + data.Data[i].ReverseStrState + '</button></td>'
                         + '</tr>';
                     $("#tabody").append(tabody);
                 }
             }
         })
     };
+    
+    function FirstPage() {
+        cur = 1;
+        getTravelOnVacation();
+    }
+    function LastPage() {
+        cur = count;
+        getTravelOnVacation();
+    }
+    function PrevPage() {
+        if (cur - 1 <= 0) {
+            alert("这已经是第一页");
+            return;
+        }
+        else {
+            cur--;
+            getTravelOnVacation();
+        }
+    }
+    function NextPage() {
+        if (cur + 1 > count) {
+            alert("这已经是尾页");
+            return;
+        }
+        else {
+            cur++;
+            getTravelOnVacation();
+        }
+    }
+
 
     //显示添加控件
     function addBtn() {

@@ -170,7 +170,7 @@ namespace CooperativeLabor.WebApi.Controllers
                 checkingInsList.Add(checkingIn);
             }
             //分页 
-            
+            pageNumber.DataCount = checkingInsList.Count;
             pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
             pageNumber.TotlePage = (checkingInsList.Count / PAGESIZE) + (checkingInsList.Count % PAGESIZE == 0 ? 0 : 1);
             pageNumber.Data = checkingInsList.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);

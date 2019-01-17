@@ -85,8 +85,12 @@
                                 $(".messageBox").removeClass("messageError").text("登录成功！！").css("margin-left", -($(".messageBox").outerWidth() / 2)).animate({ top: 0 }, "fast").delay(1500).animate({ top: "-57px" }, "fast");
 
                                 localStorage.user = JSON.stringify(data);
+
                                //location.href = '/Login/LoginIndex'
                                 location.href = '/Login/Index'                            
+
+                                location.href = '/Login/Index'
+
                                 //$.ajax({
                                 //    url: "/Login/Logins",
                                 //    type: "post",
@@ -98,6 +102,7 @@
                                 //        location.href = "/Login/LoginIndex?id=" + data.Id;
                                 //    }
                                 //})
+
                             }
                             else {
                                 //页头下拉提示框

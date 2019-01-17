@@ -18,6 +18,7 @@ namespace CooperativeLabor.WebApi.Controllers
     [RoutePrefix("travelOnVacation")]
     public class TravelOnVacationWebApiController : ApiController
     {
+        private const int PAGESIZE = 5;
         /// <summary>
         /// 差旅休假属性注入
         /// </summary>
@@ -44,16 +45,28 @@ namespace CooperativeLabor.WebApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("getTravelOnVacation")]
-        public List<TravelOnVacation> GetTravelOnVacations(int StaffId)
+        public PageNumber GetTravelOnVacations(int StaffId, int? pageIndex)
         {
             //0删除、1提交、2草稿
-            //获取差旅休假信息
-            var result = ItravelOnVacationServices.GetTravelOnVacations(StaffId);
-
             //Breach List
             List<TravelOnVacation> travelOnVacationsList = new List<TravelOnVacation>();
             //查询本月签到情况
             var list = ItravelOnVacationServices.GetTravelOnVacations(StaffId);
+            ////申请类型条件查询
+            //if (!string.IsNullOrWhiteSpace(applicationType))
+            //{
+            //    list = list.Where(m => m.ApplicationType.Contains(applicationType)).ToList();
+            //}
+            ////申请状态条件查询
+            //if (state != null)
+            //{
+            //    list = list.Where(m => m.State.Equals(state)).ToList();
+            //}
+            ////申请日期条件查询
+            //if (!string.IsNullOrWhiteSpace(applicationDate))
+            //{
+            //    list = list.Where(m => m.ApplicationDate.Contains(applicationDate)).ToList();
+            //}
             for (int i = 0; i < list.Count; i++)
             {
                 var reverseStrState = "";//状态文字(反)
@@ -81,7 +94,14 @@ namespace CooperativeLabor.WebApi.Controllers
                 //Add Model In List
                 travelOnVacationsList.Add(travelOnVacations);
             }
-            return travelOnVacationsList;
+            PageNumber pageNumber = new PageNumber();
+            pageNumber.DataCount = travelOnVacationsList.Count;
+            pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
+            pageNumber.TotlePage = (travelOnVacationsList.Count / PAGESIZE) + (travelOnVacationsList.Count % PAGESIZE == 0 ? 0 : 1);
+            pageNumber.Data = travelOnVacationsList.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);
+
+            return pageNumber;
+            
         }
 
         /// <summary>

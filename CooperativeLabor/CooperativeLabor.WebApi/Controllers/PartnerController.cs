@@ -163,7 +163,7 @@ namespace CooperativeLabor.WebApi.Controllers
                 result = result.Where(m => m.PartnerName.Contains(partnerName)).ToList();
             }
 
-
+            pageNumber.DataCount = result.Count;
             pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
             pageNumber.TotlePage = (result.Count / PAGESIZE) + (result.Count % PAGESIZE == 0 ? 0 : 1);
             pageNumber.Data = result.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);
