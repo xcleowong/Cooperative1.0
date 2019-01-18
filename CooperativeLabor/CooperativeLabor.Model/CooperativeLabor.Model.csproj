@@ -49,6 +49,7 @@
     <Compile Include="ApprovalNode.cs" />
     <Compile Include="ApprovalProcess.cs" />
     <Compile Include="ApprovalStatus.cs" />
+    <Compile Include="AttendanceStatistics.cs" />
     <Compile Include="CanteenanagementFee.cs" />
     <Compile Include="CheckingIn.cs" />
     <Compile Include="DepartmentMaintenance.cs" />

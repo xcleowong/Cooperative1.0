@@ -215,8 +215,23 @@ namespace CooperativeLabor.Services
             }
         }
 
+        /// <summary>
+        /// 根据登录时的用户ID获取该管理员权限(url)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<UserManagement> GetUsersPermissionUrl(int id)
+        {
+            using (MySqlConnection conn = DapperHelper.GetConnString())
+            {
+                conn.Open();
+                string sql = "select * from Permission where Id in(select  PermissionID  from permissionsandroles where RoleID in(select RoleID from rolesandusers where UserID=(select Id from usermanagement where Id=@id))) ";
+                IEnumerable<UserManagement> userManagement = conn.Query<UserManagement>(sql, null);
+                return userManagement.ToList();
+            }
 
 
 
+        }
     }
 }
