@@ -13,7 +13,7 @@ namespace CooperativeLabor.WebApi.Controllers
     [RoutePrefix("EntryDimission")]
     public class EntryDimissionController : ApiController
     {
-        private const int PAGESIZE = 6;
+        private const int PAGESIZE = 5;
         [Dependency]
         public IEntryDimissionRecordServices entryDimission { get; set; }
 

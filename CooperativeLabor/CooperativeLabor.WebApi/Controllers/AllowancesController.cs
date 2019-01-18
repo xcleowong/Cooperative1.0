@@ -20,7 +20,7 @@ namespace CooperativeLabor.WebApi.Controllers
     [RoutePrefix("Allowances")]
     public class AllowancesController : ApiController
     {
-        private const int PAGESIZE = 6;
+        private const int PAGESIZE = 5;
         //方法一
         //需要引用 using Unity.Attributes;
         /// <summary>

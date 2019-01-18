@@ -12,7 +12,7 @@ namespace CooperativeLabor.WebApi.Controllers
     [RoutePrefix("SpecialSignTheRecord")]
     public class SpecialSignTheRecordController : ApiController
     {
-        private const int PAGESIZE = 8;
+        private const int PAGESIZE = 5;
 
         ISpecialSignTheRecordServices specialSign = null;
         public SpecialSignTheRecordController(ISpecialSignTheRecordServices ispecialSign)
