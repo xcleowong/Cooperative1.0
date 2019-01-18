@@ -47,9 +47,9 @@
         <xblock>
             <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
             <button class="layui-btn" onclick="x_admin_show('添加用户','/PartnerMVC/AddUserManagement')"><i class="layui-icon"></i>添加</button>
-            <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+            <span class="x-right" style="line-height:40px">共有数据：12 条</span>
         </xblock>
-        <table class="layui-table" id="tab">
+        <table class="layui-table" id="tab" lay-size="sm">
             <thead>
                 <tr>
                     <th>
@@ -59,42 +59,13 @@
                     <th>登录名</th>
                     <th>用户密码</th>
                     <th>用户组织机构</th>
-
                     <th>角色名称</th>
                     <th>创建时间</th>
                     <th>修改时间</th>
                     <th>状态</th>
                     <th>操作</th>
             </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-                    </td>
-                    <td>1</td>
-                    <td>admin</td>
-                    <td>18925139194</td>
-                    <td>18925139194</td>
-                    <td>18925139194</td>
 
-                    <td>超级管理员</td>
-                    <td>2017-01-01 11:11:42</td>
-                    <td class="td-status">
-                        <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span>
-                    </td>
-                    <td class="td-manage">
-                        <a onclick="member_stop(this,'10001')" href="javascript:;" title="启用">
-                            <i class="layui-icon">&#xe601;</i>
-                        </a>
-                        <a title="编辑" onclick="x_admin_show('编辑','admin-edit.html')" href="javascript:;">
-                            <i class="layui-icon">&#xe642;</i>
-                        </a>
-                        <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                            <i class="layui-icon">&#xe640;</i>
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
         </table>
         <div class="page">
             <div>
@@ -117,7 +88,7 @@
                 type: "get",
                 success: function (data) {
                     $(data).each(function (index, data) {
-                        $("#tab").append("<tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.UserName + "</td> <td>" + data.UserPassword + "</td> <td>" + data.InstitutionalFramework + "</td>  <td>" + data.RoleName.substring(0, 20) + "……</td><td>" + data.CreationTime.substring(0, 10) + "&nbsp;" + data.CreationTime.substring(11, 19) + "</td> <td>" + data.ModificationTime.substring(0, 10) + "&nbsp;" + data.ModificationTime.substring(11, 19) + "</td> <td class='td - status'><span class='layui - btn layui - btn - normal layui - btn - mini'>" + (data.IsStart == 1 ? "启用" : "禁用") + "</span></td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateUserManagement?Id=" + data.Id + "'>修改</a></td> </tr>");
+                        $("#tab").append("<tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.UserName + "</td> <td>" + data.UserPassword + "</td> <td>" + data.InstitutionalFramework + "</td>  <td title=" + data.RoleName + ">" + data.RoleName.substring(0, 10) + '...' + "</td><td>" + data.CreationTime.substring(0, 10) + "&nbsp;" + data.CreationTime.substring(11, 19) + "</td> <td>" + data.ModificationTime.substring(0, 10) + "&nbsp;" + data.ModificationTime.substring(11, 19) + "</td> <td class='td - status'><span class='layui - btn layui - btn - normal layui - btn - mini'>" + (data.IsStart == 1 ? "启用" : "禁用") + "</span></td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateUserManagement?Id=" + data.Id + "'>修改</a></td> </tr>");
                     })
 
                     //$(data).each(function (index, data) {
@@ -129,15 +100,18 @@
 
         //删除
         function Delete(Id, obj) {
-            $.ajax({
-                url: "http://localhost:8099/Jurisdiction/DeleteUser?Id=" + Id,
-                type: "get",
-                success: function (data) {
-                    if (data > 0) {
-                        alert("删除成功");
-                        $(obj).parent().parent().remove();
+            layer.confirm('确认要删除吗？', function (index) {
+                $.ajax({
+                    url: "http://localhost:8099/Jurisdiction/DeleteUser?Id=" + Id,
+                    type: "get",
+                    success: function (data) {
+                        if (data > 0) {
+                            //alert("删除成功");
+                            layer.msg('已删除!', { icon: 1, time: 1000 });
+                            $(obj).parent().parent().remove();
+                        }
                     }
-                }
+                })
             })
         }
 
@@ -203,7 +177,7 @@
         }
     </script>
     <script>
-    var _hmt = _hmt || []; (function () {
+        var _hmt = _hmt || []; (function () {
             var hm = document.createElement("script");
             hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
             var s = document.getElementsByTagName("script")[0];

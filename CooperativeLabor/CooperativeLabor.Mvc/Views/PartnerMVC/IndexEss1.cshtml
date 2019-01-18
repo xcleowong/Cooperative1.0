@@ -292,6 +292,7 @@
                         this.EssentialInformationList = [];
                         this.cur = response.data.CurrentPage;
                         this.all = response.data.TotlePage;
+                        this.count = response.data.DataCount;
                         for (var i = 0; i < response.data.Data.length; i++) {
                             this.EssentialInformationList.push(response.data.Data[i]);
                         }

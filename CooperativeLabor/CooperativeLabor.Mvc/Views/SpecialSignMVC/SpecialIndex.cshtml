@@ -102,14 +102,16 @@
       <div class="layui-row">
           <form class="layui-form layui-col-md12 x-so">
 
-              <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
-              <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+              <input type="text" placeholder="请输入用户名" autocomplete="off" class="layui-input" v-model="searchName">
+              @*<button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>*@
+              <input type="button" class="layui-btn" value="搜索" v-on:click="searchSignTheRecord(searchName)" />
+
           </form>
       </div>
       <xblock>
         <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量删除</button>
         <button class="layui-btn" onclick="x_admin_show('添加特别签录','/SpecialSignMVC/Add',700,500)"><i class="layui-icon"></i>添加</button>
-        <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        <span class="x-right" style="line-height:40px">共有数据：{{count}} 条</span>
       </xblock>
       <table class="layui-table" lay-size="sm"  v-show="GetSpecialSign.length">
         <thead>
@@ -236,9 +238,11 @@
     var vm = new Vue({
         el: "#app",
         data: {
+            searchName:"",
             GetSpecialSign: [],
             all: 6, //总页数
-            cur: 1//当前页码
+            cur: 1,//当前页码
+            count: 0//总条数
         },
         watch: {
             cur: function (oldValue, newValue) {
@@ -258,12 +262,14 @@
                 //console.log('现在在' + this.cur + '页');
                 this.SpecialSignTheRecord(this.cur);
             },
+            //显示
             SpecialSignTheRecord: function (id) {
                 axios.get("http://localhost:8099/SpecialSignTheRecord/GetSpecialSignTheRecord", { params: { pageIndex: id } }).then(
                     (response) => {
                         this.GetSpecialSign = [];
                         this.cur = response.data.CurrentPage;
                         this.all = response.data.TotlePage;
+                        this.count = response.data.DataCount;
                         for (var i = 0; i < response.data.Data.length; i++) {
                             this.GetSpecialSign.push(response.data.Data[i]);
                         }
@@ -275,6 +281,27 @@
                     alert(response);
                 });
             },
+            //查询
+            searchSignTheRecord: function (searchName) {
+                axios.get("http://localhost:8099/SpecialSignTheRecord/GetSpecialSignTheRecord", { params: { pageIndex: 1, name: searchName } }).then(
+                    (response) => {
+                        this.GetSpecialSign = [];
+                        this.cur = response.data.CurrentPage;
+                        this.all = response.data.TotlePage;
+                        this.count = response.data.DataCount;
+                        for (var i = 0; i < response.data.Data.length; i++) {
+                            this.GetSpecialSign.push(response.data.Data[i]);
+                        }
+                    },
+                    (response) => {
+                        alert(response.status);
+                    }
+                ).catch(function (response) {
+                    alert(response);
+                });
+            },
+
+
             //删除
             deleteById: function(Id) {
                 layer.confirm('确认要删除吗？', function (index) {

@@ -25,14 +25,19 @@ namespace CooperativeLabor.WebApi.Controllers
         /// <returns></returns>
         [Route("GetSpecialSignTheRecord")]
         [HttpGet]
-        public PageNumber GetSpecialSignTheRecord(int? pageIndex)
+        public PageNumber GetSpecialSignTheRecord(int? pageIndex,string name="")
         {
             if (pageIndex == null)
             {
                 pageIndex = 1;
             }
             List<SpecialSignTheRecord> listGA = specialSign.GetSpecialSignTheRecord().ToList();
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                listGA = listGA.Where(m => m.Name.Contains(name)).ToList();
+            }
             PageNumber pageNumber = new PageNumber();
+            pageNumber.DataCount = listGA.Count;
             pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
             pageNumber.TotlePage = (listGA.Count / PAGESIZE) + (listGA.Count % PAGESIZE == 0 ? 0 : 1);
             pageNumber.Data = listGA.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);

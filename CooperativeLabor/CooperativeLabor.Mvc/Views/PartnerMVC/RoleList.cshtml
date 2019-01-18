@@ -49,7 +49,7 @@
         <button class="layui-btn" onclick="x_admin_show('添加用户','/PartnerMVC/AddRoles')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
-      <table class="layui-table">
+      <table class="layui-table" lay-size="sm">
         <thead id="tab">
           <tr>
             <th>
@@ -57,37 +57,12 @@
             </th>
             <th>ID</th>
             <th>角色名称</th>
-           
             <th>拥有权限规则</th>
             <th>创建时间</th>
             <th>状态</th>
             <th>操作</th>
         </thead>
-        <tbody>
-          <tr>
-            <td>
-              <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-            </td>
-            <td>1</td>
-            <td>超级管理员</td>
-            <td>会员列表，问题列表</td>
-            <td>具有至高无上的权利</td>
-            <td>2018-02-01</td>
-            <td class="td-status">
-              <span class="layui-btn layui-btn-normal layui-btn-mini">已启用</span></td>
-            <td class="td-manage">
-              <a onclick="member_stop(this,'10001')" href="javascript:;"  title="启用">
-                <i class="layui-icon">&#xe601;</i>
-              </a>
-              <a title="编辑"  onclick="x_admin_show('编辑','role-add.html')" href="javascript:;">
-                <i class="layui-icon">&#xe642;</i>
-              </a>
-              <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                <i class="layui-icon">&#xe640;</i>
-              </a>
-            </td>
-          </tr>
-        </tbody>
+        
       </table>
       <div class="page">
         <div>
@@ -112,7 +87,7 @@
                 type: "get",
                 success: function (data) {
                     $(data).each(function (index, data) {
-                        $("#tab").append("<tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.RoleName + "</td> <td>" + data.PermissionName + "</td><td>" + data.CreateTime.substring(0, 10) +"&nbsp;" + data.CreateTime.substring(11, 19) + "</td> <td class='td - manage'>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr>");
+                        $("#tab").append("<tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.RoleName + "</td> <td title=" + data.PermissionName + ">" + data.PermissionName.substring(0, 10) + '...' + "</td><td>" + data.CreateTime.substring(0, 10) + "&nbsp;" + data.CreateTime.substring(11, 19) + "</td> <td class='td - manage'>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr>");
                     })
 
                     //$(data).each(function (index, data) {
@@ -124,15 +99,18 @@
 
         //删除
         function Delete(Id, obj) {
-            $.ajax({
-                url: "http://localhost:8099/Jurisdiction/DeleteRoles?Id=" + Id,
-                type: "get",
-                success: function (data) {
-                    if (data > 0) {
-                        alert("删除成功");
-                        $(obj).parent().parent().remove();
+            layer.confirm('确认要删除吗？', function (index) {
+                $.ajax({
+                    url: "http://localhost:8099/Jurisdiction/DeleteRoles?Id=" + Id,
+                    type: "get",
+                    success: function (data) {
+                        if (data > 0) {
+                            //alert("删除成功");
+                            layer.msg('已删除!', { icon: 1, time: 1000 }); 
+                            $(obj).parent().parent().remove();
+                        }
                     }
-                }
+                })
             })
         }
 
