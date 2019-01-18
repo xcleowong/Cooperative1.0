@@ -49,20 +49,25 @@
         <button class="layui-btn" onclick="x_admin_show('添加用户','/PartnerMVC/AddRoles')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
+
       <table class="layui-table"  id="tab">
         <thead>
+
+      <table class="layui-table" lay-size="sm">
+        <thead id="tab">
+
           <tr>
             <th>
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
             <th>ID</th>
             <th>角色名称</th>
-           
             <th>拥有权限规则</th>
             <th>创建时间</th>
             <th>状态</th>
             <th>操作</th>
         </thead>
+
         <tbody>
           <tr>
             <td>
@@ -88,6 +93,7 @@
             </td>
           </tr>
         </tbody>
+
       </table>
       <div class="page">
         <div>
@@ -112,7 +118,11 @@
                 type: "get",
                 success: function (data) {
                     $(data).each(function (index, data) {
-                        $("#tab").append("<tbody><tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.RoleName + "</td> <td title=" + data.PermissionName + ">" + data.PermissionName.substring(0, 25) + "…</td><td>" + data.CreateTime.substring(0, 10) + "&nbsp;" + data.CreateTime.substring(11, 19) + "</td> <td class='td - manage'>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr></tbody>");
+
+                        //$("#tab").append("<tbody><tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.RoleName + "</td> <td title=" + data.PermissionName + ">" + data.PermissionName.substring(0, 25) + "…</td><td>" + data.CreateTime.substring(0, 10) + "&nbsp;" + data.CreateTime.substring(11, 19) + "</td> <td class='td - manage'>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr></tbody>");
+
+                        $("#tab").append("<tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + (index + 1) + "</td> <td>" + data.RoleName + "</td> <td title=" + data.PermissionName + ">" + data.PermissionName.substring(0, 10) + '...' + "</td><td>" + data.CreateTime.substring(0, 10) + "&nbsp;" + data.CreateTime.substring(11, 19) + "</td> <td class='td - manage'>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr>");
+
                     })
 
                     //$(data).each(function (index, data) {
@@ -124,15 +134,18 @@
 
         //删除
         function Delete(Id, obj) {
-            $.ajax({
-                url: "http://localhost:8099/Jurisdiction/DeleteRoles?Id=" + Id,
-                type: "get",
-                success: function (data) {
-                    if (data > 0) {
-                        alert("删除成功");
-                        $(obj).parent().parent().remove();
+            layer.confirm('确认要删除吗？', function (index) {
+                $.ajax({
+                    url: "http://localhost:8099/Jurisdiction/DeleteRoles?Id=" + Id,
+                    type: "get",
+                    success: function (data) {
+                        if (data > 0) {
+                            //alert("删除成功");
+                            layer.msg('已删除!', { icon: 1, time: 1000 }); 
+                            $(obj).parent().parent().remove();
+                        }
                     }
-                }
+                })
             })
         }
 

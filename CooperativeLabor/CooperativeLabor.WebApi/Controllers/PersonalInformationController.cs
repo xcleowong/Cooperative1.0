@@ -13,7 +13,7 @@ namespace CooperativeLabor.WebApi.Controllers
     [RoutePrefix("PersonalInformation")]
     public class PersonalInformationController : ApiController
     {
-        private const int PAGESIZE = 8;
+        private const int PAGESIZE = 5;
         IPersonalInformationServices personals = null;
         public PersonalInformationController(IPersonalInformationServices ipersonal)
         {

@@ -42,11 +42,11 @@
             <form class="layui-form layui-col-md12 x-so layui-form-pane">
                 <div class="layui-input-inline">
                     @*<select name="cateid">
-                <option>规则分类</option>
-                <option>文章</option>
-                <option>会员</option>
-                <option>权限</option>
-            </select>*@
+                            <option>规则分类</option>
+                            <option>文章</option>
+                            <option>会员</option>
+                            <option>权限</option>
+                        </select>*@
                     <input id="Text1" type="text" name="PermissionName" />
                 </div>
                 <div class="layui-input-inline">
@@ -82,7 +82,7 @@
             <span class="x-right" style="line-height:40px">共有数据：88 条</span>
         </xblock>
 
-        <table class="layui-table" id="tab">
+        <table class="layui-table" id="tab" lay-size="sm">
             <thead>
                 <tr>
                     <th>
@@ -95,6 +95,7 @@
                     <th>是否启用</th>
                     <th>操作</th>
             </thead>
+
             <tbody>
                 <tr>
                     <td>
@@ -115,6 +116,8 @@
                     </td>
                 </tr>
             </tbody>
+    
+
         </table>
         <div class="page">
             <div>
@@ -138,47 +141,28 @@
                 type: "get",
                 success: function (data) {
                     $(data).each(function (index, data) {
-                        $("#tab").append("<tr><td><div class= 'layui-unselect layui-form-checkbox' lay - skin='primary' data - id='2' > <i class='layui-icon'>&#xe605;</i></div ></td ><td>" + data.Id + "</td> <td>" + data.PermissionName + "</td> <td>" + data.PermissionUrl + "</td> <td>" + data.CreateTime + "</td> <td>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td> <td><a title='编辑' onclick='x_admin_show('编辑', 'Updates.cshtml')' href='/PartnerMVC/Updates?Id=" + data.Id +"'>修改✎</a><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> </td > </tr > ");
+                        $("#tab").append("<tr><td><div class= 'layui-unselect layui-form-checkbox' lay - skin='primary' data - id='2' > <i class='layui-icon'>&#xe605;</i></div ></td ><td>" + (index+1)+ "</td> <td>" + data.PermissionName + "</td> <td>" + data.PermissionUrl + "</td> <td>" + data.CreateTime + "</td> <td>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td> <td><a title='编辑' onclick='x_admin_show('编辑', 'Updates.cshtml')' href='/PartnerMVC/Updates?Id=" + data.Id + "'>修改✎</a><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> </td > </tr > ");
                     })
                 }
             })
         })
 
-        ////删除      
-            function Delete(Id, obj) {
-                if (confirm("确定要删除吗？")) {
+        //删除
+        function Delete(Id, obj) {
+            layer.confirm('确认要删除吗？', function (index) {
                 $.ajax({
                     url: "http://localhost:8099/Jurisdiction/DeletePermission?Id=" + Id,
                     type: "post",
                     success: function (data) {
                         if (data > 0) {
                             //alert("删除成功");
+                            layer.msg('已删除!', { icon: 1, time: 1000 }); 
                             $(obj).parent().parent().remove();
                         }
                     }
                 })
-            }
-        
+            })
         }
-
-        /*用户-删除*/
-        //function member_del(Id, obj) {
-        //    layer.confirm('确认要删除吗？', function (index) {
-        //        //发异步删除数据
-        //        //$(obj).parents("tr").remove();
-        //        $.ajax({
-        //            url: "http://localhost:8099/Jurisdiction/DeletePermission?Id=" + Id,
-        //            type: "get",
-        //            success: function (data) {
-        //                if (data > 0) {
-        //                    alert("删除成功");
-        //                    $(obj).parent().parent().remove();
-        //                    layer.msg('已删除!', { icon: 1, time: 1000 });
-        //                }
-        //            }
-        //        })
-        //    });
-        //}
 
         layui.use('laydate', function () {
             var laydate = layui.laydate;
