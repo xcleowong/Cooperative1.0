@@ -33,12 +33,90 @@ namespace CooperativeLabor.WebApi.Controllers
         [Route("AddPersonnelExpenditure")]
         public int AddPersonnelExpenditure(PersonnelExpenditure personnelExpenditure)
         {
+            var breakValue = 0;//返回Id值
+            //添加审批活动
             personnelExpenditure.CreationTime = personnelExpenditure.CreationTime + "年";
             personnelExpenditure.CreationTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             personnelExpenditure.Status = 1;
             var result = IPersonnelExpenditureServices.AddPersonnelExpenditure(personnelExpenditure);
-            return result;
+
+            //提交成功
+            if (result > 0)
+            {
+                var breakId = IPersonnelExpenditureServices.GetPersonnelExpenditureId(personnelExpenditure.StaffId, personnelExpenditure.Name, personnelExpenditure.EmployingUnit, personnelExpenditure.PartnerName,personnelExpenditure.Year, personnelExpenditure.Quarter, personnelExpenditure.Completeness,  personnelExpenditure.Post, personnelExpenditure.CreationTime)[0].Id;
+                //获取审批流程信息
+                var name = "人员费审批节点";
+                //获取审批流程配置信息
+                var approvalProcess = IPersonnelExpenditureServices.GetApprovalProcesses(name);
+                #region  批量添加
+                //创建多条集合
+                var activityList = Enumerable.Range(0, approvalProcess.Count).Select(i => new ApprovalActivity()
+                {
+                    ProcessID = approvalProcess[i].ProcessID,//审批流程ID
+                    StaffId = personnelExpenditure.StaffId,//员工ID
+                    Proposer = personnelExpenditure.Name,//申请人
+                    NodeID = approvalProcess[i].NodeID,//审批节点ID
+                    ProcessCode = approvalProcess[i].ProcessCode,//配置流程编码
+                    RoleSector = approvalProcess[i].RoleSector,//审批角色部门
+                    ApprovalRoleID = approvalProcess[i].ApprovalRoleID,//审批角色ID
+                    NextApprovalRoleID = approvalProcess[i].NextAppRoleId,//下一步审批角色ID
+                    ApprovalUserID = approvalProcess[i].AppUserId,//审批人ID
+                    NextApprovalUserID = approvalProcess[i].NextAppUserId,//下一步审批人ID
+                    ProcessRoleID = approvalProcess[i].ProcessRoleID,//使用流程角色ID
+                    JudgmentID = approvalProcess[i].ConditionId, //判断条件ID
+                    Condtion = approvalProcess[i].AppStatusId,//审批状态
+                    IsAllowModity = 1,// 是否修改
+                    IsAllowVersion = 0,//是否撤销
+                    ApprovalUser = "",// 实际审批人
+                    ApprovalOpinion = "",// 审批意见
+                    TureCondtion = 0,//实际审批状态
+                    ApprovalTime = DateTime.Now,// 审批时间
+                    Creator = approvalProcess[i].Creator,//创建人
+                    CreateTime = DateTime.Now,//创建时间
+                    Disabled = approvalProcess[i].Disabled,//是否启用
+                    PId = approvalProcess[i].PId,// 父级ID
+                    PerExpId = breakId,// 人员费ID
+                }).ToList<ApprovalActivity>();
+                //添加多条
+                breakValue = IPersonnelExpenditureServices.AddApprovalActivity(activityList);
+            }
+            #endregion
+            #region
+            //for (int i = 0; i < approvalProcess.Count; i++)
+            //{
+            //    //实例化审批活动表
+            //    ApprovalActivity approvalActivity = new ApprovalActivity
+            //    {
+            //        ProcessID = approvalProcess[i].ProcessID,//审批流程ID
+            //        StaffId = personnelExpenditure.StaffId,//员工ID
+            //        Proposer = personnelExpenditure.Name,//申请人
+            //        NodeID = approvalProcess[i].NodeID,//审批节点ID
+            //        ProcessCode = approvalProcess[i].ProcessCode,//配置流程编码
+            //        RoleSector = approvalProcess[i].RoleSector,//审批角色部门
+            //        ApprovalRoleID = approvalProcess[i].ApprovalRoleID,//审批角色ID
+            //        NextApprovalRoleID = approvalProcess[i].NextAppRoleId,//下一步审批角色ID
+            //        ApprovalUserID = approvalProcess[i].AppUserId,//审批人ID
+            //        NextApprovalUserID = approvalProcess[i].NextAppUserId,//下一步审批人ID
+            //        ProcessRoleID = approvalProcess[i].ProcessRoleID,//使用流程角色ID
+            //        JudgmentID = approvalProcess[i].ConditionId, //判断条件ID
+            //        Condtion = approvalProcess[i].AppStatusId,//审批状态
+            //        IsAllowModity = 1,// 是否修改
+            //        IsAllowVersion = 0,//是否撤销
+            //        ApprovalUser = "",// 实际审批人
+            //        ApprovalOpinion = "",// 审批意见
+            //        TureCondtion = 0,//实际审批状态
+            //        ApprovalTime = DateTime.Now,// 审批时间
+            //        Creator = approvalProcess[i].Creator,//创建人
+            //        CreateTime = DateTime.Now,//创建时间
+            //        PId = approvalProcess[i].PId,// 父级ID
+            //        Disabled = approvalProcess[i].Disabled,//是否启用
+            //    };
+            //    breakId = IPersonnelExpenditureServices.AddApprovalActivity(approvalActivity);
+            //}
+            #endregion
+            return breakValue;
         }
+
 
         /// <summary>
         /// 获取员工信息
@@ -69,7 +147,7 @@ namespace CooperativeLabor.WebApi.Controllers
             {
                 var reverseStrStatus = "";//状态文字(反)
                 var strStatus = "";//状态文字
-                //0删除、1提交、2草稿
+                                   //0删除、1提交、2草稿
                 if (list[i].Status == 1) { strStatus = "提交中 "; reverseStrStatus = "撤回 "; }
                 if (list[i].Status == 2) { strStatus = "草稿 "; reverseStrStatus = "删除 "; }
 

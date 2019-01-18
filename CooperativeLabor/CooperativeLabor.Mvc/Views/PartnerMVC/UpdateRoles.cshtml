@@ -17,9 +17,30 @@
         li {
             list-style: none;
         }
+        /*顶部下拉信息提示框*/
+        .messageBox {
+            height: 52px;
+            padding: 0 53px 0 78px;
+            line-height: 52px;
+            /*background: url(/Images/img-set1.png) -441px -613px #ffffe7 no-repeat;*/
+            background: url(../../Images/img-set1.png) -441px -613px #ffffe7 no-repeat;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            position: fixed;
+            top: -60px;
+            left: 50%;
+            border: 5px solid #ddd;
+            border-top: 0;
+            color: #444;
+            font-size: 18px;
+            z-index: 9999;
+        }
+
+        .messageError {
+            background-position: -441px -673px;
+        }
     </style>
     <script>
-
         var permissionId = 0;
         var list = [];
         function PermisionShow(obj) {
@@ -70,7 +91,7 @@
                 //    list = data;
                 //    $(data).each(function (index, data) {
                 //        if (data.Pid == 0) {
-                //            str += "<label> <input type='checkbox' onclick='PermisionShow(this)'  name='PermissionName' value=" + data.Id + ">" + data.PermissionName + "</label>&nbsp;&nbsp;&nbsp;&nbsp;<label></label>"                           
+                //            str += "<label> <input type='checkbox' onclick='PermisionShow(this)'  name='PermissionName' value=" + data.Id + ">" + data.PermissionName + "</label>&nbsp;&nbsp;&nbsp;&nbsp;<label></label>"
                 //        }
                 //    })
 
@@ -78,13 +99,7 @@
                 //    str += '</tr></table>';
                 //    $("#div1").append(str);
                 //}
-
-
             });
-
-
-
-
 
               //反填
             $.ajax({
@@ -143,22 +158,23 @@
                 $("input[name=PermissionName]:checked").each(function () {
                     PermissionNames.push($(this).parent().text());
                 })
+                async: false;
                 $.ajax({
                     url: "http://localhost:8099/Jurisdiction/UpdateRoles",
                     type: "post",
                     data: $("#addform").serialize(),
                     success: function (data) {
                         if (data > 0) {
-                            alert("修改成功！");
+                            //页头下拉提示框
+                            $(".messageBox").removeClass("messageError").text("登录成功！！").css("margin-left", -($(".messageBox").outerWidth() / 2)).animate({ top: 0 }, "fast").delay(1500).animate({ top: "-57px" }, "fast");
+                           // location.href = "/PartnerMVC/RoleList";
                         }
                     }
                 })
             })
 
         })
-        //function Getpermission() {
-            //    location.href = "/PartnerMVC/GetPermission";
-            //}
+ 
     </script>
 </head>
 <body>
@@ -202,6 +218,8 @@
                 </tr>
             </table>
         </div>
+        <!-- 通用提示框 -->
+        <div class="messageBox"></div>
     </form>
 
 </body>

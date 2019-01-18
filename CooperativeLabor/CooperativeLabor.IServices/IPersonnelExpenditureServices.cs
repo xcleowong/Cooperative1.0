@@ -28,17 +28,18 @@ namespace CooperativeLabor.IServices
         int AddPersonnelExpenditure(PersonnelExpenditure personnelExpenditure);
         
         /// <summary>
-        /// 获取审批流程信息
+        /// 获取审批流程配置信息
         /// </summary>
         /// <returns></returns>
-        List<ApprovalProcess> GetApprovalProcesses(int Id);
+        List<AppProcessConfiguration> GetApprovalProcesses(string name);
 
         /// <summary>
         /// 添加审批活动表信息
         /// </summary>
         /// <param name="approvalActivity"></param>
         /// <returns></returns>
-        int AddApprovalActivity(ApprovalActivity approvalActivity);
+        int AddApprovalActivity(List<ApprovalActivity> activityList);
+        //int AddApprovalActivity(ApprovalActivity approvalActivity);
 
         /// <summary>
         /// 获取审批活动表信息
@@ -59,7 +60,14 @@ namespace CooperativeLabor.IServices
         /// </summary>
         /// <returns></returns>
         List<PersonnelExpenditure> GetPersonnelExpenditures(int StaffId);
-
+        
+        /// <summary>
+        /// 获取人员费用信息
+        /// 返回ID
+        /// </summary>
+        /// <returns></returns>
+        List<PersonnelExpenditure> GetPersonnelExpenditureId(int StaffId,string Name, string EmployingUnit, string PartnerName, string Year, string Quarter, string Completeness, string Post, string CreationTime);
+        
         /// <summary>
         /// 获取人员费用信息By Id
         /// </summary>
@@ -73,6 +81,5 @@ namespace CooperativeLabor.IServices
         /// <param name="Status"></param>
         /// <returns></returns>
         int RecallOrDelete(int Id, int Status);
-
     }
 }
