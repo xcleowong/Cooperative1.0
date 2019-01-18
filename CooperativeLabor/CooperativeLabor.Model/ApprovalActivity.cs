@@ -15,6 +15,16 @@ namespace CooperativeLabor.Model
         public int Id { get; set; }
 
         /// <summary>
+        /// 员工ID
+        /// </summary>
+        public int StaffId { get; set; }
+
+        /// <summary>
+        /// 申请人
+        /// </summary>
+        public string Proposer { get; set; }
+
+        /// <summary>
         /// 审批流程ID
         /// </summary>           
         public int ProcessID { get; set; }
@@ -57,7 +67,7 @@ namespace CooperativeLabor.Model
         /// <summary>
         /// 使用流程角色ID
         /// </summary>           
-        public int ProcessRoleID { get; set; }
+        public string ProcessRoleID { get; set; }
 
         /// <summary>
         /// 判断条件ID
@@ -109,5 +119,19 @@ namespace CooperativeLabor.Model
         /// </summary>           
         public DateTime CreateTime { get; set; }
 
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        public int Disabled { get; set; }
+
+        /// <summary>
+        /// 父级ID
+        /// </summary>
+        public int PId { get; set; }
+
+        /// <summary>
+        /// 人员费ID
+        /// </summary>
+        public int PerExpId { get; set; }
     }
 }
