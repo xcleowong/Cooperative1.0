@@ -108,6 +108,14 @@ namespace CooperativeLabor.Model
         /// 创建时间
         /// </summary>           
         public DateTime CreateTime { get; set; }
+        /// <summary>
+        /// 是否启用
+        /// </summary>
+        public int Disabled { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
+        public int Pid { get; set; }
 
     }
 }

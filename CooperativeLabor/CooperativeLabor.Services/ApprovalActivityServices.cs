@@ -25,7 +25,7 @@ namespace CooperativeLabor.Services
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
-                string sql = @"INSERT into approvalactivity(ProcessID,NodeID,ProcessCode,RoleSector,ApprovalRoleID,NextApprovalRoleID,ApprovalUserID,NextApprovalUserID,ProcessRoleID,JudgmentID,Condtion,IsAllowModity,IsAllowVersion,ApprovalUser,ApprovalOpinion,TureCondtion,ApprovalTime,Creator,CreateTime,Disabled) VALUES(@ProcessID,@NodeID,@ProcessCode,@RoleSector,@ApprovalRoleID,@NextApprovalRoleID,@ApprovalUserID,@NextApprovalUserID,@ProcessRoleID,@JudgmentID,@Condtion,@IsAllowModity,@IsAllowVersion,@ApprovalUser,@ApprovalOpinion,@TureCondtion,@ApprovalTime,@Creator,@CreateTime,@Disabled)";
+                string sql = @"INSERT into approvalactivity(ProcessID,NodeID,ProcessCode,RoleSector,ApprovalRoleID,NextApprovalRoleID,ApprovalUserID,NextApprovalUserID,ProcessRoleID,JudgmentID,Condtion,IsAllowModity,IsAllowVersion,ApprovalUser,ApprovalOpinion,TureCondtion,ApprovalTime,Creator,CreateTime,Disabled,Pid) VALUES(@ProcessID,@NodeID,@ProcessCode,@RoleSector,@ApprovalRoleID,@NextApprovalRoleID,@ApprovalUserID,@NextApprovalUserID,@ProcessRoleID,@JudgmentID,@Condtion,@IsAllowModity,@IsAllowVersion,@ApprovalUser,@ApprovalOpinion,@TureCondtion,@ApprovalTime,@Creator,@CreateTime,@Disabled,@Pid)";
                 var result = conn.Execute(sql, approvalActivity);
                 return result;
             }
@@ -46,9 +46,6 @@ namespace CooperativeLabor.Services
                 return result;
             }
         }
-
-
-
 
         /// <summary>
         /// 获取审批活动
@@ -92,7 +89,7 @@ namespace CooperativeLabor.Services
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
-                string sql = @"UPDATE approvalactivity SET ProcessID=@ProcessID,NodeID=@NodeID,ProcessCode=@ProcessCode,RoleSector=@RoleSector,ApprovalRoleID=@ApprovalRoleID,NextApprovalRoleID=@NextApprovalRoleID,ApprovalUserID=@ApprovalUserID,NextApprovalUserID=@NextApprovalUserID,ProcessRoleID=@ProcessRoleID,JudgmentID=@JudgmentID,Condtion=@Condtion,IsAllowModity=@IsAllowModity,IsAllowVersion=@IsAllowVersion,ApprovalUser=@ApprovalUser,ApprovalOpinion=@ApprovalOpinion,TureCondtion=@TureCondtion,ApprovalTime=@ApprovalTime,Creator=@Creator,CreateTime=@CreateTime,Disabled=@Disabled WHERE Id = @Id;";
+                string sql = @"UPDATE approvalactivity SET ProcessID=@ProcessID,NodeID=@NodeID,ProcessCode=@ProcessCode,RoleSector=@RoleSector,ApprovalRoleID=@ApprovalRoleID,NextApprovalRoleID=@NextApprovalRoleID,ApprovalUserID=@ApprovalUserID,NextApprovalUserID=@NextApprovalUserID,ProcessRoleID=@ProcessRoleID,JudgmentID=@JudgmentID,Condtion=@Condtion,IsAllowModity=@IsAllowModity,IsAllowVersion=@IsAllowVersion,ApprovalUser=@ApprovalUser,ApprovalOpinion=@ApprovalOpinion,TureCondtion=@TureCondtion,ApprovalTime=@ApprovalTime,Creator=@Creator,CreateTime=@CreateTime,Disabled=@Disabled,Pid=@Pid WHERE Id = @Id";
                 var result = conn.Execute(sql, approvalActivity);
                 return result;
             }

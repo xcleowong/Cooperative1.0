@@ -21,13 +21,12 @@
                 type: "get",
                 success: function (data) {
                     $(data).each(function (index, data) {
-                        $("#tab").append("<tr> <td>" + data.Id + "</td> <td>" + data.PermissionName + "</td> <td>" + data.PermissionUrl + "</td> <td>" + data.CreateTime + "</td> <td>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/Updates?Id="+ data.Id+"'>修改</a></td> </tr>");
+                        $("#tab").append("<tr> <td>" + data.Id + "</td> <td>" + data.PermissionName + "…</td> <td>" + data.PermissionUrl + "</td> <td>" + data.CreateTime + "</td> <td>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/Updates?Id="+ data.Id+"'>修改</a></td> </tr>");
                     })
                 }
             })
 
         })
-
 
         //删除
         function Delete(Id,obj) {
@@ -35,15 +34,13 @@
                 url: "http://localhost:8099/Jurisdiction/DeletePermission?Id=" + Id,
                 type: "post",              
                 success: function (data) {
-                    if (data > 0) {
+                    if (data> 0) {
                         alert("删除成功");
                         $(obj).parent().parent().remove();
                     }
                 }
             })
         }
-
-       
     </script>
 </head>
 <body>
@@ -57,7 +54,7 @@
                 </tr>
             </table>
 
-            <table align="center" class="table table-hover table-bordered" style="width:1000px;text-align:center;" id="tab">
+            <table align="center" class="table table-hover table-bordered" style="width:80%;text-align:center;" id="tab">
                 <tr>
                     <td>编号</td>
                     <td>权限名称</td>

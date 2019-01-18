@@ -49,8 +49,8 @@
         <button class="layui-btn" onclick="x_admin_show('添加用户','/PartnerMVC/AddRoles')"><i class="layui-icon"></i>添加</button>
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
-      <table class="layui-table">
-        <thead id="tab">
+      <table class="layui-table"  id="tab">
+        <thead>
           <tr>
             <th>
               <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
@@ -70,7 +70,7 @@
             </td>
             <td>1</td>
             <td>超级管理员</td>
-            <td>会员列表，问题列表</td>
+            
             <td>具有至高无上的权利</td>
             <td>2018-02-01</td>
             <td class="td-status">
@@ -112,7 +112,7 @@
                 type: "get",
                 success: function (data) {
                     $(data).each(function (index, data) {
-                        $("#tab").append("<tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.RoleName + "</td> <td>" + data.PermissionName + "</td><td>" + data.CreateTime.substring(0, 10) +"&nbsp;" + data.CreateTime.substring(11, 19) + "</td> <td class='td - manage'>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr>");
+                        $("#tab").append("<tbody><tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.RoleName + "</td> <td title=" + data.PermissionName + ">" + data.PermissionName.substring(0, 25) + "…</td><td>" + data.CreateTime.substring(0, 10) + "&nbsp;" + data.CreateTime.substring(11, 19) + "</td> <td class='td - manage'>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr></tbody>");
                     })
 
                     //$(data).each(function (index, data) {

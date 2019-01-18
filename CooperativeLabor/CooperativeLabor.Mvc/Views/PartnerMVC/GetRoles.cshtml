@@ -23,7 +23,7 @@
                 type: "get",
                 success: function (data) {
                     $(data).each(function (index, data) {
-                        $("#tab").append("<tr> <td>" + data.Id + "</td> <td>" + data.RoleName + "</td> <td>" + data.Role_PeremissionIds + "</td> <td>" + data.PermissionName + "</td><td>" + data.CreateTime + "</td> <td>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr>");
+                        $("#tab").append("<tr> <td>" + data.Id + "</td> <td>" + data.RoleName + "</td> <td title=" + data.PermissionName + "> " + data.PermissionName.substring(0, 20) + "…</td><td>" + data.CreateTime + "</td> <td>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr>");
                     })
                 }
             })
@@ -57,11 +57,10 @@
             </tr>
         </table>
 
-        <table align="center" class="table table-hover table-bordered" style="width:1000px;text-align:center;" id="tab">
+        <table align="center" class="table table-hover table-bordered table-condensed" style="width:75%" id="tab">
             <tr>
                 <td>编号</td>
-                <td>角色名称</td>
-                <td>权限ID</td>
+                <td>角色名称</td>              
                 <td>权限名称</td>
                 <td>创建时间</td>
                 <td>是否启用</td>
