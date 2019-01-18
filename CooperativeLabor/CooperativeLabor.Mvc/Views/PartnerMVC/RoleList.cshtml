@@ -50,11 +50,10 @@
         <span class="x-right" style="line-height:40px">共有数据：88 条</span>
       </xblock>
 
-      <table class="layui-table"  id="tab">
-        <thead>
+      
 
-      <table class="layui-table" lay-size="sm">
-        <thead id="tab">
+      <table class="layui-table" lay-size="sm" id="tab">
+        <thead>
 
           <tr>
             <th>
@@ -119,15 +118,12 @@
                 success: function (data) {
                     $(data).each(function (index, data) {
 
-                        //$("#tab").append("<tbody><tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.RoleName + "</td> <td title=" + data.PermissionName + ">" + data.PermissionName.substring(0, 25) + "…</td><td>" + data.CreateTime.substring(0, 10) + "&nbsp;" + data.CreateTime.substring(11, 19) + "</td> <td class='td - manage'>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr></tbody>");
 
                         $("#tab").append("<tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + (index + 1) + "</td> <td>" + data.RoleName + "</td> <td title=" + data.PermissionName + ">" + data.PermissionName.substring(0, 10) + '...' + "</td><td>" + data.CreateTime.substring(0, 10) + "&nbsp;" + data.CreateTime.substring(11, 19) + "</td> <td class='td - manage'>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr>");
 
                     })
 
-                    //$(data).each(function (index, data) {
-                    //    $("#tab").append("<tr><td><div class='layui - unselect header layui - form - checkbox' lay-skin='primary'><i class='layui - icon'>&#xe605;</i></div></td> <td>" + data.Id + "</td> <td>" + data.RoleName + "</td> <td>" + data.Role_PeremissionIds + "</td> <td>" + data.PermissionName + "</td><td>" + data.CreateTime + "</td> <td class='td-status'><span class='layui - btn layui - btn - normal layui - btn - mini'>已启用</span>" + (data.IsStart == 1 ? "启用" : "禁用") + "</td><td><a href='#' onclick=Delete(" + data.Id + ",this)>删除</a> <a href='/PartnerMVC/UpdateRoles?Id=" + data.Id + "'>修改</a></td> </tr>");
-                    //})
+                   
                 }
             })
         })

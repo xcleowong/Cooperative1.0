@@ -31,10 +31,10 @@ namespace CooperativeLabor.WebApi.Controllers
         public UserManagement Login(string UserName, string UserPassword)
         {
             var result = this.iUserManagement.Login(UserName, UserPassword);
-
             CookieHelper.SetCookie("cookie_rememberme", UserName, 1);
-
             return result;
         }
+
+
     }
 }
