@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace CooperativeLabor.Mvc.Controllers.shenpi
+namespace CooperativeLabor.Mvc.Controllers.Approval
 {
     public class ApprovalActivityController : Controller
     {

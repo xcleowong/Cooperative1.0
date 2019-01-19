@@ -1,79 +1,159 @@
-﻿
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
+﻿<!DOCTYPE html>
 <html>
+
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-    <link href="~/BootstrapSouce/css/bootstrap.min.css" rel="stylesheet" />
-    <script type="text/javascript">
-        $(function () {
-            $.ajax({
-                url: "http://localhost:8099/ApprovalActivity/GetApprovalActivity",
-                type: "get",
-                success: function (data) {
-                    $(data).each(function (index, data) {
-                        $("#tab").append("<tr>" +
-                            "<td>" + data.Id + "</td>" +
-                            "<td>" + data.ProcessID + "</td>" +
-                            "<td>" + data.NodeID + "</td>" +
-                            "<td>" + data.ProcessCode + "</td>" +
-                            "<td>" + data.RoleSector + "</td>" +
-                            "<td>" + data.ApprovalRoleID + "</td>" +
-                            "<td>" + data.NextApprovalRoleID + "</td>" +
-                            "<td>" + data.ApprovalUserID + "</td>" +
-                            "<td>" + data.NextApprovalUserID + "</td>" +
-                            "<td>" + data.ProcessRoleID + "</td>" +
-                            "<td>" + data.JudgmentID + "</td>" +
-                            "<td>" + data.Condtion + "</td>" +
-                            "<td>" + data.IsAllowModity + "</td>" +
-                            "<td>" + data.IsAllowVersion + "</td>" +
-                            "<td>" + data.ApprovalUser + "</td>" +
-                            "<td>" + data.ApprovalOpinion + "</td>" +
-                            "<td>" + data.TureCondtion + "</td>" +
-                            "<td>" + data.ApprovalTime + "</td>" +
-                            "<td>" + data.Creator + "</td>" +
-                            "<td>" + data.CreateTime + "</td>" + 
-                            "<td><a>驳回/通过/撤回</a></td>" +
-                            "</tr>");
-                    })
-                }
-            })
-        })
-    </script>
+    <meta charset="UTF-8">
+    <title>欢迎页面-X-admin2.0</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+
+    <link href="~/Content/Layui_X_Admin/css/font.css" rel="stylesheet" />
+    <link href="~/Content/Layui_X_Admin/css/xadmin.css" rel="stylesheet" />
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="~/Content/Layui_X_Admin/lib/layui/layui.js"></script>
+    <script src="~/Content/Layui_X_Admin/js/xadmin.js"></script>
+
+    @*vue*@
+    <script src="~/Content/VueScripts/vue.js"></script>
+    <script src="~/Content/VueScripts/axios.js"></script>
+
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <style>
+        .page-bar {
+            margin: 40px;
+        }
+
+        ul, li {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        li {
+            list-style: none
+        }
+
+        .page-bar li:first-child > a {
+            margin-left: 0px
+        }
+
+        .page-bar a {
+            border: 1px solid #ddd;
+            text-decoration: none;
+            position: relative;
+            float: left;
+            padding: 6px 12px;
+            margin-left: -1px;
+            line-height: 1.42857143;
+            color: #337ab7;
+            cursor: pointer
+        }
+
+            .page-bar a:hover {
+                background-color: #eee;
+            }
+
+            .page-bar a.banclick {
+                cursor: not-allowed;
+            }
+
+        .page-bar .active a {
+            color: #fff;
+            cursor: default;
+            background-color: #337ab7;
+            border-color: #337ab7;
+        }
+
+        .page-bar i {
+            font-style: normal;
+            color: #d44950;
+            margin: 0px 4px;
+            font-size: 12px;
+        }
+
+
+        .div-td table td {
+            width: 30px;
+            line-height: 15px
+        }
+    </style>
+
 </head>
-<body>
-    <div>
-        <table align="center" id="tab" class="table table-hover table-bordered table-condensed" >
-            <tr>
-                <th>编号</th>
-                <th>审批流程ID</th>
-                <th>审批节点ID</th>
-                <th>配置流程编码</th>
-                <th>审批角色部门</th>
-                <th>审批角色ID</th>
-                <th>下一步审批角色</th>
-                <th>审批人ID</th>
-                <th>下一步审批人ID</th>
-                <th>使用流程角色ID</th>
-                <th>条件ID</th>
-                <th>审批状态ID</th>
-                <th>是否修改</th>
-                <th>是否撤销</th>
-                <th>实际审批人</th>
-                <th>审批意见</th>
-                <th>实际审批状态</th>
-                <th>审批时间</th>               
-                <th>创建人</th>
-                <th>创建时间</th>
-                <th>操作</th>
-            </tr>
-        </table>
+
+<body class="layui-anim layui-anim-up">
+    <div class="x-nav">
+        <span class="layui-breadcrumb">
+            <a href="">首页</a>
+            <a href="">审批活动</a>
+            <a>
+                <cite>我的审批</cite>
+            </a>
+        </span>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon" style="line-height:30px">ဂ</i>
+        </a>
     </div>
+    <div class="x-body" id="app">
+        <div class="layui-row">
+            <form class="layui-form layui-col-md12 x-so">
+                &nbsp;&nbsp;
+                <input type="text" name="startendtime" placeholder="选择日期" autocomplete="off" class="layui-input" id="startendtime" style="width:200px;">
+                <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+            </form>
+        </div>
+        <xblock>
+            <button class="layui-btn layui-btn-danger small" v-on:click="signIn()"><i class="layui-icon">&#xe66c;</i>签到</button>
+            <button class="layui-btn layui-btn-small" v-on:click="signBack()"><i class="layui-icon">&#xe65b;</i>签退</button>
+            <span class="x-right" style="line-height:40px">共有数据：{{count}} 条</span>
+        </xblock>
+        <table class="layui-table" lay-size="sm" v-show="GetCheckingIns.length">
+            <thead>
+                <tr>
+                    <th>序号</th>
+                    <th>签到时间</th>
+                    <th>签退时间</th>
+                    <th>签到状态</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
+        <div class="page-bar">
+            <ul>
+                <li v-if="cur>1"><a v-on:click="cur--,pageClick()">上一页</a></li>
+                <li v-if="cur==1"><a class="banclick">上一页</a></li>
+                <li v-for="index in indexs" v-bind:class="{ 'active': cur == index}">
+                    <a v-on:click="btnClick(index)">{{ index }}</a>
+                </li>
+                <li v-if="cur!=all"><a v-on:click="cur++,pageClick()">下一页</a></li>
+                <li v-if="cur == all"><a class="banclick">下一页</a></li>
+                <li><a>共<i>{{all}}</i>页</a></li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+            //执行一个laydate实例
+            laydate.render({
+                elem: '#startendtime' //指定元素
+            });
+        });
+    </script>
+    <script>
+    var _hmt = _hmt || []; (function () {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();</script>
 </body>
 </html>

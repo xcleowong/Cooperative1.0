@@ -1,0 +1,79 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <link href="~/BootstrapSouce/css/bootstrap.min.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(function () {
+            $.ajax({
+                url: "http://localhost:8099/ApprovalActivity/GetApprovalActivity",
+                type: "get",
+                success: function (data) {
+                    $(data).each(function (index, data) {
+                        $("#tab").append("<tr>" +
+                            "<td>" + data.Id + "</td>" +
+                            "<td>" + data.ProcessID + "</td>" +
+                            "<td>" + data.NodeID + "</td>" +
+                            "<td>" + data.ProcessCode + "</td>" +
+                            "<td>" + data.RoleSector + "</td>" +
+                            "<td>" + data.ApprovalRoleID + "</td>" +
+                            "<td>" + data.NextApprovalRoleID + "</td>" +
+                            "<td>" + data.ApprovalUserID + "</td>" +
+                            "<td>" + data.NextApprovalUserID + "</td>" +
+                            "<td>" + data.ProcessRoleID + "</td>" +
+                            "<td>" + data.JudgmentID + "</td>" +
+                            "<td>" + data.Condtion + "</td>" +
+                            "<td>" + data.IsAllowModity + "</td>" +
+                            "<td>" + data.IsAllowVersion + "</td>" +
+                            "<td>" + data.ApprovalUser + "</td>" +
+                            "<td>" + data.ApprovalOpinion + "</td>" +
+                            "<td>" + data.TureCondtion + "</td>" +
+                            "<td>" + data.ApprovalTime + "</td>" +
+                            "<td>" + data.Creator + "</td>" +
+                            "<td>" + data.CreateTime + "</td>" + 
+                            "<td><a>驳回/通过/撤回</a></td>" +
+                            "</tr>");
+                    })
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+    <div>
+        <table align="center" id="tab" class="table table-hover table-bordered table-condensed" >
+            <tr>
+                <th>编号</th>
+                <th>审批流程ID</th>
+                <th>审批节点ID</th>
+                <th>配置流程编码</th>
+                <th>审批角色部门</th>
+                <th>审批角色ID</th>
+                <th>下一步审批角色</th>
+                <th>审批人ID</th>
+                <th>下一步审批人ID</th>
+                <th>使用流程角色ID</th>
+                <th>条件ID</th>
+                <th>审批状态ID</th>
+                <th>是否修改</th>
+                <th>是否撤销</th>
+                <th>实际审批人</th>
+                <th>审批意见</th>
+                <th>实际审批状态</th>
+                <th>审批时间</th>               
+                <th>创建人</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
