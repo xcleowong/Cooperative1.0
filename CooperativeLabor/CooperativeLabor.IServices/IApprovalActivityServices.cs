@@ -13,39 +13,37 @@ namespace CooperativeLabor.IServices
     public interface IApprovalActivityServices
     {
         /// <summary>
-        /// 添加审批活动
+        /// 查询登录用户角色
         /// </summary>
-        /// <param name="approvalActivity"></param>
+        /// <param name="Id"></param>
+        /// <param name="UserName"></param>
         /// <returns></returns>
-        int AddApprovalActivity(ApprovalActivity approvalActivity);
+        List<UserManagement> GetUserManagements(int Id, string UserName);
+
+        /// <summary>
+        /// 获取人员费信息
+        /// </summary>
+        /// <returns></returns>
+        List<PersonnelExpenditure> GetPersonnelExpenditures(int PerExpId);
+
+        /// <summary>
+        /// 获取审批活动
+        /// </summary>
+        /// <returns></returns>
+        List<ApprovalActivity> GetApprovalActivity(int ApprovalUserID);
 
         /// <summary>
         /// 修改审批活动
         /// </summary>
         /// <param name="approvalActivity"></param>
         /// <returns></returns>
-        int UpdateApprovalActivity(ApprovalActivity approvalActivity);
-
-        /// <summary>
-        /// 删除审批活动
-        /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        int DeleteApprovalActivity(int Id);
-
-        /// <summary>
-        /// 获取审批活动
-        /// </summary>
-        /// <returns></returns>
-        List<ApprovalActivity> GetApprovalActivity();
+        int UpdateApprovalActivity(int Id, string ApprovalUser, string ApprovalOpinion, int TureCondtion);
 
         /// <summary>
         /// 根据ID获取审批活动
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        ApprovalActivity GetApprovalActivityById(int Id);
-
-
+        List<ApprovalActivity> GetApprovalActivityById(int Id, int ApprovalUserID);
     }
 }
