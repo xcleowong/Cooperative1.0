@@ -54,7 +54,14 @@ namespace CooperativeLabor.IServices
         /// <returns></returns>
         UserManagement Login(string UserName, string UserPassword);
 
+
         object getusers(string UserName, string UserPassword);
 
+        /// <summary>
+        /// 根据登录时的用户ID获取该管理员权限(url)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        List<UserManagement> GetUsersPermissionUrl(int id);
     }
 }
