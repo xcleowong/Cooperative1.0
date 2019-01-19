@@ -11,34 +11,8 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
 
-    <link href="~/Content/Layui_X_Admin/css/font.css" rel="stylesheet" />
-    <link href="~/Content/Layui_X_Admin/css/xadmin.css" rel="stylesheet" />
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
-    <script src="~/Content/Layui_X_Admin/lib/layui/layui.js"></script>
-    <script src="~/Content/Layui_X_Admin/js/xadmin.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            var user = JSON.parse(localStorage.user)
-            console.log(user);
-            $.ajax({
-                
-                url: "/Login/GetPermissionList",
-                data: {
-                    Id: user.Id,
-                    @* Id: @Request.QueryString["Id"].ToString(),*@
-                    //UserName: user.UserName,
-                   
-                },
-                
-                type: "get",
-                success: function (data) {
-                    $(data).each(function (index, data) {
-                        $("#side-nav").append("<ul>< li class= 'layui-nav-item' ><a href='" + data.PermissionUrl + "' target='BodyContent'> <i class='iconfont'>&#xe6b8;</i><cite>" + data.PermissionName + "</cite><i class='iconfont nav_right'>&#xe697;</i></a></li ></ul > ");   
-                    })
-                }
-            })
-        })
-    </script>
+
 </head>
 <body>
     <!-- 顶部开始 -->
@@ -79,158 +53,158 @@
     <div class="left-nav">
         <div id="side-nav">
             <ul id="nav">
-                <li>
-                    <a href="javascript:;">
-                        <i class="iconfont">&#xe6b8;</i>
-                        <cite>合作方管理</cite>
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a _href="/PartnerMVC/IndexEss1">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>基本信息维护</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a _href="/DepartmentMaintenanceView/AddDepartmentMaintenanceView">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>单位科室维护</cite>
+                @*<li>
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe6b8;</i>
+                            <cite>合作方管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="/PartnerMVC/IndexEss1">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>基本信息维护</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a _href="/DepartmentMaintenanceView/AddDepartmentMaintenanceView">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>单位科室维护</cite>
 
-                            </a>
-                        </li>
+                                </a>
+                            </li>
 
-                        <li>
-                            <a _href="/PartnerMVC/IndexEnt">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>入离场记录</cite>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <i class="iconfont">&#xe6af;</i>
-                        <cite>合作方人员管理</cite>
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a _href="/PersonalInformation/PersonalIndex">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>人员基本信息维护</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a _href="/EntryDimissionMVC/EntryIndex">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>人员入离职记录</cite>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a _href="/AllowancesView/Index">
-                        <i class="iconfont">&#xe6e5;</i>
-                        <cite>补助标准配置</cite>
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                </li>
-                <li>
-                    <a _href="/HolidaySettingsView/Index">
-                        <i class="iconfont">&#xe6e5;</i>
-                        <cite>假期设置</cite>
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <i class="iconfont">&#xe6bf;</i>
-                        <cite>绩效考核</cite>
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a _href="/CheckingIn/Index">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>考勤签到</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a _href="/TravelOnVacation/Index">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>差旅休假</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a _href="/SpecialSignMVC/SpecialIndex">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>特别签录</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a _href="city.html">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>考勤统计</cite>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <i class="iconfont">&#xe6e5;</i>
-                        <cite>费用管理</cite>
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a _href="/PersonnelExpenditure/Index">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>人员费</cite>
-                            </a>
-                        </li>
+                            <li>
+                                <a _href="/PartnerMVC/IndexEnt">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>入离场记录</cite>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe6af;</i>
+                            <cite>合作方人员管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="/PersonalInformation/PersonalIndex">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>人员基本信息维护</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a _href="/EntryDimissionMVC/EntryIndex">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>人员入离职记录</cite>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a _href="/AllowancesView/Index">
+                            <i class="iconfont">&#xe6e5;</i>
+                            <cite>补助标准配置</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a _href="/HolidaySettingsView/Index">
+                            <i class="iconfont">&#xe6e5;</i>
+                            <cite>假期设置</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe6bf;</i>
+                            <cite>绩效考核</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="/CheckingIn/Index">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>考勤签到</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a _href="/TravelOnVacation/Index">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>差旅休假</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a _href="/SpecialSignMVC/SpecialIndex">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>特别签录</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a _href="city.html">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>考勤统计</cite>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe6e5;</i>
+                            <cite>费用管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="/PersonnelExpenditure/Index">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>人员费</cite>
+                                </a>
+                            </li>
 
-                        <li>
-                            <a _href="/OtherExpenses/Index">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>其他费用</cite>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="javascript:;">
-                        <i class="iconfont">&#xe6f5;</i>
-                        <cite>管理员管理</cite>
-                        <i class="iconfont nav_right">&#xe697;</i>
-                    </a>
-                    <ul class="sub-menu">
-                        <li>
-                            <a _href="/PartnerMVC/AdminList">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>管理员列表</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a _href="/PartnerMVC/RoleList">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>角色管理</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a _href="/PartnerMVC/PermissionType">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>权限分类</cite>
-                            </a>
-                        </li>
-                        <li>
-                            <a _href="/PartnerMVC/PermissionList">
-                                <i class="iconfont">&#xe6a7;</i>
-                                <cite>权限管理</cite>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                            <li>
+                                <a _href="/OtherExpenses/Index">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>其他费用</cite>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe6f5;</i>
+                            <cite>管理员管理</cite>
+                            <i class="iconfont nav_right">&#xe697;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="/PartnerMVC/AdminList">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>管理员列表</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a _href="/PartnerMVC/RoleList">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>角色管理</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a _href="/PartnerMVC/PermissionType">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>权限分类</cite>
+                                </a>
+                            </li>
+                            <li>
+                                <a _href="/PartnerMVC/PermissionList">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>权限管理</cite>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>*@
 
             </ul>
         </div>
@@ -258,15 +232,40 @@
         <div class="copyright">合作化用工管理系统1.0</div>
     </div>
     <!-- 底部结束 -->
-    <script>
-        //百度统计可去掉
-        var _hmt = _hmt || [];
-        (function () {
-            var hm = document.createElement("script");
-            hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
 </body>
 </html>
+<script type="text/javascript">
+    //  $(function () {
+    var user = JSON.parse(localStorage.user)
+    console.log(user);
+    $.ajax({
+        url: "http://localhost:8099/Login/getusers",
+        type: "get",
+         async: false,
+        data: {
+            UserName: user.UserName,
+            UserPassword: user.UserPassword,
+        },
+        success: function (data) {
+
+
+            $(data).each(function (index, data1) {
+                if (data1.Pid == 0) {
+                    var U = '<li> <a href="javascript:;"> <i class="iconfont">&#xe6b8;</i><cite>' + data1.PermissionName + '</cite><i class="iconfont nav_right">&#xe697;</i></a><ul id="nav' + data1.Id + '" class="sub-menu">'
+                    $("#nav").append(U);
+                    $(data).each(function (index, data2) {
+                        if (data2.Pid == data1.Id) {
+                            $("#nav" + data1.Id).append("<li><a _href='" + data2.PermissionUrl + "'><cite>" + data2.PermissionName + "</cite></a></li>");
+                        }
+                        $("#nav").append("</ul></li>");
+                    })
+                }
+            })
+        }
+    })
+      
+</script>
+<link href="~/Content/Layui_X_Admin/css/font.css" rel="stylesheet" />
+<link href="~/Content/Layui_X_Admin/css/xadmin.css" rel="stylesheet" />
+<script src="~/Content/Layui_X_Admin/lib/layui/layui.js"></script>
+<script src="~/Content/Layui_X_Admin/js/xadmin.js"></script>

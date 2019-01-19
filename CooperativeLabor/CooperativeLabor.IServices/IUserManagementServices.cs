@@ -54,5 +54,7 @@ namespace CooperativeLabor.IServices
         /// <returns></returns>
         UserManagement Login(string UserName, string UserPassword);
 
+        object getusers(string UserName, string UserPassword);
+
     }
 }

@@ -215,7 +215,16 @@ namespace CooperativeLabor.Services
             }
         }
 
+        public object getusers(string UserName, string UserPassword)
+        {
+            using (MySqlConnection conn = DapperHelper.GetConnString())
+            {
+                string sql1 = "select * from permission where Id in(select  PermissionId  from permissionsandroles where RoleId in(select RoleId from rolesandusers where UserId=(select id from usermanagement where UserName=@UserName and UserPassword=@UserPassword)))";
+                var result2 = conn.Query<Permission>(sql1, new { UserName = UserName, UserPassword = UserPassword });
 
+                return result2;
+            }
+        }
 
 
     }

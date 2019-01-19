@@ -13,10 +13,22 @@ namespace CooperativeLabor.Mvc.Controllers
     using Utility;
     public class LoginController : BaseController
     {
+
+        /// <summary>
+        /// 登录首页
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult LoginIndex()
+        {
+            ViewBag.Id = Session["Id"];
+            ViewBag.UserName = Session["UserName"];
+            return View();
+        }
         // GET: Login
         public ActionResult Index()
         {
-
+            ViewBag.Id = Session["Id"];
+            ViewBag.UserName = Session["UserName"];
             return View();
         }
 
@@ -56,16 +68,7 @@ namespace CooperativeLabor.Mvc.Controllers
             return 1;
         }
 
-        /// <summary>
-        /// 登录首页
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult LoginIndex()
-        {
-            ViewBag.Id = Session["Id"];
-            ViewBag.UserName = Session["UserName"];
-            return View();
-        }
+      
         
         public string GetPermissionList(string Id)
         {
@@ -73,6 +76,7 @@ namespace CooperativeLabor.Mvc.Controllers
             string permission = JsonConvert.SerializeObject(u.ListPermission);
             return permission;
         }
+
 
     }
 }

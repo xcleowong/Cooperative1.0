@@ -37,7 +37,13 @@ namespace CooperativeLabor.WebApi.Controllers
             return result;
         }
 
-
-
+        [Route("getusers")]
+        [HttpGet]
+        public object getusers(string UserName, string UserPassword)
+        {
+            var result = this.iUserManagement.getusers(UserName,UserPassword);
+             
+            return result;
+        }
     }
 }
