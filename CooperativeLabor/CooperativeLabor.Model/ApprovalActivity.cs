@@ -125,12 +125,12 @@ namespace CooperativeLabor.Model
         /// <summary>
         /// 
         /// </summary>
-        public int Pid { get; set; }
+        //public int Pid { get; set; }
 
         /// <summary>
         /// 是否启用
         /// </summary>
-        public int Disabled { get; set; }
+        //public int Disabled { get; set; }
 
         /// <summary>
         /// 父级ID
