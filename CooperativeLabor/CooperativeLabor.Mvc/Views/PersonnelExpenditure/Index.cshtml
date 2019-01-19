@@ -37,87 +37,92 @@
     <script src="~/Scripts/jquery-3.3.1.js"></script>
 </head>
 <body class="layui-anim layui-anim-up">
-    <div>
-        <div class="x-nav">
-            <span class="layui-breadcrumb">
-                <a href="">首页</a>
-                <a href="">费用管理</a>
-                <a>
-                    <cite>人员费</cite>
-                </a>
-            </span>
-            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
-                <i class="layui-icon" style="line-height:30px">ဂ</i>
-            </a>
-        </div>
-        <div class="x-body" id="app">
-            <div class="layui-row">
-                <!--<form class="layui-form layui-col-md12 x-so">
-                    <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
-                    <input type="text" name="username" placeholder="请输入用工单位" autocomplete="off" class="layui-input">
-                    <input type="text" name="username" placeholder="请输入合作方名称" autocomplete="off" class="layui-input">
-                    <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-                </form>-->
-            </div>
-            <xblock>
-                <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量操作</button>
-                <button class="layui-btn" onclick="add()"><i class="layui-icon"></i>添加</button>
-                <span class="x-right" style="line-height:40px">共有数据：88 条</span>
-            </xblock>
-            <table class="layui-table" lay-size="sm">
-                <thead>
-                    <tr>
-                        <th>
-                            <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
-                        </th>
-                        <th>序号</th>
-                        <th>年度</th>
-                        <th>季度</th>
-                        <th>岗位</th>
-                        <th>工作完成情况</th>
-                        <th>创建时间</th>
-                        <th>状态</th>
-                        <th>操作</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="(item,index) in GetPersonnelExpenditures">
-                        <td>
-                            <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
-                        </td>
-                        <td>{{index + 1}}</td>
-                        <td hidden="hidden">
-                            <span id="staffId">{{item.StaffId}}</span>
-                            <span id="name">{{item.Name}}</span>
-                            <span id="employingUnit">{{item.EmployingUnit}}</span>
-                            <span id="partnerName">{{item.PartnerName}}</span>
-                            <span id="post">{{item.Post}}</span>
-                        </td>
-                        <td>{{item.Year}}</td>
-                        <td>{{item.Quarter}}</td>
-                        <td id="post">{{item.Post}}</td>
-                        <td>{{item.Completeness}}</td>
-                        <td>{{item.CreationTime}}</td>
-                        <td>{{item.StrStatus}}<span id="reverse" hidden="hidden">{{item.ReverseStrStatus}}</span></td>
-                        <td class="td-manage" id="tdreverse">
-                            <button class="layui-btn layui-btn-sm" v-on:click="recallOrDelete(item.Id ,item.Status)">{{item.ReverseStrStatus}}</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <div class="page">
-                <div>
-                    <a class="prev" href="">&lt;&lt;</a>
-                    <a class="num" href="">1</a>
-                    <span class="current">2</span>
-                    <a class="num" href="">3</a>
-                    <a class="num" href="">489</a>
-                    <a class="next" href="">&gt;&gt;</a>
-                </div>
-            </div>
 
+
+    <div>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon" style="line-height:30px">ဂ</i>
+        </a>
+
+    </div>
+    <div class="x-body" id="app">
+        <div class="layui-row">
+            <!--<form class="layui-form layui-col-md12 x-so">
+            <div>
+                <div class="x-nav">
+                    <span class="layui-breadcrumb">
+                        <a href="">首页</a>
+                        <a href="">费用管理</a>
+                        <a>
+                            <cite>人员费</cite>
+                        </a>
+                    </span>
+                    <a class="layui-btn layui-btn-small" style="line-hei
+                            <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                            <input type="text" name="username" placeholder="请输入用工单位" autocomplete="off" class="layui-input">
+                            <input type="text" name="username" placeholder="请输入合作方名称" autocomplete="off" class="layui-input">
+                            <button class="layui-btn" lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
+                        </form>-->
         </div>
+        <xblock>
+            <button class="layui-btn layui-btn-danger" onclick="delAll()"><i class="layui-icon"></i>批量操作</button>
+            <button class="layui-btn" onclick="add()"><i class="layui-icon"></i>添加</button>
+            <span class="x-right" style="line-height:40px">共有数据：88 条</span>
+        </xblock>
+        <table class="layui-table" lay-size="sm">
+            <thead>
+                <tr>
+                    <th>
+                        <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
+                    </th>
+                    <th>序号</th>
+                    <th>年度</th>
+                    <th>季度</th>
+                    <th>岗位</th>
+                    <th>工作完成情况</th>
+                    <th>创建时间</th>
+                    <th>状态</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="(item,index) in GetPersonnelExpenditures">
+                    <td>
+                        <div class="layui-unselect layui-form-checkbox" lay-skin="primary" data-id='2'><i class="layui-icon">&#xe605;</i></div>
+                    </td>
+                    <td>{{index + 1}}</td>
+                    <td hidden="hidden">
+                        <span id="staffId">{{item.StaffId}}</span>
+                        <span id="name">{{item.Name}}</span>
+                        <span id="employingUnit">{{item.EmployingUnit}}</span>
+                        <span id="partnerName">{{item.PartnerName}}</span>
+                        <span id="post">{{item.Post}}</span>
+                    </td>
+                    <td>{{item.Year}}</td>
+                    <td>{{item.Quarter}}</td>
+                    <td id="post">{{item.Post}}</td>
+                    <td>{{item.Completeness}}</td>
+                    <td>{{item.CreationTime}}</td>
+                    <td>{{item.StrStatus}}<span id="reverse" hidden="hidden">{{item.ReverseStrStatus}}</span></td>
+                    <td class="td-manage" id="tdreverse">
+                        <button class="layui-btn layui-btn-sm" v-on:click="recallOrDelete(item.Id ,item.Status)">{{item.ReverseStrStatus}}</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="page">
+            <div>
+                <a class="prev" href="">&lt;&lt;</a>
+                <a class="num" href="">1</a>
+                <span class="current">2</span>
+                <a class="num" href="">3</a>
+                <a class="num" href="">489</a>
+                <a class="next" href="">&gt;&gt;</a>
+            </div>
+        </div>
+
+    </div>
     </div>
 
     <script>
@@ -236,7 +241,7 @@
                     alert(response);
                 });
             },
-            
+
             //撤回/删除
             recallOrDelete: function (id, status) {
                 //定义提示变量
