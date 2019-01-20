@@ -27,25 +27,9 @@ namespace CooperativeLabor.Services
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
                 conn.Open();
-                string sql = @"select * from UserManagement WHERE Id=@Id And UserName = @UserName";
+                string sql = @"SELECT u.RoleId, p.Id, p.Name from UserManagement u Join personalinformation p WHERE u.UserName = p.UserName ANd p.UId = @Id AND p.UserName = @UserName";
                 var values = new { Id, UserName };
                 var result = conn.Query<UserManagement>(sql, values);
-                return result.ToList();
-            }
-        }
-        
-        /// <summary>
-        /// 获取人员费信息
-        /// </summary>
-        /// <returns></returns>
-        public List<PersonnelExpenditure> GetPersonnelExpenditures(int PerExpId)
-        {
-            using (MySqlConnection conn = DapperHelper.GetConnString())
-            {
-                conn.Open();
-                string sql = @"select * from UserManagement WHERE PerExpId=@PerExpId And Status <> 0";
-                var values = new { PerExpId };
-                var result = conn.Query<PersonnelExpenditure>(sql, values);
                 return result.ToList();
             }
         }
@@ -54,13 +38,29 @@ namespace CooperativeLabor.Services
         /// 获取审批活动
         /// </summary>
         /// <returns></returns>
-        public List<ApprovalActivity> GetApprovalActivity(int ApprovalUserID)
+        public List<ApprovalActivity> GetApprovalActivity(int ApprovalRoleID)
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
                 conn.Open();
-                string sql = @"select * from UserManagement WHERE ApprovalUserID=@ApprovalUserID And Disabled = 0";
-                var values = new { ApprovalUserID };
+                string sql = @"select * from approvalactivity WHERE ApprovalRoleID = @ApprovalRoleID And Disabled = 0";
+                var values = new { ApprovalRoleID };
+                var result = conn.Query<ApprovalActivity>(sql, values);
+                return result.ToList();
+            }
+        }
+
+        /// <summary>
+        /// 获取人员费信息
+        /// </summary>
+        /// <returns></returns>
+        public List<ApprovalActivity> GetPersonnelExpenditures(int PerExpId)
+        {
+            using (MySqlConnection conn = DapperHelper.GetConnString())
+            {
+                conn.Open();
+                string sql = @"SELECT DISTINCT p.Id,p.*,a.StaffId,a.Proposer,a.ApprovalUser,a.ApprovalOpinion,a.TureCondtion FROM personnelexpenditure p JOIN approvalactivity a WHERE p.Id = a.PerExpId AND a.PerExpId = @PerExpId And STATUS = 1";
+                var values = new { PerExpId };
                 var result = conn.Query<ApprovalActivity>(sql, values);
                 return result.ToList();
             }
@@ -92,7 +92,7 @@ namespace CooperativeLabor.Services
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
                 conn.Open();
-                string sql = @"select * from approvalactivity WHERE Id=@Id And ApprovalUserID = @ApprovalUserID";
+                string sql = @"select * from approvalactivity WHERE Id=@Id And ApprovalRoleID = @ApprovalRoleID";
                 var values = new { Id, ApprovalUserID };
                 var result = conn.Query<ApprovalActivity>(sql, values);
                 return result.ToList();
