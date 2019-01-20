@@ -59,10 +59,12 @@ namespace CooperativeLabor.Services
                         for (int j = 0; j < permids.Length; j++)
                         {
                             //实例化角色、用户关联表
-                            RolesAndUsers rolesAndUsers = new RolesAndUsers();
-                            rolesAndUsers.UserId = id;//为用户ID赋值
-                            rolesAndUsers.RoleId = Convert.ToInt32(permids[j]);//为角色ID赋值
-                            rolesAndUsers.CreateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            RolesAndUsers rolesAndUsers = new RolesAndUsers
+                            {
+                                UserId = id,//为用户ID赋值
+                                RoleId = Convert.ToInt32(permids[j]),//为角色ID赋值
+                                CreateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+                            };
                             //角色、用户关联表添加语句
                             string sql4 = "INSERT into rolesandusers(RoleId,UserId,CreateTime) VALUES(@RoleId,@UserId,@CreateTime);";
                             i = conn.Execute(sql4, rolesAndUsers);
@@ -175,10 +177,12 @@ namespace CooperativeLabor.Services
                         for (int j = 0; j < permids.Length; j++)
                         {
                             //实例化角色、用户关联表
-                            RolesAndUsers rolesAndUsers = new RolesAndUsers();
-                            rolesAndUsers.UserId = id;//为用户ID赋值
-                            rolesAndUsers.RoleId = Convert.ToInt32(permids[j]);//为角色ID赋值
-                            rolesAndUsers.CreateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+                            RolesAndUsers rolesAndUsers = new RolesAndUsers
+                            {
+                                UserId = id,//为用户ID赋值
+                                RoleId = Convert.ToInt32(permids[j]),//为角色ID赋值
+                                CreateTime = Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
+                            };
                             //角色、用户关联表添加语句
                             string sql4 = "INSERT into rolesandusers(RoleId,UserId,CreateTime) VALUES(@RoleId,@UserId,@CreateTime);";
                             i = conn.Execute(sql4, rolesAndUsers);
@@ -199,19 +203,30 @@ namespace CooperativeLabor.Services
             {
                 conn.Open();
                 string sql = "select * from usermanagement where UserName=@UserName and UserPassword=@UserPassword";
-                var result = conn.Query<UserManagement>(sql, new { UserName = UserName, UserPassword = UserPassword }).FirstOrDefault();
+                var result = conn.Query<UserManagement>(sql, new { UserName, UserPassword }).FirstOrDefault();
                 if (result != null)
                 {
                     string sql1 = "select * from permission where Id in(select  PermissionId  from permissionsandroles where RoleId in(select RoleId from rolesandusers where UserId=(select id from usermanagement where UserName=@UserName and UserPassword=@UserPassword)))";
-                    var result2 = conn.Query<Permission>(sql1, new { UserName = UserName, UserPassword = UserPassword });
+                    var result2 = conn.Query<Permission>(sql1, new { UserName, UserPassword });
                     result.ListPermission = result2.ToList();
                     return result;
-
                 }
                 else
                 {
                     return null;
                 }
+            }
+        }
+
+
+
+        public object getusers(string UserName, string UserPassword)
+        {
+            using (MySqlConnection conn = DapperHelper.GetConnString())
+            {
+                string sql1 = "select * from permission where Id in(select  PermissionId  from permissionsandroles where RoleId in(select RoleId from rolesandusers where UserId=(select id from usermanagement where UserName=@UserName and UserPassword=@UserPassword)))";
+                var result2 = conn.Query<Permission>(sql1, new { UserName, UserPassword });
+                return result2;
             }
         }
 
@@ -224,12 +239,18 @@ namespace CooperativeLabor.Services
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
+
                 string sql1 = "select * from permission where Id in(select  PermissionId  from permissionsandroles where RoleId in(select RoleId from rolesandusers where UserId=(select id from usermanagement where UserName=@UserName and UserPassword=@UserPassword)))";
                 var result2 = conn.Query<Permission>(sql1, new { UserName = UserName, UserPassword = UserPassword });
                 return result2;
+            
+
+                conn.Open();
+                string sql = "select * from Permission where Id in(select  PermissionID  from permissionsandroles where RoleID in(select RoleID from rolesandusers where UserID=(select Id from usermanagement where Id=@id))) ";
+                IEnumerable<UserManagement> userManagement = conn.Query<UserManagement>(sql, null);
+                return userManagement.ToList();
             }
 
-           
         }
         //public list<usermanagement> getuserspermissionurl(int id)
         //{

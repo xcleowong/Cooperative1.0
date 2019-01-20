@@ -16,6 +16,7 @@ namespace CooperativeLabor.WebApi.Controllers
     [RoutePrefix("Jurisdiction")]
     public class JurisdictionController : ApiController
     {
+        private const int PAGESIZE = 5;
         /// <summary>
         /// 权限表
         /// </summary>
@@ -139,10 +140,19 @@ namespace CooperativeLabor.WebApi.Controllers
         /// <returns></returns>
         [Route("GetRoles")]
         [HttpGet]
-        public IEnumerable<Roles> GetRoles()
+        public PageNumber GetRoles(int? pageIndex)
         {
-            var result = this.role.GetRoles();
-            return result;
+            if (pageIndex == null)
+            {
+                pageIndex = 1;
+            }
+            List<Roles> listGA = role.GetRoles().ToList();
+            PageNumber pageNumber = new PageNumber();
+            pageNumber.DataCount = listGA.Count;
+            pageNumber.CurrentPage = Convert.ToInt32(pageIndex);
+            pageNumber.TotlePage = (listGA.Count / PAGESIZE) + (listGA.Count % PAGESIZE == 0 ? 0 : 1);
+            pageNumber.Data = listGA.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);
+            return pageNumber;
         }
         /// <summary>
         /// 根据Id获取单个角色

@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace CooperativeLabor.WebApi.Controllers.shenpi
+namespace CooperativeLabor.WebApi.Controllers.Approval
 {
     using CooperativeLabor.Model;
     using CooperativeLabor.IServices;
@@ -18,7 +18,7 @@ namespace CooperativeLabor.WebApi.Controllers.shenpi
         /// 审批配置表
         /// </summary>
         [Dependency]
-        public IAppProcessConfigurationServices appProcessConfiguration { get; set; }
+        public IAppProcessConfigurationServices IAppProcessConfiguration { get; set; }
         /// <summary>
         /// 添加
         /// </summary>
@@ -28,7 +28,7 @@ namespace CooperativeLabor.WebApi.Controllers.shenpi
         [HttpGet]
         public int Add(AppProcessConfiguration appProcessConfiguration)
         {
-           int i = this.appProcessConfiguration.Add(appProcessConfiguration);
+           int i = this.IAppProcessConfiguration.Add(appProcessConfiguration);
             return i;
         }
 
@@ -41,7 +41,7 @@ namespace CooperativeLabor.WebApi.Controllers.shenpi
         [HttpGet]
         public int Delete(int Id)
         {
-            int i = this.appProcessConfiguration.Delete(Id);
+            int i = this.IAppProcessConfiguration.Delete(Id);
             return i;
         }
 
@@ -53,7 +53,7 @@ namespace CooperativeLabor.WebApi.Controllers.shenpi
         [HttpGet]
         public IEnumerable<AppProcessConfiguration> GetAppProcess()
         {
-            var result = this.appProcessConfiguration.GetAppProcess();
+            var result = this.IAppProcessConfiguration.GetAppProcess();
             return result;
         }
 
@@ -66,7 +66,7 @@ namespace CooperativeLabor.WebApi.Controllers.shenpi
         [HttpGet]
         public AppProcessConfiguration GetAppProcessById(int Id)
         {
-            var result = this.appProcessConfiguration.GetAppProcessById(Id);
+            var result = this.IAppProcessConfiguration.GetAppProcessById(Id);
             return result;
         }
         [Route("Update")]
@@ -78,7 +78,7 @@ namespace CooperativeLabor.WebApi.Controllers.shenpi
 
         public int Update(AppProcessConfiguration appProcessConfiguration)
         {
-            int i = this.appProcessConfiguration.Update(appProcessConfiguration);
+            int i = this.IAppProcessConfiguration.Update(appProcessConfiguration);
             return i;
         }
     }

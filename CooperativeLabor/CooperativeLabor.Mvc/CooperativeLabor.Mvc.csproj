@@ -208,8 +208,8 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\OtherExpensesController.cs" />
     <Compile Include="Controllers\PersonnelExpenditureController.cs" />
-    <Compile Include="Controllers\shenpi\AppProcessConfigurationController.cs" />
-    <Compile Include="Controllers\shenpi\ApprovalActivityController.cs" />
+    <Compile Include="Controllers\Approval\AppProcessConfigurationController.cs" />
+    <Compile Include="Controllers\Approval\ApprovalActivityController.cs" />
     <Compile Include="Controllers\SpecialSignMVCController.cs" />
     <Compile Include="Controllers\CheckingInController.cs" />
     <Compile Include="Controllers\AllowancesViewController.cs" />
@@ -1503,6 +1503,7 @@
     <Content Include="Views\OtherExpenses\Index.cshtml" />
     <Content Include="Views\Attendance\Index.cshtml" />
     <Content Include="Views\AppProcessConfiguration\Index.cshtml" />
+    <Content Include="Views\ApprovalActivity\Index1.cshtml" />
     <Content Include="Views\ApprovalActivity\Index.cshtml" />
     <None Include="Views\PartnerMVC\IndexEss1.cshtml" />
     <None Include="Views\PartnerMVC\IndexEnt.cshtml" />
@@ -1688,6 +1689,14 @@
     <ProjectReference Include="..\CooperativeLabor.Model\CooperativeLabor.Model.csproj">
       <Project>{5532cc8e-108e-4f34-a814-4181e32945c8}</Project>
       <Name>CooperativeLabor.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CooperativeLabor.Services\CooperativeLabor.Services.csproj">
+      <Project>{8c420262-604a-4cf9-9d60-29c8f4cb8af9}</Project>
+      <Name>CooperativeLabor.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CooperativeLabor.WebApi\CooperativeLabor.WebApi.csproj">
+      <Project>{60bad412-a63c-4411-a777-7a021c00d532}</Project>
+      <Name>CooperativeLabor.WebApi</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

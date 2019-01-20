@@ -13,6 +13,7 @@ namespace CooperativeLabor.WebApi.Controllers
     using CooperativeLabor.Cache;
     using Unity.Attributes;
     using Dapper;
+    
 
     /// <summary>
     /// 补助标准配置
@@ -75,6 +76,8 @@ namespace CooperativeLabor.WebApi.Controllers
             pageNumber.Data = listGA.Skip((Convert.ToInt32(pageIndex) - 1) * PAGESIZE).Take(PAGESIZE);
             return pageNumber;
         }
+
+      
 
         /// <summary>
         /// 根据ID获取补助标准

@@ -101,6 +101,7 @@ namespace CooperativeLabor.Model
 
         /// <summary>
         /// 实际审批状态
+        /// 0未审、1通过、2驳回
         /// </summary>           
         public int TureCondtion { get; set; }
 
@@ -118,16 +119,11 @@ namespace CooperativeLabor.Model
         /// 创建时间
         /// </summary>           
         public DateTime CreateTime { get; set; }
+
         /// <summary>
         /// 是否启用
         /// </summary>
         public int Disabled { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        public int Pid { get; set; }
-
-       
 
         /// <summary>
         /// 父级ID

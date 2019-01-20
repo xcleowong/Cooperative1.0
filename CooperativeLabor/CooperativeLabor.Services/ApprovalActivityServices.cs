@@ -17,33 +17,36 @@ namespace CooperativeLabor.Services
     public class ApprovalActivityServices : IApprovalActivityServices
     {
         /// <summary>
-        /// 添加审批活动
-        /// </summary>
-        /// <param name="approvalActivity"></param>
-        /// <returns></returns>
-        public int AddApprovalActivity(ApprovalActivity approvalActivity)
-        {
-            using (MySqlConnection conn = DapperHelper.GetConnString())
-            {
-                string sql = @"INSERT into approvalactivity(ProcessID,NodeID,ProcessCode,RoleSector,ApprovalRoleID,NextApprovalRoleID,ApprovalUserID,NextApprovalUserID,ProcessRoleID,JudgmentID,Condtion,IsAllowModity,IsAllowVersion,ApprovalUser,ApprovalOpinion,TureCondtion,ApprovalTime,Creator,CreateTime,Disabled,Pid) VALUES(@ProcessID,@NodeID,@ProcessCode,@RoleSector,@ApprovalRoleID,@NextApprovalRoleID,@ApprovalUserID,@NextApprovalUserID,@ProcessRoleID,@JudgmentID,@Condtion,@IsAllowModity,@IsAllowVersion,@ApprovalUser,@ApprovalOpinion,@TureCondtion,@ApprovalTime,@Creator,@CreateTime,@Disabled,@Pid)";
-                var result = conn.Execute(sql, approvalActivity);
-                return result;
-            }
-        }
-
-        /// <summary>
-        /// 删除审批活动
+        /// 查询登录用户角色
         /// </summary>
         /// <param name="Id"></param>
+        /// <param name="UserName"></param>
         /// <returns></returns>
-        public int DeleteApprovalActivity(int Id)
+        public List<UserManagement> GetUserManagements(int Id, string UserName)
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
                 conn.Open();
-                string sql = @"DELETE FROM approvalactivity where Id=@Id";
-                var result = conn.Execute(sql, new { Id });
-                return result;
+                string sql = @"select * from UserManagement WHERE Id=@Id And UserName = @UserName";
+                var values = new { Id, UserName };
+                var result = conn.Query<UserManagement>(sql, values);
+                return result.ToList();
+            }
+        }
+        
+        /// <summary>
+        /// 获取人员费信息
+        /// </summary>
+        /// <returns></returns>
+        public List<PersonnelExpenditure> GetPersonnelExpenditures(int PerExpId)
+        {
+            using (MySqlConnection conn = DapperHelper.GetConnString())
+            {
+                conn.Open();
+                string sql = @"select * from UserManagement WHERE PerExpId=@PerExpId And Status <> 0";
+                var values = new { PerExpId };
+                var result = conn.Query<PersonnelExpenditure>(sql, values);
+                return result.ToList();
             }
         }
 
@@ -51,33 +54,16 @@ namespace CooperativeLabor.Services
         /// 获取审批活动
         /// </summary>
         /// <returns></returns>
-        public List<ApprovalActivity> GetApprovalActivity()
+        public List<ApprovalActivity> GetApprovalActivity(int ApprovalUserID)
         {
-
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
                 conn.Open();
-                string sql = @"select * from approvalactivity";
-                var result = conn.Query<ApprovalActivity>(sql, null);
+                string sql = @"select * from UserManagement WHERE ApprovalUserID=@ApprovalUserID And Disabled = 0";
+                var values = new { ApprovalUserID };
+                var result = conn.Query<ApprovalActivity>(sql, values);
                 return result.ToList();
             }
-        }
-
-        /// <summary>
-        ///根据ID获取审批活动
-        /// </summary>
-        /// <param name="Id"></param>
-        /// <returns></returns>
-        public ApprovalActivity GetApprovalActivityById(int Id)
-        {
-            using (MySqlConnection conn = DapperHelper.GetConnString())
-            {
-                conn.Open();
-                string sql = @"select * from approvalactivity WHERE Id=@Id";
-                ApprovalActivity result = conn.Query<ApprovalActivity>(sql, new { Id }).FirstOrDefault();
-                return result;
-            }
-
         }
 
         /// <summary>
@@ -85,13 +71,31 @@ namespace CooperativeLabor.Services
         /// </summary>
         /// <param name="approvalActivity"></param>
         /// <returns></returns>
-        public int UpdateApprovalActivity(ApprovalActivity approvalActivity)
+        public int UpdateApprovalActivity(int Id, string ApprovalUser, string ApprovalOpinion, int TureCondtion)
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
             {
-                string sql = @"UPDATE approvalactivity SET ProcessID=@ProcessID,NodeID=@NodeID,ProcessCode=@ProcessCode,RoleSector=@RoleSector,ApprovalRoleID=@ApprovalRoleID,NextApprovalRoleID=@NextApprovalRoleID,ApprovalUserID=@ApprovalUserID,NextApprovalUserID=@NextApprovalUserID,ProcessRoleID=@ProcessRoleID,JudgmentID=@JudgmentID,Condtion=@Condtion,IsAllowModity=@IsAllowModity,IsAllowVersion=@IsAllowVersion,ApprovalUser=@ApprovalUser,ApprovalOpinion=@ApprovalOpinion,TureCondtion=@TureCondtion,ApprovalTime=@ApprovalTime,Creator=@Creator,CreateTime=@CreateTime,Disabled=@Disabled,Pid=@Pid WHERE Id = @Id";
-                var result = conn.Execute(sql, approvalActivity);
+                string sql = @"UPDATE approvalactivity SET ApprovalUser=@ApprovalUser,ApprovalOpinion=@ApprovalOpinion,TureCondtion=@TureCondtion WHERE Id = @Id And PerExpId = 0";
+                var values =  new { Id, ApprovalUser, ApprovalOpinion, TureCondtion };
+                var result = conn.Execute(sql, values);
                 return result;
+            }
+        }
+
+        /// <summary>
+        /// 根据ID获取审批活动
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
+        public List<ApprovalActivity> GetApprovalActivityById(int Id, int ApprovalUserID)
+        {
+            using (MySqlConnection conn = DapperHelper.GetConnString())
+            {
+                conn.Open();
+                string sql = @"select * from approvalactivity WHERE Id=@Id And ApprovalUserID = @ApprovalUserID";
+                var values = new { Id, ApprovalUserID };
+                var result = conn.Query<ApprovalActivity>(sql, values);
+                return result.ToList();
             }
         }
     }
