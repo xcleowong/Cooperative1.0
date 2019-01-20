@@ -58,6 +58,10 @@
     <Compile Include="DataMySqlHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SessionHelper.cs" />
+    <Compile Include="一拓云短信验证\Verification.cs" />
+    <Compile Include="短信验证\CheckSumBuilder.cs" />
+    <Compile Include="短信验证\HttpClient.cs" />
+    <Compile Include="短信验证\Program.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CooperativeLabor.IServices\CooperativeLabor.IServices.csproj">

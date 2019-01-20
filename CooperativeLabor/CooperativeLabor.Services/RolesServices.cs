@@ -44,8 +44,6 @@ namespace CooperativeLabor.Services
                     //如果上条语句执行成功则执行下面语句
                     if (result > 0)
                     {
-
-
                         //根据角色名称查询Id
                         string sql3 = "select Id from roles where RoleName=@RoleName";
                         //返回一个对象(第一个元素)
@@ -67,7 +65,6 @@ namespace CooperativeLabor.Services
                     }
 
                 }
-
                 return i;
             }
         }

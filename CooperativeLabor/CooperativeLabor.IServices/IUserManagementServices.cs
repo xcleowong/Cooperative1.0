@@ -62,6 +62,6 @@ namespace CooperativeLabor.IServices
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        List<UserManagement> GetUsersPermissionUrl(int id);
+       // List<UserManagement> GetUsersPermissionUrl(int id);
     }
 }

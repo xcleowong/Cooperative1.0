@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using CooperativeLabor.Common;
+using CooperativeLabor.Model;
+using Newtonsoft.Json;
 
 namespace CooperativeLabor.Mvc.Controllers
 {
-    using CooperativeLabor.Model;
-    using CooperativeLabor.Common;
-    using CooperativeLabor.Cache;
-    using Newtonsoft.Json;
-    using Utility;
+  
+
     public class LoginController : BaseController
     {
 
@@ -50,6 +50,10 @@ namespace CooperativeLabor.Mvc.Controllers
 
             return View();
         }
+       
+
+
+
         public ActionResult Welcome()
         {
             return View();
