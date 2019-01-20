@@ -220,21 +220,21 @@ namespace CooperativeLabor.Services
 
 
 
-        public object getusers(string UserName, string UserPassword)
-        {
-            using (MySqlConnection conn = DapperHelper.GetConnString())
-            {
-                string sql1 = "select * from permission where Id in(select  PermissionId  from permissionsandroles where RoleId in(select RoleId from rolesandusers where UserId=(select id from usermanagement where UserName=@UserName and UserPassword=@UserPassword)))";
-                var result2 = conn.Query<Permission>(sql1, new { UserName, UserPassword });
-                return result2;
-            }
-        }
+        //public object getusers(string UserName, string UserPassword)
+        //{
+        //    using (MySqlConnection conn = DapperHelper.GetConnString())
+        //    {
+        //        string sql1 = "select * from permission where Id in(select  PermissionId  from permissionsandroles where RoleId in(select RoleId from rolesandusers where UserId=(select id from usermanagement where UserName=@UserName and UserPassword=@UserPassword)))";
+        //        var result2 = conn.Query<Permission>(sql1, new { UserName, UserPassword });
+        //        return result2;
+        //    }
+        //}
 
         /// <summary>
         /// 根据登录时的用户获取该管理员权限(url)
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name = "id" ></ param >
+        /// < returns ></ returns >
         public object getusers(string UserName, string UserPassword)
         {
             using (MySqlConnection conn = DapperHelper.GetConnString())
@@ -243,15 +243,20 @@ namespace CooperativeLabor.Services
                 string sql1 = "select * from permission where Id in(select  PermissionId  from permissionsandroles where RoleId in(select RoleId from rolesandusers where UserId=(select id from usermanagement where UserName=@UserName and UserPassword=@UserPassword)))";
                 var result2 = conn.Query<Permission>(sql1, new { UserName = UserName, UserPassword = UserPassword });
                 return result2;
-            
 
-                conn.Open();
-                string sql = "select * from Permission where Id in(select  PermissionID  from permissionsandroles where RoleID in(select RoleID from rolesandusers where UserID=(select Id from usermanagement where Id=@id))) ";
-                IEnumerable<UserManagement> userManagement = conn.Query<UserManagement>(sql, null);
-                return userManagement.ToList();
+
+                //conn.Open();
+                //string sql = "select * from Permission where Id in(select  PermissionID  from permissionsandroles where RoleID in(select RoleID from rolesandusers where UserID=(select Id from usermanagement where Id=@id))) ";
+                //IEnumerable<UserManagement> userManagement = conn.Query<UserManagement>(sql, null);
+                //return userManagement.ToList();
             }
 
         }
+
+
+
+
+
         //public list<usermanagement> getuserspermissionurl(int id)
         //{
         //    using (mysqlconnection conn = dapperhelper.getconnstring())
