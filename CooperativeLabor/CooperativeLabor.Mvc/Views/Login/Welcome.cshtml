@@ -13,7 +13,7 @@
     <script type="text/javascript">
         function fun() {
             var date = new Date();
-            document.getElementById("span1").innerHTML = (1900 + date.getYear()) + "年" + (date.getMonth() + 1) + "月" + (date.getDay() + 13) + "日" + date.getHours() + "时" + date.getMinutes() + "分" + date.getSeconds() + "秒"
+            document.getElementById("span1").innerHTML = (1900 + date.getYear()) + "年" + (date.getMonth() + 1) + "月" + (@DateTime.Now.Day) + "日" + date.getHours() + "时" + date.getMinutes() + "分" + date.getSeconds() + "秒"
         }
         setInterval(fun, 1000)
     </script>
@@ -24,9 +24,6 @@
             欢迎管理员：
 
             <span id="userName" class="x-red"></span>！当前时间:<span id="span1"></span>
-
-       
-
         </blockquote>
         @*<fieldset class="layui-elem-field">
                 <legend>数据统计</legend>

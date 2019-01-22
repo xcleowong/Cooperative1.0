@@ -73,13 +73,13 @@
         var codeLength = 6;//验证码长度
         var curCount = 60; ///当前剩余秒数
 
-        $(function () {
+        $(function () {  
             $("#btnSendCode").click(function () {
                 // 设置按钮显示效果，倒计时
                 $("#btnSendCode").attr("disabled", "true");
                 $("#btnSendCode").val("" + curCount + "秒");
                 InterValObj = window.setInterval(SetRemainTime, 1000); // 启动计时器，1秒执行一次
-                // 产生随记验证码
+                // 产生随机验证码
                 for (var i = 0; i < codeLength; i++) {
                     code += parseInt(Math.random() * 9).toString();
                 }
@@ -112,7 +112,7 @@
             if (curCount == 0) {
                 window.clearInterval(InterValObj);// 停止计时器
                 $("#btnSendCode").removeAttr("disabled");// 启用按钮
-                $("#btnSendCode").val("重新发送验证码");
+                $("#btnSendCode").val("重新发送");
                 code = ""; // 清除验证码。如果不清除，过时间后，输入收到的验证码依然有效
             } else {
                 curCount--;
