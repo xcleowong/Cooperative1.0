@@ -24,13 +24,13 @@ namespace CooperativeLabor.IServices
         /// 获取人员费信息
         /// </summary>
         /// <returns></returns>
-        List<PersonnelExpenditure> GetPersonnelExpenditures(int PerExpId);
+        List<ApprovalActivity> GetPersonnelExpenditures(int PerExpId);
 
         /// <summary>
         /// 获取审批活动
         /// </summary>
         /// <returns></returns>
-        List<ApprovalActivity> GetApprovalActivity(int ApprovalUserID);
+        List<ApprovalActivity> GetApprovalActivity(int ApprovalRoleID);
 
         /// <summary>
         /// 修改审批活动
